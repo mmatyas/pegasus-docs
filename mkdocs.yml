@@ -1,0 +1,4 @@
+site_name: Pegasus Docs
+pages:
+  - Home: index.md
+  - About: about.md

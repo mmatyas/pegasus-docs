@@ -53,11 +53,22 @@ Regna *ictu*, res aversum. Saxo vultus noverat fusus, Haemoniam magica
 iuvenisque iugis! Annos suspiratibus male lapides motu Acmon, pro canis confugit
 foco urbes et dura; illi licet?
 
+!!! note "Phasellus posuere in sem ut cursus"
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
+
 ## Nec an nimius
 
 Ab Quis nullos ultra pontus audebatis aliter ait Eurynomus arces flecti Neritius
 honore sub est solus. Nate petit figuris inploravere caro ab tenebris **passim
 hunc** clamore.
+
+```qml
+FocusScope {
+    active: true
+}
+```
 
 Praetentaque magna fundebat cicatrix rapiunt tu ipsum et nulla qui habet
 sidereus fama Onchestius caelo Pterelas pudorem virgo. Ossa quo est deficiunt,

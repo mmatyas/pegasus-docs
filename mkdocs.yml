@@ -7,7 +7,15 @@ repo_url: https://github.com/mmatyas/pegasus-frontend/
 
 pages:
     - Home: index.md
-    - About: about.md
+    - User Guide:
+        - Controls: user-guide/controls.md
+        - Scripting: user-guide/scripting.md
+    - Development:
+        - Installing Qt: dev/install-qt.md
+        - Cross compile Qt: dev/cross-compile-qt.md
+        - Building: dev/build.md
+        - Deployment: dev/deploy.md
+        - Translations: dev/translate.md
 
 theme: cinder
 extra_css:
@@ -15,10 +23,7 @@ extra_css:
     - css/extra.css
 
 markdown_extensions:
-    - toc:
-        separator: "_"
+    - toc
     - sane_lists
     - admonition
     - def_list
-plugins:
-    - search

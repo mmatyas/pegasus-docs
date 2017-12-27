@@ -1,17 +1,20 @@
-# Welcome to MkDocs
+# Home
 
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+Pegasus is an experimental emulator frontend, focusing on customizability, cross platform support (including embedded) and high performance. Here you can find the related documentation, development notes and guides.
 
-## Commands
+## User guide
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+- [Default controls](user-guide/controls.md)
+- [Scripting](user-guide/scripting.md)
 
-## Project layout
+## Development
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+- [Installing Qt on desktop](dev/install-qt.md)
+- [Cross compiling Qt for embedded](dev/cross-compile-qt.md)
+- [Building Pegasus](dev/build.md)
+- [Deployment](dev/deploy.md)
+- [Translations](dev/translate.md)
+
+## Customization
+
+- Theme guide

@@ -16,15 +16,20 @@ pages:
         - Building: dev/build.md
         - Deployment: dev/deploy.md
         - Translations: dev/translate.md
+    - Customization:
+        - Theme guide: customize/theme-guide.md
 
 theme:
     name: cinder
     custom_dir: cinder_custom
 extra_css:
     - css/extra.css
+    - css/codehl.css
 
 markdown_extensions:
     - toc
     - sane_lists
     - admonition
     - def_list
+    - codehilite:
+        guess_lang: false

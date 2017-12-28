@@ -17,7 +17,7 @@ pages:
         - Deployment: dev/deploy.md
         - Translations: dev/translate.md
 
-theme: cinder
+theme_dir: cinder-0.9.4
 extra_css:
     - https://fonts.googleapis.com/icon?family=Material+Icons
     - css/extra.css

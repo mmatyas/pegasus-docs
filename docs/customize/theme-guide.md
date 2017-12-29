@@ -35,16 +35,14 @@ Rectangle {
 }
 ```
 
-There are numerous built-in components you can use in a theme: simple types (texts, rectangles, images, ...), components that define layouts of other items (rows, grids, custom paths) and special elements (animations, particle effects, custom shader code). We'll see the most common of them and their usage later in this guide.
+There are numerous built-in components you can use in a theme: simple types (texts, rectangles, images, ...), components that define layouts of other items (rows, grids, custom paths) and special elements (animations, particle effects, custom shader code). These are contained in so called *modules*, with most of them are in the one called **Qt Quick**. We'll see the most common components and their usage, as well as other modules in the in-depth QML tutorial (*todo*).
 
-&nbsp;
+### Extending with JavaScript
 
 QML generally describes *what* is on the screen and how they *look* like -- to tell what a component should *do*, you can extend QML with **JavaScript** code. Don't worry if you aren't familiar with it; QML works quite well on its own, usually you only need to code if you want to implement some special behaviour for the elements.
 
 !!! warning
     While JavaScript is usually associated with websites, Pegasus is **NOT** a web browser or an HTML5 app. Only the JavaScript engine is used, not a whole browser. In case you're worried about performance: your script will automatically get compiled to native code the next time you start Pegasus when you change a file.
-
-&nbsp;
 
 !!! info "Further reading"
     - [https://en.wikipedia.org/wiki/QML](https://en.wikipedia.org/wiki/QML)
@@ -114,9 +112,44 @@ Currently the following options are recognized:
 
 Every theme is required to have a `theme.cfg` file, with at least the `name` defined.
 
+### theme.qml
 
-#### WIP section
+The `theme.qml` file is the entry point of your theme. You should start with the following minimal code:
 
-These components are contained in so called *modules*; you'll see that most of them are in the one called **Qt Quick**. There are others: for example audio and video playback are in Qt Multimedia. In every case, I'll list the module in which the type can be found in this guide, and you can also
+```qml
+import QtQuick 2.0
 
-On the user interface side, there are three main components: the loading screen you see when you launch Pegasus, the main menu overlay and the content area, of which this guide will be about.
+FocusScope {
+
+    // your code here
+
+}
+```
+
+`FocusScope` is a special container component in QML which is used for separating keyboard/gamepad input from the other parts of the UI (eg. main menu). `FocusScope`, as well as the other components and modules will be introduced in the more in-depth QML tutorial (*todo*).
+
+
+## Usage
+
+If you've created the `theme.cf` and `theme.qml` files as descried aove, you should now see your entry in the list of available themes in Pegasus' settings menu.
+
+After the theme is loaded, pressing the `F5` key will make Pegasus reload its files, making it easier to try out changes.
+
+### Screen coordinates
+
+When you select a theme, its main component (the `FocusScope` above) will be set to fill the whole screen. The top left corner of the screen is (0,0), with the X axis growing right and the Y axis growing downwards.
+
+When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally QML this easy because you can tell the position and size of elements compared to others (eg. set an element's corner or side to have at the same place as another element's corner or side -- see the QML tutorial *todo*).
+
+When you do have to position or size things manually, you can either use percentages, or you can use the **virtual coordinate system** to position using integer pixel coordinates. Using the latter, you can assume the screen to have the resolution of at least 1280x720 virtual pixels (16:9 aspect ratio). If the *physical* screen's resolution is smaller or larger than this, the values will scale accordingly. If the aspect ratio is smaller than this (eg. 4:3), then the *virtual* screen will be taller than 720 virtual pixels, but still have 1280 as width. If the aspect ratio is wider (eg. 21:9), then the virtual height will remain to be 720, but the width will be bigger. To use virtual screen coordinates, put virtual pixel values into the provided JavaScript function called `rpx()` (see the examples *todo*).
+
+!!! important
+    Using the virtual coordinate system does **not** decrease image quality.
+
+Using virtual coordinates is optional, but ofter more intuitive than percentages with several digits of precision. Depending on your situations and mood, you might prefer one over the other, or use both of them. Feel free to experiment!
+
+
+## Next steps
+
+- QML tutorial
+- Step-by-step example

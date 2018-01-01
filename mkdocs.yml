@@ -18,6 +18,7 @@ pages:
         - Translations: dev/translate.md
     - Customization:
         - Theme guide: customize/theme-guide.md
+        - Example Flixnet theme: customize/example-flixnet.md
 
 theme:
     name: cinder

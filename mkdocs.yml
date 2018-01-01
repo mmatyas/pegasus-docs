@@ -10,15 +10,15 @@ pages:
     - User Guide:
         - Controls: user-guide/controls.md
         - Scripting: user-guide/scripting.md
-    - Development:
+    - Core Dev:
         - Installing Qt: dev/install-qt.md
         - Cross compile Qt: dev/cross-compile-qt.md
         - Building: dev/build.md
         - Deployment: dev/deploy.md
         - Translations: dev/translate.md
-    - Customization:
-        - Theme guide: customize/theme-guide.md
-        - Example Flixnet theme: customize/example-flixnet.md
+    - Theme Dev:
+        - Overview: themes/overview.md
+        - Example Flixnet theme: themes/example-flixnet.md
 
 theme:
     name: cinder

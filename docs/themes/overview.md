@@ -50,7 +50,7 @@ QML generally describes *what* is on the screen and how they *look* like -- to t
     - [https://doc.qt.io/qt-5/qmlapplications.html](https://doc.qt.io/qt-5/qmlapplications.html)
 
 
-## Theme files
+## Theme directories
 
 Pegasus is looking for themes in the following directories:
 
@@ -77,6 +77,9 @@ Pegasus is looking for themes in the following directories:
 - `~/Library/Preferences/pegasus-frontend/themes`
 - `~/Library/Application Support/pegasus-frontend/themes`
 - `/Library/Application Support/pegasus-frontend/themes`
+
+
+## Theme structure
 
 Inside these directories, every individual theme is contained in its own directory. The name of this directory doesn't matter, as long as it's unique.
 
@@ -128,26 +131,47 @@ FocusScope {
 
 `FocusScope` is a special container component in QML which is used for separating keyboard/gamepad input from the other parts of the UI (eg. main menu). `FocusScope`, as well as the other components and modules will be introduced in the more in-depth QML tutorial (*todo*).
 
+### Usage
 
-## Usage
-
-If you've created the `theme.cf` and `theme.qml` files as descried aove, you should now see your entry in the list of available themes in Pegasus' settings menu.
+If you've created the `theme.cfg` and `theme.qml` files as described above, you should now see your entry in the list of available themes in Pegasus' settings menu.
 
 After the theme is loaded, pressing the `F5` key will make Pegasus reload its files, making it easier to try out changes.
 
-### Screen coordinates
+## Special QML properties
+
+Pegasus' themes are standard QML files, and you can use any QML tutorial (collection here *todo*) to learn it. Pegasus itself provides the following additions:
+
+- a virtual coordinate system to make multiple aspect ratio support easier
+- the actual collection- and platform data, and the way to select and launch a game
+
+### Virtual screen coordinates
 
 When you select a theme, its main component (the `FocusScope` above) will be set to fill the whole screen. The top left corner of the screen is (0,0), with the X axis growing right and the Y axis growing downwards.
 
-When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally QML this easy because you can tell the position and size of elements compared to others (eg. set an element's corner or side to have at the same place as another element's corner or side -- see the QML tutorial *todo*).
+When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally QML this easy because you can tell the position and size of elements compared to others using *anchors* (eg. set an element's corner or side to have at the same place as another element's corner or side -- see the QML tutorial *todo*).
 
-When you do have to position or size things manually, you can either use percentages, or you can use the **virtual coordinate system** to position using integer pixel coordinates. Using the latter, you can assume the screen to have the resolution of at least 1280x720 virtual pixels (16:9 aspect ratio). If the *physical* screen's resolution is smaller or larger than this, the values will scale accordingly. If the aspect ratio is smaller than this (eg. 4:3), then the *virtual* screen will be taller than 720 virtual pixels, but still have 1280 as width. If the aspect ratio is wider (eg. 21:9), then the virtual height will remain to be 720, but the width will be bigger. To use virtual screen coordinates, put virtual pixel values into the provided JavaScript function called `rpx()` (see the examples *todo*).
+When you *do* have to position or size things manually, it is common to use percentages, but Pegasus also provides a **virtual coordinate system**. You can treat the screen as one with the resolution of at least **1280x720** virtual pixels (16:9 aspect ratio), and use integer pixel values, which will then scale to the correct physical value according to the screen's real resolution. If the screen's aspect ratio is smaller than this (eg. 4:3), then the *virtual* screen will be taller than 720 virtual pixels, but still have 1280 as a fixed width. If the aspect ratio is wider (eg. 21:9), then the virtual height will remain to be 720, but the width will be bigger. This system can be useful when you want to express precise details in pixels, like width/height, spacing, text sizes, etc.
+
+To use virtual pixel values, simply put your namber inside a function called `vpx`. For example, instead of
+
+```qml
+width: 50
+```
+
+you would use
+
+```qml
+width: vpx(50)
+```
+
+Using virtual pixel values is optional, but often more intuitive than percentages with several digits of precision. Depending on your situations, you might prefer one over the other, or use both of them. Feel free to experiment!
 
 !!! important
     Using the virtual coordinate system does **not** decrease image quality.
 
-Using virtual coordinates is optional, but ofter more intuitive than percentages with several digits of precision. Depending on your situations and mood, you might prefer one over the other, or use both of them. Feel free to experiment!
+### Game data
 
+*todo*
 
 ## Next steps
 

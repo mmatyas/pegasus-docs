@@ -298,4 +298,4 @@ And here's how it should look so far:
 
 <img src="../img/flixnet-listviews01.png" style="max-width:100%">
 
-Well, probably not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these list and delegates, and add some simple components for the metadata.
+Well, probably not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, and add some simple components for the metadata.

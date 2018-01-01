@@ -146,7 +146,7 @@ Pegasus' themes are standard QML files, and you can use any QML tutorial (collec
 
 ### Virtual screen coordinates
 
-When you select a theme, its main component (the `FocusScope` above) will be set to fill the whole screen. The top left corner of the screen is (0,0), with the X axis growing right and the Y axis growing downwards.
+When you load a theme, its main component (the `FocusScope` above) will be set to fill the whole screen. The top left corner of the screen is (0,0), with the X axis growing right and the Y axis growing downwards.
 
 When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally QML this easy because you can tell the position and size of elements compared to others using *anchors* (eg. set an element's corner or side to have at the same place as another element's corner or side -- see the QML tutorial *todo*).
 

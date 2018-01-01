@@ -19,3 +19,4 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 
 - [Overview](themes/overview.md)
 - [Step-by-step: Flixnet theme](themes/example-flixnet.md)
+- [API reference](themes/api.md)

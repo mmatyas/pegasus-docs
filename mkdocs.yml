@@ -19,6 +19,7 @@ pages:
     - Theme Dev:
         - Overview: themes/overview.md
         - Example Flixnet theme: themes/example-flixnet.md
+        - API reference: themes/api.md
 
 theme:
     name: cinder

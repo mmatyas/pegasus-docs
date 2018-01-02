@@ -14,6 +14,10 @@ After that, you can read whatever part you're more interested. You can also down
 
 ## Official documentation <small>(more detailed)</small>
 
+This one is actually quite good: https://doc.qt.io/archives/qt-4.8/qtquick.html.
+
+You can also find a bunch of documentations here:
+
 - https://doc.qt.io/qt-5/qmlapplications.html
 - https://doc.qt.io/qt-5/qtquick-index.html
 - https://doc.qt.io/qt-5/qtqml-index.html

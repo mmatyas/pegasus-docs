@@ -4,6 +4,8 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 
 ## User guide
 
+- Installation and setup
+- Game collections and metadata files
 - [Default controls](user-guide/controls.md)
 - [Scripting](user-guide/scripting.md)
 
@@ -18,5 +20,6 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 ## Theme development
 
 - [Overview](themes/overview.md)
+- [QML tutorials](themes/qml-tutorials.md)
 - [Step-by-step: Flixnet theme](themes/example-flixnet.md)
 - [API reference](themes/api.md)

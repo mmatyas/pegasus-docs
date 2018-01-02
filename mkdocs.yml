@@ -18,6 +18,7 @@ pages:
         - Translations: dev/translate.md
     - Theme Dev:
         - Overview: themes/overview.md
+        - QML tutorials: themes/qml-tutorials.md
         - Example Flixnet theme: themes/example-flixnet.md
         - API reference: themes/api.md
 

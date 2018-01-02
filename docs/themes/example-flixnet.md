@@ -18,7 +18,7 @@ In QML terms, this means a list containing lists, which will make the layout som
 
 ## Initial files
 
-I'm on Linux, so my [theme directory](theme-overview.md) is at `~/.config/pegasus-frontend/themes`. I'm creating a new directory called `flixnet-tutorial`, and in it my `theme.cfg` like this:
+I'm on Linux, so my [theme directory](overview.md) is at `~/.config/pegasus-frontend/themes`. I'm creating a new directory called `flixnet-tutorial`, and in it my `theme.cfg` like this:
 
 ```control
 name: Flixnet tutorial

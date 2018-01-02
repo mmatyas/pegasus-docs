@@ -35,7 +35,7 @@ Rectangle {
 }
 ```
 
-There are numerous built-in components you can use in a theme: simple types (texts, rectangles, images, ...), components that define layouts of other items (rows, grids, custom paths) and special elements (animations, particle effects, custom shader code). These are contained in so called *modules*, with most of them are in the one called **Qt Quick**. We'll see the most common components and their usage, as well as other modules in the in-depth QML tutorial (*todo*).
+There are numerous built-in components you can use in a theme: simple types (texts, rectangles, images, ...), components that define layouts of other items (rows, grids, custom paths) and special elements (animations, particle effects, custom shader code). These are contained in so called *modules*, with most of them are in the one called **Qt Quick**. You can find guides for the most common components and their usages, as well as other modules on the [QML tutorials page](qml-tutorials.md).
 
 ### Extending with JavaScript
 
@@ -129,7 +129,7 @@ FocusScope {
 }
 ```
 
-`FocusScope` is a special container component in QML which is used for separating keyboard/gamepad input from the other parts of the UI (eg. main menu). `FocusScope`, as well as the other components and modules will be introduced in the more in-depth QML tutorial (*todo*).
+`FocusScope` is a special container component in QML which is used for separating keyboard/gamepad input from the other parts of the UI (eg. main menu). `FocusScope`, as well as the other components and modules will be introduced in the more in-depth [QML tutorials](qml-tutorials.md).
 
 ### Usage
 
@@ -139,7 +139,7 @@ After the theme is loaded, pressing the `F5` key will make Pegasus reload its fi
 
 ## Special QML properties
 
-Pegasus' themes are standard QML files, and you can use any QML tutorial (collection here *todo*) to learn it. Pegasus itself provides the following additions:
+Pegasus' themes are standard QML files, and you can use any QML tutorial (collection [here](qml-tutorials.md)) to learn it. Pegasus itself provides the following additions:
 
 - a virtual coordinate system to make multiple aspect ratio support easier
 - the actual collection- and platform data, and the way to select and launch a game
@@ -148,7 +148,7 @@ Pegasus' themes are standard QML files, and you can use any QML tutorial (collec
 
 When you load a theme, its main component (the `FocusScope` above) will be set to fill the whole screen. The top left corner of the screen is (0,0), with the X axis growing right and the Y axis growing downwards.
 
-When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally QML this easy because you can tell the position and size of elements compared to others using *anchors* (eg. set an element's corner or side to have at the same place as another element's corner or side -- see the QML tutorial *todo*).
+When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally QML this easy because you can tell the position and size of elements compared to others using *anchors* (eg. set an element's corner or side to have at the same place as another element's corner or side -- see the [QML tutorials](qml-tutorials.md) (positioning/anchoring)).
 
 When you *do* have to position or size things manually, it is common to use percentages, but Pegasus also provides a **virtual coordinate system**. You can treat the screen as one with the resolution of at least **1280x720** virtual pixels (16:9 aspect ratio), and use integer pixel values, which will then scale to the correct physical value according to the screen's real resolution. If the screen's aspect ratio is smaller than this (eg. 4:3), then the *virtual* screen will be taller than 720 virtual pixels, but still have 1280 as a fixed width. If the aspect ratio is wider (eg. 21:9), then the virtual height will remain to be 720, but the width will be bigger. This system can be useful when you want to express precise details in pixels, like width/height, spacing, text sizes, etc.
 
@@ -171,7 +171,7 @@ Using virtual pixel values is optional, but often more intuitive than percentage
 
 ### Game data
 
-*todo*
+The actual data set provided by the Core is available in the global object `api`. Its items are detailed on the [API reference page](api.md).
 
 ## Next steps
 

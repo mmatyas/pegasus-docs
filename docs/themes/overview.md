@@ -45,9 +45,9 @@ QML generally describes *what* is on the screen and how they *look* like -- to t
     While JavaScript is usually associated with websites, Pegasus is **NOT** a web browser or an HTML5 app. Only the JavaScript engine is used, not a whole browser. In case you're worried about performance: your script will automatically get compiled to native code the next time you start Pegasus when you change a file.
 
 !!! info "Further reading"
-    - [https://en.wikipedia.org/wiki/QML](https://en.wikipedia.org/wiki/QML)
-    - [https://doc.qt.io/qt-5/qtquick-index.html](https://doc.qt.io/qt-5/qtquick-index.html)
-    - [https://doc.qt.io/qt-5/qmlapplications.html](https://doc.qt.io/qt-5/qmlapplications.html)
+    - https://en.wikipedia.org/wiki/QML
+    - https://doc.qt.io/qt-5/qtquick-index.html
+    - https://doc.qt.io/qt-5/qmlapplications.html
 
 
 ## Theme directories
@@ -135,7 +135,7 @@ FocusScope {
 
 If you've created the `theme.cfg` and `theme.qml` files as described above, you should now see your entry in the list of available themes in Pegasus' settings menu.
 
-After the theme is loaded, pressing the `F5` key will make Pegasus reload its files, making it easier to try out changes.
+After the theme is loaded, pressing the ++f5++ key will make Pegasus reload its files, making it easier to try out changes.
 
 ## Special QML properties
 
@@ -175,5 +175,5 @@ The actual data set provided by the Core is available in the global object `api`
 
 ## Next steps
 
-- QML tutorial
-- Step-by-step example
+- [QML tutorial collection](qml-tutorials.md)
+- [Step-by-step example: Flixnet theme](example-flixnet.md)

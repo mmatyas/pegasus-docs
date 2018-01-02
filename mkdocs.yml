@@ -36,3 +36,5 @@ markdown_extensions:
     - def_list
     - codehilite:
         guess_lang: false
+    - pymdownx.keys
+    - pymdownx.magiclink

@@ -83,7 +83,7 @@ Ok, back to the code!
 
 So, one element of this collection axis will have 180px height and the whole width of the screen. I'll create a placeholder for now and add a fake model (a series of numbers) for testing.
 
-```qml
+```qml hl_lines="13 14"
 import QtQuick 2.0
 
 FocusScope {
@@ -115,10 +115,10 @@ If you now refresh Pegasus, you'll see the lower half of the screen turned blue.
 !!! note
     The visual element of a list is called *delegate*. For every data item of the `model` (in this case, for every number between 0 and 9), a delegate will be created.
 
-The code looks good so far, I'll just make a small change: the delegate will ikely get more complex later, so to make easier to read, I'll move it out into a separate `Component`:
+The code looks good so far, I'll just make a small change: the delegate will likely get more complex later, so to make easier to read, I'll move it out into a separate `Component`:
 
 
-```qml
+```qml hl_lines="14"
 import QtQuick 2.0
 
 FocusScope {
@@ -148,9 +148,6 @@ FocusScope {
 }
 ```
 
-
-INPUT orange
-
 ## Horizontal axis
 
 The rows of the collection axis will consist of two things: a `Text` label that shows the collection's name and a `ListView` that shows its games. Because a `Component` can have only one child, I'll turn the `Rectangle` into an `Item` (so that we don't have a background color), and put a `Text` and a `ListView` into it.
@@ -158,11 +155,11 @@ The rows of the collection axis will consist of two things: a `Text` label that 
 !!! info
     `Component` is a special element that defines a QML document. Just as individual QML files can have only one root element, `Component` can have only one child.
 
-    Actually, you could even move the `Rectangle` from the previous part to a new file (eg. `CollectionAxisDelegate.qml`) and use the file's name to set the delegate (eg. `delegate: CollectionAxisDelegate {}`).
+    Actually, you could even move the `Rectangle` from the previous part to a new file (eg. `HorizontalAxis.qml`) and use the file's name to set the delegate (`:::qml delegate: HorizontalAxis {}`).
 
 First I'll add the collection label:
 
-```qml
+```qml hl_lines="14 18"
 import QtQuick 2.0
 
 FocusScope {
@@ -208,7 +205,7 @@ If you refresh the theme in Pegasus, you'll now see the numbers "0" and "1" at w
 I'll now add the horizontal `ListView`s:
 
 
-```qml
+```qml hl_lines="13"
 Component {
     id: collectionAxisDelegate
 
@@ -239,28 +236,17 @@ Component {
 
 Let's try it out with some placeholders:
 
-```qml
+```qml hl_lines="22 23 24 30"
 import QtQuick 2.0
 
 FocusScope {
-
-    ListView {
-        id: collectionAxis
-
-        // ...
-    }
+    // ...
 
     Component {
         id: collectionAxisDelegate
 
         Item {
             // ...
-
-            Text {
-                id: label
-
-                // ...
-            }
 
             ListView {
                 id: gameAxis
@@ -271,10 +257,10 @@ FocusScope {
                 anchors.bottom: parent.bottom
 
                 orientation: ListView.Horizontal
-                spacing: vpx(10) // some spacing to make it look fancy
 
                 model: 100
                 delegate: gameAxisDelegate
+                spacing: vpx(10) // some spacing to make it look fancy
             }
         }
     }
@@ -298,4 +284,4 @@ And here's how it should look so far:
 
 <img src="../img/flixnet-listviews01.png" style="max-width:100%">
 
-Well, probably not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, and add some simple components for the metadata.
+Not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, and add some simple components for the metadata.

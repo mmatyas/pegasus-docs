@@ -285,3 +285,105 @@ And here's how it should look so far:
 <img src="../img/flixnet-listviews01.png" style="max-width:100%">
 
 Not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, and add some simple components for the metadata.
+
+Here's the whole code so far (without comments to save space):
+
+```qml
+import QtQuick 2.0
+
+FocusScope {
+
+    ListView {
+        id: collectionAxis
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.verticalCenter
+        anchors.bottom: parent.bottom
+
+        model: 10
+        delegate: collectionAxisDelegate
+    }
+
+    Component {
+        id: collectionAxisDelegate
+
+        Item {
+            width: ListView.view.width
+            height: vpx(180)
+
+            Text {
+                id: label
+
+                text: modelData
+                color: "white"
+                font.pixelSize: vpx(18)
+                font.family: uiFont.name
+
+                height: font.pixelSize * 2.5
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            ListView {
+                id: gameAxis
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: label.bottom
+                anchors.bottom: parent.bottom
+
+                orientation: ListView.Horizontal
+
+                model: 100
+                delegate: gameAxisDelegate
+                spacing: vpx(10)
+            }
+        }
+    }
+
+    Component {
+        id: gameAxisDelegate
+
+        Rectangle {
+            width: vpx(240)
+            height: vpx(135)
+
+            color: "green"
+        }
+    }
+}
+```
+
+
+## Completing the axes
+
+### Keyboard navigation
+
+You might have noticed that you can drag and scroll the components with the mouse, but the keyboard doesn't work yet. Let's fix this: simply add `:::qml focus: true` to the collection axis:
+
+```qml
+ListView {
+    id: collectionAxis
+
+    // ...
+
+    focus: true
+}
+```
+
+You can now scroll the bars with ++up++ and ++down++, but... it's kind of wonky right now. What we want is the items to "snap" to their place, to scroll to the next item when we press a button. This can be fixed with `snapMode` and `highlightRangeMode`: setting `snapMode` keeps the elements organized when scrolling the list as a whole, while `highlightRangeMode` will make sure the selection follows the scrolling (that is, when you press ++up++ or ++down++, you actually select the next or previous element, not just view a different part of the list).
+
+```qml
+ListView {
+    id: collectionAxis
+
+    // ...
+
+    snapMode: ListView.SnapOneItem
+    highlightRangeMode: ListView.StrictlyEnforceRange
+
+    focus: true
+}
+```
+
+There, much better now.

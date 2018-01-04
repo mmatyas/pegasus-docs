@@ -99,7 +99,7 @@ FocusScope {
         model: 10 // just some random number
         delegate: Rectangle {
             width: ListView.view.width
-            height: rpx(180)
+            height: vpx(180)
 
             color: "blue"
         }
@@ -109,8 +109,8 @@ FocusScope {
 
 If you now refresh Pegasus, you'll see the lower half of the screen turned blue. Yay!
 
-!!! hint "rpx"
-    The function `rpx` is what you can use for virtual pixel values. It scales the virtual pixel value you set as an input to the physical screen coordinates as an output.
+!!! hint "vpx"
+    The function `vpx` is what you can use for virtual pixel values. It scales the virtual pixel value you set as an input to the physical screen coordinates as an output.
 
 !!! note
     The visual element of a list is called *delegate*. For every data item of the `model` (in this case, for every number between 0 and 9), a delegate will be created.
@@ -140,7 +140,7 @@ FocusScope {
 
         Rectangle {
             width: ListView.view.width
-            height: rpx(180)
+            height: vpx(180)
 
             color: "blue"
         }
@@ -178,7 +178,7 @@ FocusScope {
 
         Item {
             width: ListView.view.width
-            height: rpx(180)
+            height: vpx(180)
 
             Text {
                 id: label
@@ -190,7 +190,7 @@ FocusScope {
 
                 // white, 18px font, using Pegasus' default font family
                 color: "white"
-                font.pixelSize: rpx(18)
+                font.pixelSize: vpx(18)
                 font.family: uiFont.name
 
                 // make the line height 250%
@@ -214,7 +214,7 @@ Component {
 
     Item {
         width: ListView.view.width
-        height: rpx(180)
+        height: vpx(180)
 
         Text {
             id: label
@@ -271,7 +271,7 @@ FocusScope {
                 anchors.bottom: parent.bottom
 
                 orientation: ListView.Horizontal
-                spacing: rpx(10) // some spacing to make it look fancy
+                spacing: vpx(10) // some spacing to make it look fancy
 
                 model: 100
                 delegate: gameAxisDelegate
@@ -285,8 +285,8 @@ FocusScope {
 
         Rectangle {
             // as we calculated previously
-            width: rpx(240)
-            height: rpx(135)
+            width: vpx(240)
+            height: vpx(135)
 
             color: "green"
         }

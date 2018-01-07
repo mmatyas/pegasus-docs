@@ -190,9 +190,9 @@ FocusScope {
                 font.pixelSize: vpx(18)
                 font.family: uiFont.name
 
-                // make the line height 250%
+                // make the line height 45px high
                 // and center the text vertically in it
-                height: font.pixelSize * 2.5
+                height: vpx(45)
                 verticalAlignment: Text.AlignVCenter
             }
         }
@@ -320,7 +320,7 @@ FocusScope {
                 font.pixelSize: vpx(18)
                 font.family: uiFont.name
 
-                height: font.pixelSize * 2.5
+                height: vpx(45)
                 verticalAlignment: Text.AlignVCenter
             }
 

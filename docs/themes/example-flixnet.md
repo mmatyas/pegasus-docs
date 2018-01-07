@@ -359,7 +359,11 @@ FocusScope {
 
 ### Keyboard navigation
 
-You might have noticed that you can drag and scroll the components with the mouse, but the keyboard doesn't work yet. Let's fix this: simply add `:::qml focus: true` to the collection axis:
+You might have noticed that you can drag and scroll the components with the mouse, but the keyboard doesn't work yet. Let's fix this.
+
+#### Vertical scroll
+
+Simply add `:::qml focus: true` to the collection axis:
 
 ```qml
 ListView {
@@ -387,3 +391,119 @@ ListView {
 ```
 
 There, much better now.
+
+For some reason, I also see one extra row on the screen when I start scrolling down; not sure if that's a bug or a feature, but to make sure only the rows in the lower half of the screen are visible, I set `clip` on the `ListView`:
+
+```qml hl_lines="8"
+ListView {
+    id: collectionAxis
+
+    // ...
+
+    snapMode: ListView.SnapOneItem
+    highlightRangeMode: ListView.StrictlyEnforceRange
+    clip: true
+
+    focus: true
+}
+```
+
+#### Horizontal scroll
+
+We have a somewhat complex layout -- scrollable items inside a scrollable item; we can't just set `:::qml focus: true` here if we want the navigation to only scroll the current collection's row but also the whole collection axis. Hovewer, every `ListView` has select-next and select-previous function we can use (`incrementCurrentIndex()`, `decrementCurrentIndex()`), and the currently selected item can be accessed through `currentItem`.
+
+In this case, the `currentItem` of `collectionAxis` will be the `Item` element inside `collectionAxisDelegate`:
+
+```qml
+Component {
+    id: collectionAxisDelegate
+
+    // this one!
+    Item {
+        width: ListView.view.width
+        height: vpx(180)
+
+        Text {
+            id: label
+
+            // ...
+        }
+
+        ListView {
+            id: gameAxis
+
+            // ...
+        }
+    }
+}
+```
+
+But how can we access the ListView, `gameAxis` of the Item? Turns out we can't just use its `id`, as it's not accessible by external element (we'll get an error about `gameAxis` being undefined). Hovewer, `property` members *can* be accessed: let's add an `alias` to the Item:
+
+```qml hl_lines="5"
+Component {
+    id: collectionAxisDelegate
+
+    Item {
+        property alias axis: gameAxis
+
+        width: ListView.view.width
+        height: vpx(180)
+
+        Text {
+            id: label
+
+            // ...
+        }
+
+        ListView {
+            id: gameAxis
+
+            // ...
+        }
+    }
+}
+```
+
+We can now access the game axis of the current collection as `currentItem.axis` (see below).
+
+!!! note
+    Yes, you can also write it like `:::qml property alias gameAxis: gameAxis`, I simply preferred the different name.
+
+Combining the ListView functions, `currentItem` and manual keyboard handling (`Keys`), we can now make the horizontal scrolling work with:
+
+```qml
+ListView {
+    id: collectionAxis
+
+    // ...
+
+    focus: true
+    Keys.onLeftPressed: currentItem.axis.decrementCurrentIndex()
+    Keys.onRightPressed: currentItem.axis.incrementCurrentIndex()
+}
+```
+
+...which, similarly to the vertical axis, scrolls in unwanted ways. Fix it the similar way like there:
+
+```qml hl_lines="15 16"
+ListView {
+    id: gameAxis
+
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: label.bottom
+    anchors.bottom: parent.bottom
+
+    orientation: ListView.Horizontal
+
+    model: 100
+    delegate: gameAxisDelegate
+    spacing: vpx(10)
+
+    snapMode: ListView.SnapOneItem
+    highlightRangeMode: ListView.StrictlyEnforceRange
+}
+```
+
+And now it should scroll finely in both axes!

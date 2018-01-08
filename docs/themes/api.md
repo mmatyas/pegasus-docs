@@ -98,7 +98,7 @@ You can select a game by changing `api.collections.index` and `api.currentCollec
 
 ## Filtering games
 
-`api.filters` is an Object with the data members below. Changing these values will automatically update all `Collection`'s `model` field to include `Game`s that match *all* filters. All fields are writable.
+`api.filters` is an Object with the data members below. Changing these values will automatically update all `Collection`'s `model` field to include `Game`s that match *all* filters. **All fields are writable**.
 
 Property | Description
 ---|---

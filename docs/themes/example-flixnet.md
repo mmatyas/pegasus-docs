@@ -521,3 +521,61 @@ ListView {
 ```
 
 And now both directions should scroll finely!
+
+!!! tip
+    To see that the current item indeed changes, you could set the `color` of the `gameAxisDelegate`'s `Rectangle` to:
+
+    `:::qml color: ListView.isCurrentItem ? "orange" : "green"`
+
+## Left margin
+
+There's a small margin on the left that shows the game before the currently selected one. We don't want to reduce the size of the horizontal `ListView`s (they should fill the whole width of the screen), we just want to move the currently selected item a little bit right. We can use the `preferredHighlightBegin`/`End` members of the `ListView`s: they can be used to define a fixed position range (in pixels) where the currently selected element should reside.
+
+I'll set a 100px offset like this:
+
+```qml hl_lines="15 16"
+ListView {
+    id: gameAxis
+
+    // ...
+
+    preferredHighlightBegin: vpx(100)
+    preferredHighlightEnd: preferredHighlightBegin + vpx(240)
+}
+```
+
+!!! note
+    240px is the width of one game box, as we've calculated at the beginning.
+
+!!! tip
+    `preferredHighlightBegin` and `preferredHighlightEnd` almost always come in pair, and `End` must be greater than `Begin` to have their effect applied.
+
+We also need to move the collection label too. As it's just a regular Text element, I'll simply set its left anchor and a margin on it:
+
+```qml
+Component {
+    id: collectionAxisDelegate
+
+    Item {
+        // ...
+
+        Text {
+            id: label
+
+            // ...
+
+            anchors.left: parent.left
+            anchors.leftMargin: vpx(100)
+        }
+
+        ListView {
+            id: gameAxis
+
+            // ...
+        }
+    }
+}
+```
+
+!!! tip
+    You can also use the Text item's `leftPadding` property. This feature was added in Qt 5.6 (as mentioned in the official documentation), so you'll need to change the `import` command on the top of the QML file to `import QtQuick 2.6` or higher (Pegasus comes with Qt 5.9 at the moment).

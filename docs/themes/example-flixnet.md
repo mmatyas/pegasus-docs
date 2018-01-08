@@ -13,12 +13,14 @@ As you can see, there are two main axes of motion:
 - a horizontal **game axis** for the currently selected collection
 - a vertical **collection axis** for selecting a collection
 
-In QML terms, this means a list containing lists, which will make the layout somewhat complex, but not impossible to implement, of course. Anyway, let's get started!
+Each row can be individually scrolled, with the currently selected game being the top row's first (fully visible) item.
+
+In QML terms, this structure means a list containing lists, which will make the layout somewhat complex (but not impossible to implement, of course). Let's get started!
 
 
 ## Initial files
 
-I'm on Linux, so my [theme directory](overview.md) is at `~/.config/pegasus-frontend/themes`. I'm creating a new directory called `flixnet-tutorial`, and in it my `theme.cfg` like this:
+I'm on Linux, so my [theme directory](overview.md) is at `~/.config/pegasus-frontend/themes`. I'm creating a new directory called `flixnet-tutorial`, and in it my `theme.cfg`, like this:
 
 ```control
 name: Flixnet tutorial
@@ -38,15 +40,30 @@ FocusScope {
 Now I open Pegasus and select this theme on the Settings screen. I'll keep Pegasus open during the development, and refresh the theme with the ++f5++ key. I also open the main log file `~/.config/pegasus-frontend/lastrun.log` which will tell me if I've made any errors in the QML file.
 
 !!! hint
-    You can use whatever text editor you like. Qt Creator is cross platform, has good auto-complete and syntax highlight features. For a more lightweight editor, Sublime Text with the QML package could be used, among others.
+    You can use whatever text editor you like. Qt Creator is cross platform, has good auto-complete and syntax highlight features. For a more lightweight editor, Sublime Text with the QML package, Atom or Notepad++ could be used, among others.
 
 !!! note
-    Depending on your platform, you'll see `.qmlc` files popping up in your theme's directory. These are cache files, generated for faster loading, optimized for you machine. When copying the theme to a different machine, you don't have to bring them.
+    Depending on your platform, you'll see `.qmlc` files popping up in your theme's directory. These are cache files, generated for faster loading, optimized for you machine. When copying the theme to a different machine, you don't have to bring them, they'll get generated the next time you launch Pegasus.
 
 
-## Vertical axis
+## Initial layout
 
-Let's start with the hard part, the list of lists. Because collections are what contain the games, I'll first start making the axis that selects the collection, and then add the game selection after that. I'll write a rough initial structure first, as once you have the basic layout done, you can tweak the elements as much as you want.
+Let's start with the hard part, the layout of the items on the bottom. This is a vertically scrollable list of horizontally scrollable lists, each containing boxes for the games. Because collections are what contain the games, I'll first start making the vertical axis that selects the collection, and then add the horizontal game selection after that. I'll write a rough initial structure first, as once you have the basic layout done, you can tweak the elements as much as you want.
+
+### Some planning
+
+The game selection layout should take the whole lower half of the screen. On a standard 16:9 screen I want to show 2 rows of games to appear, and incrementally more on screens with smaller aspect ratios. Using Pegasus' virtual coordinates, I can assume the screen's height is at least 720 (virtual) pixels high. Based on that,
+
+- if the height of the list is half the screen's height, I'll have 360px at least
+- if I want to show two rows, one row's full height in the list will be 180px
+- I'll use 18px font size for the collection's name
+- to have some space around the text, I'll use 250% line height; that's 45px out of the 180px so far
+- I'm left with 135px height to use for the game boxes
+- the game boxes will have a 16:9 aspect ratio, so their width will be 240 (surprisingly an integer!)
+
+Ok, let's start coding!
+
+### Vertical axis
 
 The type we can use to lay out a variable amount of items with one of them being selected is `ListView`. I set it up so it takes the whole lower half of the screen:
 
@@ -63,25 +80,11 @@ FocusScope {
         anchors.top: parent.verticalCenter
         anchors.bottom: parent.bottom
     }
+
 }
 ```
 
-### Some planning
-
-On a standard 16:9 screen I want to show 2 rows of games to appear, and more with smaller aspect ratios. Using Pegasus' virtual coordinates, I can assume the screen's height is at least 720 (virtual) pixels high. Based on that,
-
-- if the height of the list is half the screen's height, I have 360px at least
-- if I want to show two rows, one row's full height in the list will be 180px
-- I'll use 18px font size for the collection's name
-- to have some space around the text, I'll use 250% line height; that's 45px out of the 180px so far
-- I'm left with 135px height to use for the game boxes (I'll call them *cells*)
-- the cells' have a 16:9 aspect ratio, so their width will be 240 (surprisingly an integer!)
-
-Ok, back to the code!
-
-### Placeholders
-
-So, one element of this collection axis will have 180px height and the whole width of the screen. I'll create a placeholder for now and add a fake model (a series of numbers) for testing.
+One element of this collection axis will have 180px height and the width is the whole width of the screen. I'll create a placeholder for now and add a fake model (a series of numbers) for testing (so you can see that they indeed come in order and the ListView has the correct amount of items):
 
 ```qml hl_lines="13 14"
 import QtQuick 2.0
@@ -104,6 +107,7 @@ FocusScope {
             color: "blue"
         }
     }
+
 }
 ```
 
@@ -115,8 +119,7 @@ If you now refresh Pegasus, you'll see the lower half of the screen turned blue.
 !!! note
     The visual element of a list is called *delegate*. For every data item of the `model` (in this case, for every number between 0 and 9), a delegate will be created.
 
-The code looks good so far, I'll just make a small change: the delegate will likely get more complex later, so to make easier to read, I'll move it out into a separate `Component`:
-
+The code looks good so far, I'll just make a small change: the delegate will likely get more complex later, so to make it easier to read, I'll move it out into a separate `Component`:
 
 ```qml hl_lines="14"
 import QtQuick 2.0
@@ -145,17 +148,19 @@ FocusScope {
             color: "blue"
         }
     }
+
 }
 ```
 
-## Horizontal axis
+!!! info
+    `Component` is a special element that defines a QML document. Actually, you could even move the `Rectangle` to a new file (eg. `HorizontalAxis.qml`) and use the file's name to set the delegate (eg. `:::qml delegate: HorizontalAxis {}`).
 
-The rows of the collection axis will consist of two things: a `Text` label that shows the collection's name and a `ListView` that shows its games. Because a `Component` can have only one child, I'll turn the `Rectangle` into an `Item` (so that we don't have a background color), and put a `Text` and a `ListView` into it.
+### Horizontal axis
+
+The rows of the collection axis will consist of two things: a `Text` label that shows the collection's name and a `ListView` that shows its games. Because a `Component` can have only one child, I'll turn the `Rectangle` into an `Item` (an otherwise invisible container), and put a `Text` and a `ListView` into it.
 
 !!! info
-    `Component` is a special element that defines a QML document. Just as individual QML files can have only one root element, `Component` can have only one child.
-
-    Actually, you could even move the `Rectangle` from the previous part to a new file (eg. `HorizontalAxis.qml`) and use the file's name to set the delegate (`:::qml delegate: HorizontalAxis {}`).
+    Just as individual QML files can have only one root element, `Component` can have only one child.
 
 First I'll add the collection label:
 
@@ -181,7 +186,7 @@ FocusScope {
                 id: label
 
                 // `modelData` is the item in the list's model
-                // for which this delegate is created for
+                // for which this delegate is created for;
                 // in this case a number between 0-9
                 text: modelData
 
@@ -197,13 +202,13 @@ FocusScope {
             }
         }
     }
+
 }
 ```
 
 If you refresh the theme in Pegasus, you'll now see the numbers "0" and "1" at where we'd expect the labels.
 
-I'll now add the horizontal `ListView`s:
-
+I'll now add the horizontal `ListView`:
 
 ```qml hl_lines="13"
 Component {
@@ -234,7 +239,7 @@ Component {
 }
 ```
 
-Let's try it out with some placeholders:
+We'll need a model and a delegate item to actually see something. Let's create some dummy items:
 
 ```qml hl_lines="22 23 24 30"
 import QtQuick 2.0
@@ -258,7 +263,7 @@ FocusScope {
 
                 orientation: ListView.Horizontal
 
-                model: 100
+                model: 20
                 delegate: gameAxisDelegate
                 spacing: vpx(10) // some spacing to make it look fancy
             }
@@ -275,16 +280,22 @@ FocusScope {
             height: vpx(135)
 
             color: "green"
+
+            Text {
+                // will become a number between 0-19
+                text: modelData
+            }
         }
     }
+
 }
 ```
 
 And here's how it should look so far:
 
-<img src="../img/flixnet-listviews01.png" style="max-width:100%">
+<img src="../img/flixnet_initial-layout.png" style="max-width:100%">
 
-Not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, and add some simple components for the metadata.
+Not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, then add some simple components for the metadata.
 
 Here's the whole code so far (without comments to save space):
 
@@ -334,7 +345,7 @@ FocusScope {
 
                 orientation: ListView.Horizontal
 
-                model: 100
+                model: 20
                 delegate: gameAxisDelegate
                 spacing: vpx(10)
             }
@@ -349,19 +360,22 @@ FocusScope {
             height: vpx(135)
 
             color: "green"
+
+            Text {
+                text: modelData
+            }
         }
     }
+
 }
 ```
 
 
-## Completing the axes
-
-### Keyboard navigation
+## Keyboard navigation
 
 You might have noticed that you can drag and scroll the components with the mouse, but the keyboard doesn't work yet. Let's fix this.
 
-#### Vertical scroll
+### Vertical scroll
 
 Simply add `:::qml focus: true` to the collection axis:
 
@@ -408,9 +422,9 @@ ListView {
 }
 ```
 
-#### Horizontal scroll
+### Horizontal scroll
 
-We have a somewhat complex layout -- scrollable items inside a scrollable item; we can't just set `:::qml focus: true` here if we want the navigation to only scroll the current collection's row but also the whole collection axis. Hovewer, every `ListView` has select-next and select-previous function we can use (`incrementCurrentIndex()`, `decrementCurrentIndex()`), and the currently selected item can be accessed through `currentItem`.
+We have a somewhat complex layout -- scrollable items inside a scrollable item; we can't just set `focus: true` here, since that'd mean we set it for *each* row, and end up with scrolling one we don't want. Hovewer, every `ListView` has select-next and select-previous function we can use (`incrementCurrentIndex()`, `decrementCurrentIndex()`), and the currently selected item can be accessed through `currentItem`.
 
 In this case, the `currentItem` of `collectionAxis` will be the `Item` element inside `collectionAxisDelegate`:
 
@@ -438,7 +452,7 @@ Component {
 }
 ```
 
-But how can we access the ListView, `gameAxis` of the Item? Turns out we can't just use its `id`, as it's not accessible by external element (we'll get an error about `gameAxis` being undefined). Hovewer, `property` members *can* be accessed: let's add an `alias` to the Item:
+But how can we access the ListView, `gameAxis` of the Item? Turns out we can't just use its `id`, as it's not accessible by external element (we'll get an error about `gameAxis` being undefined). `property` members, however, *can* be accessed: let's add an `alias` to the Item:
 
 ```qml hl_lines="5"
 Component {
@@ -468,7 +482,7 @@ Component {
 We can now access the game axis of the current collection as `currentItem.axis` (see below).
 
 !!! note
-    Yes, you can also write it like `:::qml property alias gameAxis: gameAxis`, I simply preferred the different name.
+    Yes, you can also write it like `property alias gameAxis: gameAxis`, I simply preferred the different name in this case.
 
 Combining the ListView functions, `currentItem` and manual keyboard handling (`Keys`), we can now make the horizontal scrolling work with:
 
@@ -484,7 +498,7 @@ ListView {
 }
 ```
 
-...which, similarly to the vertical axis, scrolls in unwanted ways. Fix it the similar way like there:
+...which, similarly to the vertical axis, initially scrolls in a not so nice way. Fix it like previously:
 
 ```qml hl_lines="15 16"
 ListView {
@@ -506,4 +520,4 @@ ListView {
 }
 ```
 
-And now it should scroll finely in both axes!
+And now both directions should scroll finely!

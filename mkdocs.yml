@@ -39,3 +39,4 @@ markdown_extensions:
     - pymdownx.inlinehilite
     - pymdownx.keys
     - pymdownx.magiclink
+    - pymdownx.extrarawhtml

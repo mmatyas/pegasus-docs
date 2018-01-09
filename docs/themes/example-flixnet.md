@@ -2,7 +2,7 @@
 
 In this tutorial, we'll implement the following theme from scratch:
 
-<img src="../img/flixnet-result.png" style="max-width:100%">
+![preview](img/flixnet-result.png)
 
 If we simplify it a bit, here's how its structure and navigation looks like:
 
@@ -293,7 +293,7 @@ FocusScope {
 
 And here's how it should look so far:
 
-<img src="../img/flixnet_initial-layout.png" style="max-width:100%">
+![screenshot](img/flixnet_initial-layout.png)
 
 Not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, then add some simple components for the metadata.
 
@@ -527,6 +527,7 @@ And now both directions should scroll finely!
 
     `:::qml color: ListView.isCurrentItem ? "orange" : "green"`
 
+
 ## Left margin
 
 There's a small margin on the left that shows the game before the currently selected one. We don't want to reduce the size of the horizontal `ListView`s (they should fill the whole width of the screen), we just want to move the currently selected item a little bit right. We can use the `preferredHighlightBegin`/`End` members of the `ListView`s: they can be used to define a fixed position range (in pixels) where the currently selected element should reside.
@@ -577,5 +578,116 @@ Component {
 }
 ```
 
+!!! note
+    The anchor margin is only applied if the anchor itself is defined.
+
 !!! tip
     You can also use the Text item's `leftPadding` property. This feature was added in Qt 5.6 (as mentioned in the official documentation), so you'll need to change the `import` command on the top of the QML file to `import QtQuick 2.6` or higher (Pegasus comes with Qt 5.9 at the moment).
+
+
+## Using API data
+
+Finally, the time has come to replace the placeholder elements with actual content. Let's start by using the real collection data. According to the [API reference](api.md), collections can be accessed and selected through `api.collections`, and we can use `api.collections.model` as the `model` of a ListView (or any other View).
+
+First, find the ListView for the collection axis (which I've called `collectionAxis` previously), and set its `model` property:
+
+```qml hl_lines="6"
+ListView {
+    id: collectionAxis
+
+    // ...
+
+    model: api.collections.model
+    delegate: collectionAxisDelegate
+
+    // ...
+}
+```
+
+Previously the `model` was set to `10`, and so the `modelData` available in the delegates was a number between 0 and 9. With `model` set to `api.collections.model`, the `modelData` will be a `Collection` object. A `Collection` always has a `tag` (a short, unique label) and possibly a proper `name`. We should show the `name` if it's available, and fall back to the `tag` if it's not defined. We can do it like this:
+
+```qml hl_lines="10"
+Component {
+    id: collectionAxisDelegate
+
+    Item {
+        // ...
+
+        Text {
+            id: label
+
+            text: modelData.name || modelData.tag
+            color: "white"
+            font.pixelSize: vpx(18)
+            font.family: uiFont.name
+
+            // ...
+        }
+
+        ListView {
+            id: gameAxis
+
+            // ...
+        }
+    }
+}
+```
+
+After a refresh, you should see the names of collections appearing in Pegasus.
+
+![screenshot](img/flixnet_collection-names.png)
+
+Now let's show the game titles in the horizontal rectangles. Every `Collection` has a `games` member we can use to access the list of games associated with the collection. Similarly to `collections`, `games` also has a `model` property, so let's use it as the model of the horizontal axis:
+
+```qml hl_lines="18"
+Component {
+    id: collectionAxisDelegate
+
+    Item {
+        // ...
+
+        Text {
+            id: label
+
+            // ...
+        }
+
+        ListView {
+            id: gameAxis
+
+            // ...
+
+            model: modelData.games.model
+            delegate: gameAxisDelegate
+            spacing: vpx(10)
+
+            // ...
+        }
+    }
+}
+```
+
+The `model` of the *vertical* ListView was a list of `Collection`s, so the `modelData` received by a delegate of that ListView (one whole horizontal row) is one `Collection` object. The `model` of these *horizontal* ListViews is a list of `Game`s, so a delegate of the horizontal ListViews will see a `Game` in its `modelData`.
+
+A `Game` always has a `title`, so we can simply set it as text:
+
+```qml hl_lines="11"
+Component {
+    id: gameAxisDelegate
+
+    Rectangle {
+        width: vpx(240)
+        height: vpx(135)
+
+        color: "green"
+
+        Text {
+            text: modelData.title
+        }
+    }
+}
+```
+
+And now they should show up in Pegasus:
+
+![screenshot](img/flixnet_game-titles.png)

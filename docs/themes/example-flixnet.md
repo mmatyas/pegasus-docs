@@ -633,6 +633,9 @@ Component {
 }
 ```
 
+!!! tip
+    If the name of the `modelData` property you use (in this case `name` and `tag`) don't collide with other properties of the object, it's not required to type out `modelData` (ie. you can just write `text: name || tag`).
+
 After a refresh, you should see the names of collections appearing in Pegasus.
 
 ![screenshot](img/flixnet_collection-names.png)
@@ -691,3 +694,112 @@ Component {
 And now they should show up in Pegasus:
 
 ![screenshot](img/flixnet_game-titles.png)
+
+
+## Fancy game boxes
+
+I'll now replace the green game boxes with something better to look at. There are two main cases:
+
+- if there is a usable image for a game, the box will show that
+- if there is none, or the image has not loaded yet, it'll show a gray rectangle, with the game name in the center in white
+
+I'll turn the Rectangle of `gameAxisDelegate` to an Item, and add an initial Rectangle and Image to it for the two cases:
+
+```qml
+Component {
+    id: gameAxisDelegate
+
+    Item {
+        width: vpx(240)
+        height: vpx(135)
+
+        Rectangle {
+            anchors.fill: parent
+            color: "#333"
+        }
+
+        Image {
+            id: image
+
+            anchors.fill: parent
+        }
+    }
+}
+```
+
+So which image asset should we use? A game box is a rectangle with 16:9 aspect ratio, so the `banner` would be perfect for this. However, since every asset is potentially missing, we should consider showing the other assets and provide multiple fallbacks. If we don't have a `banner`, the next similarly sized one is the `steam` ("grid icon") asset. Because it's wider than 16:9, we'll need to crop it if we don't want black bars or squashed/scretched images (though you might prefer that). If neither image is available, I'll use `boxFront` as it tends to be commonly available.
+
+Let's extend the Image object created previously:
+
+```qml
+Image {
+    id: image
+
+    anchors.fill: parent
+    visible: source
+
+    // fill the whole area, cropping what lies outside
+    fillMode: Image.PreserveAspectCrop
+
+    asynchronous: true
+    source: assets.banner || assets.steam || assets.boxFront
+    sourceSize { width: 256; height: 256 }
+}
+```
+
+I've also made some optimizations here:
+
+- I've set `asynchronous: true`: Loading image files takes some time depending on the device Pegasus runs on. If this property is set to false (default), the program will not react to input until the image is loaded (or noticed that it failed to load). If it's false, the image is loaded "in the background", and input is not blocked; hovewer depending on your theme, you might want to show something in its place for the users during this time (eg. a loading spinner or progress bar).
+- I've set `sourceSize`: This sets the maximum size the image should occupy in the memory. The [official documentation](https://doc-snapshots.qt.io/qt5-dev/qml-qtquick-image.html#sourceSize-prop) describes this in detail.
+- I've set `visible: source`, that is, if the `source` is empty (neither `banner`, `steam` or `boxFront` is available), then ignore this whole object: no input will be ever handled here and there's nothing to see either.
+
+With these changes, here's how it looks:
+
+![screenshot](img/flixnet_gamebox-images.png)
+
+Starting to take shape, isn't it?
+
+Let's finish the text-only fallback too:
+
+```qml hl_lines="11 13"
+Component {
+    id: gameAxisDelegate
+
+    Item {
+        width: vpx(240)
+        height: vpx(135)
+
+        Rectangle {
+            anchors.fill: parent
+            color: "#333"
+            visible: image.status !== Image.Ready
+
+            Text {
+                text: modelData.title
+
+                // define the text area
+                anchors.fill: parent
+                anchors.margins: vpx(12)
+
+                // align to the center
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                wrapMode: Text.Wrap
+
+                // set the font
+                color: "white"
+                font.pixelSize: vpx(16)
+                font.family: uiFont.name
+            }
+        }
+
+        Image {
+            id: image
+
+            // ...
+        }
+    }
+}
+```
+
+And we're done with the game boxes!

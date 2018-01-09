@@ -15,12 +15,12 @@ Property | Description
 
 ## One Collection
 
-`api.currentCollection` can be used as a shortcut for `api.collections.current`. A `Collection` has the following data members:
+`api.currentCollection` can be used as a shortcut for `api.collections.current`. A `Collection` has the following data members. Properties marked as optional might have no value (eg. empty string or empty array).
 
 Property | Description
 ---|---
 `tag` | A short, unique string for identifying a collection, for example `nes`, `mario carts`, etc.
-`name` | The proper name of the collection, eg. "Nintendo Entertainment System", "Mario Cartridges", etc.
+`name` | <span class="optional"></span> The proper name of the collection, eg. "Nintendo Entertainment System", "Mario Cartridges", etc.
 `games` | Object storing the list of games (see below).
 
 ## List of Games
@@ -41,33 +41,33 @@ Property | Description
 
 ## One Game
 
-`api.currentGame` can be used as a shortcut for `api.collections.current.games.current`. A `Game` is an Object with the following data members:
+`api.currentGame` can be used as a shortcut for `api.collections.current.games.current`. A `Game` is an Object with the following data members. Properties marked as optional might have no value (eg. empty string or empty array).
 
 Property | Description
 ---|---
 `title` | Game title
-`developer` | Developer(s) as a string. If there are more than one, they are separated with `, `.
-`publisher` | Publisher(s) as a string. If there are more than one, they are separated with `, `.
-`genre` | Genre(s) as a string. If there are more than one, they are separated with `, `.
-`developerList` | Developers as an array.
-`publisherList` | Publishers as an array.
-`genreList` | Genres as an array.
-`summary` | Short description (2-3 sentence or less)
-`description` | Longer description
-`release` | Release date as QML `date`
-`year` | Release year as integer
-`month` | Release month as integer
-`day` | Release day as integer
-`players` | Maximun number of players
-`favorite` | Boolean (true/false) value
-`rating` | Floating-point value between and including `0.0` and `1.0`
-`playCount` | Positive integer
-`lastPlayed` | As QML `date`, incl. time
+`developer` | <span class="optional"></span> Developer(s) as a string. If there are more than one, they are separated with `, `.
+`publisher` | <span class="optional"></span> Publisher(s) as a string. If there are more than one, they are separated with `, `.
+`genre` | <span class="optional"></span> Genre(s) as a string. If there are more than one, they are separated with `, `.
+`developerList` | <span class="optional"></span> Developers as an array.
+`publisherList` | <span class="optional"></span> Publishers as an array.
+`genreList` | <span class="optional"></span> Genres as an array.
+`summary` | <span class="optional"></span> Short description (2-3 sentence or less)
+`description` | <span class="optional"></span> Longer description
+`release` | <span class="optional"></span> Release date as QML `date` (default: invalid)
+`year` | <span class="optional"></span> Release year as integer (default: 0)
+`month` | <span class="optional"></span> Release month as integer (default: 0)
+`day` | <span class="optional"></span> Release day as integer (default: 0)
+`players` | <span class="optional"></span> Maximum number of players (default: 1)
+`favorite` | <span class="optional"></span> Boolean (true/false) value (default: false)
+`rating` | <span class="optional"></span> Floating-point value between and including `0.0` and `1.0` (default: `0.0`)
+`playCount` | <span class="optional"></span> Positive integer (default: 0)
+`lastPlayed` | <span class="optional"></span> As QML `date`, incl. time (default: invalid)
 `assets` | An Object containing game assets (see below)
 
 ## Game Assets
 
-Every `Game` has an `asset` member Object with the following data members. All of them are string URLs:
+Every `Game` has an `asset` member Object with the following data members. All of them are string URLs, and all of them can be empty.
 
 Property | Description
 ---|---
@@ -85,7 +85,7 @@ Property | Description
 `background` | A background image, eg. artwork or selected screenshot
 `music` | Background music
 
-In addition, the following members can have multiple values, and as such usable as eg. `model` sources.
+In addition, the following members can have multiple values, and as such usable as eg. `model` sources. All of them can be empty.
 
 Property | Description
 ---|---
@@ -102,6 +102,6 @@ You can select a game by changing `api.collections.index` and `api.currentCollec
 
 Property | Description
 ---|---
-`title` |  Match games whose titles contain this string. String value.
-`playerCount` |  Match games that have at least this many players. Positive integer.
-`favorite` |  Setting to true includes only games marked as favorite. Boolean (true/false) value.
+`title` |  Match games whose titles contain this string. String value. (default: empty)
+`playerCount` |  Match games that have at least this many players. Positive integer. (default: 1)
+`favorite` |  Setting to true includes only games marked as favorite. Boolean (true/false) value. (default: false)

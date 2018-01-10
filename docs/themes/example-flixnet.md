@@ -869,13 +869,13 @@ PathView {
     //
     // brand new: path definitions
     //
-    pathItemCount: 1 + height / vpx(180)
+    pathItemCount: 1 + Math.ceil(height / vpx(180))
     path: Path {
         startX: collectionAxis.width * 0.5
         startY: vpx(180) * -0.5
         PathLine {
             x: collectionAxis.path.startX
-            y: collectionAxis.height + (vpx(180) * 0.5)
+            y: collectionAxis.path.startY + collectionAxis.pathItemCount * vpx(180)
         }
     }
     preferredHighlightBegin: 1 / pathItemCount
@@ -896,10 +896,95 @@ PathView {
 
 Unlike ListView that goes to one direction only, PathView can be used to create arbitrary paths on which the items will travel (curves, circles, all kinds of shapes). Because of that, some properties have to be manually calculated.
 
-- For PathViews, `pathItemCount` must be set (the default behaviour is to show all items). We should show as many rows as it fits into lower half or the screen (one row's height is 180px). However, when there's a scrolling going on, there'll be actually one more rows present on the screen: the topmost row will gradually go *out* of the visible area, while a new line is on its way *in* to appear on the bottom.
+- For PathViews, `pathItemCount` must be set (the default behaviour is to show all items). We should show as many rows as it fits into lower half or the screen (one row's height is 180px). The number of visible items thus will be [area height] / [row height], which I've rounded up using `Math.ceil`, a standard JavaScript function. However, when there's a scrolling going on, there'll be actually **one more** row visible on the screen: the topmost row will gradually go *out* on the top of the lower area, while a new line is on its way *in* to appear on the bottom (see the animation below).
 
-- The `path` defines the **trail** the elements will follow, **by their center point**. Because there'll be one item that slides *out*, and one that slides *in*, the path extends above and below the PathVies's area. The starting point of the axis (the center point of the item that will slide out) is horizontally (`startX`) the center of the screen (as the rows fill the width), and vertically (`startY`) above the top edge of the PathView (which would be 0) by 50% of the row height (values are in pixels). From the start point, a linear path is created with `PathLine`, its end point (where the item that'll slide in is created) is the same horizontally as the start, while vertically will be below the screen by 50% of the row height.
+- The `path` defines the trail the elements will follow **by their center point**. Because there'll be one item that slides *out*, and one that slides *in*, the path extends above and below the PathView's area. The starting point of the axis (the center point of the item that will slide out) is horizontally (`startX`) the center of the screen (as the rows fill the width), and vertically (`startY`) above the top edge of the PathView (which would be 0) by 50% of the row height (where values are in pixels). From the start point, a linear path is created with `PathLine`: I've set it so the end point is the same as the start except the `Y` coordinate, which is increased by the length ot the path, [number of max. visible items] * [item height].
 
-- The preferred highlight positions are in **percentage** for the PathView (as it can have any kind of shape, pixels don't always make sense). Again, the values define the range for the *center point* of the selected item. It defaults to 0, which in our case is the center of the sliding out element; I've set it to `1 / pathItemCount`, which will produce the center point of the *second* element on the path, in percentages. Since I'm not planning to add any additional effects and such, just select one item, I've set the end of the range to the same as the beginning.
+- The preferred highlight positions are in **percentage** for the PathView (as it can have any kind of shape, pixels don't always make sense). Again, the values define the range for the *center point* of the selected item. It defaults to 0, which in our case would be the center of the sliding out element, out of the visible area. I've set it to [1] / [item count], which will produce the center point of the *second* element on the path. Since I'm not planning to add any additional effects and such, just select one item, I've set the end of the range to the same as the beginning.
+
+- Input handling is also added manually, because as the path could go in any directions and shapes, there's no concept of up/down/left/right by default.
 
 <video autoplay loop style="max-width:100%;display:block;margin:0 auto"><source src="../webm/flixnet_pathview.webm" type="video/webm"></video>
+
+*Structure of the vertical PathView. The red line marks the path, with red dots at positions 0/4, 1/4, 2/4, 3/4 and 4/4. The centers of the delegates are marked with blue.*
+
+### Horizontally
+
+The horizontal scrolling works similarly, with one important difference: there is a margin on the left of the currently selected item, where the previous one is halfway in the screen. We'll have to shift the whole path horizontally, and add 1 to the maximum number of visible items, and, just like previously, another one to account for scrolling.
+
+<video autoplay loop style="max-width:100%;display:block;margin:0 auto"><source src="../webm/flixnet_pathview2.webm" type="video/webm"></video>
+
+I've set the left margin previously to 100 px and the width of a game box to be 240x135. In addition, there's a 10px spacing between the element, giving the full width of a box to 250. The center of the current item will be at 100 + 250/2 = 225 on the path; counting backwards, the previous item will be at 100 - 250 * 0.5, and the position where the new elements will appear when scrolling will be at 100 - 250 * 1.5.
+
+All right, let's change the horizontal ListView into PathView.
+
+**Before**:
+
+```qml
+ListView {
+    id: gameAxis
+
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: label.bottom
+    anchors.bottom: parent.bottom
+
+    orientation: ListView.Horizontal
+
+    model: modelData.games.model
+    delegate: gameAxisDelegate
+    spacing: vpx(10)
+
+    snapMode: ListView.SnapOneItem
+    highlightRangeMode: ListView.StrictlyEnforceRange
+
+    preferredHighlightBegin: vpx(100)
+    preferredHighlightEnd: preferredHighlightBegin + vpx(240)
+}
+```
+
+**After**:
+
+```qml
+PathView {
+    id: gameAxis
+
+    // anchors: unchanged
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: label.bottom
+    anchors.bottom: parent.bottom
+
+    // removed orientation
+
+    // removed spacing
+    model: modelData.games.model
+    delegate: gameAxisDelegate
+
+
+    //
+    // brand new: path definitions
+    //
+    pathItemCount: 2 + Math.ceil(width / vpx(250)) // note the '2'!
+    path: Path {
+        startX: vpx(100) - vpx(250) * 1.5
+        startY: vpx(135) * 0.5
+        PathLine {
+            x: gameAxis.path.startX + gameAxis.pathItemCount * vpx(250)
+            y: gameAxis.path.startY
+        }
+    }
+    preferredHighlightBegin: 2 / pathItemCount
+    preferredHighlightEnd: preferredHighlightBegin
+
+
+    // changed ListView to PathView
+    snapMode: ListView.SnapOneItem
+    highlightRangeMode: ListView.StrictlyEnforceRange
+}
+```
+
+And now both the horizontal and vertical axis loops as intended!
+
+!!! tip
+    Typing out fixed values in pixels every time can be tedious and error prone. I'd recommend defining them as properties at the top of the file or object they're used in (eg. `property real boxHeight: vpx(135)`).

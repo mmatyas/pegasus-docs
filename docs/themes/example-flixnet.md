@@ -891,10 +891,15 @@ PathView {
 }
 ```
 
+!!! warning
+    Don't forget to change ListView to PathView in the delegate too!
+
 Unlike ListView that goes to one direction only, PathView can be used to create arbitrary paths on which the items will travel (curves, circles, all kinds of shapes). Because of that, some properties have to be manually calculated.
 
 - For PathViews, `pathItemCount` must be set (the default behaviour is to show all items). We should show as many rows as it fits into lower half or the screen (one row's height is 180px). However, when there's a scrolling going on, there'll be actually one more rows present on the screen: the topmost row will gradually go *out* of the visible area, while a new line is on its way *in* to appear on the bottom.
 
 - The `path` defines the **trail** the elements will follow, **by their center point**. Because there'll be one item that slides *out*, and one that slides *in*, the path extends above and below the PathVies's area. The starting point of the axis (the center point of the item that will slide out) is horizontally (`startX`) the center of the screen (as the rows fill the width), and vertically (`startY`) above the top edge of the PathView (which would be 0) by 50% of the row height (values are in pixels). From the start point, a linear path is created with `PathLine`, its end point (where the item that'll slide in is created) is the same horizontally as the start, while vertically will be below the screen by 50% of the row height.
 
-- The preferred highlight positions are in **percentage** for the PathView (as it can have any kind of shape, pixels don't always make sense). Again, the values define the range for the *center point* of the selected item. It defaults to 0, whics in our case is the center of the sliding out element; I've set it to `1 / pathItemCount`, which will produce the center point of the *second* element on the path, in percentages. Since I'm not planning to add any additional effects and such, just select one item, I've set the end of the range to the same as the beginning.
+- The preferred highlight positions are in **percentage** for the PathView (as it can have any kind of shape, pixels don't always make sense). Again, the values define the range for the *center point* of the selected item. It defaults to 0, which in our case is the center of the sliding out element; I've set it to `1 / pathItemCount`, which will produce the center point of the *second* element on the path, in percentages. Since I'm not planning to add any additional effects and such, just select one item, I've set the end of the range to the same as the beginning.
+
+<video autoplay loop style="max-width:100%;display:block;margin:0 auto"><source src="../webm/flixnet_pathview.webm" type="video/webm"></video>

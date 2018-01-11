@@ -43,7 +43,7 @@ Now I open Pegasus and select this theme on the Settings screen. I'll keep Pegas
     You can use whatever text editor you like. Qt Creator is cross platform, has good auto-complete and syntax highlight features. For a more lightweight editor, Sublime Text with the QML package, Atom or Notepad++ could be used, among others.
 
 !!! note
-    Depending on your platform, you'll see `.qmlc` files popping up in your theme's directory. These are cache files, generated for faster loading, optimized for you machine. When copying the theme to a different machine, you don't have to bring them, they'll get generated the next time you launch Pegasus.
+    You might see `.qmlc` files popping up in your theme's directory. These are cache files, generated for faster loading. When copying the theme to a different machine, you don't have to bring them, they'll automatically get generated the next time you launch Pegasus.
 
 
 ## Initial layout
@@ -916,7 +916,7 @@ The horizontal scrolling works similarly, with one important difference: there i
 
 I've set the left margin previously to 100 px and the width of a game box to be 240x135. In addition, there's a 10px spacing between the element, giving the full width of a box to 250. The center of the current item will be at 100 + 250/2 = 225 on the path; counting backwards, the previous item will be at 100 - 250 * 0.5, and the position where the new elements will appear when scrolling will be at 100 - 250 * 1.5.
 
-All right, let's change the horizontal ListView into PathView.
+All right, let's change the horizontal ListView into a PathView:
 
 **Before**:
 
@@ -988,3 +988,66 @@ And now both the horizontal and vertical axis loops as intended!
 
 !!! tip
     Typing out fixed values in pixels every time can be tedious and error prone. I'd recommend defining them as properties at the top of the file or object they're used in (eg. `property real boxHeight: vpx(135)`).
+
+
+## The rest of the theme
+
+The upper half of the theme contains the metadata and preview image of the currently selected game. All of them are simple, fixed elements, which will make adding them way easier.
+
+You can place all these elements under the main `FocusScope` hierarchially, or you could create a containing Item if you wish. I'll do the former to keep the guide shorter.
+
+As for accessing the actual game data, we can use the properties of `api.currentGame` for metadata information, and `api.currentGame.assets` for the assets. You can find all the available fields listed in the [API reference](api.md).
+
+### Screenshot
+
+This should be below everything else -- in fact, if you look at the image at the beginning of this guide, it's actually going into the bottom-half region of the screen, reaching the row of images. As it's under everything else, I'll put its implementation at the top of the theme file, even before the collections' PathView.
+
+I'll anchor the top and left edges of the image to the top right corner of the screen. To make it go slightly into the bottom half, I'll anchor the bottom edge to the vertical center of the screen, then add a small amount of **negative margin** to the bottom: a positive margin that would *reduce* the size of the element, while a negative one *increases* it.
+
+```qml
+Image {
+    id: screenshot
+
+    property
+
+    asynchronous: true
+    fillMode: Image.PreserveAspectFit
+
+    // set the first screenshot as source, or nothing
+    source: api.currentGame.assets.screenshots[0] || ""
+    sourceSize { width: 512; height: 512 }
+
+    anchors.top: parent.top
+    anchors.right: parent.right
+    anchors.bottom: parent.VerticalCenter
+    anchors.bottomMargin: vpx(-45) // the height of the collection label
+}
+```
+
+!!! note
+    Using negative margins kind of feels like a hack though, so depending on the situation you might prefer to use simple width/height properties.
+
+!!! note
+    The screenshots are stored under `<Game>.assets.screenshots`, which is a regular JavaScript `Array`. If it's empty, `screenshots[0]` will be `undefined`, and setting an `undefined` value as the `source` of an Image will produce a warning in the log. Setting it to an empty string will not, however, so appending `|| ""` as a fallback will silence the warning.
+
+    An alternative solution could be is to use `screenshots` as a `model` in eg. a ListView, and the Image as delegate. You could then further extend it to periodically change the current visible screenshot.
+
+### Title
+
+A simple Text item in the upper left corner, with the left margin the same 100px we used at the game bars.
+
+```qml
+Text {
+    id: title
+
+    text: game.title
+    color: "#eee"
+
+    font.pixelSize: rpx(28)
+    font.family: uiFont.name
+    font.bold: true
+
+    anchors.top: parent.top
+    anchors.topMargin: vpx(42)
+}
+```

@@ -992,9 +992,9 @@ And now both the horizontal and vertical axis loops as intended!
 
 ## The rest of the theme
 
-The upper half of the theme contains the metadata and preview image of the currently selected game. All of them are simple, fixed elements, which will make adding them way easier.
+The upper half of the theme contains the metadata and preview image of the currently selected game. The components here will consist of simple elements, like Image and Text, which will make adding them way easier.
 
-You can place all these elements under the main `FocusScope` hierarchially, or you could create a containing Item if you wish. I'll do the former to keep the guide shorter.
+You can place all these elements directly under the main `FocusScope`, or you could create a containing Item if you wish. I'll do the former to keep the guide shorter.
 
 As for accessing the actual game data, we can use the properties of `api.currentGame` for metadata information, and `api.currentGame.assets` for the assets. You can find all the available fields listed in the [API reference](api.md).
 
@@ -1008,8 +1008,6 @@ I'll anchor the top and left edges of the image to the top right corner of the s
 Image {
     id: screenshot
 
-    property
-
     asynchronous: true
     fillMode: Image.PreserveAspectFit
 
@@ -1019,7 +1017,7 @@ Image {
 
     anchors.top: parent.top
     anchors.right: parent.right
-    anchors.bottom: parent.VerticalCenter
+    anchors.bottom: parent.verticalCenter
     anchors.bottomMargin: vpx(-45) // the height of the collection label
 }
 ```
@@ -1028,19 +1026,21 @@ Image {
     Using negative margins kind of feels like a hack though, so depending on the situation you might prefer to use simple width/height properties.
 
 !!! note
-    The screenshots are stored under `<Game>.assets.screenshots`, which is a regular JavaScript `Array`. If it's empty, `screenshots[0]` will be `undefined`, and setting an `undefined` value as the `source` of an Image will produce a warning in the log. Setting it to an empty string will not, however, so appending `|| ""` as a fallback will silence the warning.
+    The screenshots are stored under `screenshots`, which is a regular JavaScript `Array`. If it's empty, `screenshots[0]` will be `undefined`, and setting an `undefined` value as the `source` of an Image will produce a warning in the log. Setting it to an empty string, however, will not, so appending `|| ""` as a fallback will silence the warning.
 
     An alternative solution could be is to use `screenshots` as a `model` in eg. a ListView, and the Image as delegate. You could then further extend it to periodically change the current visible screenshot.
 
+TODO gradient
+
 ### Title
 
-A simple Text item in the upper left corner, with the left margin the same 100px we used at the game bars.
+A simple Text item in the upper left corner, with the left margin set to the same 100px we used at the game rows.
 
 ```qml
 Text {
     id: title
 
-    text: game.title
+    text: api.currentGame.title
     color: "#eee"
 
     font.pixelSize: rpx(28)
@@ -1049,5 +1049,61 @@ Text {
 
     anchors.top: parent.top
     anchors.topMargin: vpx(42)
+    anchors.left: parent.left
+    anchors.leftMargin: vpx(100)
 }
 ```
+
+### Rating
+
+The rating will be displayed as a five-star bar, with some percentage of it colored according to the actual rating. This can be done with two simple QML Images overlapping. First, I draw two images for the stars, an empty one and a filled; both images are squares. I create a new directory (eg. `assets`) in my theme folder and put them there.
+
+star_empty.svg | star_filled.svg
+:---: | :----:
+<img src="../img/star_empty.svg" width="64" height="64"> | <img src="../img/star_filled.svg" width="64" height="64">
+
+Then I create the following Item. The stars are squares, so I make its width 5 times the height to hold the five stars horizontally. I'll make one Image fill this whole item, and another that will have its width modified by the rating. The `rating` is provided as a number between `0.0` and `1.0` (ie. 0% and 100%).
+
+```qml
+Item {
+    id: rating
+
+    // set the item's dimensions
+    height: vpx(24)
+    width: height * 5
+
+    anchors.top: title.bottom
+    anchors.left: parent.left
+    anchors.leftMargin: vpx(100)
+
+
+    // the "background"
+    Image {
+        source: "assets/star_empty.svg"
+        sourceSize { width: parent.height; height: parent.height }
+
+        anchors.fill: parent
+        // the most important bits!
+        fillMode: Image.TileHorizontally
+        horizontalAlignment: Image.AlignLeft
+    }
+
+
+    // the foreground
+    Image {
+        anchors.left: parent.left
+
+        source: "assets/star_filled.svg"
+        sourceSize { width: parent.height; height: parent.height }
+
+        width: parent.width * api.currentGame.rating // !!!
+        height: parent.height
+
+        fillMode: Image.TileHorizontally
+        horizontalAlignment: Image.AlignLeft
+    }
+}
+```
+
+!!! note
+    Without `horizontalAlignment` the stars might not line up perfectly.

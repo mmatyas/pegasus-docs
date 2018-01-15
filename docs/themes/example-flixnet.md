@@ -297,6 +297,9 @@ And here's how it should look so far:
 
 Not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, then add some simple components for the metadata.
 
+
+## Full code #1
+
 Here's the whole code so far (without comments to save space):
 
 ```qml
@@ -452,7 +455,14 @@ Component {
 }
 ```
 
-But how can we access the ListView, `gameAxis` of the Item? Turns out we can't just use its `id`, as it's not accessible by external element (we'll get an error about `gameAxis` being undefined). `property` members, however, *can* be accessed: let's add an `alias` to the Item:
+But how can we access the ListView, `gameAxis` of the Item? Turns out we can't just use its `id`, as it's not accessible by external element (we'll get an error about `gameAxis` being undefined). We can, however, access
+
+- access `property` members, and
+- call `function` definitions
+
+instead. I'll show what we can access are
+
+- `property` members: we could , however, *can* be accessed: let's add an `alias` to the Item:
 
 ```qml hl_lines="5"
 Component {
@@ -498,7 +508,7 @@ ListView {
 }
 ```
 
-...which, similarly to the vertical axis, initially scrolls in a not so nice way. Fix it like previously:
+...which, similarly to the vertical axis, initially scrolls in a not so nice way. Fix it like previously, but in the delegate:
 
 ```qml hl_lines="15 16"
 ListView {
@@ -549,7 +559,7 @@ ListView {
     240px is the width of one game box, as we've calculated at the beginning.
 
 !!! tip
-    `preferredHighlightBegin` and `preferredHighlightEnd` almost always come in pair, and `End` must be greater than `Begin` to have their effect applied.
+    `preferredHighlightBegin` and `preferredHighlightEnd` almost always come in pair, and `End` must be greater or equal than `Begin` to have their effect applied.
 
 We also need to move the collection label too. As it's just a regular Text element, I'll simply set its left anchor and a margin on it:
 
@@ -587,24 +597,46 @@ Component {
 
 ## Using API data
 
-Finally, the time has come to replace the placeholder elements with actual content. Let's start by using the real collection data. According to the [API reference](api.md), collections can be accessed and selected through `api.collections`, and we can use `api.collections.model` as the `model` of a ListView (or any other View).
+Finally, the time has come to replace the placeholder elements with actual content. Let's start by using the real collection data. According to the [API reference](api.md), collections can be accessed and selected through `api.collections`: we can use `api.collections.model` as the `model` of a ListView (or any other View) and `index` as the `currentIndex` of it. We can then call `increaseIndex()` and `decreaseIndex()` to move to the next and previous items (or by setting the `index` manually).
 
-First, find the ListView for the collection axis (which I've called `collectionAxis` previously), and set its `model` property:
+### Vertical axis
 
-```qml hl_lines="6"
+First, find the ListView for the collection axis (which I've called `collectionAxis` previously) and set its `model` property. Then add the `currentIndex` line to bind it to the index from the API. Finally, call `increaseIndex()` and `decreaseIndex()` when ++up++ and ++down++ is pressed.
+
+```qml hl_lines="6 7 13 14"
 ListView {
     id: collectionAxis
 
     // ...
 
     model: api.collections.model
+    currentIndex: api.collections.index
     delegate: collectionAxisDelegate
 
     // ...
+
+    focus: true
+    Keys.onUpPressed: api.collections.decrementIndex()
+    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onLeftPressed: currentItem.axis.decrementCurrentIndex()
+    Keys.onRightPressed: currentItem.axis.incrementCurrentIndex()
 }
 ```
 
-Previously the `model` was set to `10`, and so the `modelData` available in the delegates was a number between 0 and 9. With `model` set to `api.collections.model`, the `modelData` will be a `Collection` object. A `Collection` always has a `tag` (a short, unique label) and possibly a proper `name`. We should show the `name` if it's available, and fall back to the `tag` if it's not defined. We can do it like this:
+!!! warning
+    Incrementing/decrementing the `currentIndex` property of a ListView (eg. by navigation) has no effect on the bound value (in this casse `api.collections.index`). This is why I call `incrementIndex()`/`decrementIndex()` manually on ++up++ and ++down++. (We'll also modify the ++left++/++right++ keys later.)
+
+!!! tip
+    Instead of using `Keys` and increment/decrement, you can also set `api.collections.index` manually, eg.
+
+    `:::qml onCurrentIndexChanged: api.collections.index = currentIndex`
+
+!!! tip
+    `incrementIndex()` and `decrementIndex()` wrap around (eg. incrementing the index at the last item of the model will make it just to the first one). If you don't want them to wrap, you can use `incrementIndexNoWrap()` and `decrementIndexNoWrap()` instead.
+
+Previously the `model` was set to `10`, and so the `modelData` available in the delegates was a number between 0 and 9. With `model` set to `api.collections.model`, the `modelData` will be a `Collection` object.
+
+A `Collection` always has a `tag` (a short, unique label) and possibly a proper `name`. We should show the `name` if it's available, and fall back to the `tag` if it's not defined. We can do it like this:
 
 ```qml hl_lines="10"
 Component {
@@ -640,9 +672,11 @@ After a refresh, you should see the names of collections appearing in Pegasus.
 
 ![screenshot](img/flixnet_collection-names.png)
 
-Now let's show the game titles in the horizontal rectangles. Every `Collection` has a `games` member we can use to access the list of games associated with the collection. Similarly to `collections`, `games` also has a `model` property, so let's use it as the model of the horizontal axis:
+### Horizontal axis
 
-```qml hl_lines="18"
+Now let's show the game titles in the horizontal rectangles. Every `Collection` has a `games` member we can use to access the list of games associated with the collection. Similarly to `collections`, `games` also has `model` and `index` properties, so let's use them in the horizontal axis (`collectionAxisDelegate`):
+
+```qml hl_lines="18 19"
 Component {
     id: collectionAxisDelegate
 
@@ -661,6 +695,7 @@ Component {
             // ...
 
             model: modelData.games.model
+            currentIndex: modelData.games.index
             delegate: gameAxisDelegate
             spacing: vpx(10)
 
@@ -670,9 +705,76 @@ Component {
 }
 ```
 
-The `model` of the *vertical* ListView was a list of `Collection`s, so the `modelData` received by a delegate of that ListView (one whole horizontal row) is one `Collection` object. The `model` of these *horizontal* ListViews is a list of `Game`s, so a delegate of the horizontal ListViews will see a `Game` in its `modelData`.
+We'll also need to replace `Keys.onLeftPressed` and `Keys.onRightPressed` of the collection axis. Currently we access the horizontal ListView of the collection delegate via an `alias` property, and call the ListView's `incrementCurrentIndex()` and `decrementCurrentIndex()` methods. Instead, we should call the index changing functions of the API, of the Collection belonging to a delegate (ie. `modelData`). As usual, there are more than one way to do it, I'll show how you can use JavaScript functions for it.
 
-A `Game` always has a `title`, so we can simply set it as text:
+First, find the `property alias axis: gameAxis` line
+
+```qml hl_lines="5"
+Component {
+    id: collectionAxisDelegate
+
+    Item {
+        property alias axis: gameAxis
+
+        // ...
+
+        Text { ... }
+        ListView { ... }
+    }
+}
+```
+
+and replace it with `next()` and `prev()` functions, with the increment/decrement methods of the API in their body:
+
+```qml
+Component {
+    id: collectionAxisDelegate
+
+    Item {
+        function selectNext() {
+            modelData.games.incrementIndex();
+        }
+
+        function selectPrev() {
+            modelData.games.decrementIndex();
+        }
+
+
+        // ...
+
+        Text { ... }
+        ListView { ... }
+    }
+}
+```
+
+Then you can call the new functions in the `collectionAxis` like this:
+
+```qml hl_lines="15 16"
+ListView {
+    id: collectionAxis
+
+    // ...
+
+    model: api.collections.model
+    currentIndex: api.collections.index
+    delegate: collectionAxisDelegate
+
+    // ...
+
+    focus: true
+    Keys.onUpPressed: api.collections.decrementIndex()
+    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onLeftPressed: currentItem.selectPrev()
+    Keys.onRightPressed: currentItem.selectNext()
+}
+```
+
+And now the Views scroll properly, with the real data!
+
+### Game items
+
+With the previous changes, `gameAxisDelegate` is now a visual representation for a Game element. A Game always has a `title`, so we can simply set it as the text:
 
 ```qml hl_lines="11"
 Component {
@@ -691,7 +793,12 @@ Component {
 }
 ```
 
-And now they should show up in Pegasus:
+!!! note
+    The `model` of the *vertical* ListView was a list of `Collection`s, so the `modelData` received by a delegate of that ListView (one whole horizontal row) is one `Collection` object.
+
+    The `model` of these *horizontal* ListViews is a list of `Game`s, so a delegate of the horizontal ListViews will see a `Game` in its `modelData`.
+
+And now the game names also show up in Pegasus:
 
 ![screenshot](img/flixnet_game-titles.png)
 

@@ -374,9 +374,9 @@ FocusScope {
 ```
 
 
-## Keyboard navigation
+## Navigation
 
-You might have noticed that you can drag and scroll the components with the mouse, but the keyboard doesn't work yet. Let's fix this.
+You might have noticed that you can drag and scroll the components with the mouse, but keyboard or gamepad input doesn't work yet. Let's fix this.
 
 ### Vertical scroll
 
@@ -408,6 +408,9 @@ ListView {
 ```
 
 There, much better now.
+
+!!! tip
+    Setting up the keyboard input also makes gamepads work. Check the [Controls](../../user-guide/controls) page to see how are they related.
 
 For some reason, I also see one extra row on the screen when I start scrolling down; not sure if that's a bug or a feature, but to make sure only the rows in the lower half of the screen are visible, I set `clip` on the `ListView`:
 
@@ -801,6 +804,35 @@ Component {
 And now the game names also show up in Pegasus:
 
 ![screenshot](img/flixnet_game-titles.png)
+
+### Launching games
+
+Now that the game selection items are in sync with the API, we can actually launch games! To start the currently selected game, simply call `api.currentGame.launch()` when ++return++ is pressed:
+
+```qml hl_lines="11"
+ListView {
+    id: collectionAxis
+
+    // ...
+
+    focus: true
+    Keys.onUpPressed: api.collections.decrementIndex()
+    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onLeftPressed: currentItem.selectPrev()
+    Keys.onRightPressed: currentItem.selectNext()
+    Keys.onReturnPressed: api.currentGame.launch()
+}
+```
+
+!!! note
+    Careful not to confuse the `onReturnPressed` and `onEnterPressed` calls: `Return` is the key next to the letters, while `Enter` is the one at the numeric keypad.
+
+!!! tip
+    `onReturnPressed` is also triggered by pressing <img class="joybtn" src="../../img/A.png" title="A">/<img class="joybtn" src="../../img/Cross.png"  title="CROSS"> on the gamepad.
+
+And with this, our theme is now fully functional!
+
+Next step, let's make it pretty.
 
 
 ## Fancy game boxes

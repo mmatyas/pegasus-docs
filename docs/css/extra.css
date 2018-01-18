@@ -7,6 +7,17 @@ span.optional::before {
     color: #999;
 }
 
+img.joybtn {
+    height: 1.5em;
+    display: inline-block;
+}
+img.joybtn.x25 {
+    height: 2.5em;
+}
+img.joybtn.x3 {
+    height: 3em;
+}
+
 /* based on the Material theme */
 
 .admonition>.admonition-title:before,

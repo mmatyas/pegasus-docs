@@ -1263,3 +1263,49 @@ Item {
     // ...
 }
 ```
+
+### Release year
+
+Yet another simple Text element:
+
+```qml
+Text {
+    id: year
+
+    // if not defined, the release year is 0
+    visible: game.year > 0
+
+    text: game.year
+    color: "#eee"
+    font.pixelSize: vpx(16)
+    font.family: uiFont.name
+
+    anchors.left: rating.right
+    anchors.top: rating.top
+}
+```
+
+The element is aligned right next to the rating. Manually anchoring the items every time is quite annoying, let's just put them in a `Row`:
+
+```qml
+Row {
+    anchors.top: title.bottom
+    anchors.left: title.left
+
+    Item {
+        id: rating
+
+        // remove anchor items!
+
+        // ...
+    }
+
+    Text {
+        id: year
+
+        // remove anchor items!
+
+        // ...
+    }
+}
+```

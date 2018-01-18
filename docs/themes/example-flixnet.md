@@ -1139,9 +1139,9 @@ As for accessing the actual game data, we can use the properties of `api.current
 
 ### Screenshot
 
-This should be below everything else -- in fact, if you look at the image at the beginning of this guide, it's actually going into the bottom-half region of the screen, reaching the row of images. As it's under everything else, I'll put its implementation at the top of the theme file, even before the collections' PathView.
+This should be below everything else on the screen -- in fact, if you look at the image at the beginning of this guide, it's actually going into the bottom-half region of the screen, reaching the row of images.
 
-I'll anchor the top and left edges of the image to the top right corner of the screen. To make it go slightly into the bottom half, I'll anchor the bottom edge to the vertical center of the screen, then add a small amount of **negative margin** to the bottom: a positive margin that would *reduce* the size of the element, while a negative one *increases* it.
+As it's under everything else, I'll put its implementation at the top of the theme file, even before the collections' PathView. I'll anchor the top and left edges of the image to the top right corner of the screen. To make it go slightly into the bottom half, I'll anchor the bottom edge to the vertical center of the screen, then add a small amount of **negative margin** to the bottom (a positive margin *reduces* the size of the element, while a negative one *increases* it).
 
 ```qml
 Image {
@@ -1165,7 +1165,7 @@ Image {
     Using negative margins kind of feels like a hack though, so depending on the situation you might prefer to use simple width/height properties.
 
 !!! note
-    The screenshots are stored under `screenshots`, which is a regular JavaScript `Array`. If it's empty, `screenshots[0]` will be `undefined`, and setting an `undefined` value as the `source` of an Image will produce a warning in the log. Setting it to an empty string, however, will not, so appending `|| ""` as a fallback will silence the warning.
+    The screenshots are stored under `assets.screenshots`, which is a regular JavaScript `Array`. If it's empty, `screenshots[0]` will be `undefined`, and setting an `undefined` value as the `source` of an Image will produce a warning in the log. Setting it to an empty string, however, will not, so appending `|| ""` as a fallback will silence the warning.
 
     An alternative solution could be is to use `screenshots` as a `model` in eg. a ListView, and the Image as delegate. You could then further extend it to periodically change the current visible screenshot.
 
@@ -1195,13 +1195,15 @@ Text {
 
 ### Rating
 
-The rating will be displayed as a five-star bar, with some percentage of it colored according to the actual rating. This can be done with two simple QML Images overlapping. First, I draw two images for the stars, an empty one and a filled; both images are squares. I create a new directory (eg. `assets`) in my theme folder and put them there.
+The rating will be displayed as a five-star bar, with some percentage of it colored according to the actual rating. This can be done with two simple, overlapping QML Images: draw five empty stars first, then over them, draw filled ones according to the rating.
+
+First, I draw two image for the stars, the empty one and the filled. Both have square size and transparent background. I create a new directory (eg. `assets`) in my theme folder and put them there.
 
 star_empty.svg | star_filled.svg
 :---: | :----:
 <img src="../img/star_empty.svg" width="64" height="64"> | <img src="../img/star_filled.svg" width="64" height="64">
 
-Then I create the following Item. The stars are squares, so I make its width 5 times the height to hold the five stars horizontally. I'll make one Image fill this whole item, and another that will have its width modified by the rating. The `rating` is provided as a number between `0.0` and `1.0` (ie. 0% and 100%).
+Then I create the following Item. As the star image is a square, I make its width 5 times the height to hold the five stars horizontally. I make the empty-star Image fill this whole item, and set `fillMode: Image.TileHorizontally` to make the star repeat horizontally. For the filled-star image, I place it over the other one, and modify its width by the rating, provided as a number between `0.0` and `1.0` (0% and 100%).
 
 ```qml
 Item {
@@ -1211,38 +1213,53 @@ Item {
     height: vpx(24)
     width: height * 5
 
+    // put it under the title
     anchors.top: title.bottom
-    anchors.left: parent.left
-    anchors.leftMargin: vpx(100)
+    anchors.left: title.left
 
 
-    // the "background"
+    // the empty stars
     Image {
+        anchors.fill: parent
+
         source: "assets/star_empty.svg"
         sourceSize { width: parent.height; height: parent.height }
 
-        anchors.fill: parent
         // the most important bits!
         fillMode: Image.TileHorizontally
         horizontalAlignment: Image.AlignLeft
     }
 
 
-    // the foreground
+    // the filled stars
     Image {
+        anchors.top: parent.top
         anchors.left: parent.left
-
-        source: "assets/star_filled.svg"
-        sourceSize { width: parent.height; height: parent.height }
 
         width: parent.width * api.currentGame.rating // !!!
         height: parent.height
 
+        source: "assets/star_filled.svg"
+        sourceSize { width: parent.height; height: parent.height }
+
         fillMode: Image.TileHorizontally
         horizontalAlignment: Image.AlignLeft
     }
+
 }
 ```
 
 !!! note
-    Without `horizontalAlignment` the stars might not line up perfectly.
+    Without `horizontalAlignment` the stars might not line up perfectly (the repeat will start from the center).
+
+When a game has no rating defined, `game.rating` is 0.0. Showing five empty stars for an oterwise good game might be a bit misleading, so I'll make the rating bar only appear when the `rating` is over 0%:
+
+```qml hl_lines="4"
+Item {
+    id: rating
+
+    visible: api.currentGame.rating > 0.0
+
+    // ...
+}
+```

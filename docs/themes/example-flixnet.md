@@ -930,12 +930,12 @@ Next step, let's make it pretty.
 
 ## Fancy game boxes
 
-I'll now replace the green game boxes with something better to look at. There are two main cases:
+I'll now replace the green game boxes with something better to look at. There are two main cases we have to support:
 
-- if there is a usable image for a game, the box will show that
-- if there is none, or the image has not loaded yet, it'll show a gray rectangle, with the game name in the center in white
+- if there is an available image for a game, the box should show that
+- if there is none, or the image has not loaded yet, the boy should show a gray rectangle, with the game's title in the center
 
-I'll turn the Rectangle of `gameAxisDelegate` to an Item, and add an initial Rectangle and Image to it for the two cases:
+So `gameAxisDelegate` is our game box that right now contains a green rectangle. I'll turn that into an Item, and, for the two cases above, I'll add an initial gray Rectangle and Image:
 
 ```qml
 Component {
@@ -959,7 +959,7 @@ Component {
 }
 ```
 
-So which image asset should we use? A game box is a rectangle with 16:9 aspect ratio, so the `banner` would be perfect for this. However, since every asset is potentially missing, we should consider showing the other assets and provide multiple fallbacks. If we don't have a `banner`, the next similarly sized one is the `steam` ("grid icon") asset. Because it's wider than 16:9, we'll need to crop it if we don't want black bars or squashed/scretched images (though you might prefer that). If neither image is available, I'll use `boxFront` as it tends to be commonly available.
+So which image asset should we use? A game box is a rectangle with 16:9 aspect ratio, so the `banner` would be perfect for this. However, since every asset is potentially missing, we should consider showing other images and provide multiple fallbacks. If we don't have a `banner`, the next similarly sized one is the `steam` ("grid icon") asset. Because it's wider than 16:9, we'll need to crop it if we don't want black bars or squashed/scretched images (though you might prefer that). If neither image is available, I'll use `boxFront` as it tends to be commonly available.
 
 Let's extend the Image object created previously:
 
@@ -1044,13 +1044,13 @@ It'd be nice if all of the lists would loop around. You can do two kinds of loop
 - make the list finite and when the last item is reached, jump back to the first one (and also in reverse direction)
 - make the list infinite and loop around (carousel style)
 
-The first one can be done by simply setting `keyNavigationWraps: true` for a ListView (and other Views). But in our case, the second would look better.
+The first one can be done either by simply setting `keyNavigationWraps: true` for a ListView (and other Views) or using the API's default index increase/decrease functions. In our case though, the carousel option would look the best.
 
-I won't lie, making a carousel-like looping list is annoying and overly complex for this use case; hopefully I can improve the situation later by creating some easier-to-use types.
+I won't lie, making a carousel-like looping list is annoying and overly complex for this use case; the situation might improve later by creating some easier-to-use custom types in Pegasus.
 
 ### Vertically
 
-So the problem is, ListView can't do carousels: the only type that can is PathView. As such, we'll turn our ListViews into PathViews next. Again, let's start with the vertical axis:
+So the problem is, ListView can't do carousels: the only type that can is PathView. As such, we'll turn our ListViews into PathViews next. Again, let's start with the vertical axis; here's a before-after comparison, with some comments after the code:
 
 **Before**
 
@@ -1064,43 +1064,44 @@ ListView {
     anchors.bottom: parent.bottom
 
     model: api.collections.model
+    currentIndex: api.collections.index
     delegate: collectionAxisDelegate
 
-    clip: true
     snapMode: ListView.SnapOneItem
     highlightRangeMode: ListView.StrictlyEnforceRange
+    clip: true
 
     focus: true
-    Keys.onLeftPressed: currentItem.gameAxis.decrementCurrentIndex()
-    Keys.onRightPressed: currentItem.gameAxis.incrementCurrentIndex()
+    Keys.onUpPressed: api.collections.decrementIndex()
+    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onLeftPressed: currentItem.selectPrev()
+    Keys.onRightPressed: currentItem.selectNext()
+    Keys.onReturnPressed: api.currentGame.launch()
 }
 ```
 
 **After**
 
-```qml
+```qml hl_lines="14 19"
 PathView {
     id: collectionAxis
 
-    // anchors: unchanged
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.top: parent.verticalCenter
     anchors.bottom: parent.bottom
 
-    // model and delegate: unchanged
     model: api.collections.model
+    currentIndex: api.collections.index
     delegate: collectionAxisDelegate
 
+
     // changed ListView to PathView
-    clip: true
     snapMode: PathView.SnapOneItem
     highlightRangeMode: PathView.StrictlyEnforceRange
+    clip: true
 
-
-    //
     // brand new: path definitions
-    //
     pathItemCount: 1 + Math.ceil(height / vpx(180))
     path: Path {
         startX: collectionAxis.width * 0.5
@@ -1114,35 +1115,33 @@ PathView {
     preferredHighlightEnd: preferredHighlightBegin
 
 
-    // added up/down keys
     focus: true
-    Keys.onUpPressed: decrementCurrentIndex()
-    Keys.onDownPressed: incrementCurrentIndex()
-    Keys.onLeftPressed: currentItem.gameAxis.decrementCurrentIndex()
-    Keys.onRightPressed: currentItem.gameAxis.incrementCurrentIndex()
+    Keys.onUpPressed: api.collections.decrementIndex()
+    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onLeftPressed: currentItem.selectPrev()
+    Keys.onRightPressed: currentItem.selectNext()
+    Keys.onReturnPressed: api.currentGame.launch()
 }
 ```
 
 !!! warning
-    Don't forget to change ListView to PathView in the delegate too!
+    Don't forget to change ListView to PathView in the delegate (`collectionAxisDelegate`'s `width` prop) too!
 
-Unlike ListView that goes to one direction only, PathView can be used to create arbitrary paths on which the items will travel (curves, circles, all kinds of shapes). Because of that, some properties have to be manually calculated.
+Unlike ListView that goes to one direction only, PathView can be used to create arbitrary paths on which the items will travel (curves, circles, all kinds of shapes). Because of that, some properties have to be provided in percentage or need manual calculations.
 
 - For PathViews, `pathItemCount` must be set (the default behaviour is to show all items). We should show as many rows as it fits into lower half or the screen (one row's height is 180px). The number of visible items thus will be [area height] / [row height], which I've rounded up using `Math.ceil`, a standard JavaScript function. However, when there's a scrolling going on, there'll be actually **one more** row visible on the screen: the topmost row will gradually go *out* on the top of the lower area, while a new line is on its way *in* to appear on the bottom (see the animation below).
 
 - The `path` defines the trail the elements will follow **by their center point**. Because there'll be one item that slides *out*, and one that slides *in*, the path extends above and below the PathView's area. The starting point of the axis (the center point of the item that will slide out) is horizontally (`startX`) the center of the screen (as the rows fill the width), and vertically (`startY`) above the top edge of the PathView (which would be 0) by 50% of the row height (where values are in pixels). From the start point, a linear path is created with `PathLine`: I've set it so the end point is the same as the start except the `Y` coordinate, which is increased by the length ot the path, [number of max. visible items] * [item height].
 
-- The preferred highlight positions are in **percentage** for the PathView (as it can have any kind of shape, pixels don't always make sense). Again, the values define the range for the *center point* of the selected item. It defaults to 0, which in our case would be the center of the sliding out element, out of the visible area. I've set it to [1] / [item count], which will produce the center point of the *second* element on the path. Since I'm not planning to add any additional effects and such, just select one item, I've set the end of the range to the same as the beginning.
-
-- Input handling is also added manually, because as the path could go in any directions and shapes, there's no concept of up/down/left/right by default.
+- The preferred highlight positions are in **percentage** for the PathView (as it can have any kind of shape, pixels don't always make sense). Again, the values define the range for the *center point* of the selected item. It defaults to 0 (start of the line), which in our case would be the center of the sliding out element, out of the visible area. I've set it to [1] / [item count], which will produce the center point of the *second* element on the path. Since I'm not planning to add any additional effects and such, just select one item, I've set the end of the range to the same as the beginning.
 
 <video autoplay loop style="max-width:100%;display:block;margin:0 auto"><source src="../webm/flixnet_pathview.webm" type="video/webm"></video>
 
-*Structure of the vertical PathView. The red line marks the path, with red dots at positions 0/4, 1/4, 2/4, 3/4 and 4/4. The centers of the delegates are marked with blue.*
+*Structure of the vertical PathView. The red line marks the path, with red dots at positions 0/4 (top), 1/4, 2/4, 3/4 and 4/4 (bottom). The centers of the delegates are marked with blue.*
 
 ### Horizontally
 
-The horizontal scrolling works similarly, with one important difference: there is a margin on the left of the currently selected item, where the previous one is halfway in the screen. We'll have to shift the whole path horizontally, and add 1 to the maximum number of visible items, and, just like previously, another one to account for scrolling.
+The horizontal scrolling works similarly, with one important difference: there is a margin on the left of the currently selected item, where the previous one is halfway in the screen. We'll have to shift the whole path horizontally, and add 1 to the maximum number of visible items, and another one to account for scrolling, just like at the vertical axis.
 
 <video autoplay loop style="max-width:100%;display:block;margin:0 auto"><source src="../webm/flixnet_pathview2.webm" type="video/webm"></video>
 
@@ -1164,6 +1163,7 @@ ListView {
     orientation: ListView.Horizontal
 
     model: modelData.games.model
+    currentIndex: modelData.games.index
     delegate: gameAxisDelegate
     spacing: vpx(10)
 
@@ -1177,11 +1177,10 @@ ListView {
 
 **After**:
 
-```qml
+```qml hl_lines="9 11 16 21 31"
 PathView {
     id: gameAxis
 
-    // anchors: unchanged
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.top: label.bottom
@@ -1191,12 +1190,15 @@ PathView {
 
     // removed spacing
     model: modelData.games.model
+    currentIndex: modelData.games.index
     delegate: gameAxisDelegate
 
+    // changed ListView to PathView
+    snapMode: PathView.SnapOneItem
+    highlightRangeMode: PathView.StrictlyEnforceRange
 
-    //
+
     // brand new: path definitions
-    //
     pathItemCount: 2 + Math.ceil(width / vpx(250)) // note the '2'!
     path: Path {
         startX: vpx(100) - vpx(250) * 1.5
@@ -1206,13 +1208,9 @@ PathView {
             y: gameAxis.path.startY
         }
     }
+    // changed highlight range
     preferredHighlightBegin: 2 / pathItemCount
     preferredHighlightEnd: preferredHighlightBegin
-
-
-    // changed ListView to PathView
-    snapMode: ListView.SnapOneItem
-    highlightRangeMode: ListView.StrictlyEnforceRange
 }
 ```
 
@@ -1224,7 +1222,7 @@ And now both the horizontal and vertical axis loops as intended!
 
 ## The rest of the theme
 
-The upper half of the theme contains the metadata and preview image of the currently selected game. The components here will consist of simple elements, like Image and Text, which will make adding them way easier.
+The upper half of the screen contains the metadata and preview image of the currently selected game. The components here will consist of simple elements, like Image and Text, which will make adding them way easier.
 
 You can place all these elements directly under the main `FocusScope`, or you could create a containing Item if you wish. I'll do the former to keep the guide shorter.
 
@@ -1275,7 +1273,7 @@ Text {
     text: api.currentGame.title
     color: "#eee"
 
-    font.pixelSize: rpx(28)
+    font.pixelSize: vpx(28)
     font.family: uiFont.name
     font.bold: true
 
@@ -1288,9 +1286,9 @@ Text {
 
 ### Rating
 
-The rating will be displayed as a five-star bar, with some percentage of it colored according to the actual rating. This can be done with two simple, overlapping QML Images: draw five empty stars first, then over them, draw filled ones according to the rating.
+The rating will be displayed as a five-star bar, with some percentage of it colored according to the actual rating. This can be done with two simple, overlapping QML Images: draw five empty stars first, then over them, draw filled ones according to the rating. Kind of like a progress bar, except we're using stars for filling.
 
-First, I draw two image for the stars, the empty one and the filled. Both have square size and transparent background. I create a new directory (eg. `assets`) in my theme folder and put them there.
+First, I draw two image for the stars, an empty one and a filled. Both have square size and transparent background. I create a new directory (eg. `assets`) in my theme folder and put them there.
 
 star_empty.svg | star_filled.svg
 :---: | :----:
@@ -1345,7 +1343,7 @@ Item {
 !!! note
     Without `horizontalAlignment` the stars might not line up perfectly (the repeat will start from the center).
 
-When a game has no rating defined, `game.rating` is 0.0. Showing five empty stars for an oterwise good game might be a bit misleading, so I'll make the rating bar only appear when the `rating` is over 0%:
+When a game has no rating defined, `game.rating` is 0.0. Showing five empty stars for an otherwise good game might be a bit misleading, so I'll make the rating bar only appear when the `rating` is over 0%:
 
 ```qml hl_lines="4"
 Item {

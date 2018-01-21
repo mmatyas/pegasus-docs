@@ -298,80 +298,80 @@ And here's how it should look so far:
 Not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, then add some simple components for the metadata.
 
 
-## Full code #1
+## The code so far #1
 
 Here's the whole code so far (without comments to save space):
 
-```qml
-import QtQuick 2.0
+??? note "The code so far #1"
+        :::qml
+        import QtQuick 2.0
 
-FocusScope {
-
-    ListView {
-        id: collectionAxis
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.verticalCenter
-        anchors.bottom: parent.bottom
-
-        model: 10
-        delegate: collectionAxisDelegate
-    }
-
-    Component {
-        id: collectionAxisDelegate
-
-        Item {
-            width: ListView.view.width
-            height: vpx(180)
-
-            Text {
-                id: label
-
-                text: modelData
-                color: "white"
-                font.pixelSize: vpx(18)
-                font.family: uiFont.name
-
-                height: vpx(45)
-                verticalAlignment: Text.AlignVCenter
-            }
+        FocusScope {
 
             ListView {
-                id: gameAxis
+                id: collectionAxis
 
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.top: label.bottom
+                anchors.top: parent.verticalCenter
                 anchors.bottom: parent.bottom
 
-                orientation: ListView.Horizontal
-
-                model: 20
-                delegate: gameAxisDelegate
-                spacing: vpx(10)
+                model: 10
+                delegate: collectionAxisDelegate
             }
-        }
-    }
 
-    Component {
-        id: gameAxisDelegate
+            Component {
+                id: collectionAxisDelegate
 
-        Rectangle {
-            width: vpx(240)
-            height: vpx(135)
+                Item {
+                    width: ListView.view.width
+                    height: vpx(180)
 
-            color: "green"
+                    Text {
+                        id: label
 
-            Text {
-                text: modelData
+                        text: modelData
+                        color: "white"
+                        font.pixelSize: vpx(18)
+                        font.family: uiFont.name
+
+                        height: vpx(45)
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    ListView {
+                        id: gameAxis
+
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.top: label.bottom
+                        anchors.bottom: parent.bottom
+
+                        orientation: ListView.Horizontal
+
+                        model: 20
+                        delegate: gameAxisDelegate
+                        spacing: vpx(10)
+                    }
+                }
             }
-        }
-    }
 
-}
-```
+            Component {
+                id: gameAxisDelegate
+
+                Rectangle {
+                    width: vpx(240)
+                    height: vpx(135)
+
+                    color: "green"
+
+                    Text {
+                        text: modelData
+                    }
+                }
+            }
+
+        }
 
 
 ## Navigation
@@ -458,14 +458,7 @@ Component {
 }
 ```
 
-But how can we access the ListView, `gameAxis` of the Item? Turns out we can't just use its `id`, as it's not accessible by external element (we'll get an error about `gameAxis` being undefined). We can, however, access
-
-- access `property` members, and
-- call `function` definitions
-
-instead. I'll show what we can access are
-
-- `property` members: we could , however, *can* be accessed: let's add an `alias` to the Item:
+But how can we access the ListView, `gameAxis` of the Item? Turns out we can't just use its `id`, as it's not accessible by external element (we'll get an error about `gameAxis` being undefined). Function definitions and `property` members, however, *can* be accessed. For now, I'll simply create an `alias` property for the horizontal axis:
 
 ```qml hl_lines="5"
 Component {
@@ -499,7 +492,7 @@ We can now access the game axis of the current collection as `currentItem.axis` 
 
 Combining the ListView functions, `currentItem` and manual keyboard handling (`Keys`), we can now make the horizontal scrolling work with:
 
-```qml
+```qml hl_lines="7 8"
 ListView {
     id: collectionAxis
 
@@ -543,7 +536,7 @@ And now both directions should scroll finely!
 
 ## Left margin
 
-There's a small margin on the left that shows the game before the currently selected one. We don't want to reduce the size of the horizontal `ListView`s (they should fill the whole width of the screen), we just want to move the currently selected item a little bit right. We can use the `preferredHighlightBegin`/`End` members of the `ListView`s: they can be used to define a fixed position range (in pixels) where the currently selected element should reside.
+There's a small margin on the left that shows the game before the currently selected one. We don't want to reduce the size of the horizontal `ListView`s (they should fill the whole width of the screen), we just want to move the currently selected item a little bit right. For this, we can use the `preferredHighlightBegin`/`End` members of the `ListView`s: they can be used to define a fixed position range (in pixels) where the currently selected element should reside.
 
 I'll set a 100px offset like this:
 
@@ -554,19 +547,16 @@ ListView {
     // ...
 
     preferredHighlightBegin: vpx(100)
-    preferredHighlightEnd: preferredHighlightBegin + vpx(240)
+    preferredHighlightEnd: preferredHighlightBegin + vpx(240) // the width of one game box
 }
 ```
-
-!!! note
-    240px is the width of one game box, as we've calculated at the beginning.
 
 !!! tip
     `preferredHighlightBegin` and `preferredHighlightEnd` almost always come in pair, and `End` must be greater or equal than `Begin` to have their effect applied.
 
 We also need to move the collection label too. As it's just a regular Text element, I'll simply set its left anchor and a margin on it:
 
-```qml
+```qml hl_lines="12 13"
 Component {
     id: collectionAxisDelegate
 
@@ -595,7 +585,7 @@ Component {
     The anchor margin is only applied if the anchor itself is defined.
 
 !!! tip
-    You can also use the Text item's `leftPadding` property. This feature was added in Qt 5.6 (as mentioned in the official documentation), so you'll need to change the `import` command on the top of the QML file to `import QtQuick 2.6` or higher (Pegasus comes with Qt 5.9 at the moment).
+    You can also use the Text item's `leftPadding` property. This feature was added in Qt 5.6 (as mentioned in the official documentation TODO), so you'll need to change the `import` command on the top of the QML file to `import QtQuick 2.6` or higher (Pegasus comes with Qt 5.9 at the moment).
 
 
 ## Using API data
@@ -604,7 +594,7 @@ Finally, the time has come to replace the placeholder elements with actual conte
 
 ### Vertical axis
 
-First, find the ListView for the collection axis (which I've called `collectionAxis` previously) and set its `model` property. Then add the `currentIndex` line to bind it to the index from the API. Finally, call `increaseIndex()` and `decreaseIndex()` when ++up++ and ++down++ is pressed.
+First, find the ListView for the collection axis and set its `model` property. Then add the `currentIndex` line to bind it to the index from the API. Finally, call `increaseIndex()` and `decreaseIndex()` when ++up++ and ++down++ is pressed:
 
 ```qml hl_lines="6 7 13 14"
 ListView {
@@ -627,7 +617,7 @@ ListView {
 ```
 
 !!! warning
-    Incrementing/decrementing the `currentIndex` property of a ListView (eg. by navigation) has no effect on the bound value (in this casse `api.collections.index`). This is why I call `incrementIndex()`/`decrementIndex()` manually on ++up++ and ++down++. (We'll also modify the ++left++/++right++ keys later.)
+    Incrementing/decrementing the `currentIndex` property of a ListView (eg. by navigation) has no effect on the bound value (in this case `api.collections.index`); this is why I call `incrementIndex()`/`decrementIndex()` manually on ++up++ and ++down++. We'll also modify the ++left++/++right++ keys very soon.
 
 !!! tip
     Instead of using `Keys` and increment/decrement, you can also set `api.collections.index` manually, eg.
@@ -635,7 +625,7 @@ ListView {
     `:::qml onCurrentIndexChanged: api.collections.index = currentIndex`
 
 !!! tip
-    `incrementIndex()` and `decrementIndex()` wrap around (eg. incrementing the index at the last item of the model will make it just to the first one). If you don't want them to wrap, you can use `incrementIndexNoWrap()` and `decrementIndexNoWrap()` instead.
+    `incrementIndex()` and `decrementIndex()` wraps around (incrementing the index at the last item will make it jump to the first one). If you don't want them to wrap, you can use `incrementIndexNoWrap()` and `decrementIndexNoWrap()` instead.
 
 Previously the `model` was set to `10`, and so the `modelData` available in the delegates was a number between 0 and 9. With `model` set to `api.collections.model`, the `modelData` will be a `Collection` object.
 
@@ -669,7 +659,7 @@ Component {
 ```
 
 !!! tip
-    If the name of the `modelData` property you use (in this case `name` and `tag`) don't collide with other properties of the object, it's not required to type out `modelData` (ie. you can just write `text: name || tag`).
+    If the name of the `modelData` property you use (in this case `name` and `tag`) don't collide with other properties of the object, it's not required to type out `modelData`: you can simply write `text: name || tag`.
 
 After a refresh, you should see the names of collections appearing in Pegasus.
 
@@ -708,16 +698,16 @@ Component {
 }
 ```
 
-We'll also need to replace `Keys.onLeftPressed` and `Keys.onRightPressed` of the collection axis. Currently we access the horizontal ListView of the collection delegate via an `alias` property, and call the ListView's `incrementCurrentIndex()` and `decrementCurrentIndex()` methods. Instead, we should call the index changing functions of the API, of the Collection belonging to a delegate (ie. `modelData`). As usual, there are more than one way to do it, I'll show how you can use JavaScript functions for it.
+Just like with the vertical axis, we'll use `incrementCurrentIndex()` and `decrementCurrentIndex()` again. Currently we access the horizontal ListView of the collection delegate via an `alias` property, and call the ListView's `incrementCurrentIndex()` and `decrementCurrentIndex()` methods by `Keys.onLeftPressed` and `Keys.onRightPressed` of the collection axis. Instead, we should call the index changing functions of the API, of the Collection belonging to a delegate (ie. `modelData`).
 
-First, find the `property alias axis: gameAxis` line
+As usual, there are more than one way to do it, I'll show how you can use JavaScript functions this time. First, find the `property alias axis: gameAxis` line
 
 ```qml hl_lines="5"
 Component {
     id: collectionAxisDelegate
 
     Item {
-        property alias axis: gameAxis
+        property alias axis: gameAxis // this one
 
         // ...
 
@@ -825,14 +815,117 @@ ListView {
 ```
 
 !!! note
-    Careful not to confuse the `onReturnPressed` and `onEnterPressed` calls: `Return` is the key next to the letters, while `Enter` is the one at the numeric keypad.
+    Careful not to confuse the `onReturnPressed` and `onEnterPressed` calls: technically `Return` is the key next to the letters, while `Enter` is the one at the numeric keypad.
 
 !!! tip
     `onReturnPressed` is also triggered by pressing <img class="joybtn" src="../../img/A.png" title="A">/<img class="joybtn" src="../../img/Cross.png"  title="CROSS"> on the gamepad.
 
-And with this, our theme is now fully functional!
+And with this, technically our theme is fully functional!
 
 Next step, let's make it pretty.
+
+## The code so far #2
+
+??? note "The code so far #2"
+        :::qml
+        import QtQuick 2.0
+
+        FocusScope {
+
+            ListView {
+                id: collectionAxis
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.verticalCenter
+                anchors.bottom: parent.bottom
+
+                model: api.collections.model
+                currentIndex: api.collections.index
+                delegate: collectionAxisDelegate
+
+                snapMode: ListView.SnapOneItem
+                highlightRangeMode: ListView.StrictlyEnforceRange
+                clip: true
+
+                focus: true
+                Keys.onUpPressed: api.collections.decrementIndex()
+                Keys.onDownPressed: api.collections.incrementIndex()
+                Keys.onLeftPressed: currentItem.selectPrev()
+                Keys.onRightPressed: currentItem.selectNext()
+                Keys.onReturnPressed: api.currentGame.launch()
+            }
+
+            Component {
+                id: collectionAxisDelegate
+
+                Item {
+                    function selectNext() {
+                        modelData.games.incrementIndex();
+                    }
+
+                    function selectPrev() {
+                        modelData.games.decrementIndex();
+                    }
+
+                    width: ListView.view.width
+                    height: vpx(180)
+
+                    Text {
+                        id: label
+
+                        text: modelData.name || modelData.tag
+                        color: "white"
+                        font.pixelSize: vpx(18)
+                        font.family: uiFont.name
+
+                        height: vpx(45)
+                        verticalAlignment: Text.AlignVCenter
+
+                        anchors.left: parent.left
+                        anchors.leftMargin: vpx(100)
+                    }
+
+                    ListView {
+                        id: gameAxis
+
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.top: label.bottom
+                        anchors.bottom: parent.bottom
+
+                        orientation: ListView.Horizontal
+
+                        model: modelData.games.model
+                        currentIndex: modelData.games.index
+                        delegate: gameAxisDelegate
+                        spacing: vpx(10)
+
+                        snapMode: ListView.SnapOneItem
+                        highlightRangeMode: ListView.StrictlyEnforceRange
+
+                        preferredHighlightBegin: vpx(100)
+                        preferredHighlightEnd: preferredHighlightBegin + vpx(240)
+                    }
+                }
+            }
+
+            Component {
+                id: gameAxisDelegate
+
+                Rectangle {
+                    width: vpx(240)
+                    height: vpx(135)
+
+                    color: "green"
+
+                    Text {
+                        text: modelData.title
+                    }
+                }
+            }
+
+        }
 
 
 ## Fancy game boxes
@@ -1285,17 +1378,23 @@ Text {
 }
 ```
 
-The element is aligned right next to the rating. Manually anchoring the items every time is quite annoying, let's just put them in a `Row`:
+#### Row
+
+Currently the `year` element is manually anchored right next to the rating. Doing this for each item every time is quite annoying, let's just put them in a `Row`:
 
 ```qml
 Row {
+    // anchor the whole row
     anchors.top: title.bottom
     anchors.left: title.left
+
 
     Item {
         id: rating
 
         // remove anchor items!
+        // anchors.top: title.bottom
+        // anchors.left: title.left
 
         // ...
     }
@@ -1304,6 +1403,8 @@ Row {
         id: year
 
         // remove anchor items!
+        // anchors.left: rating.right
+        // anchors.top: rating.top
 
         // ...
     }

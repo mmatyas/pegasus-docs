@@ -40,3 +40,4 @@ markdown_extensions:
     - pymdownx.keys
     - pymdownx.magiclink
     - pymdownx.extrarawhtml
+    - pymdownx.details

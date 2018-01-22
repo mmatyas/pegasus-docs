@@ -1271,7 +1271,7 @@ Text {
     id: title
 
     text: api.currentGame.title
-    color: "#eee"
+    color: "white"
 
     font.pixelSize: vpx(28)
     font.family: uiFont.name
@@ -1301,7 +1301,7 @@ Item {
     id: rating
 
     // set the item's dimensions
-    height: vpx(24)
+    height: vpx(16)
     width: height * 5
 
     // put it under the title
@@ -1367,7 +1367,7 @@ Text {
     visible: game.year > 0
 
     text: game.year
-    color: "#eee"
+    color: "white"
     font.pixelSize: vpx(16)
     font.family: uiFont.name
 
@@ -1382,9 +1382,14 @@ Currently the `year` element is manually anchored right next to the rating. Doin
 
 ```qml
 Row {
+    id: detailsRow
+
     // anchor the whole row
     anchors.top: title.bottom
+    anchors.topMargin: vpx(5)
     anchors.left: title.left
+
+    spacing: vpx(10)
 
 
     Item {
@@ -1405,6 +1410,97 @@ Row {
         // anchors.top: rating.top
 
         // ...
+    }
+}
+```
+
+### Player count
+
+This one will be a rounded rectangle with smiley faces in it indicating the number of players. The player count defaults to one; similarly to the rating, I'll show the component only if the player count is more than one.
+
+First I create the smiley face image (based on the Unicode "filled smiling face" symbol ([U+263B](https://www.fileformat.info/info/unicode/char/263b/index.htm)). Again, it's square sized with a transparent background.
+
+<div style="background-color: #555;padding:10px 0;text-align:center">
+<img src="../img/smiley.svg" width="64" height="64">
+</div>
+
+Then create a background rounded Rectangle and the smiles Image in it, putting the whole thing in the Row created in the previous step:
+
+```qml
+Rectangle {
+    id: multiplayer
+
+    // the Rectangle's size depends on the Image,
+    // with some additional padding
+    width: smileys.width + vpx(8)
+    height: smileys.height + vpx(5)
+
+    color: "#555"
+    radius: vpx(3)
+
+    visible: api.currentGame.players > 1
+
+
+    Image {
+        id: smileys
+
+        // 13px looked good for me
+        width: vpx(13) * api.currentGame.players
+        height: vpx(13)
+
+        anchors.centerIn: parent
+
+        source: "assets/smiley.svg"
+        sourceSize { width: smileys.height; height: smileys.height }
+
+        fillMode: Image.TileHorizontally
+        horizontalAlignment: Image.AlignLeft
+    }
+}
+```
+
+### Developer
+
+Yet another simple Text in the Row:
+
+```qml
+Text {
+    id: developer
+
+    text: api.currentGame.developer
+    color: "white"
+    font.pixelSize: vpx(16)
+    font.family: uiFont.name
+}
+```
+
+!!! tip
+    A game may have multiple developers: if you just want to show them as a Text, you can use `<Game>.developer`, a string that simply lists them all. There's also `<Game>.developerList`, a JavaScript `Array`, if you wish to use them individually.
+
+### Description
+
+A bigger text with set boundaries for alignment:
+
+```qml
+Text {
+    id: description
+
+    text: api.currentGame.description
+    color: "white"
+    font.pixelSize: vpx(16)
+    font.family: uiFont.name
+
+    // allow word wrapping, justify horizontally,
+    // and if the text is too long, end it with an ellipsis (...)
+    wrapMode: Text.WordWrap
+    horizontalAlignment: Text.AlignJustify
+    elide: Text.ElideRight
+
+    anchors {
+        left: detailsRow.left
+        right: parent.horizontalCenter
+        top: detailsRow.bottom; topMargin: vpx(20)
+        bottom: parent.verticalCenter; bottomMargin: vpx(32)
     }
 }
 ```

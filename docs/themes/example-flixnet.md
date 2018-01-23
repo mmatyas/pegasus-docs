@@ -190,10 +190,11 @@ FocusScope {
                 // in this case a number between 0-9
                 text: modelData
 
-                // white, 18px font, using Pegasus' default font family
+                // white, bold 18px font, using Pegasus' default font family
                 color: "white"
                 font.pixelSize: vpx(18)
                 font.family: uiFont.name
+                font.bold: true
 
                 // make the line height 45px high
                 // and center the text vertically in it
@@ -1273,7 +1274,7 @@ Text {
     text: api.currentGame.title
     color: "white"
 
-    font.pixelSize: vpx(28)
+    font.pixelSize: vpx(32)
     font.family: uiFont.name
     font.bold: true
 
@@ -1479,7 +1480,7 @@ Text {
 
 ### Description
 
-A bigger text with set boundaries for alignment:
+A bigger text with set boundaries for alignment. If there is a short `summary`, I'll use that, otherwise the beginning of the full description.
 
 ```qml
 Text {
@@ -1487,13 +1488,13 @@ Text {
 
     text: api.currentGame.description
     color: "white"
-    font.pixelSize: vpx(16)
+    font.pixelSize: vpx(18)
     font.family: uiFont.name
 
-    // allow word wrapping, justify horizontally,
-    // and if the text is too long, end it with an ellipsis (...)
+    // allow word wrapping, justify horizontally
     wrapMode: Text.WordWrap
     horizontalAlignment: Text.AlignJustify
+    // if the text is too long, end it with an ellipsis (...)
     elide: Text.ElideRight
 
     anchors {

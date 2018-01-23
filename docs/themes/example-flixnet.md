@@ -193,7 +193,7 @@ FocusScope {
                 // white, bold 18px font, using Pegasus' default font family
                 color: "white"
                 font.pixelSize: vpx(18)
-                font.family: uiFont.name
+                font.family: globalFonts.sans
                 font.bold: true
 
                 // make the line height 45px high
@@ -334,7 +334,7 @@ Here's the whole code so far (without comments to save space):
                         text: modelData
                         color: "white"
                         font.pixelSize: vpx(18)
-                        font.family: uiFont.name
+                        font.family: globalFonts.sans
 
                         height: vpx(45)
                         verticalAlignment: Text.AlignVCenter
@@ -645,7 +645,7 @@ Component {
             text: modelData.name || modelData.tag
             color: "white"
             font.pixelSize: vpx(18)
-            font.family: uiFont.name
+            font.family: globalFonts.sans
 
             // ...
         }
@@ -878,7 +878,7 @@ Next step, let's make it pretty.
                         text: modelData.name || modelData.tag
                         color: "white"
                         font.pixelSize: vpx(18)
-                        font.family: uiFont.name
+                        font.family: globalFonts.sans
 
                         height: vpx(45)
                         verticalAlignment: Text.AlignVCenter
@@ -1022,7 +1022,7 @@ Component {
                 // set the font
                 color: "white"
                 font.pixelSize: vpx(16)
-                font.family: uiFont.name
+                font.family: globalFonts.sans
             }
         }
 
@@ -1241,7 +1241,7 @@ Text {
     color: "white"
 
     font.pixelSize: vpx(32)
-    font.family: uiFont.name
+    font.family: globalFonts.sans
     font.bold: true
 
     anchors.top: parent.top
@@ -1336,7 +1336,7 @@ Text {
     text: game.year
     color: "white"
     font.pixelSize: vpx(16)
-    font.family: uiFont.name
+    font.family: globalFonts.sans
 
     anchors.left: rating.right
     anchors.top: rating.top
@@ -1437,7 +1437,7 @@ Text {
     text: api.currentGame.developer
     color: "white"
     font.pixelSize: vpx(16)
-    font.family: uiFont.name
+    font.family: globalFonts.sans
 }
 ```
 
@@ -1455,7 +1455,7 @@ Text {
     text: api.currentGame.description
     color: "white"
     font.pixelSize: vpx(18)
-    font.family: uiFont.name
+    font.family: globalFonts.sans
 
     // allow word wrapping, justify horizontally
     wrapMode: Text.WordWrap
@@ -1684,7 +1684,7 @@ And the full code:
                 color: "white"
 
                 font.pixelSize: vpx(32)
-                font.family: uiFont.name
+                font.family: globalFonts.sans
                 font.bold: true
 
                 anchors.top: parent.top
@@ -1743,7 +1743,7 @@ And the full code:
                     text: api.currentGame.year
                     color: "white"
                     font.pixelSize: vpx(16)
-                    font.family: uiFont.name
+                    font.family: globalFonts.sans
                 }
 
                 Rectangle {
@@ -1779,7 +1779,7 @@ And the full code:
                     text: api.currentGame.developer
                     color: "white"
                     font.pixelSize: vpx(16)
-                    font.family: uiFont.name
+                    font.family: globalFonts.sans
                 }
             }
 
@@ -1789,7 +1789,7 @@ And the full code:
                 text: api.currentGame.summary || api.currentGame.description
                 color: "white"
                 font.pixelSize: vpx(18)
-                font.family: uiFont.name
+                font.family: globalFonts.sans
 
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignJustify
@@ -1863,7 +1863,7 @@ And the full code:
                         text: modelData.name || modelData.tag
                         color: "white"
                         font.pixelSize: vpx(18)
-                        font.family: uiFont.name
+                        font.family: globalFonts.sans
                         font.bold: true
 
                         height: vpx(45)
@@ -1927,7 +1927,7 @@ And the full code:
 
                             color: "white"
                             font.pixelSize: vpx(16)
-                            font.family: uiFont.name
+                            font.family: globalFonts.sans
                         }
                     }
 
@@ -2015,7 +2015,7 @@ It's a bit long, but then again this theme had some complex layouting going on. 
             color: "white"
 
             font.pixelSize: vpx(32)
-            font.family: uiFont.name
+            font.family: globalFonts.sans
             font.bold: true
         }
 
@@ -2064,7 +2064,7 @@ It's a bit long, but then again this theme had some complex layouting going on. 
             text: api.currentGame.year
             color: "white"
             font.pixelSize: vpx(16)
-            font.family: uiFont.name
+            font.family: globalFonts.sans
         }
 
 ??? note "MultiplayerIcon.qml"
@@ -2104,7 +2104,7 @@ It's a bit long, but then again this theme had some complex layouting going on. 
             text: api.currentGame.summary || api.currentGame.description
             color: "white"
             font.pixelSize: vpx(18)
-            font.family: uiFont.name
+            font.family: globalFonts.sans
 
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignJustify
@@ -2171,7 +2171,7 @@ It's a bit long, but then again this theme had some complex layouting going on. 
                 text: modelData.name || modelData.tag
                 color: "white"
                 font.pixelSize: vpx(18)
-                font.family: uiFont.name
+                font.family: globalFonts.sans
                 font.bold: true
 
                 height: vpx(45)
@@ -2235,7 +2235,7 @@ It's a bit long, but then again this theme had some complex layouting going on. 
 
                     color: "white"
                     font.pixelSize: vpx(16)
-                    font.family: uiFont.name
+                    font.family: globalFonts.sans
                 }
             }
 

@@ -1146,7 +1146,7 @@ The horizontal scrolling works similarly, with one important difference: there i
 
 <video autoplay loop style="max-width:100%;display:block;margin:0 auto"><source src="../webm/flixnet_pathview2.webm" type="video/webm"></video>
 
-I've set the left margin previously to 100 px and the width of a game box to be 240x135. In addition, there's a 10px spacing between the element, giving the full width of a box to 250. The center of the current item will be at 100 + 250/2 = 225 on the path; counting backwards, the previous item will be at 100 - 250 * 0.5, and the position where the new elements will appear when scrolling will be at 100 - 250 * 1.5.
+I've set the left margin previously to 100 px and the width of a game box to be 240x135. In addition, there's a 10px spacing between the elements, giving the full width of a box to 250. The center of the current-item would be at 100 + 250/2 = 225 on the path, but to make it align with the collection label, I'll shift it 5px (half of the spacing) to the left, making the X center to be 220px. Counting backwards, the previous-item will be at 220 - 250, and the one before that (the leftmost postion, where the new elements will appear when scrolling) at 220 - 250 * 2.
 
 All right, let's change the horizontal ListView into a PathView:
 
@@ -1202,7 +1202,7 @@ PathView {
     // brand new: path definitions
     pathItemCount: 2 + Math.ceil(width / vpx(250)) // note the '2'!
     path: Path {
-        startX: vpx(100) - vpx(250) * 1.5
+        startX: vpx(220) - vpx(250) * 2
         startY: vpx(135) * 0.5
         PathLine {
             x: gameAxis.path.startX + gameAxis.pathItemCount * vpx(250)
@@ -1505,3 +1505,29 @@ Text {
     }
 }
 ```
+
+### Selection marker
+
+It's not too visible on the example images, but actually there's a white rectangular border around the place where the current item is located in the first horizontal axis. It's position is fixed and does not move even during scrolling.
+
+I'll create an empty, border-only Rectangle for it. Since it's over everything else in the theme, I'll put it to the bottom of the whole file, after the `gameAxisDelegate`'s definition.
+
+```qml
+Rectangle {
+    id: selectionMarker
+
+    width: vpx(240)
+    height: vpx(135)
+
+    color: "transparent"
+    border { width: 3; color: "white" }
+
+    anchors.left: parent.left
+    anchors.leftMargin: vpx(100)
+    anchors.top: parent.verticalCenter
+    anchors.topMargin: vpx(45)
+}
+```
+
+!!! tip
+    You can also use the `z` property of the components to set their relative "height".

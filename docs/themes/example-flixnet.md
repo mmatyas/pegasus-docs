@@ -1531,3 +1531,26 @@ Rectangle {
 
 !!! tip
     You can also use the `z` property of the components to set their relative "height".
+
+### Opacity
+
+The currently active horizontal row is fully visible, while the rest are a bit darker. I'll set the opacity of the non-active rows to 60%. In addition, I'll add a light animation, so instead of a sudden change in the visibility, the rows gradually raise their opacity during scrolling.
+
+Simply add these two lines to the `collectionAxisDelegate`:
+
+```qml hl_lines="9 10"
+Component {
+    id: collectionAxisDelegate
+
+    Item {
+        // JS functions
+
+        // width, height
+
+        opacity: PathView.isCurrentItem ? 1.0 : 0.6
+        Behavior on opacity { NumberAnimation { duration: 150 } }
+
+        // ...
+    }
+}
+```

@@ -1229,43 +1229,9 @@ You can place all these elements directly under the main `FocusScope`, or you co
 
 As for accessing the actual game data, we can use the properties of `api.currentGame` for metadata information, and `api.currentGame.assets` for the assets. You can find all the available fields listed in the [API reference](api.md).
 
-### Screenshot
-
-This should be below everything else on the screen -- in fact, if you look at the image at the beginning of this guide, it's actually going into the bottom-half region of the screen, reaching the row of images.
-
-As it's under everything else, I'll put its implementation at the top of the theme file, even before the collections' PathView. I'll anchor the top and left edges of the image to the top right corner of the screen. To make it go slightly into the bottom half, I'll anchor the bottom edge to the vertical center of the screen, then add a small amount of **negative margin** to the bottom (a positive margin *reduces* the size of the element, while a negative one *increases* it).
-
-```qml
-Image {
-    id: screenshot
-
-    asynchronous: true
-    fillMode: Image.PreserveAspectFit
-
-    // set the first screenshot as source, or nothing
-    source: api.currentGame.assets.screenshots[0] || ""
-    sourceSize { width: 512; height: 512 }
-
-    anchors.top: parent.top
-    anchors.right: parent.right
-    anchors.bottom: parent.verticalCenter
-    anchors.bottomMargin: vpx(-45) // the height of the collection label
-}
-```
-
-!!! note
-    Using negative margins kind of feels like a hack though, so depending on the situation you might prefer to use simple width/height properties.
-
-!!! note
-    The screenshots are stored under `assets.screenshots`, which is a regular JavaScript `Array`. If it's empty, `screenshots[0]` will be `undefined`, and setting an `undefined` value as the `source` of an Image will produce a warning in the log. Setting it to an empty string, however, will not, so appending `|| ""` as a fallback will silence the warning.
-
-    An alternative solution could be is to use `screenshots` as a `model` in eg. a ListView, and the Image as delegate. You could then further extend it to periodically change the current visible screenshot.
-
-TODO gradient
-
 ### Title
 
-A simple Text item in the upper left corner, with the left margin set to the same 100px we used at the game rows.
+A simple Text item in the upper left corner, with the left margin set to the same 100px we used at the game rows, and some additional margin at the top.
 
 ```qml
 Text {
@@ -1505,6 +1471,102 @@ Text {
     }
 }
 ```
+
+### Screenshot
+
+This should be below everything else on the screen -- in fact, if you look at the image at the beginning of this guide, it's actually going into the bottom-half region of the screen, reaching the row of images.
+
+As it's under everything else, I'll put its implementation at the top of the theme file, even before the collections' PathView. I'll anchor the top and left edges of the image to the top right corner of the screen. To make it go slightly into the bottom half, I'll anchor the bottom edge to the vertical center of the screen, then add a small amount of **negative margin** to the bottom (a positive margin *reduces* the size of the element, while a negative one *increases* it).
+
+```qml
+Image {
+    id: screenshot
+
+    asynchronous: true
+    fillMode: Image.PreserveAspectFit
+
+    // set the first screenshot as source, or nothing
+    source: api.currentGame.assets.screenshots[0] || ""
+    sourceSize { width: 512; height: 512 }
+
+    anchors.top: parent.top
+    anchors.right: parent.right
+    anchors.bottom: parent.verticalCenter
+    anchors.bottomMargin: vpx(-45) // the height of the collection label
+}
+```
+
+!!! note
+    Using negative margins kind of feels like a hack though, so depending on the situation you might prefer to use simple width/height properties.
+
+!!! note
+    The screenshots are stored under `assets.screenshots`, which is a regular JavaScript `Array`. If it's empty, `screenshots[0]` will be `undefined`, and setting an `undefined` value as the `source` of an Image will produce a warning in the log. Setting it to an empty string, however, will not, so appending `|| ""` as a fallback will silence the warning.
+
+    An alternative solution could be is to use `screenshots` as a `model` in eg. a ListView, and the Image as delegate. You could then further extend it to periodically change the current visible screenshot.
+
+#### Gradients
+
+There are two linear gradients ("fade-ins"), one from the left and one from the bottom of the image. Such effect can be added just like regular components, can be positioned, sized, animated, etc. But first of all, to use gradients you'll need the `QtGraphicalEffects` QML module:
+
+```qml hl_lines="2"
+import QtQuick 2.0
+import QtGraphicalEffects 1.0
+
+FocusScope {
+    // ...
+}
+```
+
+Then, create the horizontal linear gradient inside our Image component:
+
+```qml
+Image {
+    id: screenshot
+
+    // ...
+
+
+    LinearGradient {
+        width: parent.width * 0.25
+        height: parent.height
+
+        anchors.left: parent.left
+
+        // since it goes straight horizontally from the left,
+        // the Y of the point doesn't really matter
+        start: Qt.point(0, 0)
+        end: Qt.point(width, 0)
+        // at the left side (0%), it starts with a fully visible black
+        // at the right side (100%), it blends into transparency
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "black" }
+            GradientStop { position: 1.0; color: "transparent" }
+        }
+    }
+
+}
+```
+
+And another for the bottom:
+
+```qml
+LinearGradient {
+    width: parent.width
+    height: vpx(50)
+
+    anchors.bottom: parent.bottom
+
+    // goes straight up, so the X of the point doesn't really matter
+    start: Qt.point(0, height)
+    end: Qt.point(0, 0)
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: "black" }
+        GradientStop { position: 1.0; color: "transparent" }
+    }
+}
+```
+
+And we're done!
 
 ### Selection marker
 

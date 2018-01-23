@@ -39,7 +39,7 @@ FocusScope {
 
 Now I open Pegasus and select this theme on the Settings screen. I'll keep Pegasus open during the development, and refresh the theme with the ++f5++ key. I also open the main log file `~/.config/pegasus-frontend/lastrun.log` which will tell me if I've made any errors in the QML file.
 
-!!! hint
+!!! tip
     You can use whatever text editor you like. Qt Creator is cross platform, has good auto-complete and syntax highlight features. For a more lightweight editor, Sublime Text with the QML package, Atom or Notepad++ could be used, among others.
 
 !!! note
@@ -152,14 +152,14 @@ FocusScope {
 }
 ```
 
-!!! info
+!!! tip
     `Component` is a special element that defines a QML document. Actually, you could even move the `Rectangle` to a new file (eg. `HorizontalAxis.qml`) and use the file's name to set the delegate (eg. `:::qml delegate: HorizontalAxis {}`).
 
 ### Horizontal axis
 
 The rows of the collection axis will consist of two things: a `Text` label that shows the collection's name and a `ListView` that shows its games. Because a `Component` can have only one child, I'll turn the `Rectangle` into an `Item` (an otherwise invisible container), and put a `Text` and a `ListView` into it.
 
-!!! info
+!!! note
     Just as individual QML files can have only one root element, `Component` can have only one child.
 
 First I'll add the collection label:
@@ -586,7 +586,7 @@ Component {
     The anchor margin is only applied if the anchor itself is defined.
 
 !!! tip
-    You can also use the Text item's `leftPadding` property. This feature was added in Qt 5.6 (as mentioned in the official documentation TODO), so you'll need to change the `import` command on the top of the QML file to `import QtQuick 2.6` or higher (Pegasus comes with Qt 5.9 at the moment).
+    You can also use the Text item's `leftPadding` property. This feature was added in Qt 5.6 (as mentioned in the [official documentation](https://doc-snapshots.qt.io/qt5-5.9/qml-qtquick-text.html#leftPadding-prop)), so you'll need to change the `import` command on the top of the QML file to `import QtQuick 2.6` or higher (Pegasus comes with Qt 5.9 at the moment).
 
 
 ## Using API data
@@ -1570,7 +1570,7 @@ And we're done!
 
 ### Selection marker
 
-It's not too visible on the example images, but actually there's a white rectangular border around the place where the current item is located in the first horizontal axis. It's position is fixed and does not move even during scrolling.
+It's not easy on the example images, but actually there's a white rectangular border around the place where the current item is located in the first horizontal axis. It's position is fixed and does not move even during scrolling.
 
 I'll create an empty, border-only Rectangle for it. Since it's over everything else in the theme, I'll put it to the bottom of the whole file, after the `gameAxisDelegate`'s definition.
 
@@ -1616,3 +1616,723 @@ Component {
     }
 }
 ```
+
+
+## Conclusion
+
+With all these components added, it seems we're actually done! Here's the end result:
+
+![preview](img/flixnet_guide-end.png)
+
+And the full code:
+
+??? note "The code so far #3"
+        :::qml
+        import QtQuick 2.0
+        import QtGraphicalEffects 1.0
+
+
+        FocusScope {
+
+            Image {
+                id: screenshot
+
+                asynchronous: true
+                fillMode: Image.PreserveAspectFit
+
+                source: api.currentGame.assets.screenshots[0] || ""
+                sourceSize { width: 512; height: 512 }
+
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.bottom: parent.verticalCenter
+                anchors.bottomMargin: vpx(-45)
+
+                LinearGradient {
+                    width: parent.width * 0.25
+                    height: parent.height
+
+                    anchors.left: parent.left
+
+                    start: Qt.point(0, 0)
+                    end: Qt.point(width, 0)
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: "black" }
+                        GradientStop { position: 1.0; color: "transparent" }
+                    }
+                }
+
+                LinearGradient {
+                    width: parent.width
+                    height: vpx(50)
+
+                    anchors.bottom: parent.bottom
+
+                    start: Qt.point(0, height)
+                    end: Qt.point(0, 0)
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: "black" }
+                        GradientStop { position: 1.0; color: "transparent" }
+                    }
+                }
+            }
+
+            Text {
+                id: title
+
+                text: api.currentGame.title
+                color: "white"
+
+                font.pixelSize: vpx(32)
+                font.family: uiFont.name
+                font.bold: true
+
+                anchors.top: parent.top
+                anchors.topMargin: vpx(42)
+                anchors.left: parent.left
+                anchors.leftMargin: vpx(100)
+            }
+
+            Row {
+                id: detailsRow
+
+                anchors.top: title.bottom
+                anchors.topMargin: vpx(5)
+                anchors.left: title.left
+
+                spacing: vpx(10)
+
+                Item {
+                    id: rating
+
+                    visible: api.currentGame.rating > 0.0
+
+                    height: vpx(16)
+                    width: height * 5
+
+                    Image {
+                        anchors.fill: parent
+
+                        source: "assets/star_empty.svg"
+                        sourceSize { width: parent.height; height: parent.height }
+
+                        fillMode: Image.TileHorizontally
+                        horizontalAlignment: Image.AlignLeft
+                    }
+
+                    Image {
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+
+                        width: parent.width * api.currentGame.rating
+                        height: parent.height
+
+                        source: "assets/star_filled.svg"
+                        sourceSize { width: parent.height; height: parent.height }
+
+                        fillMode: Image.TileHorizontally
+                        horizontalAlignment: Image.AlignLeft
+                    }
+                }
+
+                Text {
+                    id: year
+
+                    visible: api.currentGame.year > 0
+
+                    text: api.currentGame.year
+                    color: "white"
+                    font.pixelSize: vpx(16)
+                    font.family: uiFont.name
+                }
+
+                Rectangle {
+                    id: multiplayer
+
+                    width: smileys.width + vpx(8)
+                    height: smileys.height + vpx(5)
+
+                    color: "#555"
+                    radius: vpx(3)
+
+                    visible: api.currentGame.players > 1
+
+                    Image {
+                        id: smileys
+
+                        width: vpx(13) * api.currentGame.players
+                        height: vpx(13)
+
+                        anchors.centerIn: parent
+
+                        source: "assets/smiley.svg"
+                        sourceSize { width: smileys.height; height: smileys.height }
+
+                        fillMode: Image.TileHorizontally
+                        horizontalAlignment: Image.AlignLeft
+                    }
+                }
+
+                Text {
+                    id: developer
+
+                    text: api.currentGame.developer
+                    color: "white"
+                    font.pixelSize: vpx(16)
+                    font.family: uiFont.name
+                }
+            }
+
+            Text {
+                id: description
+
+                text: api.currentGame.summary || api.currentGame.description
+                color: "white"
+                font.pixelSize: vpx(18)
+                font.family: uiFont.name
+
+                wrapMode: Text.WordWrap
+                horizontalAlignment: Text.AlignJustify
+                elide: Text.ElideRight
+
+                anchors {
+                    left: detailsRow.left
+                    right: parent.horizontalCenter
+                    top: detailsRow.bottom; topMargin: vpx(20)
+                    bottom: parent.verticalCenter; bottomMargin: vpx(32)
+                }
+            }
+
+            PathView {
+                id: collectionAxis
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.verticalCenter
+                anchors.bottom: parent.bottom
+
+                model: api.collections.model
+                currentIndex: api.collections.index
+                delegate: collectionAxisDelegate
+
+                snapMode: PathView.SnapOneItem
+                highlightRangeMode: PathView.StrictlyEnforceRange
+                clip: true
+
+                pathItemCount: 1 + Math.ceil(height / vpx(180))
+                path: Path {
+                    startX: collectionAxis.width * 0.5
+                    startY: vpx(180) * -0.5
+                    PathLine {
+                        x: collectionAxis.path.startX
+                        y: collectionAxis.path.startY + collectionAxis.pathItemCount * vpx(180)
+                    }
+                }
+                preferredHighlightBegin: 1 / pathItemCount
+                preferredHighlightEnd: preferredHighlightBegin
+
+                focus: true
+                Keys.onUpPressed: api.collections.decrementIndex()
+                Keys.onDownPressed: api.collections.incrementIndex()
+                Keys.onLeftPressed: currentItem.selectPrev()
+                Keys.onRightPressed: currentItem.selectNext()
+                Keys.onReturnPressed: api.currentGame.launch()
+            }
+
+            Component {
+                id: collectionAxisDelegate
+
+                Item {
+                    function selectNext() {
+                        modelData.games.incrementIndex();
+                    }
+
+                    function selectPrev() {
+                        modelData.games.decrementIndex();
+                    }
+
+                    width: PathView.view.width
+                    height: vpx(180)
+
+                    opacity: PathView.isCurrentItem ? 1.0 : 0.6
+                    Behavior on opacity { NumberAnimation { duration: 150 } }
+
+                    Text {
+                        id: label
+
+                        text: modelData.name || modelData.tag
+                        color: "white"
+                        font.pixelSize: vpx(18)
+                        font.family: uiFont.name
+                        font.bold: true
+
+                        height: vpx(45)
+                        verticalAlignment: Text.AlignVCenter
+
+                        anchors.left: parent.left
+                        anchors.leftMargin: vpx(100)
+                    }
+
+                    PathView {
+                        id: gameAxis
+
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.top: label.bottom
+                        anchors.bottom: parent.bottom
+
+                        model: modelData.games.model
+                        currentIndex: modelData.games.index
+                        delegate: gameAxisDelegate
+
+                        snapMode: PathView.SnapOneItem
+                        highlightRangeMode: PathView.StrictlyEnforceRange
+
+                        pathItemCount: 2 + Math.ceil(width / vpx(250))
+                        path: Path {
+                            startX: vpx(220) - vpx(250) * 2
+                            startY: vpx(135) * 0.5
+                            PathLine {
+                                x: gameAxis.path.startX + gameAxis.pathItemCount * vpx(250)
+                                y: gameAxis.path.startY
+                            }
+                        }
+                        preferredHighlightBegin: 2 / pathItemCount
+                        preferredHighlightEnd: preferredHighlightBegin
+                    }
+                }
+            }
+
+            Component {
+                id: gameAxisDelegate
+
+                Item {
+                    width: vpx(240)
+                    height: vpx(135)
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "#333"
+                        visible: image.status !== Image.Ready
+
+                        Text {
+                            text: modelData.title
+
+                            anchors.fill: parent
+                            anchors.margins: vpx(12)
+
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            wrapMode: Text.Wrap
+
+                            color: "white"
+                            font.pixelSize: vpx(16)
+                            font.family: uiFont.name
+                        }
+                    }
+
+                    Image {
+                        id: image
+
+                        anchors.fill: parent
+                        visible: source
+
+                        fillMode: Image.PreserveAspectCrop
+
+                        asynchronous: true
+                        source: assets.banner || assets.steam || assets.boxFront
+                        sourceSize { width: 256; height: 256 }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: selectionMarker
+
+                width: vpx(240)
+                height: vpx(135)
+
+                color: "transparent"
+                border { width: 3; color: "white" }
+
+                anchors.left: parent.left
+                anchors.leftMargin: vpx(100)
+                anchors.top: parent.verticalCenter
+                anchors.topMargin: vpx(45)
+            }
+        }
+
+It's a bit long, but then again this theme had some complex layouting going on. A possible separation to multiple QML files would look like this:
+
+??? note "Screenshot.qml"
+        :::qml
+        import QtQuick 2.0
+        import QtGraphicalEffects 1.0
+
+        Image {
+            asynchronous: true
+            fillMode: Image.PreserveAspectFit
+
+            source: api.currentGame.assets.screenshots[0] || ""
+            sourceSize { width: 512; height: 512 }
+
+
+            LinearGradient {
+                width: parent.width * 0.25
+                height: parent.height
+
+                anchors.left: parent.left
+
+                start: Qt.point(0, 0)
+                end: Qt.point(width, 0)
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: "black" }
+                    GradientStop { position: 1.0; color: "transparent" }
+                }
+            }
+
+            LinearGradient {
+                width: parent.width
+                height: vpx(50)
+
+                anchors.bottom: parent.bottom
+
+                start: Qt.point(0, height)
+                end: Qt.point(0, 0)
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: "black" }
+                    GradientStop { position: 1.0; color: "transparent" }
+                }
+            }
+        }
+
+??? note "Title.qml"
+        :::qml
+        import QtQuick 2.0
+
+        Text {
+            text: api.currentGame.title
+            color: "white"
+
+            font.pixelSize: vpx(32)
+            font.family: uiFont.name
+            font.bold: true
+        }
+
+??? note "Rating.qml"
+        :::qml
+        import QtQuick 2.0
+
+        Item {
+            visible: api.currentGame.rating > 0.0
+
+            height: vpx(16)
+            width: height * 5
+
+            Image {
+                anchors.fill: parent
+
+                source: "assets/star_empty.svg"
+                sourceSize { width: parent.height; height: parent.height }
+
+                fillMode: Image.TileHorizontally
+                horizontalAlignment: Image.AlignLeft
+            }
+
+            Image {
+                anchors.top: parent.top
+                anchors.left: parent.left
+
+                width: parent.width * api.currentGame.rating
+                height: parent.height
+
+                source: "assets/star_filled.svg"
+                sourceSize { width: parent.height; height: parent.height }
+
+                fillMode: Image.TileHorizontally
+                horizontalAlignment: Image.AlignLeft
+            }
+        }
+
+??? note "ReleaseYear.qml"
+        :::qml
+        import QtQuick 2.0
+
+        Text {
+            visible: api.currentGame.year > 0
+
+            text: api.currentGame.year
+            color: "white"
+            font.pixelSize: vpx(16)
+            font.family: uiFont.name
+        }
+
+??? note "MultiplayerIcon.qml"
+        :::qml
+        import QtQuick 2.0
+
+        Rectangle {
+            width: smileys.width + vpx(8)
+            height: smileys.height + vpx(5)
+
+            color: "#555"
+            radius: vpx(3)
+
+            visible: api.currentGame.players > 1
+
+            Image {
+                id: smileys
+
+                width: vpx(13) * api.currentGame.players
+                height: vpx(13)
+
+                anchors.centerIn: parent
+
+                source: "assets/smiley.svg"
+                sourceSize { width: smileys.height; height: smileys.height }
+
+                fillMode: Image.TileHorizontally
+                horizontalAlignment: Image.AlignLeft
+            }
+        }
+
+??? note "Description.qml"
+        :::qml
+        import QtQuick 2.0
+
+        Text {
+            text: api.currentGame.summary || api.currentGame.description
+            color: "white"
+            font.pixelSize: vpx(18)
+            font.family: uiFont.name
+
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignJustify
+            elide: Text.ElideRight
+        }
+
+??? note "CollectionAxis.qml"
+        :::qml
+        import QtQuick 2.0
+
+        PathView {
+            id: collectionAxis
+
+            model: api.collections.model
+            currentIndex: api.collections.index
+            delegate: CollectionAxisDelegate { }
+
+            snapMode: PathView.SnapOneItem
+            highlightRangeMode: PathView.StrictlyEnforceRange
+            clip: true
+
+            pathItemCount: 1 + Math.ceil(height / vpx(180))
+            path: Path {
+                startX: collectionAxis.width * 0.5
+                startY: vpx(180) * -0.5
+                PathLine {
+                    x: collectionAxis.path.startX
+                    y: collectionAxis.path.startY + collectionAxis.pathItemCount * vpx(180)
+                }
+            }
+            preferredHighlightBegin: 1 / pathItemCount
+            preferredHighlightEnd: preferredHighlightBegin
+
+            focus: true
+            Keys.onUpPressed: api.collections.decrementIndex()
+            Keys.onDownPressed: api.collections.incrementIndex()
+            Keys.onLeftPressed: currentItem.selectPrev()
+            Keys.onRightPressed: currentItem.selectNext()
+            Keys.onReturnPressed: api.currentGame.launch()
+        }
+
+??? note "CollectionAxisDelegate.qml"
+        :::qml
+        import QtQuick 2.0
+
+        Item {
+            function selectNext() {
+                modelData.games.incrementIndex();
+            }
+
+            function selectPrev() {
+                modelData.games.decrementIndex();
+            }
+
+            width: PathView.view.width
+            height: vpx(180)
+
+            opacity: PathView.isCurrentItem ? 1.0 : 0.6
+            Behavior on opacity { NumberAnimation { duration: 150 } }
+
+            Text {
+                id: label
+
+                text: modelData.name || modelData.tag
+                color: "white"
+                font.pixelSize: vpx(18)
+                font.family: uiFont.name
+                font.bold: true
+
+                height: vpx(45)
+                verticalAlignment: Text.AlignVCenter
+
+                anchors.left: parent.left
+                anchors.leftMargin: vpx(100)
+            }
+
+            PathView {
+                id: gameAxis
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: label.bottom
+                anchors.bottom: parent.bottom
+
+                model: modelData.games.model
+                currentIndex: modelData.games.index
+                delegate: GameAxisDelegate { }
+
+                snapMode: PathView.SnapOneItem
+                highlightRangeMode: PathView.StrictlyEnforceRange
+
+                pathItemCount: 2 + Math.ceil(width / vpx(250))
+                path: Path {
+                    startX: vpx(220) - vpx(250) * 2
+                    startY: vpx(135) * 0.5
+                    PathLine {
+                        x: gameAxis.path.startX + gameAxis.pathItemCount * vpx(250)
+                        y: gameAxis.path.startY
+                    }
+                }
+                preferredHighlightBegin: 2 / pathItemCount
+                preferredHighlightEnd: preferredHighlightBegin
+            }
+        }
+
+??? note "GameAxisDelegate.qml"
+        :::qml
+        import QtQuick 2.0
+
+        Item {
+            width: vpx(240)
+            height: vpx(135)
+
+            Rectangle {
+                anchors.fill: parent
+                color: "#333"
+                visible: image.status !== Image.Ready
+
+                Text {
+                    text: modelData.title
+
+                    anchors.fill: parent
+                    anchors.margins: vpx(12)
+
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    wrapMode: Text.Wrap
+
+                    color: "white"
+                    font.pixelSize: vpx(16)
+                    font.family: uiFont.name
+                }
+            }
+
+            Image {
+                id: image
+
+                anchors.fill: parent
+                visible: source
+
+                fillMode: Image.PreserveAspectCrop
+
+                asynchronous: true
+                source: assets.banner || assets.steam || assets.boxFront
+                sourceSize { width: 256; height: 256 }
+            }
+        }
+
+??? note "SelectionMarker.qml"
+        :::qml
+        import QtQuick 2.0
+
+        Rectangle {
+            width: vpx(240)
+            height: vpx(135)
+
+            color: "transparent"
+            border { width: 3; color: "white" }
+        }
+
+??? note "theme.qml"
+        :::qml
+        import QtQuick 2.0
+
+        FocusScope {
+
+            Screenshot {
+                id: screenshot
+
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.bottom: parent.verticalCenter
+                anchors.bottomMargin: vpx(-45)
+            }
+
+            Title {
+                id: title
+
+                anchors.top: parent.top
+                anchors.topMargin: vpx(42)
+                anchors.left: parent.left
+                anchors.leftMargin: vpx(100)
+            }
+
+            Row {
+                id: detailsRow
+
+                anchors.top: title.bottom
+                anchors.topMargin: vpx(5)
+                anchors.left: title.left
+
+                spacing: vpx(10)
+
+                Rating { }
+                ReleaseYear { }
+                MultiplayerIcon { }
+                Developer { }
+            }
+
+            Description {
+                id: description
+
+                anchors {
+                    left: detailsRow.left
+                    right: parent.horizontalCenter
+                    top: detailsRow.bottom; topMargin: vpx(20)
+                    bottom: parent.verticalCenter; bottomMargin: vpx(32)
+                }
+            }
+
+            CollectionAxis {
+                id: collectionAxis
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.verticalCenter
+                anchors.bottom: parent.bottom
+            }
+
+            SelectionMarker {
+                anchors.left: parent.left
+                anchors.leftMargin: vpx(100)
+                anchors.top: parent.verticalCenter
+                anchors.topMargin: vpx(45)
+            }
+        }
+
+??? note "theme.cfg"
+        :::control
+        name: Flixnet tutorial
+        author: Mátyás Mustoha

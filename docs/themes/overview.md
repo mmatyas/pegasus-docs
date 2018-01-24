@@ -42,7 +42,7 @@ There are numerous built-in components you can use in a theme: simple types (tex
 QML generally describes *what* is on the screen and how they *look* like -- to tell what a component should *do*, you can extend QML with **JavaScript** code. Don't worry if you aren't familiar with it; QML works quite well on its own, usually you only need to code if you want to implement some special behaviour for the elements.
 
 !!! warning
-    While JavaScript is usually associated with websites, Pegasus is **NOT** a web browser or an HTML5 app. Only the JavaScript engine is used, not a whole browser. In case you're worried about performance: your script will automatically get compiled to native code the next time you start Pegasus when you change a file.
+    While JavaScript is usually associated with websites, Pegasus is **NOT** a web browser or an HTML5 app. Only the JavaScript engine is used, not a whole browser. In case you're worried about performance: after changing a file, your script will automatically get compiled and cached the next time you start Pegasus.
 
 !!! info "Further reading"
     - https://en.wikipedia.org/wiki/QML
@@ -148,7 +148,7 @@ Pegasus' themes are standard QML files, and you can use any QML tutorial (collec
 
 When you load a theme, its main component (the `FocusScope` above) will be set to fill the whole screen. The top left corner of the screen is (0,0), with the X axis growing right and the Y axis growing downwards.
 
-When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally QML this easy because you can tell the position and size of elements compared to others using *anchors* (eg. set an element's corner or side to have at the same place as another element's corner or side -- see the [QML tutorials](qml-tutorials.md) (positioning/anchoring)).
+When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally in QML this isn't hard because you can tell the position and size of elements compared to others using *anchors* (eg. set an element's corner or side to have at the same place as another element's corner or side -- see the [QML tutorials](qml-tutorials.md) (positioning/anchoring)).
 
 When you *do* have to position or size things manually, it is common to use percentages, but Pegasus also provides a **virtual coordinate system**. You can treat the screen as one with the resolution of at least **1280x720** virtual pixels (16:9 aspect ratio), and use integer pixel values, which will then scale to the correct physical value according to the screen's real resolution. If the screen's aspect ratio is smaller than this (eg. 4:3), then the *virtual* screen will be taller than 720 virtual pixels, but still have 1280 as a fixed width. If the aspect ratio is wider (eg. 21:9), then the virtual height will remain to be 720, but the width will be bigger. This system can be useful when you want to express precise details in pixels, like width/height, spacing, text sizes, etc.
 

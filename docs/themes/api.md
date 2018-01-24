@@ -13,9 +13,18 @@ Property | Description
 `index` | The index of the currently selected item of `model`. **Writable**, accepted values are positive integers less than `count`, and `-1` (nothing selected). Setting invalid values will be ignored.
 `current` | The currently selected `Collection`. If `index` is `-1`, its value is `null`, otherwise equivalent to `model[index]`. `current` as a field is read-only, but the `Collection` itself has writable fields; see below.
 
+Furthermore, it also has the following callable methods:
+
+Method | Description
+---|---
+`incrementIndex()` | Increments the `index` by one. If the `index` was pointing to the last item, it jumps to the first one (ie. wraps around).
+`decrementIndex()` | Decrements the `index` by one. If the `index` was pointing to the firs item, it jumps to the last one (ie. wraps around).
+`incrementIndexNoWrap()` | Increments the `index` by one, if it's not pointing to the last item already.
+`decrementIndexNoWrap()` | Decrements the `index` by one, if it's not pointing to the first item already.
+
 ## One Collection
 
-`api.currentCollection` can be used as a shortcut for `api.collections.current`. A `Collection` has the following data members. Properties marked as optional might have no value (eg. empty string or empty array).
+`api.currentCollection` can be used as a shortcut for `api.collections.current`. A `Collection` has the following data members. Properties marked as "optional" might have no value (eg. empty string or empty array).
 
 Property | Description
 ---|---
@@ -36,12 +45,21 @@ Property | Description
 `index` | The index of the currently selected item of `model` (not `modelAll`, since you can't select a game you've hide with a filter). **Writable**, accepted values are positive integers less than `count`, and `-1` (nothing selected). Setting invalid values will be ignored.
 `current` | The currently selected `Game`. If `index` is `-1`, its value is `null`, otherwise equivalent to `model[index]`.
 
+Furthermore, it also has the following callable methods:
+
+Method | Description
+---|---
+`incrementIndex()` | Increments the `index` by one. If the `index` was pointing to the last item, it jumps to the first one (ie. wraps around).
+`decrementIndex()` | Decrements the `index` by one. If the `index` was pointing to the firs item, it jumps to the last one (ie. wraps around).
+`incrementIndexNoWrap()` | Increments the `index` by one, if it's not pointing to the last item already.
+`decrementIndexNoWrap()` | Decrements the `index` by one, if it's not pointing to the first item already.
+
 !!! note
-    At the moment, the index resets to `0` or `-1` (no hits) when the `Filter` changes.
+    At the moment, the index resets to `0` or `-1` (no hits) when the `Filter` changes (see below).
 
 ## One Game
 
-`api.currentGame` can be used as a shortcut for `api.collections.current.games.current`. A `Game` is an Object with the following data members. Properties marked as optional might have no value (eg. empty string or empty array).
+`api.currentGame` can be used as a shortcut for `api.collections.current.games.current`. A `Game` is an Object with the following data members. Properties marked as "optional" might have no value (eg. empty string or empty array).
 
 Property | Description
 ---|---
@@ -75,15 +93,31 @@ Property | Description
 `boxBack` | The back of the game box
 `boxSpine` | The spine (side) of the game box
 `boxFull` | Full size box art (front + back + spine)
-`box` | Same as `boxFull`
-`cartridge` | Image of the cartridge, floppy, disk, etc.
-`logo` | The game's logo, usually the title on a transparent background
+`cartridge` | Image of the game medium (cartridge, floppy, disk, etc.)
+`logo` | The game's logo, usually the title art over a transparent background
+
+![box-related assets](img/assets-box.png)
+
+Property | Description
+---|---
 `marquee` | A wide (often over 3:1) artwork on the top of arcade machines
 `bezel` | Decoration around a game's screen on an arcade machine or emulator
-`flyer` | Advertisement poster
-`gridicon` | Steam grid icon, 460:215 ratio (most often 460x215, some people use 920x430)
+`panel` | Control panel of the arcade machine
+`cabinetLeft` | Left side of the arcade machine
+`cabinetRight` | Right side of the arcade machine
+
+![box-related assets](img/assets-arcade.png)
+
+Property | Description
+---|---
+`tile` | A square-sized image (*not* the desktop icon)
+`banner` | An image in 16:9 aspect ratio
+`steam` | Steam grid icon, 460:215 ratio (most often 460x215, some people use 920x430)
+`poster` | Advertisement poster, usually with 2:3 aspect ratio (in general a portrait-aligned image)
 `background` | A background image, eg. artwork or selected screenshot
 `music` | Background music
+
+![box-related assets](img/assets-ui.png)
 
 In addition, the following members can have multiple values, and as such usable as eg. `model` sources. All of them can be empty.
 

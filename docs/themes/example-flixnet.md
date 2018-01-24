@@ -1,8 +1,8 @@
+![preview](img/flixnet-result.png)
+
 # Step-by-step: Flixnet theme
 
-In this tutorial, we'll implement the following theme from scratch:
-
-![preview](img/flixnet-result.png)
+In this tutorial, we'll implement the theme above from scratch, inspired by the UI of a certain video streaming company. While the guide is intended to be beginner-friendly, this is a somewhat complex project, so you might want to be familiar with the QML basics and dynamic layout elements (see the [QML tutorials](qml-tutorials.md)).
 
 If we simplify it a bit, here's how its structure and navigation looks like:
 
@@ -10,12 +10,12 @@ If we simplify it a bit, here's how its structure and navigation looks like:
 
 As you can see, there are two main axes of motion:
 
-- a horizontal **game axis** for the currently selected collection
+- a horizontal **game axis** for each collection's games
 - a vertical **collection axis** for selecting a collection
 
-Each row can be individually scrolled, with the currently selected game being the top row's first (fully visible) item.
+Each row can be individually scrolled, and the currently selected game is the topmost row's first (fully visible) item. Furthermore, the rows themselves can also be scrolled vertically. This kind of layout makes the theme a bit complex, but other than these axes the rest of the theme seems to be simple enough.
 
-In QML terms, this structure means a list containing lists, which will make the layout somewhat complex (but not impossible to implement, of course). Let's get started!
+Let's get started!
 
 
 ## Initial files
@@ -48,24 +48,24 @@ Now I open Pegasus and select this theme on the Settings screen. I'll keep Pegas
 
 ## Initial layout
 
-Let's start with the hard part, the layout of the items on the bottom. This is a vertically scrollable list of horizontally scrollable lists, each containing boxes for the games. Because collections are what contain the games, I'll first start making the vertical axis that selects the collection, and then add the horizontal game selection after that. I'll write a rough initial structure first, as once you have the basic layout done, you can tweak the elements as much as you want.
+Let's start with the hard part, the layout on the bottom half. This is a vertically scrollable list of horizontally scrollable lists, each containing boxes for the games. Because collections are what contain the games, I'll first start making the vertical axis that selects the collection, and then add the horizontal game selection after that. I'll write a rough initial structure first, as once you have the basic layout done, you can tweak the elements as much as you want.
 
 ### Some planning
 
-The game selection layout should take the whole lower half of the screen. On a standard 16:9 screen I want to show 2 rows of games to appear, and incrementally more on screens with smaller aspect ratios. Using Pegasus' virtual coordinates, I can assume the screen's height is at least 720 (virtual) pixels high. Based on that,
+The game selection layout will take the whole lower half of the screen. On a standard 16:9 screen I want to show 2 rows of games to appear, and incrementally more on screens with smaller aspect ratios. Using Pegasus' virtual pixel values, I can design the theme for a screen with at least 720px height, and the values will scale appropriately for other resolutions. Based on that,
 
 - if the height of the list is half the screen's height, I'll have 360px at least
 - if I want to show two rows, one row's full height in the list will be 180px
 - I'll use 18px font size for the collection's name
 - to have some space around the text, I'll use 250% line height; that's 45px out of the 180px so far
 - I'm left with 135px height to use for the game boxes
-- the game boxes will have a 16:9 aspect ratio, so their width will be 240 (surprisingly an integer!)
+- the game boxes will have a 16:9 aspect ratio, so their width will be 240px
 
 Ok, let's start coding!
 
 ### Vertical axis
 
-The type we can use to lay out a variable amount of items with one of them being selected is `ListView`. I set it up so it takes the whole lower half of the screen:
+A simple type for laying out a variable amount of items with one of them being selected is `ListView`. I set it up so it takes the whole lower half of the screen:
 
 ```qml
 import QtQuick 2.0
@@ -84,7 +84,7 @@ FocusScope {
 }
 ```
 
-One element of this collection axis will have 180px height and the width is the whole width of the screen. I'll create a placeholder for now and add a fake model (a series of numbers) for testing (so you can see that they indeed come in order and the ListView has the correct amount of items):
+One element of this collection axis will have 180px height and the width is the whole width of the screen. I'll create a placeholder for now and add a fake `model` (a series of numbers) for testing (so you can see that they indeed come in order, and the ListView has the correct amount of items):
 
 ```qml hl_lines="13 14"
 import QtQuick 2.0
@@ -114,14 +114,14 @@ FocusScope {
 If you now refresh Pegasus, you'll see the lower half of the screen turned blue. Yay!
 
 !!! hint "vpx"
-    The function `vpx` is what you can use for virtual pixel values. It scales the virtual pixel value you set as an input to the physical screen coordinates as an output.
+    The function `vpx` is what you can use for virtual pixel values. It scales up or down the pixel value you put into it depending on the actual screen resolution.
 
 !!! note
     The visual element of a list is called *delegate*. For every data item of the `model` (in this case, for every number between 0 and 9), a delegate will be created.
 
 The code looks good so far, I'll just make a small change: the delegate will likely get more complex later, so to make it easier to read, I'll move it out into a separate `Component`:
 
-```qml hl_lines="14"
+```qml hl_lines="14 18"
 import QtQuick 2.0
 
 FocusScope {
@@ -153,7 +153,7 @@ FocusScope {
 ```
 
 !!! tip
-    `Component` is a special element that defines a QML document. Actually, you could even move the `Rectangle` to a new file (eg. `HorizontalAxis.qml`) and use the file's name to set the delegate (eg. `:::qml delegate: HorizontalAxis {}`).
+    `Component` is a special element that defines a QML document. Actually, you could even move the `Rectangle` to a new file (eg. `CollectionAxisDelegate.qml`) and use the file's name to set the delegate (eg. `:::qml delegate: CollectionAxisDelegate { }`).
 
 ### Horizontal axis
 
@@ -296,7 +296,7 @@ And here's how it should look so far:
 
 ![screenshot](img/flixnet_initial-layout.png)
 
-Not the most beautiful yet, however with this **we are done with the main layout**! From now we'll just have tweak these lists and delegates, then add some simple components for the metadata.
+Not the most beautiful yet, however with this we're done with the basics of the main layout. From now on we'll just have tweak these lists and delegates, then add some simple components for the metadata.
 
 
 ## The code so far #1
@@ -377,7 +377,7 @@ Here's the whole code so far (without comments to save space):
 
 ## Navigation
 
-You might have noticed that you can drag and scroll the components with the mouse, but keyboard or gamepad input doesn't work yet. Let's fix this.
+You might have noticed that the components react already to mouse drag or scroll, but keyboard and gamepad input doesn't work yet. Let's fix this.
 
 ### Vertical scroll
 
@@ -393,7 +393,7 @@ ListView {
 }
 ```
 
-You can now scroll the bars with ++up++ and ++down++, but... it's kind of wonky right now. What we want is the items to "snap" to their place, to scroll to the next item when we press a button. This can be fixed with `snapMode` and `highlightRangeMode`: setting `snapMode` keeps the elements organized when scrolling the list as a whole, while `highlightRangeMode` will make sure the selection follows the scrolling (that is, when you press ++up++ or ++down++, you actually select the next or previous element, not just view a different part of the list).
+You can now scroll the bars with ++up++ and ++down++, but... it's kind of weird right now. It'd be better for the items to "snap" to their place, to scroll to the next item when we press a button. This can be fixed with the `snapMode` and `highlightRangeMode` properties: setting `snapMode` keeps the elements organized when scrolling the list as a whole, while `highlightRangeMode` will make sure the selection follows the scrolling (that is, when you press ++up++ or ++down++, you actually select the next or previous element, not just view a different part of the list).
 
 ```qml
 ListView {
@@ -699,7 +699,7 @@ Component {
 }
 ```
 
-Just like with the vertical axis, we'll use `incrementCurrentIndex()` and `decrementCurrentIndex()` again. Currently we access the horizontal ListView of the collection delegate via an `alias` property, and call the ListView's `incrementCurrentIndex()` and `decrementCurrentIndex()` methods by `Keys.onLeftPressed` and `Keys.onRightPressed` of the collection axis. Instead, we should call the index changing functions of the API, of the Collection belonging to a delegate (ie. `modelData`).
+Just like with the vertical axis, I'll use `incrementIndex()` and `decrementIndex()` again. Currently we access the horizontal ListView of the collection delegate via an `alias` property, and call the ListView's `incrementCurrentIndex()` and `decrementCurrentIndex()` methods by `Keys.onLeftPressed` and `Keys.onRightPressed` of the collection axis. Instead, we should call the index changing functions of the API, of the Collection belonging to a delegate (ie. `modelData`).
 
 As usual, there are more than one way to do it, I'll show how you can use JavaScript functions this time. First, find the `property alias axis: gameAxis` line
 
@@ -718,7 +718,7 @@ Component {
 }
 ```
 
-and replace it with `next()` and `prev()` functions, with the increment/decrement methods of the API in their body:
+then delete and replace it with the `selectNext()` and `selectPrev()` functions, with the increment/decrement methods of the API in their body:
 
 ```qml
 Component {
@@ -816,7 +816,7 @@ ListView {
 ```
 
 !!! note
-    Careful not to confuse the `onReturnPressed` and `onEnterPressed` calls: technically `Return` is the key next to the letters, while `Enter` is the one at the numeric keypad.
+    Careful not to confuse the `onReturnPressed` and `onEnterPressed` calls: technically `Return` is the key next to the letters, while `Enter` is the one on the numeric keypad.
 
 !!! tip
     `onReturnPressed` is also triggered by pressing <img class="joybtn" src="../../img/A.png" title="A">/<img class="joybtn" src="../../img/Cross.png"  title="CROSS"> on the gamepad.
@@ -934,7 +934,7 @@ Next step, let's make it pretty.
 I'll now replace the green game boxes with something better to look at. There are two main cases we have to support:
 
 - if there is an available image for a game, the box should show that
-- if there is none, or the image has not loaded yet, the boy should show a gray rectangle, with the game's title in the center
+- if there is none, or the image has not loaded yet, the box should show a gray rectangle, with the game's title in the center
 
 So `gameAxisDelegate` is our game box that right now contains a green rectangle. I'll turn that into an Item, and, for the two cases above, I'll add an initial gray Rectangle and Image:
 
@@ -1146,7 +1146,7 @@ The horizontal scrolling works similarly, with one important difference: there i
 
 <video autoplay loop style="max-width:100%;display:block;margin:0 auto"><source src="../webm/flixnet_pathview2.webm" type="video/webm"></video>
 
-I've set the left margin previously to 100 px and the width of a game box to be 240x135. In addition, there's a 10px spacing between the elements, giving the full width of a box to 250. The center of the current-item would be at 100 + 250/2 = 225 on the path, but to make it align with the collection label, I'll shift it 5px (half of the spacing) to the left, making the X center to be 220px. Counting backwards, the previous-item will be at 220 - 250, and the one before that (the leftmost postion, where the new elements will appear when scrolling) at 220 - 250 * 2.
+I've set the left margin previously to 100 px and the width of a game box to be 240x135. In addition, there's a 10px spacing between the elements, giving the full width of a box to 250. The center of the current-item would be at 100 + 250/2 = 225 on the path, but to make it align with the collection label, I'll shift it 5px (half of the spacing) to the left, making the X center to be 220px. Then counting backwards, the previous-item will be at 220 - 250, and the one before that (the leftmost postion, where the new elements will appear when scrolling) at 220 - 250 * 2.
 
 All right, let's change the horizontal ListView into a PathView:
 
@@ -1218,7 +1218,7 @@ PathView {
 And now both the horizontal and vertical axis loops as intended!
 
 !!! tip
-    Typing out fixed values in pixels every time can be tedious and error prone. I'd recommend defining them as properties at the top of the file or object they're used in (eg. `property real boxHeight: vpx(135)`).
+    Typing out fixed values in pixels every time can be tedious and error prone. I'd recommend defining them as properties at the top of the object they're used in (eg. `property real boxHeight: vpx(135)`).
 
 
 ## The rest of the theme
@@ -1255,13 +1255,16 @@ Text {
 
 The rating will be displayed as a five-star bar, with some percentage of it colored according to the actual rating. This can be done with two simple, overlapping QML Images: draw five empty stars first, then over them, draw filled ones according to the rating. Kind of like a progress bar, except we're using stars for filling.
 
-First, I draw two image for the stars, an empty one and a filled. Both have square size and transparent background. I create a new directory (eg. `assets`) in my theme folder and put them there.
+But first of all, I actuatlly draw two images for the stars, an empty one and a filled. Both have square size and transparent background. I create a new directory (eg. `assets`) in my theme folder and put them there.
 
 star_empty.svg | star_filled.svg
 :---: | :----:
 <img src="../img/star_empty.svg" width="64" height="64"> | <img src="../img/star_filled.svg" width="64" height="64">
 
-Then I create the following Item. As the star image is a square, I make its width 5 times the height to hold the five stars horizontally. I make the empty-star Image fill this whole item, and set `fillMode: Image.TileHorizontally` to make the star repeat horizontally. For the filled-star image, I place it over the other one, and modify its width by the rating, provided as a number between `0.0` and `1.0` (0% and 100%).
+!!! tip
+    I've used Inkscape for drawing the vector art; it has a built-in tool for drawing stars and other polygons.
+
+Then I create the following Item. As the star image is a square, I make its width 5 times the height to hold the five stars horizontally. I make the empty-star Image fill this whole item, and set `fillMode: Image.TileHorizontally` to make the star repeat horizontally. For the filled-star image, I place it over the other one, and modify its width by the rating, which is provided as a number between `0.0` and `1.0` (0% and 100%).
 
 ```qml
 Item {
@@ -1310,7 +1313,7 @@ Item {
 !!! note
     Without `horizontalAlignment` the stars might not line up perfectly (the repeat will start from the center).
 
-When a game has no rating defined, `game.rating` is 0.0. Showing five empty stars for an otherwise good game might be a bit misleading, so I'll make the rating bar only appear when the `rating` is over 0%:
+When a game has no rating defined, `game.rating` is `0.0`. Showing five empty stars for an otherwise good game might be a bit misleading, so I'll make the rating bar only appear when the `rating` is over 0%:
 
 ```qml hl_lines="4"
 Item {
@@ -1504,6 +1507,9 @@ Image {
 
     An alternative solution could be is to use `screenshots` as a `model` in eg. a ListView, and the Image as delegate. You could then further extend it to periodically change the current visible screenshot.
 
+!!! tip
+    You can also use the `z` property of the components to set their relative "height".
+
 #### Gradients
 
 There are two linear gradients ("fade-ins"), one from the left and one from the bottom of the image. Such effect can be added just like regular components, can be positioned, sized, animated, etc. But first of all, to use gradients you'll need the `QtGraphicalEffects` QML module:
@@ -1570,7 +1576,7 @@ And we're done!
 
 ### Selection marker
 
-It's not easy on the example images, but actually there's a white rectangular border around the place where the current item is located in the first horizontal axis. It's position is fixed and does not move even during scrolling.
+Perhaps not easy to notice on the example images, but actually there's a white rectangular border around the current item's place on the topmost horizontal axis. It's position is fixed and does not move even during scrolling.
 
 I'll create an empty, border-only Rectangle for it. Since it's over everything else in the theme, I'll put it to the bottom of the whole file, after the `gameAxisDelegate`'s definition.
 
@@ -1591,8 +1597,6 @@ Rectangle {
 }
 ```
 
-!!! tip
-    You can also use the `z` property of the components to set their relative "height".
 
 ### Opacity
 

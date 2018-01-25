@@ -1622,7 +1622,7 @@ Component {
 ```
 
 
-## Conclusion
+## Done!
 
 With all these components added, it seems we're actually done! Here's the end result:
 

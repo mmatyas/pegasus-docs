@@ -54,9 +54,6 @@ Method | Description
 `incrementIndexNoWrap()` | Increments the `index` by one, if it's not pointing to the last item already.
 `decrementIndexNoWrap()` | Decrements the `index` by one, if it's not pointing to the first item already.
 
-!!! note
-    At the moment, the index resets to `0` or `-1` (no hits) when the `Filter` changes (see below).
-
 ## One Game
 
 `api.currentGame` can be used as a shortcut for `api.collections.current.games.current`. A `Game` is an Object with the following data members. Properties marked as "optional" might have no value (eg. empty string or empty array).
@@ -139,3 +136,19 @@ Property | Description
 `title` |  Match games whose titles contain this string. String value. (default: empty)
 `playerCount` |  Match games that have at least this many players. Positive integer. (default: 1)
 `favorite` |  Setting to true includes only games marked as favorite. Boolean (true/false) value. (default: false)
+
+!!! note
+    At the moment, the indices of the game lists reset to `0` or `-1` (no hits) when the `Filter` changes.
+
+## Fonts
+
+Pegasus comes with a sans-serif and a sans-serif condensed font face, which are used in the main menu. If you want to use the same font families in your theme, you can access them using a global QML object called `globalFonts`. This has the following properties:
+
+Property | Description
+---|---
+`sans` | The sans-serif font
+`condensed` | The sans-serif condensed font
+
+You can use them as the value for `font.family` members of Text items, eg. `font.family: globalFonts.sans`.
+
+The fonts currently in use are Roboto and Roboto Condensed.

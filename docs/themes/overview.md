@@ -6,7 +6,7 @@ Pegasus consists of two layers: the **core** which looks for your games and meta
 
 ![program structure](img/structure.png)
 
-Themes in Pegasus define the look and feel of the whole "content area". You can use same style for all platforms and games, or you can decide to change the UI dynamically (eg. based on the selected platform or the current time).
+Themes in Pegasus define the look and feel of the whole "content area". You can use same style for all platforms and games, or you can decide to change the UI dynamically (eg. based on the selected platform or even the current time).
 
 
 ## QML
@@ -110,7 +110,7 @@ Currently the following options are recognized:
 - `author`: the author of the theme; either simply a name or in "name <email>" format.
 - `summary`: a short (max. 80-100 characters) summary.
 - `description`: a longer description.
-- `keywords`: keywords used for searching. Separate words with `,`.
+- `keywords`: keywords used for searching. Separate them with '`,`'.
 - `homepage`: a link to you project's site.
 
 Every theme is required to have a `theme.cfg` file, with at least the `name` defined.
@@ -137,6 +137,22 @@ If you've created the `theme.cfg` and `theme.qml` files as described above, you 
 
 After the theme is loaded, pressing the ++f5++ key will make Pegasus reload its files, making it easier to try out changes.
 
+??? tip "Hello World!"
+    Here's a simple "Hello World" test theme:
+
+        :::qml
+        import QtQuick 2.0
+
+        FocusScope {
+
+            Text {
+                text: "Hello World!"
+                color: "white"
+                anchors.centerIn: parent
+            }
+
+        }
+
 ## Special QML properties
 
 Pegasus' themes are standard QML files, and you can use any QML tutorial (collection [here](qml-tutorials.md)) to learn it. Pegasus itself provides the following additions:
@@ -148,11 +164,11 @@ Pegasus' themes are standard QML files, and you can use any QML tutorial (collec
 
 When you load a theme, its main component (the `FocusScope` above) will be set to fill the whole screen. The top left corner of the screen is (0,0), with the X axis growing right and the Y axis growing downwards.
 
-When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally in QML this isn't hard because you can tell the position and size of elements compared to others using *anchors* (eg. set an element's corner or side to have at the same place as another element's corner or side -- see the [QML tutorials](qml-tutorials.md) (positioning/anchoring)).
+When positioning elements on the screen, you should make sure that your theme works well with multiple aspect ratios and screen resolutions. Generally in QML this isn't hard because you can tell the position and size of elements compared to others using *anchors* (eg. align an element right next to another -- see the [QML tutorials](qml-tutorials.md)).
 
 When you *do* have to position or size things manually, it is common to use percentages, but Pegasus also provides a **virtual coordinate system**. You can treat the screen as one with the resolution of at least **1280x720** virtual pixels (16:9 aspect ratio), and use integer pixel values, which will then scale to the correct physical value according to the screen's real resolution. If the screen's aspect ratio is smaller than this (eg. 4:3), then the *virtual* screen will be taller than 720 virtual pixels, but still have 1280 as a fixed width. If the aspect ratio is wider (eg. 21:9), then the virtual height will remain to be 720, but the width will be bigger. This system can be useful when you want to express precise details in pixels, like width/height, spacing, text sizes, etc.
 
-To use virtual pixel values, simply put your namber inside a function called `vpx`. For example, instead of
+To use virtual pixel values, simply put your number inside a function called `vpx`. For example, instead of
 
 ```qml
 width: 50
@@ -166,7 +182,7 @@ width: vpx(50)
 
 Using virtual pixel values is optional, but often more intuitive than percentages with several digits of precision. Depending on your situations, you might prefer one over the other, or use both of them. Feel free to experiment!
 
-!!! important
+!!! tip
     Using the virtual coordinate system does **not** decrease image quality.
 
 ### Game data

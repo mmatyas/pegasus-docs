@@ -66,3 +66,8 @@ You can also find a bunch of official documentations here:
 - https://doc.qt.io/qt-5/qtquick-qmlmodule.html
 
 This one is a bit old, but might be good for learning the concepts: https://doc.qt.io/archives/qt-4.8/qtquick.html.
+
+
+## Visual editor
+
+Qt Creator has a drag-and-drop QML editor (the Design tab). Unfortunately I couldn't use it because of crashes, but you might have better luck with it.

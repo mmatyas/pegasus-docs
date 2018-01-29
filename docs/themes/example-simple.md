@@ -139,3 +139,121 @@ Some interesting things here:
 - `api` is a globally accessible object through which you can access every game and collection data. Its contents are described on the [API reference](api.md) page.
 - `source` is the concatenation of three strings, `tag` being the unique identifier for a collection (eg. `nes`, `gba`, ...).
 - `asynchronous` will load the image in the background. By default (`false`), the program will wait until the Image is fully loaded, but during this time it cannot respond to user input. Since images may take a long time to load depending on the device, asynchronous loading is preferred in most cases.
+
+### Changing collections
+
+Pressing left or right feels kind of natural to use for selecting the next/previous collection. The CollectionList item of the API provides the functions called `incrementIndex()` and `decrementIndex()`, which we call for this.
+
+I'll handle of the ++left++ and ++right++ keys the top of the whole FocusScope, and simply call these two functions:
+
+```qml hl_lines="5 6"
+import QtQuick 2.0
+
+FocusScope {
+
+    Keys.onLeftPressed: api.collections.decrementIndex()
+    Keys.onRightPressed: api.collections.incrementIndex()
+
+
+    Rectangle {
+        // ...
+    }
+
+    Rectangle {
+        // ...
+    }
+}
+```
+
+After a refresh, pressing ++left++ and ++right++ should now change the logo on the screen. Yay!
+
+!!! note
+    Assuming you have more than one collection, of course.
+
+### Game list
+
+This is going to be actually the most complex piece of the theme. The games for the currently selected collection can be accessed via `api.currentCollection.games`, with `games.model` being the list of games, `games.current` the currently selected game (also available as `api.currentGame`) and `games.index` the index of the selected element. The index can be set manually to a number, or changed by the increment/decrement functions, similarly to the collections.
+
+Returning to the `menu` Rectangle, I add a ListView after the logo, first setting just the dimensions:
+
+```qml
+Rectangle {
+    id: menu
+
+    // ...
+
+    Image { /* ... */ }
+
+
+    ListView {
+        id: gameView
+
+        width: parent.contentWidth
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: collectionLogo.bottom
+        anchors.bottom: parent.bottom
+        anchors.margins: vpx(50)
+    }
+}
+```
+
+Now to actually see something, ListView needs a Model: a list of items, and a Delegate: the definition of how one item should look like on the screen.
+
+Our model will be the games of the currently selected collection, and for every game, the visual representation will be a text item:
+
+```qml
+ListView {
+    id: gameView
+
+    model: api.currentCollection.games.model
+    delegate: Text {
+        text: modelData.title
+    }
+
+    // anchors, etc.
+}
+```
+
+You should now see the list of games, changing with the selected collection on pressing ++left++/++right++.
+
+I'll do two quick reorganization in the code:
+
+- typing `api.currentCollection.games.<something>` every time is a bit long, so I create a property as a shortcut
+- I move the Delegate definition to a separate object to make the code cleaner
+
+```qml hl_lines="12 15 25"
+Rectangle {
+    id: menu
+
+    // ...
+
+    Image { /* ... */ }
+
+
+    ListView {
+        id: gameView
+
+        property var gameList: api.currentCollection.games
+
+        model: gameList.model
+        delegate: gameViewDelegate
+
+        width: parent.contentWidth
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: collectionLogo.bottom
+        anchors.bottom: parent.bottom
+        anchors.margins: vpx(50)
+    }
+
+    Component {
+        id: gameViewDelegate
+
+        Text {
+            text: modelData.title
+        }
+    }
+}
+```
+
+!!! tip
+    Component is a special element that defines a QML document. Just as QML files can have only one root element, Components can have only one child. You could actually move the `Text` to a separate file (eg. `GameListItem.qml`) and use the file's name to set the delegate (eg. `delegate: GameListItem { }`).

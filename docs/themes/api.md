@@ -1,5 +1,9 @@
 # API reference (alpha)
 
+Games found by Pegasus are organized in collections. Games can have metadata and various kinds of assets, and one game may be present in multiple collections.
+
+Collections, as well as their games are available as lists (the Model), of which one element is selected by a modifyable index number. How the provided data is displayed is completely up to the theme.
+
 All data provided by the Core is available in a global QML object called `api`. It has the following main components. Unless otherwise noted, all fields are read-only.
 
 ## List of Collections

@@ -170,6 +170,9 @@ After a refresh, pressing ++left++ and ++right++ should now change the logo on t
 !!! note
     Assuming you have more than one collection, of course.
 
+!!! tip
+    Handling keyboard keys also enables gamepad navigation. See the [controls](../../user-guide/controls) page about how keys and buttons are related.
+
 ### Game list
 
 This is going to be actually the most complex piece of the theme. The games for the currently selected collection can be accessed via `api.currentCollection.games`, with `games.model` being the list of games, `games.current` the currently selected game (also available as `api.currentGame`) and `games.index` the index of the selected element. The index can be set manually to a number, or changed by the increment/decrement functions, similarly to the collections.
@@ -216,6 +219,9 @@ ListView {
 
 You should now see the list of games, changing with the selected collection on pressing ++left++/++right++.
 
+!!! note
+    `games.model` is a list of Game objects. `modelData` in the delegate will be one Game object of the Model.
+
 I'll do two quick reorganization in the code:
 
 - typing `api.currentCollection.games.<something>` every time is a bit long, so I create a property as a shortcut
@@ -257,3 +263,253 @@ Rectangle {
 
 !!! tip
     Component is a special element that defines a QML document. Just as QML files can have only one root element, Components can have only one child. You could actually move the `Text` to a separate file (eg. `GameListItem.qml`) and use the file's name to set the delegate (eg. `delegate: GameListItem { }`).
+
+Let's continue with tweaking the menu items:
+
+```qml
+Component {
+    id: gameViewDelegate
+
+    Text {
+        text: modelData.title
+
+        // white, 20px, condensed font
+        color: "white"
+        font.family: globalFonts.condensed
+        font.pixelSize: vpx(20)
+
+        // the size of the whole text box,
+        // a bit taller than the text size for a nice padding
+        width: ListView.view.width
+        height: vpx(36)
+        // align the text vertically in the middle of the text area
+        verticalAlignment: Text.AlignVCenter
+        // if the text is too long, end it with ellipsis (three dots)
+        elide: Text.ElideRight
+    }
+}
+```
+
+This is how it should look like:
+
+![screenshot](img/simple_left-menu-1.png)
+
+To see which one of the menu items is the selected one, I'll change its color and make it bigger and bold:
+
+```qml hl_lines="8 11 13"
+Component {
+    id: gameViewDelegate
+
+    Text {
+        text: modelData.title
+
+        // orange if this item is the currently selected one, white otherwise
+        color: ListView.isCurrentItem ? "orange" : "white"
+        font.family: globalFonts.condensed
+        // bigger if selected
+        font.pixelSize: ListView.isCurrentItem ? vpx(24) : vpx(20)
+        // bold if selected (hint: isCurrentItem is already a true/false value)
+        font.bold: ListView.isCurrentItem
+
+        width: ListView.view.width
+        height: vpx(36)
+        verticalAlignment: Text.AlignVCenter
+        elide: Text.ElideRight
+    }
+}
+```
+
+!!! tip
+    When setting values, the `X ? A : B` form is called "inline-if": if the condition `X` is true, `A` will be used, otherwise `B`. In our case, it would equal to the following JavaScript code:
+
+        :::js
+        if (ListView.isCurrentItem)
+            return "orange"
+        else
+            return "white"
+
+    (which you can also use, if you wish).
+
+### Game selection
+
+You should now see one item being highlighted on the list. Now, to make the game selection work, we have to do two thing:
+
+- make the ListView's index track the current game list's index
+- change the game list index on pressing ++up++ or ++down++
+
+To update the list when the index in the API changes, bind `gameList.index` to the ListView's `currentIndex`:
+
+```qml hl_lines="8"
+ListView {
+    id: gameView
+
+    property var gameList: api.currentCollection.games
+
+    model: gameList.model
+    delegate: gameViewDelegate
+    currentItem: gameList.index
+
+    width: parent.contentWidth
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: collectionLogo.bottom
+    anchors.bottom: parent.bottom
+    anchors.margins: vpx(50)
+}
+```
+
+While for the user input, call the index increment/decrement function of the current game list, like we did with the collection changing. At the top of our file:
+
+```qml hl_lines="7 8"
+import QtQuick 2.0
+
+FocusScope {
+
+    Keys.onLeftPressed: api.collections.decrementIndex()
+    Keys.onRightPressed: api.collections.incrementIndex()
+    Keys.onUpPressed: api.currentCollection.games.decrementIndexNoWrap()
+    Keys.onDownPressed: api.currentCollection.games.incrementIndexNoWrap()
+
+
+    Rectangle {
+        // ...
+    }
+
+    Rectangle {
+        // ...
+    }
+}
+```
+
+!!! tip
+    There's a wrapping and a non-wrapping variant of the index changing functions. Use whichever is maching for your themes.
+
+!!! tip
+    Of course, you can put the key handling somewhere else, I've merely found it convenient there. Just make sure the item in which you put it has the active focus (eg. has `focus: true`).
+
+The list should now scroll around with a visible highlight for the current selection.
+
+### Launching games
+
+The last feature required to make our theme functional is launching games. Game objects from the API have a `launch()` command you can call -- in the most common case, all you need to do is calling `api.currentGame.launch()`.
+
+Simply call it on ++enter++:
+
+```qml hl_lines="9"
+import QtQuick 2.0
+
+FocusScope {
+
+    Keys.onLeftPressed: api.collections.decrementIndex()
+    Keys.onRightPressed: api.collections.incrementIndex()
+    Keys.onUpPressed: api.currentCollection.games.decrementIndexNoWrap()
+    Keys.onDownPressed: api.currentCollection.games.incrementIndexNoWrap()
+    Keys.onReturnPressed: api.currentGame.launch()
+
+
+    Rectangle {
+        // ...
+    }
+
+    Rectangle {
+        // ...
+    }
+}
+```
+
+!!! note
+    Technically the ++enter++ next to the letter keys is called "Return", and the one on the numeric pad is "Enter". Careful not to mix them up.
+
+And with this, we have a functional theme!
+
+### Tweaks
+
+Some additional (and optional) graphical tweaks to try out for extra fancyness.
+
+#### Clipping
+
+While scrolling, you might have noticed that items at the top and the bottom of the list seem to go out of the bounds of the ListView's area. Delegates are fully drawn on the screen if they are at least partially visible; to make sure nothing shows up outside the ListView's area, you can use the `clip` property:
+
+```qml hl_lines="16"
+ListView {
+    id: gameView
+
+    property var gameList: api.currentCollection.games
+
+    model: gameList.model
+    delegate: gameViewDelegate
+    currentItem: gameList.index
+
+    width: parent.contentWidth
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: collectionLogo.bottom
+    anchors.bottom: parent.bottom
+    anchors.margins: vpx(50)
+
+    clip: true
+}
+```
+
+Now the ListView will cut the drawing at its borders.
+
+#### Centering the current item
+
+It'd be nice if the currently selected item would try to stay in the middle of the list:
+
+<video autoplay loop style="max-width:100%;display:block;margin:0 auto"><source src="../webm/simple_hlrange.webm" type="video/webm"></video>
+
+We can set this by defining the "highlight range"; the ListView will then try to scroll the list so the currently selected item falls into this range.
+
+The highlight range is defined by the start and end position. For our vertical ListView, these are the distances from the top edge of the item, in pixels. We can get the vertical center of the ListView simply as `height / 2`, and the height of one Text item was set to 36px previously. To position it exactly in the middle, I'll set the start of the range 18px above the center, and end it 18px below.
+
+```qml hl_lines="10 11 12"
+ListView {
+    id: gameView
+
+    property var gameList: api.currentCollection.games
+
+    model: gameList.model
+    delegate: gameViewDelegate
+    currentItem: gameList.index
+
+    highlightRangeMode: ListView.ApplyRange
+    preferredHighlightBegin: height * 0.5 - vpx(18)
+    preferredHighlightEnd: height * 0.5 + vpx(18)
+
+    width: parent.contentWidth
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: collectionLogo.bottom
+    anchors.bottom: parent.bottom
+    anchors.margins: vpx(50)
+
+    clip: true
+}
+```
+
+which should give the desired result.
+
+However, when you change the collection, there is a few seconds of scrolling to the index of the newly selected game list. To disable this, and jump to the selected item instantly, set animation duration to zero:
+
+```qml hl_lines="11"
+ListView {
+    id: gameView
+
+    property var gameList: api.currentCollection.games
+
+    model: gameList.model
+    delegate: gameViewDelegate
+    currentItem: gameList.index
+
+    highlightRangeMode: ListView.ApplyRange
+    highlightMoveDuration: 0
+    preferredHighlightBegin: height * 0.5 - vpx(18)
+    preferredHighlightEnd: height * 0.5 + vpx(18)
+
+    width: parent.contentWidth
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: collectionLogo.bottom
+    anchors.bottom: parent.bottom
+    anchors.margins: vpx(50)
+
+    clip: true
+}
+```

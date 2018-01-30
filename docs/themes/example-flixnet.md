@@ -413,6 +413,8 @@ There, much better now.
 !!! tip
     Setting up the keyboard input also makes gamepads work. Check the [Controls](../../user-guide/controls) page to see how are they related.
 
+
+TODO
 For some reason, I also see one extra row on the screen when I start scrolling down; not sure if that's a bug or a feature, but to make sure only the rows in the lower half of the screen are visible, I set `clip` on the `ListView`:
 
 ```qml hl_lines="8"

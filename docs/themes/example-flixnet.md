@@ -113,10 +113,10 @@ FocusScope {
 
 If you now refresh Pegasus, you'll see the lower half of the screen turned blue. Yay!
 
-!!! hint "vpx"
+!!! help "vpx"
     The function `vpx` is what you can use for virtual pixel values. It scales up or down the pixel value you put into it depending on the actual screen resolution.
 
-!!! note
+!!! help "delegate"
     The visual element of a list is called *delegate*. For every data item of the `model` (in this case, for every number between 0 and 9), a delegate will be created.
 
 The code looks good so far, I'll just make a small change: the delegate will likely get more complex later, so to make it easier to read, I'll move it out into a separate `Component`:
@@ -554,7 +554,7 @@ ListView {
 }
 ```
 
-!!! tip
+!!! help
     `preferredHighlightBegin` and `preferredHighlightEnd` almost always come in pair, and `End` must be greater or equal than `Begin` to have their effect applied.
 
 We also need to move the collection label too. As it's just a regular Text element, I'll simply set its left anchor and a margin on it:
@@ -627,7 +627,7 @@ ListView {
 
     `:::qml onCurrentIndexChanged: api.collections.index = currentIndex`
 
-!!! tip
+!!! help
     `incrementIndex()` and `decrementIndex()` wraps around (incrementing the index at the last item will make it jump to the first one). If you don't want them to wrap, you can use `incrementIndexNoWrap()` and `decrementIndexNoWrap()` instead.
 
 Previously the `model` was set to `10`, and so the `modelData` available in the delegates was a number between 0 and 9. With `model` set to `api.collections.model`, the `modelData` will be a `Collection` object.
@@ -789,7 +789,7 @@ Component {
 }
 ```
 
-!!! note
+!!! help
     The `model` of the *vertical* ListView was a list of `Collection`s, so the `modelData` received by a delegate of that ListView (one whole horizontal row) is one `Collection` object.
 
     The `model` of these *horizontal* ListViews is a list of `Game`s, so a delegate of the horizontal ListViews will see a `Game` in its `modelData`.
@@ -817,10 +817,10 @@ ListView {
 }
 ```
 
-!!! note
+!!! help
     Careful not to confuse the `onReturnPressed` and `onEnterPressed` calls: technically `Return` is the key next to the letters, while `Enter` is the one on the numeric keypad.
 
-!!! tip
+!!! note
     `onReturnPressed` is also triggered by pressing <img class="joybtn" src="../../img/A.png" title="A">/<img class="joybtn" src="../../img/Cross.png"  title="CROSS"> on the gamepad.
 
 And with this, technically our theme is fully functional!
@@ -1504,7 +1504,7 @@ Image {
 !!! note
     Using negative margins kind of feels like a hack though, so depending on the situation you might prefer to use simple width/height properties.
 
-!!! note
+!!! help
     The screenshots are stored under `assets.screenshots`, which is a regular JavaScript `Array`. If it's empty, `screenshots[0]` will be `undefined`, and setting an `undefined` value as the `source` of an Image will produce a warning in the log. Setting it to an empty string, however, will not, so appending `|| ""` as a fallback will silence the warning.
 
     An alternative solution could be is to use `screenshots` as a `model` in eg. a ListView, and the Image as delegate. You could then further extend it to periodically change the current visible screenshot.

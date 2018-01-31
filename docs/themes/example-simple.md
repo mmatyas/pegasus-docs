@@ -69,7 +69,7 @@ FocusScope {
 }
 ```
 
-!!! tip
+!!! help
     Using anchors you can define the position and size of elements relative to each other; see [anchoring](qml-tutorials.md).
 
 If you now refresh Pegasus, you'll now see that the screen has been divided between the two shades of gray. You can also see the width of the left panel changing automatically when you resize the application's window.
@@ -319,7 +319,7 @@ Component {
 }
 ```
 
-!!! tip
+!!! help
     When setting values, the `X ? A : B` form is called "inline-if": if the condition `X` is true, `A` will be used, otherwise `B`. In our case, it would equal to the following JavaScript code:
 
         :::js
@@ -383,7 +383,7 @@ FocusScope {
 !!! tip
     There's a wrapping and a non-wrapping variant of the index changing functions. Use whichever is maching for your themes.
 
-!!! tip
+!!! note
     Of course, you can put the key handling somewhere else, I've merely found it convenient there. Just make sure the item in which you put it has the active focus (eg. has `focus: true`).
 
 The list should now scroll around with a visible highlight for the current selection.
@@ -416,7 +416,7 @@ FocusScope {
 }
 ```
 
-!!! note
+!!! help
     Technically the ++enter++ next to the letter keys is called "Return", and the one on the numeric pad is "Enter". Careful not to mix them up.
 
 And with this, we have a functional theme!
@@ -563,7 +563,7 @@ Rectangle {
 
 Box art images might be quite big in resolution, so this time I've also set `sourceSize`: it limits the maximum amount of memory the image will take up. If the image is largen than this, it will be scaled down, keeping the aspect ratio. In this particular case, I've set it to scale down to 1024 &times; 1024 pixels (taking up about/at most 1024 &times; 1024 &times; 3 bytes = 3 MiB space in the memory).
 
-!!! tip "Column and Row"
+!!! note "Column and Row"
     The QML Column and Row object are great tools for aligning a fixed number of elements. In this case, the box art and the further Text items could be put into a Column that would `anchors.fill` its parent with a 50px `anchors.margin`, so I wouldn't have to define it for the Image itself and the other Texts.
 
     So why I didn't use it? Column and Row works the best when the spacing between the elements is the same, but in this theme, I'd like to set some custom spacing between the elements later.

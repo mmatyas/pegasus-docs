@@ -15,7 +15,7 @@ Pegasus supports most languages in use today, and you can easily add new transla
 
 ## File format and name
 
-The translation files are text files in XML format, encoded in UTF-8. Their file name includes the [*BCP47 language tag*](https://en.wikipedia.org/wiki/IETF_language_tag#Syntax_of_language_tags) of the locale the they're made for. Usually, this means the following structure:
+The translation files are text files in XML format, encoded in UTF-8. Their file name includes the [*BCP47 language tag*](https://en.wikipedia.org/wiki/IETF_language_tag#Syntax_of_language_tags) of the locale the they're made for. Usually this means the following structure:
 
 ```
 pegasus_[language][-script][-country].ts

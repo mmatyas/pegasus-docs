@@ -19,10 +19,11 @@ These provide an introduction to the language. After reading them, you should be
 - [QML ebook chapter 4](https://qmlbook.github.io/en/ch04/index.html)
 - [Wikipedia](https://en.wikipedia.org/wiki/QML)
 - [QML official tutorial](https://doc.qt.io/qt-5/qml-tutorial.html)
+- [basic types](https://doc.qt.io/qt-5/qtqml-typesystem-basictypes.html#basic-types-provided-by-the-qml-language)
 
 ## Dynamic layout
 
-A theme should be able to show the list of games and collections. An array of data objects is what QML calls "Model". You can fully customize how one item should look like on the screen (the "Delegate"), and how the items of the model should be aligned (the "View").
+A theme should be able to show the list of games and collections. An array of data objects is what QML calls "Model". You can fully customize how one item should look like on the screen (the "Delegate"), and how all these items should be aligned/layed out (the "View").
 
 The standard layouts are:
 
@@ -37,7 +38,7 @@ The standard layouts are:
 
 ## States, transitions, animations
 
-You might want to create a theme that consists of multiple states, eg. a platform select screen and an actual game list. Or perhaps simply move an object around in a fancy way. A State object can be used to set properties of one or more objects at once. The transition between two states can be animated. Animations can also be created for individual properties, or played stand-alone.
+You might want to create a theme that consists of multiple states, eg. a platform select screen and an actual game list. Or perhaps you want to simply move an object around in multiple steps or toggle some effects. A State object can be used to set properties of one or more objects at once. The transition between two states can be animated. Animations can also be created for individual properties, or played stand-alone.
 
 **Resources:**
 
@@ -45,7 +46,7 @@ You might want to create a theme that consists of multiple states, eg. a platfor
 
 ## Media playback
 
-You can write a complete media player in QML. The third-party documentation might be a bit outdated, so you might want to ceck the official reference too. The most common components are Video, Audio and Playlist.
+You can write a complete media player in QML. The third-party documentation is a bit outdated, so you might want to check the official references too. The most common components are Video, Audio and Playlist.
 
 **Resources:**
 
@@ -55,7 +56,15 @@ You can write a complete media player in QML. The third-party documentation migh
 
 ## Further resources
 
-The unofficial QML book is quite good: https://qmlbook.github.io/index.html
+The elements so far are what you'd commonly use in a theme, however there are still lots of features not covered here, including:
+
+- touch control and sensors (eg. gyroscope)
+- manual 2D drawing canvas
+- particles and graphical effects (shadow, gradient, blur, ...)
+- 3D scenes
+- custom shader code
+
+For further learning, the unofficial QML book might come handy: https://qmlbook.github.io/index.html
 
 You can also find a bunch of official documentations here:
 

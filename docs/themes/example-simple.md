@@ -600,11 +600,11 @@ Rectangle {
         elide: Text.ElideRight
 
         // 40px below the box art
-        anchors.top: boxart.bottom
+        anchors.top: cover.bottom
         anchors.topMargin: vpx(40)
         // left and right edges same as the image
-        anchors.left: boxart.left
-        anchors.right: boxart.right
+        anchors.left: cover.left
+        anchors.right: cover.right
     }
 }
 ```
@@ -814,10 +814,10 @@ Sure, perhaps not the most attractive yet, but I hope it helped learning theme c
                     horizontalAlignment: Text.AlignRight
                     elide: Text.ElideRight
 
-                    anchors.top: boxart.bottom
+                    anchors.top: cover.bottom
                     anchors.topMargin: vpx(40)
-                    anchors.left: boxart.left
-                    anchors.right: boxart.right
+                    anchors.left: cover.left
+                    anchors.right: cover.right
                 }
 
                 Row {

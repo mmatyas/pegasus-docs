@@ -17,7 +17,7 @@ Now you have the Qt libraries and the Qt Creator IDE installed.
     On **Windows** you can choose between MinGW and MSVC compiler packages. If you're planning to edit the source code and you want to use Visual Studio, you can select the matching MSVC component instead of MinGW.
 
 !!! warning "Embedded"
-    These instructions are for **desktop** platforms. For embedded devices, you have to compile Qt manually, or use the prebuilt libraries available on Pegasus' GitHub page. See [TODO].
+    These instructions are for **desktop** platforms. For embedded devices, you have to compile Qt manually, or use the prebuilt libraries available on Pegasus' GitHub page. See [Cross compile Qt](cross-compile-qt.md).
 
 
 # Alternative installations

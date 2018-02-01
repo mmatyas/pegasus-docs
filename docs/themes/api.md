@@ -6,7 +6,7 @@ All data provided by the Core is available in a global QML object called `api`. 
 
 ## List of Collections
 
-The list of collections can be accessed trough `api.collections`. It's an Object with the following members:
+The list of collections can be accessed trough `api.collectionList`. It's an Object with the following members:
 
 Property | Description
 ---|---
@@ -26,17 +26,17 @@ Method | Description
 
 ## One Collection
 
-`api.currentCollection` can be used as a shortcut for `api.collections.current`. A `Collection` has the following data members. Properties marked as "optional" might have no value (eg. empty string or empty array).
+`api.currentCollection` can be used as a shortcut for `api.collectionList.current`. A `Collection` has the following data members. Properties marked as "optional" might have no value (eg. empty string or empty array).
 
 Property | Description
 ---|---
 `tag` | A short, unique string for identifying a collection, for example `nes`, `mario carts`, etc.
 `name` | <span class="optional"></span> The proper name of the collection, eg. "Nintendo Entertainment System", "Mario Cartridges", etc.
-`games` | Object storing the list of games (see below).
+`gameList` | Object storing the list of games (see below).
 
 ## List of Games
 
-Similarly to the list of collections, `api.currentCollection.games` is an Object with the following members:
+Similarly to the list of collections, `api.currentCollection.gameList` is an Object with the following members:
 
 Property | Description
 ---|---
@@ -58,7 +58,7 @@ Method | Description
 
 ## One Game
 
-`api.currentGame` can be used as a shortcut for `api.collections.current.games.current`. A `Game` is an Object with the following data members. Properties marked as "optional" might have no value (eg. empty string or empty array).
+`api.currentGame` can be used as a shortcut for `api.collectionList.current.gameList.current`. A `Game` is an Object with the following data members. Properties marked as "optional" might have no value (eg. empty string or empty array).
 
 Property | Description
 ---|---
@@ -127,7 +127,7 @@ Property | Description
 
 ## Launching games
 
-You can select a game by changing `api.collections.index` and `api.currentCollection.games.index`. Then call `api.launchGame` to start the game.
+You can select a game by changing `api.collectionList.index` and `api.currentCollection.gameList.index`. Then call `api.launchGame` to start the game.
 
 ## Filtering games
 

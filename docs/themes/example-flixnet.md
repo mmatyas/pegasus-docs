@@ -591,7 +591,7 @@ Component {
 
 ## Using API data
 
-Finally, the time has come to replace the placeholder elements with actual content. Let's start by using the real collection data. According to the [API reference](api.md), collections can be accessed and selected through `api.collections`: we can use `api.collections.model` as the `model` of a ListView (or any other View) and `index` as the `currentIndex` of it. We can then call `increaseIndex()` and `decreaseIndex()` to move to the next and previous items (or by setting the `index` manually).
+Finally, the time has come to replace the placeholder elements with actual content. Let's start by using the real collection data. According to the [API reference](api.md), collections can be accessed and selected through `api.collectionList`: we can use `api.collectionList.model` as the `model` of a ListView (or any other View) and `index` as the `currentIndex` of it. We can then call `increaseIndex()` and `decreaseIndex()` to move to the next and previous items (or by setting the `index` manually).
 
 ### Vertical axis
 
@@ -603,32 +603,32 @@ ListView {
 
     // ...
 
-    model: api.collections.model
-    currentIndex: api.collections.index
+    model: api.collectionList.model
+    currentIndex: api.collectionList.index
     delegate: collectionAxisDelegate
 
     // ...
 
     focus: true
-    Keys.onUpPressed: api.collections.decrementIndex()
-    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onUpPressed: api.collectionList.decrementIndex()
+    Keys.onDownPressed: api.collectionList.incrementIndex()
     Keys.onLeftPressed: currentItem.axis.decrementCurrentIndex()
     Keys.onRightPressed: currentItem.axis.incrementCurrentIndex()
 }
 ```
 
 !!! warning
-    Incrementing/decrementing the `currentIndex` property of a ListView (eg. by navigation) has no effect on the bound value (in this case `api.collections.index`); this is why I call `incrementIndex()`/`decrementIndex()` manually on ++up++ and ++down++. We'll also modify the ++left++/++right++ keys very soon.
+    Incrementing/decrementing the `currentIndex` property of a ListView (eg. by navigation) has no effect on the bound value (in this case `api.collectionList.index`); this is why I call `incrementIndex()`/`decrementIndex()` manually on ++up++ and ++down++. We'll also modify the ++left++/++right++ keys very soon.
 
 !!! tip
-    Instead of using `Keys` and increment/decrement, you can also set `api.collections.index` manually, eg.
+    Instead of using `Keys` and increment/decrement, you can also set `api.collectionList.index` manually, eg.
 
-    `:::qml onCurrentIndexChanged: api.collections.index = currentIndex`
+    `:::qml onCurrentIndexChanged: api.collectionList.index = currentIndex`
 
 !!! help
     `incrementIndex()` and `decrementIndex()` wraps around (incrementing the index at the last item will make it jump to the first one). If you don't want them to wrap, you can use `incrementIndexNoWrap()` and `decrementIndexNoWrap()` instead.
 
-Previously the `model` was set to `10`, and so the `modelData` available in the delegates was a number between 0 and 9. With `model` set to `api.collections.model`, the `modelData` will be a `Collection` object.
+Previously the `model` was set to `10`, and so the `modelData` available in the delegates was a number between 0 and 9. With `model` set to `api.collectionList.model`, the `modelData` will be a `Collection` object.
 
 A `Collection` always has a `tag` (a short, unique label) and possibly a proper `name`. We should show the `name` if it's available, and fall back to the `tag` if it's not defined. We can do it like this:
 
@@ -668,7 +668,7 @@ After a refresh, you should see the names of collections appearing in Pegasus.
 
 ### Horizontal axis
 
-Now let's show the game titles in the horizontal rectangles. Every `Collection` has a `games` member we can use to access the list of games associated with the collection. Similarly to `collections`, `games` also has `model` and `index` properties, so let's use them in the horizontal axis (`collectionAxisDelegate`):
+Now let's show the game titles in the horizontal rectangles. Every `Collection` has a `gameList` member we can use to access the list of games associated with the collection. Similarly to `collectionList`, `gameList` also has `model` and `index` properties, so let's use them in the horizontal axis (`collectionAxisDelegate`):
 
 ```qml hl_lines="18 19"
 Component {
@@ -688,8 +688,8 @@ Component {
 
             // ...
 
-            model: modelData.games.model
-            currentIndex: modelData.games.index
+            model: modelData.gameList.model
+            currentIndex: modelData.gameList.index
             delegate: gameAxisDelegate
             spacing: vpx(10)
 
@@ -726,11 +726,11 @@ Component {
 
     Item {
         function selectNext() {
-            modelData.games.incrementIndex();
+            modelData.gameList.incrementIndex();
         }
 
         function selectPrev() {
-            modelData.games.decrementIndex();
+            modelData.gameList.decrementIndex();
         }
 
 
@@ -750,15 +750,15 @@ ListView {
 
     // ...
 
-    model: api.collections.model
-    currentIndex: api.collections.index
+    model: api.collectionList.model
+    currentIndex: api.collectionList.index
     delegate: collectionAxisDelegate
 
     // ...
 
     focus: true
-    Keys.onUpPressed: api.collections.decrementIndex()
-    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onUpPressed: api.collectionList.decrementIndex()
+    Keys.onDownPressed: api.collectionList.incrementIndex()
     Keys.onLeftPressed: currentItem.selectPrev()
     Keys.onRightPressed: currentItem.selectNext()
 }
@@ -807,8 +807,8 @@ ListView {
     // ...
 
     focus: true
-    Keys.onUpPressed: api.collections.decrementIndex()
-    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onUpPressed: api.collectionList.decrementIndex()
+    Keys.onDownPressed: api.collectionList.incrementIndex()
     Keys.onLeftPressed: currentItem.selectPrev()
     Keys.onRightPressed: currentItem.selectNext()
     Keys.onReturnPressed: api.currentGame.launch()
@@ -841,8 +841,8 @@ Next step, let's make it pretty.
                 anchors.top: parent.verticalCenter
                 anchors.bottom: parent.bottom
 
-                model: api.collections.model
-                currentIndex: api.collections.index
+                model: api.collectionList.model
+                currentIndex: api.collectionList.index
                 delegate: collectionAxisDelegate
 
                 snapMode: ListView.SnapOneItem
@@ -850,8 +850,8 @@ Next step, let's make it pretty.
                 clip: true
 
                 focus: true
-                Keys.onUpPressed: api.collections.decrementIndex()
-                Keys.onDownPressed: api.collections.incrementIndex()
+                Keys.onUpPressed: api.collectionList.decrementIndex()
+                Keys.onDownPressed: api.collectionList.incrementIndex()
                 Keys.onLeftPressed: currentItem.selectPrev()
                 Keys.onRightPressed: currentItem.selectNext()
                 Keys.onReturnPressed: api.currentGame.launch()
@@ -862,11 +862,11 @@ Next step, let's make it pretty.
 
                 Item {
                     function selectNext() {
-                        modelData.games.incrementIndex();
+                        modelData.gameList.incrementIndex();
                     }
 
                     function selectPrev() {
-                        modelData.games.decrementIndex();
+                        modelData.gameList.decrementIndex();
                     }
 
                     width: ListView.view.width
@@ -897,8 +897,8 @@ Next step, let's make it pretty.
 
                         orientation: ListView.Horizontal
 
-                        model: modelData.games.model
-                        currentIndex: modelData.games.index
+                        model: modelData.gameList.model
+                        currentIndex: modelData.gameList.index
                         delegate: gameAxisDelegate
                         spacing: vpx(10)
 
@@ -1064,8 +1064,8 @@ ListView {
     anchors.top: parent.verticalCenter
     anchors.bottom: parent.bottom
 
-    model: api.collections.model
-    currentIndex: api.collections.index
+    model: api.collectionList.model
+    currentIndex: api.collectionList.index
     delegate: collectionAxisDelegate
 
     snapMode: ListView.SnapOneItem
@@ -1073,8 +1073,8 @@ ListView {
     clip: true
 
     focus: true
-    Keys.onUpPressed: api.collections.decrementIndex()
-    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onUpPressed: api.collectionList.decrementIndex()
+    Keys.onDownPressed: api.collectionList.incrementIndex()
     Keys.onLeftPressed: currentItem.selectPrev()
     Keys.onRightPressed: currentItem.selectNext()
     Keys.onReturnPressed: api.currentGame.launch()
@@ -1092,8 +1092,8 @@ PathView {
     anchors.top: parent.verticalCenter
     anchors.bottom: parent.bottom
 
-    model: api.collections.model
-    currentIndex: api.collections.index
+    model: api.collectionList.model
+    currentIndex: api.collectionList.index
     delegate: collectionAxisDelegate
 
 
@@ -1117,8 +1117,8 @@ PathView {
 
 
     focus: true
-    Keys.onUpPressed: api.collections.decrementIndex()
-    Keys.onDownPressed: api.collections.incrementIndex()
+    Keys.onUpPressed: api.collectionList.decrementIndex()
+    Keys.onDownPressed: api.collectionList.incrementIndex()
     Keys.onLeftPressed: currentItem.selectPrev()
     Keys.onRightPressed: currentItem.selectNext()
     Keys.onReturnPressed: api.currentGame.launch()
@@ -1163,8 +1163,8 @@ ListView {
 
     orientation: ListView.Horizontal
 
-    model: modelData.games.model
-    currentIndex: modelData.games.index
+    model: modelData.gameList.model
+    currentIndex: modelData.gameList.index
     delegate: gameAxisDelegate
     spacing: vpx(10)
 
@@ -1190,8 +1190,8 @@ PathView {
     // removed orientation
 
     // removed spacing
-    model: modelData.games.model
-    currentIndex: modelData.games.index
+    model: modelData.gameList.model
+    currentIndex: modelData.gameList.index
     delegate: gameAxisDelegate
 
     // changed ListView to PathView
@@ -1479,7 +1479,7 @@ Text {
 
 This should be below everything else on the screen -- in fact, if you look at the image at the beginning of this guide, it's actually going into the bottom-half region of the screen, reaching the row of images.
 
-As it's under everything else, I'll put its implementation at the top of the theme file, even before the collections' PathView. I'll anchor the top and left edges of the image to the top right corner of the screen. To make it go slightly into the bottom half, I'll anchor the bottom edge to the vertical center of the screen, then add a small amount of **negative margin** to the bottom (a positive margin *reduces* the size of the element, while a negative one *increases* it).
+As it's under everything else, I'll put its implementation at the top of the theme file, even before the collection PathView. I'll anchor the top and left edges of the image to the top right corner of the screen. To make it go slightly into the bottom half, I'll anchor the bottom edge to the vertical center of the screen, then add a small amount of **negative margin** to the bottom (a positive margin *reduces* the size of the element, while a negative one *increases* it).
 
 ```qml
 Image {
@@ -1815,8 +1815,8 @@ And the full code:
                 anchors.top: parent.verticalCenter
                 anchors.bottom: parent.bottom
 
-                model: api.collections.model
-                currentIndex: api.collections.index
+                model: api.collectionList.model
+                currentIndex: api.collectionList.index
                 delegate: collectionAxisDelegate
 
                 snapMode: PathView.SnapOneItem
@@ -1836,8 +1836,8 @@ And the full code:
                 preferredHighlightEnd: preferredHighlightBegin
 
                 focus: true
-                Keys.onUpPressed: api.collections.decrementIndex()
-                Keys.onDownPressed: api.collections.incrementIndex()
+                Keys.onUpPressed: api.collectionList.decrementIndex()
+                Keys.onDownPressed: api.collectionList.incrementIndex()
                 Keys.onLeftPressed: currentItem.selectPrev()
                 Keys.onRightPressed: currentItem.selectNext()
                 Keys.onReturnPressed: api.currentGame.launch()
@@ -1848,11 +1848,11 @@ And the full code:
 
                 Item {
                     function selectNext() {
-                        modelData.games.incrementIndex();
+                        modelData.gameList.incrementIndex();
                     }
 
                     function selectPrev() {
-                        modelData.games.decrementIndex();
+                        modelData.gameList.decrementIndex();
                     }
 
                     width: PathView.view.width
@@ -1885,8 +1885,8 @@ And the full code:
                         anchors.top: label.bottom
                         anchors.bottom: parent.bottom
 
-                        model: modelData.games.model
-                        currentIndex: modelData.games.index
+                        model: modelData.gameList.model
+                        currentIndex: modelData.gameList.index
                         delegate: gameAxisDelegate
 
                         snapMode: PathView.SnapOneItem
@@ -2122,8 +2122,8 @@ It's a bit long, but then again this theme had some complex layouting going on. 
         PathView {
             id: collectionAxis
 
-            model: api.collections.model
-            currentIndex: api.collections.index
+            model: api.collectionList.model
+            currentIndex: api.collectionList.index
             delegate: CollectionAxisDelegate { }
 
             snapMode: PathView.SnapOneItem
@@ -2143,8 +2143,8 @@ It's a bit long, but then again this theme had some complex layouting going on. 
             preferredHighlightEnd: preferredHighlightBegin
 
             focus: true
-            Keys.onUpPressed: api.collections.decrementIndex()
-            Keys.onDownPressed: api.collections.incrementIndex()
+            Keys.onUpPressed: api.collectionList.decrementIndex()
+            Keys.onDownPressed: api.collectionList.incrementIndex()
             Keys.onLeftPressed: currentItem.selectPrev()
             Keys.onRightPressed: currentItem.selectNext()
             Keys.onReturnPressed: api.currentGame.launch()
@@ -2156,11 +2156,11 @@ It's a bit long, but then again this theme had some complex layouting going on. 
 
         Item {
             function selectNext() {
-                modelData.games.incrementIndex();
+                modelData.gameList.incrementIndex();
             }
 
             function selectPrev() {
-                modelData.games.decrementIndex();
+                modelData.gameList.decrementIndex();
             }
 
             width: PathView.view.width
@@ -2193,8 +2193,8 @@ It's a bit long, but then again this theme had some complex layouting going on. 
                 anchors.top: label.bottom
                 anchors.bottom: parent.bottom
 
-                model: modelData.games.model
-                currentIndex: modelData.games.index
+                model: modelData.gameList.model
+                currentIndex: modelData.gameList.index
                 delegate: GameAxisDelegate { }
 
                 snapMode: PathView.SnapOneItem

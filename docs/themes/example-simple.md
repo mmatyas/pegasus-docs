@@ -151,8 +151,8 @@ import QtQuick 2.0
 
 FocusScope {
 
-    Keys.onLeftPressed: api.collections.decrementIndex()
-    Keys.onRightPressed: api.collections.incrementIndex()
+    Keys.onLeftPressed: api.collectionList.decrementIndex()
+    Keys.onRightPressed: api.collectionList.incrementIndex()
 
 
     Rectangle {
@@ -175,7 +175,7 @@ After a refresh, pressing ++left++ and ++right++ should now change the logo on t
 
 ### Game list
 
-This is going to be actually the most complex piece of the theme. The games for the currently selected collection can be accessed via `api.currentCollection.games`, with `games.model` being the list of games, `games.current` the currently selected game (also available as `api.currentGame`) and `games.index` the index of the selected element. The index can be set manually to a number, or changed by the increment/decrement functions, similarly to the collections.
+This is going to be actually the most complex piece of the theme. The games for the currently selected collection can be accessed via `api.currentCollection.gameList`, with `gameList.model` being the list of games, `gameList.current` the currently selected game (also available as `api.currentGame`) and `gameList.index` the index of the selected element. The index can be set manually to a number, or changed by the increment/decrement functions, similarly to the collections.
 
 Returning to the `menu` Rectangle, I add a ListView after the logo, first setting just the dimensions:
 
@@ -208,7 +208,7 @@ Our model will be the games of the currently selected collection, and for every 
 ListView {
     id: gameView
 
-    model: api.currentCollection.games.model
+    model: api.currentCollection.gameList.model
     delegate: Text {
         text: modelData.title
     }
@@ -220,11 +220,11 @@ ListView {
 You should now see the list of games, changing with the selected collection on pressing ++left++/++right++.
 
 !!! note
-    `games.model` is a list of Game objects. `modelData` in the delegate will be one Game object of the Model.
+    `gameList.model` is a list of Game objects. `modelData` in the delegate will be one Game object of the Model.
 
 I'll do two quick reorganization in the code:
 
-- typing `api.currentCollection.games.<something>` every time is a bit long, so I create a property as a shortcut
+- typing `api.currentCollection.gameList.<something>` every time is a bit long, so I create a property as a shortcut
 - I move the Delegate definition to a separate object to make the code cleaner
 
 ```qml hl_lines="12 15 25"
@@ -239,7 +239,7 @@ Rectangle {
     ListView {
         id: gameView
 
-        property var gameList: api.currentCollection.games
+        property var gameList: api.currentCollection.gameList
 
         model: gameList.model
         delegate: gameViewDelegate
@@ -343,7 +343,7 @@ To update the list when the index in the API changes, bind `gameList.index` to t
 ListView {
     id: gameView
 
-    property var gameList: api.currentCollection.games
+    property var gameList: api.currentCollection.gameList
 
     model: gameList.model
     delegate: gameViewDelegate
@@ -364,10 +364,10 @@ import QtQuick 2.0
 
 FocusScope {
 
-    Keys.onLeftPressed: api.collections.decrementIndex()
-    Keys.onRightPressed: api.collections.incrementIndex()
-    Keys.onUpPressed: api.currentCollection.games.decrementIndexNoWrap()
-    Keys.onDownPressed: api.currentCollection.games.incrementIndexNoWrap()
+    Keys.onLeftPressed: api.collectionList.decrementIndex()
+    Keys.onRightPressed: api.collectionList.incrementIndex()
+    Keys.onUpPressed: api.currentCollection.gameList.decrementIndexNoWrap()
+    Keys.onDownPressed: api.currentCollection.gameList.incrementIndexNoWrap()
 
 
     Rectangle {
@@ -399,10 +399,10 @@ import QtQuick 2.0
 
 FocusScope {
 
-    Keys.onLeftPressed: api.collections.decrementIndex()
-    Keys.onRightPressed: api.collections.incrementIndex()
-    Keys.onUpPressed: api.currentCollection.games.decrementIndexNoWrap()
-    Keys.onDownPressed: api.currentCollection.games.incrementIndexNoWrap()
+    Keys.onLeftPressed: api.collectionList.decrementIndex()
+    Keys.onRightPressed: api.collectionList.incrementIndex()
+    Keys.onUpPressed: api.currentCollection.gameList.decrementIndexNoWrap()
+    Keys.onDownPressed: api.currentCollection.gameList.incrementIndexNoWrap()
     Keys.onReturnPressed: api.currentGame.launch()
 
 
@@ -433,7 +433,7 @@ While scrolling, you might have noticed that items at the top and the bottom of 
 ListView {
     id: gameView
 
-    property var gameList: api.currentCollection.games
+    property var gameList: api.currentCollection.gameList
 
     model: gameList.model
     delegate: gameViewDelegate
@@ -465,7 +465,7 @@ The highlight range is defined by the start and end position. For our vertical L
 ListView {
     id: gameView
 
-    property var gameList: api.currentCollection.games
+    property var gameList: api.currentCollection.gameList
 
     model: gameList.model
     delegate: gameViewDelegate
@@ -493,7 +493,7 @@ However, when you change the collection, there is a few seconds of scrolling to 
 ListView {
     id: gameView
 
-    property var gameList: api.currentCollection.games
+    property var gameList: api.currentCollection.gameList
 
     model: gameList.model
     delegate: gameViewDelegate
@@ -699,10 +699,10 @@ Sure, perhaps not the most attractive yet, but I hope it helped learning theme c
 
         FocusScope {
 
-            Keys.onLeftPressed: api.collections.decrementIndex()
-            Keys.onRightPressed: api.collections.incrementIndex()
-            Keys.onUpPressed: api.currentCollection.games.decrementIndexNoWrap()
-            Keys.onDownPressed: api.currentCollection.games.incrementIndexNoWrap()
+            Keys.onLeftPressed: api.collectionList.decrementIndex()
+            Keys.onRightPressed: api.collectionList.incrementIndex()
+            Keys.onUpPressed: api.currentCollection.gameList.decrementIndexNoWrap()
+            Keys.onDownPressed: api.currentCollection.gameList.incrementIndexNoWrap()
             Keys.onReturnPressed: api.currentGame.launch()
 
             Rectangle {
@@ -734,7 +734,7 @@ Sure, perhaps not the most attractive yet, but I hope it helped learning theme c
                 ListView {
                     id: gameView
 
-                    property var gameList: api.currentCollection.games
+                    property var gameList: api.currentCollection.gameList
 
                     model: gameList.model
                     delegate: gameViewDelegate

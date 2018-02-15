@@ -171,7 +171,7 @@ After a refresh, pressing ++left++ and ++right++ should now change the logo on t
     Assuming you have more than one collection, of course.
 
 !!! tip
-    Handling keyboard keys also enables gamepad navigation. See the [controls](../../user-guide/controls) page about how keys and buttons are related.
+    Handling keyboard keys also enables gamepad navigation. See the [controls](../user-guide/controls) page about how keys and buttons are related.
 
 ### Game list
 

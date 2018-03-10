@@ -4,8 +4,6 @@ site_description: Documentation and customization guides for the Pegasus fronten
 site_author: Mátyás Mustoha
 copyright: Copyright &copy; 2018 Mátyás Mustoha
 
-repo_url: https://github.com/mmatyas/pegasus-frontend/
-
 pages:
     - Home: index.md
     - User Guide:

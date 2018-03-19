@@ -8,6 +8,7 @@ pages:
     - Home: index.md
     - User Guide:
         - Controls: user-guide/controls.md
+        - Game collections and metadata files: user-guide/config-files.md
         - Scripting: user-guide/scripting.md
     - Core Dev:
         - Installing Qt: dev/install-qt.md

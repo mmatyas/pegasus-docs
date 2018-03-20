@@ -48,8 +48,7 @@ x-source: ScreenScraper
 ```
 
 - Keys are case insensitive, ie. `title`, `Title` and `TitLe` are the same. Keys always start an the beginning of the line and end at the first `:` (not including trailing spaces).
-- Values are either single line or span multiple lines. Lines starting with space (or other whitespace characters) will be appended to the item's value (without leading or trailing whitespace, but with a single space between the contents of the individual lines).
-    - To manually create a line break, create a new line with a single dot `.` as the content (see the example in the metadata specification part).
+- Values are either single line or span multiple lines. Lines starting with space (or other whitespace characters) will be appended to the item's value (without leading or trailing whitespace), with a single space between the contents of the individual lines. Empty lines will be appended as line breaks.
 - Both the keys and the values may contain Unicode characters.
 - Lines starting with `#` are comments and will be ignored.
 

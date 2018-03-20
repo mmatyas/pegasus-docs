@@ -81,6 +81,8 @@ Key | Description
 
 **Exclusion is stronger than inclusion**: if both the normal and the `ignore-` fields match for a file, it will be excluded.
 
+Keys starting with `x-` can be used to extend the format with additional data. This could be used, for example, by other softwares (eg. scrapers) to store some program-specific data.
+
 !!! tip "Plural forms"
     Sometimes writing the plural forms of the fields feels more natural, so `extensions`, `files`, `ignore-extensions` and `ignore-files` are also supported, without any difference to their regular forms.
 
@@ -122,4 +124,47 @@ regex: \d+.in.1
 
 ## Metadata properties
 
-TODO
+The following properties can be used in the metadata files:
+
+Key | Description
+----|---
+`file` | Relative path to the file for which the metadata after this line will be added. If the file is not included in any collection, all properties will be ignored until the next `file` key. This is a **required** field.
+`title` | The proper title of the game. If it's not defined, the file name without extension will be used.
+`name` | Same as `title`. Use whichever you prefer.
+`developer` | The developer or the game. This field can appear multiple times.
+`publisher` | The publisher or the game. This field can appear multiple times.
+`genre` | A comma-separated list of genres. This field can appear multiple times.
+`summary` | A short description of the game in one paragraph.
+`description` | A possibly longer description of the game.
+`players` | The number of players who can play the game. Either a single number (eg. `2`) or a number range (eg. `1-4`).
+`release` | The date when the game was released, in YYYY-MM-DD format (eg. `1985-05-22`). Month and day can be omitted if unknown (eg. `1985-05` or `1985` alone is also accepted).
+`rating` | The rating of the game, in percentages. Either an integer percentage in the 0-100% range (eg. `70%`), or a fractional value between 0 and 1 (eg. `0.7`).
+`launch` | If this game must be launched differently than the others in the same collection, a custom launch command can be defined for it.
+`command` | Same as `launch`. Use whichever you prefer.
+
+Like with the collections, keys starting with `x-` can be used to extend the format with additional data. This could be used, for example, by other softwares (eg. scrapers) to store some program-specific data.
+
+!!! tip "Plural forms"
+    As with the collections, plural forms for the keys with multiple values are also supported, so `developers`, `publishers` and `genres` will work too.
+
+### Example
+
+```make
+file: mygame1.bin
+title: My Game 1
+developer: Dev1
+developer: Dev2
+
+file: mygame2.bin
+name: My Game 2
+publisher: Publisher with Spaces
+publisher: Another Publisher
+
+file: mygame3.bin
+genres: genre1, genre2
+players: 2-4
+
+file: subdir/game.bin
+rating: 80%
+release: 1998-05
+```

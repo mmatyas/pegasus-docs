@@ -95,7 +95,6 @@ Variable | Description | Example
 `{file.path}` | Absolute path to the file. | `/home/joe/games/mygame.bin`
 `{file.name}` | The file name part of the path | `mygame.bin`
 `{file.basename}` | The file name without extension (ie. until but not including the last dot) | `mygame`
-`{file.ext}` | The extension of the file (ie. after but not including the last dot) | `bin`
 `{file.dir}` | The directory where the file is located. | `/home/joe/games`
 
 Note that the variables will be replaced as-is, without additional formatting. Depending on your use cases, you might need to eg. wrap them in quotes.

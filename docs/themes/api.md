@@ -30,8 +30,8 @@ Method | Description
 
 Property | Description
 ---|---
-`tag` | A short, unique string for identifying a collection, for example `nes`, `mario carts`, etc.
-`name` | <span class="optional"></span> The proper name of the collection, eg. "Nintendo Entertainment System", "Mario Cartridges", etc.
+`name` | The unique name of the collection, eg. "Nintendo Entertainment System", "Mario Cartridges", etc.
+`shortName` | <span class="optional"></span> An optional, lowercase short name for the collection. Often an abbreviation, like `nes`, `mame`, etc.
 `gameList` | Object storing the list of games (see below).
 
 ## List of Games

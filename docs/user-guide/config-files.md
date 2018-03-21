@@ -62,6 +62,7 @@ Key | Description
 `collection` | Creates a new collection with the value as name (if it was not created yet). The properties after this line will modify this colection. This is a **required** field.
 `launch` | A common launch command for the games in this collection. See below for the supported variables.
 `command` | Same as `launch`. Use whichever you prefer.
+`shortname` | An optional short name for the collection, often an abbreviation (like MAME, NES, etc.). Should be lowercase.
 
 The following fields control which files of the directory should be included in the collection:
 
@@ -102,9 +103,10 @@ Note that the variables will be replaced as-is, without additional formatting. D
 ### Example
 
 ```make
-# Selects all files with the extension 'bin', except two games
-collection: My Games
-extensions: bin
+# Selects all files with the provided extension, except two games
+collection: Super Nintendo Entertainment System
+shortname: snes
+extensions: 7z, bin, smc, sfc, fig, swc, mgd, zip, bin
 ignore-file: buggygame.bin
 ignore-file: duplicategame.bin
 launch: myemulator "{file.path}"

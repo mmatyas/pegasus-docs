@@ -149,21 +149,40 @@ Like with the collections, keys starting with `x-` can be used to extend the for
 ### Example
 
 ```make
-file: mygame1.bin
-title: My Game 1
-developer: Dev1
-developer: Dev2
+file: Alien Hominid (Europe) (En,Fr,De,Es,It).gba
+title: Alien Hominid
+developer: Zoo Digital
+genre: Shooter
+players: 1
+summary: You're a little yellow alien.  The FBI has shot down your ship
+  while flying over planet Earth.  And it, quite literally, lands right on their
+  doorstep.  After a series of FBI Agents swipe your ship, what option do you have
+  other than to blow up everything in your path to get it back?
+description:
+  Alien Hominid is a 2D side-scrolling shooter with heavy references to the Metal
+  Slug series of games - from the hand-drawn graphics, huge explosions, right down
+  to the ability to eviscerate FBI Agents when you get up close to them.  The
+  graphics are by featured artist Dan Paladin.  Your goal, is quite simply, to get
+  to the end of the stage, and die as little as possible.  Which is made difficult
+  due to the fact that any bullet is an instant kill.
 
-file: mygame2.bin
-name: My Game 2
-publisher: Publisher with Spaces
-publisher: Another Publisher
+  To help you out, you can grab a range of power-ups, such as lasers, spread
+  shots, shotguns and more, as well as hijacking vehicles and using them for
+  protection.  Grenades can be lobbed, and you can jump on enemy shoulders and
+  choose to bite their heads off if you like, or pick them up and throw them at
+  other enemies.  You can also dive underground for a short period of time to
+  avoid enemies - while underground, you can drag agents into the ground to kill
+  them.
+rating: 50%
+x-id: 4149
+x-source: ScreenScraper
 
-file: mygame3.bin
-genres: genre1, genre2
-players: 2-4
 
-file: subdir/game.bin
-rating: 80%
-release: 1998-05
+file: Altered Beast - Guardian of the Realms (USA).gba
+title: Altered Beast : Guardian of the Realms
+developer: THQ
+genre: Action
+rating: 60%
+x-id: 4139
+x-source: ScreenScraper
 ```

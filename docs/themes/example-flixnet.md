@@ -630,7 +630,7 @@ ListView {
 
 Previously the `model` was set to `10`, and so the `modelData` available in the delegates was a number between 0 and 9. With `model` set to `api.collectionList.model`, the `modelData` will be a `Collection` object.
 
-A `Collection` always has a `tag` (a short, unique label) and possibly a proper `name`. We should show the `name` if it's available, and fall back to the `tag` if it's not defined. We can do it like this:
+A `Collection` always has a `name`, so let's show that:
 
 ```qml hl_lines="10"
 Component {
@@ -642,7 +642,7 @@ Component {
         Text {
             id: label
 
-            text: modelData.name || modelData.tag
+            text: modelData.name
             color: "white"
             font.pixelSize: vpx(18)
             font.family: globalFonts.sans
@@ -660,7 +660,7 @@ Component {
 ```
 
 !!! tip
-    If the name of the `modelData` property you use (in this case `name` and `tag`) don't collide with other properties of the object, it's not required to type out `modelData`: you can simply write `text: name || tag`.
+    If the name of the `modelData` property you use (in this case `name`) don't collide with other properties of the object, it's not required to type out `modelData`: you can simply write `text: name`.
 
 After a refresh, you should see the names of collections appearing in Pegasus.
 
@@ -875,7 +875,7 @@ Next step, let's make it pretty.
                     Text {
                         id: label
 
-                        text: modelData.name || modelData.tag
+                        text: modelData.name
                         color: "white"
                         font.pixelSize: vpx(18)
                         font.family: globalFonts.sans
@@ -1864,7 +1864,7 @@ And the full code:
                     Text {
                         id: label
 
-                        text: modelData.name || modelData.tag
+                        text: modelData.name
                         color: "white"
                         font.pixelSize: vpx(18)
                         font.family: globalFonts.sans
@@ -2172,7 +2172,7 @@ It's a bit long, but then again this theme had some complex layouting going on. 
             Text {
                 id: label
 
-                text: modelData.name || modelData.tag
+                text: modelData.name
                 color: "white"
                 font.pixelSize: vpx(18)
                 font.family: globalFonts.sans

@@ -124,7 +124,7 @@ Rectangle {
         height: vpx(60)
 
         fillMode: Image.PreserveAspectFit
-        source: "assets/" + api.currentCollection.tag + ".svg"
+        source: "assets/" + api.currentCollection.shortname + ".svg"
         asynchronous: true
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -137,7 +137,7 @@ Rectangle {
 Some interesting things here:
 
 - `api` is a globally accessible object through which you can access every game and collection data. Its contents are described on the [API reference](api.md) page.
-- `source` is the concatenation of three strings, `tag` being the unique identifier for a collection (eg. `nes`, `gba`, ...).
+- `source` is the concatenation of three strings, `shortname` being the short name for a collection (eg. `nes`, `gba`, ...).
 - `asynchronous` will load the image in the background. By default (`false`), the program will wait until the Image is fully loaded, but during this time it cannot respond to user input. Since images may take a long time to load depending on the device, asynchronous loading is preferred in most cases.
 
 ### Changing collections
@@ -723,7 +723,7 @@ Sure, perhaps not the most attractive yet, but I hope it helped learning theme c
                     height: vpx(60)
 
                     fillMode: Image.PreserveAspectFit
-                    source: "assets/" + api.currentCollection.tag + ".svg"
+                    source: "assets/" + api.currentCollection.shortname + ".svg"
                     asynchronous: true
 
                     anchors.horizontalCenter: parent.horizontalCenter

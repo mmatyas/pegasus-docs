@@ -3,10 +3,10 @@
 Pegasus supports most languages in use today, and you can easily add new translations for any locale. The translations are stored in simple text files in XML format, so the only thing you need is a text editor. There's also a graphical tool to make things easier (see below). The translations themselves are collected in a separate repository [here](https://github.com/mmatyas/pegasus-frontend-translations), which is also included as a Git submodule in the main Pegasus repo.
 
 !!! tldr "In short"
-    - download the [Qt tools](install-qt.md)
+    - (optional) download the [Qt tools](install-qt.md)
     - download the [translation repo](https://github.com/mmatyas/pegasus-frontend-translations)
     - create a copy of `pegasus_en.ts` for your language
-    - open the new file in *Qt Linguist* and translate the UI strings
+    - open the new file in *Qt Linguist* or your editor of choice, and translate the strings
     - open a new issue in the [translation repo](https://github.com/mmatyas/pegasus-frontend-translations/issues) and attach your TS file
 
 !!! todo
@@ -27,12 +27,12 @@ where
 - optionally,`script` defines the writing system (eg. simplified/traditional chinese) (four letters, title case)
 - optionally, `country` defines a country-specific variant (two letters, uppercase)
 
-for example, `hi-Deva-IN` means Hindi language, Devanagari script, and used in India.
+for example, `hi-Deva-IN` means Hindi language, Devanagari script, and used in India. Usually though the two letter language code is enough for most locales.
 
 
 ## 1. Preparing the tools
 
-You can use any decent text editor, or you can also use *Qt Linguist*, a graphical translation tool:
+You can use any decent text editor to edit the files. There's also a graphical translation tool called *Qt Linguist*:
 
 ![linguist](https://doc.qt.io/qt-5/images/linguist-linguist.png )
 
@@ -45,7 +45,7 @@ You can find the translation files in [this repository](https://github.com/mmaty
 Then, create a copy of `pegasus_en.ts`, and change `en` to your locale's code (see above).
 
 !!! info "Developer note"
-    You can create this file with `lupdate ../src -ts pegasus_en.ts`.
+    You can create this file with `lupdate ../src -ts pegasus_en.ts -no-obsolete`.
 
 ## 3. Translate the file
 
@@ -55,13 +55,8 @@ If you're using a **text editor**, the translateable strings are inside `<messag
 
 If you're using **Qt Linguist**, first set your language in *Edit -> Translation file settings*. After that, you can select a "module" on the left, then see the relevant strings in the upper-middle panel. You can add the translation in the center panel (marked with "1" on the picture above). A detailed guide for Qt Linguist can be found [here](https://doc.qt.io/qt-5/linguist-translators.html).
 
-
 !!! help
     - `%1`, `%2`, ... in the text is a placeholder for additional values, such as numbers, file names, etc.
-    - You don't have to translate *every* string; most of them won't be visible for the users, and will only be used in debug log files. It's enough to translate only the QML files (hover over the source code panel or check the `<location>` tag for the file name).
-
-!!! todo
-    In the future, UI and log messages will likely be separated to make translation easier.
 
 ## 4. (dev) Add your translation to the QRC file
 

@@ -23,11 +23,13 @@ pegasus_[language][-script][-country].ts
 
 where
 
-- `language` is the language code (two letters, lowercase)
-- optionally,`script` defines the writing system (eg. simplified/traditional chinese) (four letters, title case)
+- `language` is the language code (two- or rarely three letters, lowercase).
+- optionally,`script` defines the writing system, like simplified/traditional chinese or Old German Runes (four letters, title case)
 - optionally, `country` defines a country-specific variant (two letters, uppercase)
 
 for example, `hi-Deva-IN` means Hindi language, Devanagari script, and used in India. Usually though the two letter language code is enough for most locales.
+
+Two letter language codes can be found [here](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and four letter script codes [here](https://en.wikipedia.org/wiki/ISO_15924).
 
 
 ## 1. Preparing the tools
@@ -53,22 +55,23 @@ Open your new file in a text editor or in Qt Linguist.
 
 If you're using a **text editor**, the translateable strings are inside `<message>` tags: you can see the original text in the `<source>` tag, and you can provide your translation in `<translation>`. Also change the language tag on the top of the file (`<TS ...>`).
 
-If you're using **Qt Linguist**, first set your language in *Edit -> Translation file settings*. After that, you can select a "module" on the left, then see the relevant strings in the upper-middle panel. You can add the translation in the center panel (marked with "1" on the picture above). A detailed guide for Qt Linguist can be found [here](https://doc.qt.io/qt-5/linguist-translators.html).
+If you're using **Qt Linguist**, first set your language in *Edit -> Translation file settings -> Target language*. After that, you can select a "module" (group of texts) on the left, then see the relevant strings in the upper-middle panel. You can add the translation in the center panel (marked with "1" on the picture above). Then press the green checkmark on the top toolbar (or press Ctrl+Enter) to jump to the next untranslated line.
+
+A detailed guide for Qt Linguist can be found [here](https://doc.qt.io/qt-5/linguist-translators.html).
 
 !!! help
     - `%1`, `%2`, ... in the text is a placeholder for additional values, such as numbers, file names, etc.
+    - screenshots for most of the translateable text can be found [here](https://imgur.com/a/no3Jm)
 
-## 4. (dev) Add your translation to the QRC file
-
-There's a file called `translations.qrc.in` in the translations repository. It's another XML file that you can open in a text editor, and collects all the translation files. Simply add a new `<file>pegasus_LOCALECODE.qm</file>` entry.
-
-## 5. (dev) Rebuild Pegasus
+## 4. (optional) Rebuild Pegasus and test the translation
 
 At the moment, all translation files must be built into Pegasus. See the [build documentation](build.md) about how to rebuild the program.
+
+There's also a file called `translations.qrc.in` in the translations repository which lists the language files. It's another XML file that you can open in a text editor; simply add a new `<file>pegasus_LOCALECODE.qm</file>` entry (note the QM extension!).
 
 !!! note
     This step is only required for trying out the translation in-app. You can safely skip it if you don't want to deal with building Pegasus.
 
-## 6. Open a pull request
+## 5. Open a pull request
 
 If you know Git, open a pull request in the [translations repository](https://github.com/mmatyas/pegasus-frontend-translations). Alternatively, open a new issue and attach your translation (TS) file.

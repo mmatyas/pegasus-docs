@@ -58,7 +58,7 @@ If you're using **Arch**, you can get Qt from AUR; here's the relevant [wiki pag
 
 ## Windows/MSYS2
 
-Qt is availale in the MSYS2 repos. See [https://wiki.qt.io/MSYS2](https://wiki.qt.io/MSYS2).
+Qt is available in the MSYS2 repos. See [https://wiki.qt.io/MSYS2](https://wiki.qt.io/MSYS2).
 
 ## Windows/vcpkg
 
@@ -66,4 +66,4 @@ At the time of writing, Qt 5.8 is available in vcpkg as a port.
 
 ## macOS/Homebrew
 
-Qt is availale in the Homebrew repos, but may not be up to date. See [http://brewformulas.org/qt5](http://brewformulas.org/qt5).
+Qt is available in the Homebrew repos, but may not be up to date. See [http://brewformulas.org/qt5](http://brewformulas.org/qt5).

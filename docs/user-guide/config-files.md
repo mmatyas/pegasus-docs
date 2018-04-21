@@ -11,6 +11,8 @@ In these directories, Pegasus will look for *collection* and *metadata* configur
 !!! tip "EmulationStation"
     If you have EmulationStation installed and set up, Pegasus will also check the directories set in `es_systems.cfg`, read the `gamelist.xml` files and use the metadata and assets defined there.
 
+    A tool for converting between ES and Pegasus files can be found [here](http://pegasus-frontend.org/tools/convert).
+
 !!! tip "Steam"
     Pegasus is also compatible with Steam. No additional settings are necessary, installed Steam games will automatically appear in Pegasus with metadata and multimedia assets.
 

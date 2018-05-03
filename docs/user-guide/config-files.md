@@ -2,7 +2,14 @@
 
 *To tell Pegasus the list of directories in which it should look for games, you can use the Settings menu* -- is what I'd like to say, but this isn't done yet as of `alpha7`. The list of directories is read from `[config directory]/game_dirs.txt`, one directory per line. The file might not exist at first, but you can create it and then it'll be read.
 
-In these directories, Pegasus will look for *collection* and *metadata* configuration files.
+!!! help "Configuration directories"
+    Depending on your platform, the default config directory should be:
+
+    - Linux: `~/.config/pegasus-frontend`
+    - Windows: `C:\Users\<User Name>\AppData\Local\pegasus-frontend`
+    - macOS: `~/Library/Preferences/pegasus-frontend`
+
+Pegasus will then go through the directories listed in `game_dirs.txt`, and look for *collection* and *metadata* files in them:
 
 - **Collections** define which files should be treated as games, and thus appear in Pegasus. You can fine tune which or what type of files you'd like to see in a group, and what to ignore. Games can belong to multiple collections, and collections can span multiple game directories, making the collections useful for organization purposes as well.
 

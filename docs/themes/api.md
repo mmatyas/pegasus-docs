@@ -76,11 +76,11 @@ Property | Description
 `month` | <span class="optional"></span> Release month as integer (default: 0)
 `day` | <span class="optional"></span> Release day as integer (default: 0)
 `players` | <span class="optional"></span> Maximum number of players (default: 1)
-`favorite` | <span class="optional"></span> Boolean (true/false) value (default: false)
 `rating` | <span class="optional"></span> Floating-point value between and including `0.0` and `1.0` (default: `0.0`)
+`assets` | An Object containing game assets (see below)
+`favorite` | <span class="optional"></span> Boolean (true/false) value (default: false). **Writable**.
 `playCount` | <span class="optional"></span> Positive integer (default: 0)
 `lastPlayed` | <span class="optional"></span> As QML `date`, incl. time (default: invalid)
-`assets` | An Object containing game assets (see below)
 
 ## Game Assets
 

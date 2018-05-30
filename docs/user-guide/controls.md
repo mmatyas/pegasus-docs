@@ -13,3 +13,5 @@ Arrows | <img class="joybtn x25" src="../../img/Dpad.png" title="DPAD"> or <img 
 <img class="joybtn x25" src="../../img/Keyboard_White_E.png" title="E"> or <img class="joybtn x25" src="../../img/Keyboard_White_D.png" title="D"> | <img class="joybtn x25" src="../../img/R1.png" title="R1"> R1/RB | next collection
 Page Up <img class="joybtn x25" src="../../img/Keyboard_White_Page_Up.png" title="Page Up"> | <img class="joybtn x25" src="../../img/L2.png" title="L2"> L2/LT | previous page of games
 Page Down <img class="joybtn x25" src="../../img/Keyboard_White_Page_Down.png" title="Page Down"> | <img class="joybtn x25" src="../../img/R2.png" title="R2"> R2/RT | next page of games
+
+In addition, if you have a keyboard you may use <img class="joybtn x25" src="../../img/Keyboard_Alt.png" title="ALT"> + [letter] to jump to the first game starting with that letter.

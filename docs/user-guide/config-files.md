@@ -9,16 +9,16 @@
     - Windows: `C:\Users\<User Name>\AppData\Local\pegasus-frontend`
     - macOS: `~/Library/Preferences/pegasus-frontend`
 
-Pegasus will then go through the directories listed in `game_dirs.txt`, and look for *collection* and *metadata* files in them:
+Pegasus will then go through the directories listed in `game_dirs.txt`, and look for the *collection* and *metadata* file in them:
 
-- **Collections** define which files should be treated as games, and thus appear in Pegasus. You can fine tune which or what type of files you'd like to see in a group, and what to ignore. Games can belong to multiple collections, and collections can span multiple game directories, making the collections useful for organization purposes as well.
+- The **collection** file defines which files in the directory (and its subdirectories) should be treated as games, and thus appear in Pegasus. It also stores information about how to launch them (eg. open in emulator X, or run with parameter Y). Games can be grouped into collections, and one game can belong to multiple collections as well.
 
-- Additional information about the individual games can be set in the **metadata** file. Common properties, like title, developer(s) or release date can be defined here.
+- Additional information about the *individual games* can be set in the **metadata** file. Common properties, like title, developer(s) or release date can be defined here. If a game need a special way to get launched, it can also be set here.
 
 !!! tip "EmulationStation"
     If you have EmulationStation installed and set up, Pegasus will also check the directories set in `es_systems.cfg`, read the `gamelist.xml` files and use the metadata and assets defined there.
 
-    A tool for converting between ES and Pegasus files can be found [here](http://pegasus-frontend.org/tools/convert).
+    A tool for converting between ES and Pegasus files can be found [HERE](http://pegasus-frontend.org/tools/convert). Compared to ES files, the collection file is like `es_systems.cfg`, except it's local to the directory it's placed in, while the metadata file is mostly equal to `gamelist.xml`.
 
 !!! tip "Steam"
     Pegasus is also compatible with Steam. No additional settings are necessary, installed Steam games will automatically appear in Pegasus with metadata and multimedia assets.
@@ -26,7 +26,9 @@ Pegasus will then go through the directories listed in `game_dirs.txt`, and look
 
 ## File names
 
-Pegasus fill look for `collections.txt` or `collections.pegasus.txt` for the collection definitions, while metadata can be defined in `metadata.txt` or `metadata.pegasus.txt`. Pegasus will first check for the `.pegasus.txt` variant (in case you wish to store something else in the one with shorter name).
+Pegasus looks for `collections.txt` or `collections.pegasus.txt` for the collection definitions, while metadata can be defined in `metadata.txt` or `metadata.pegasus.txt` (with these exact names). Pegasus will first check for the `.pegasus.txt` variant (in case you wish to store something else in the one with shorter name).
+
+You can find examples for both files below, after their format and keywords are detailed.
 
 
 ## Common file format
@@ -58,7 +60,7 @@ x-source: ScreenScraper
 
 - Keys are case insensitive, ie. `title`, `Title` and `TitLe` are the same. Keys always start an the beginning of the line and end at the first `:` (not including trailing spaces).
 - Values are either single line or span multiple lines. Lines starting with space (or other whitespace characters) will be appended to the item's value (without leading or trailing whitespace), with a single space between the contents of the individual lines. Empty lines will be appended as line breaks.
-- Both the keys and the values may contain Unicode characters.
+- Both the keys and the values can contain Unicode characters.
 - Lines starting with `#` are comments and will be ignored.
 
 
@@ -96,6 +98,10 @@ Keys starting with `x-` can be used to extend the format with additional data. T
 !!! tip "Plural forms"
     Sometimes writing the plural forms of the fields feels more natural, so `extensions`, `files`, `ignore-extensions` and `ignore-files` are also supported, without any difference to their regular forms.
 
+!!! tip "Multiple directories"
+    Collections can span over multiple directories if they have the same name. This means you can create categories such as "Platformer games", for which the game files themselves might be located in different directories.
+
+
 ### Launch command parameters
 
 The following variables will be replaced in the launch command value:
@@ -107,9 +113,11 @@ Variable | Description | Example
 `{file.basename}` | The file name without extension (ie. until but not including the last dot) | `mygame`
 `{file.dir}` | The directory where the file is located. | `/home/joe/games`
 
-Note that the variables will be replaced as-is, without additional formatting. Depending on your use cases, you might need to eg. wrap them in quotes.
+Note that the variables will be replaced as-is, without additional formatting. You might need to eg. wrap them in quotes.
 
 ### Example
+
+Let's say you have Super Nintendo games under `C:/games/snes`. Then you'd create `C:/games/snes/collections.txt` with the following contents:
 
 ```make
 # Selects all files with the provided extension, except two games
@@ -130,6 +138,8 @@ files: mario3.bin
 collection: Multi-game carts
 regex: \d+.in.1
 ```
+
+Then add `C:/games/snes` to `[config directory]/game_dirs.txt` in a new line. The games and categories will appear the next time you start Pegasus.
 
 
 ## Metadata properties
@@ -158,6 +168,8 @@ Like with the collections, keys starting with `x-` can be used to extend the for
     As with the collections, plural forms for the keys with multiple values are also supported, so `developers`, `publishers` and `genres` will work too.
 
 ### Example
+
+Continuing with the collection example, a file called `C:/games/snes/metadata.txt` could look like this:
 
 ```make
 file: Alien Hominid (Europe) (En,Fr,De,Es,It).gba

@@ -8,17 +8,9 @@ Pegasus is released as an APK package. To install it, you'll need to enable such
 
 If you have an active full screen app (eg. screen shade), Android might not allow you to press on the install button due to security reasons. In this case, just disable that app for the time of the installation.
 
-## Directories
+### Config directory
 
 Config files are stored under `<storage>/pegasus-frontend`, where `<storage>` the internal storage, if you have one, otherwise the SD card. The directory will be created automatically when you first launch Pegasus (or you can create it yourself).
-
-Then you can continue with creating your `game_dirs.txt` and other files as usual ([see here](config-files.md)). You'll need to know the absolute path to the storage device -- most file browser apps can tell you this. For example, on my phone it's `/storage/emulated/0`, but it may differ on yours. A `game_dirs.txt` would then look like this:
-
-```
-/storage/emulated/0/roms/NES
-/storage/emulated/0/roms/SNES
-/storage/emulated/0/roms/PSP
-```
 
 ## Loading games
 
@@ -49,7 +41,8 @@ launch: am start --user 0
     - `-a` stands for "action"; if an app supports opening files (`android.intent.action.VIEW` ie. "open with"), it will react to this action. There are other possible actions, like "take a photo" or "call a taxi", but we probably won't need them for our use.
     - `-d` is the parameter (data) of the action, and must be in such URI format (`file://...`)
 
-    The full documentation of `am` can be found [here](https://developer.android.com/studio/command-line/adb#am) and [here](https://developer.android.com/studio/command-line/adb#IntentSpec).
+    The full documentation of `am` can be found [here](https://developer.android.com/studio/command-line/adb#am) and [here](https://developer.android.com/studio/command-line/adb#IntentSpec).<br>
+    If you're not familiar with Pegasus' config files, you can find their documentation [here](config-files.md).
 
 Note that not every app supports opening arbitrary files, or opening files at all (for example, RetroArch). In addition, there seems to be a glich on some systems where a file may get opened with something else when there are multiple apps that can handle the file type. Which leads to...
 
@@ -85,7 +78,7 @@ Some apps simply don't support opening files, for example because they rely on a
 
 ### RetroArch
 
-RetroArch happens to use a number of custom parameters. It can be launched like this:
+RetroArch happens to use a large number of custom parameters. It can be launched like this:
 
 ```make
 collection: NES
@@ -115,7 +108,7 @@ The important parts here are the **core** and the **storage** paths. Make sure y
 !!!help
     `-e KEY VALUE` defines an extra parameter, specific to the app. Unlike the file opening before, RetroArch does not need `file://` for the ROM path.
 
-### Apps that can open files
+### Known emulators
 
 Here's an incomplete list of emulators that can open external files using `android.intent.action.VIEW`. If you think some some of the entries are incorrect, or you'd like to extend this list, feel free to open an Issue [here](https://github.com/mmatyas/pegasus-frontend/issues).
 
@@ -149,4 +142,4 @@ SuperRetro16 Lite | `com.bubblezapgames.supergnes_lite/com.bubblezapgames.superg
 - Video playback has a high battery drain
 - Unmounting the SD card while Pegasus is running may force close it
 - If you're launching a memory-intensive application, the Android OS may decide to close Pegasus
-- Shutdown and reboot is not avaliable due to Android restrictions
+- Shutdown and reboot are not avaliable due to Android restrictions

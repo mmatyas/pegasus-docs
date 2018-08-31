@@ -4,7 +4,7 @@ site_description: Documentation and customization guides for the Pegasus fronten
 site_author: Mátyás Mustoha
 copyright: Copyright &copy; 2018 Mátyás Mustoha
 
-pages:
+nav:
     - Home: index.md
     - User Guide:
         - Installation and setup: user-guide/installation.md

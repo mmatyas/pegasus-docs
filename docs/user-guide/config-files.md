@@ -1,8 +1,8 @@
 # Game collections and metadata files
 
-To tell Pegasus in which directories it should look for games, you can use the *Settings menu* -> *Set game directories...* option.
+To tell Pegasus in which directories it should look for games, you can use the *Settings menu &rarr; Set game directories* option:
 
-![screenshot](img/gamedir-editor.png)
+[![screenshot](img/gamedir-editor.png)](img/gamedir-editor.png)
 
 In each of these directories, Pegasus will look for a *collection* and a *metadata* file:
 
@@ -10,22 +10,21 @@ In each of these directories, Pegasus will look for a *collection* and a *metada
 
 - The **metadata** file (`metadata.pegasus.txt` or `metadata.txt`) stores additional information about the individual games, such as title, developer(s) or release date. If a game need a special way to get launched, it can also be set here.
 
-Pegasus will look for the files with `.pegasus.txt` extension first, and if they don't exist, will try the simple `.txt` variants.
+Pegasus will look for the files with `.pegasus.txt` extension first, and if they don't exist, will also try the simple `.txt` variants.
+
+You can find examples for both kind of files below on this page, after their format and keywords are detailed.
 
 !!! tip "EmulationStation"
     If you have EmulationStation installed and set up, Pegasus will also check the directories set in `es_systems.cfg`, read the `gamelist.xml` files and use the metadata and assets defined there.
 
     A tool for converting between ES and Pegasus files can be found [HERE](http://pegasus-frontend.org/tools/convert). Compared to ES files, the collection file is like `es_systems.cfg`, except it's local to the directory it's placed in, while the metadata file is mostly equal to `gamelist.xml`.
 
+    You can disable EmulationStation support in the Settings menu if you wish.
+
 !!! tip "Steam"
-    Pegasus is also compatible with Steam. No additional settings are necessary, installed Steam games will automatically appear in Pegasus with metadata and multimedia assets.
+    Pegasus is also compatible with Steam. No additional configuration is necessary, installed Steam games will automatically appear in Pegasus with metadata and multimedia assets.
 
-
-## File names
-
-Pegasus looks for `collections.txt` or `collections.pegasus.txt` for the collection definitions, while metadata can be defined in `metadata.txt` or `metadata.pegasus.txt` (with these exact names). Pegasus will first check for the `.pegasus.txt` variant (in case you wish to store something else in the one with shorter name).
-
-You can find examples for both files below, after their format and keywords are detailed.
+    You can disable Steam support in the Settings menu if you wish.
 
 
 ## Common file format
@@ -57,8 +56,10 @@ x-source: ScreenScraper
 
 - Keys are case insensitive, ie. `title`, `Title` and `TitLe` are the same. Keys always start an the beginning of the line and end at the first `:` (not including trailing spaces).
 - Values are either single line or span multiple lines. Lines starting with space (or other whitespace characters) will be appended to the item's value (without leading or trailing whitespace), with a single space between the contents of the individual lines. Empty lines will be appended as line breaks.
-- Both the keys and the values can contain Unicode characters.
+- Both the keys and the values may contain Unicode characters.
 - Lines starting with `#` are comments and will be ignored.
+
+`collection` in collection files and `file` in metadata files start a new "entry", and all other properties will belong to the last entry that has been defined above them.
 
 
 ## Collection properties
@@ -88,7 +89,7 @@ Key | Description
 `ignore-file` | Similarly to `file` above.
 `ignore-regex` | Similarly to `regex` above.
 
-**Exclusion is stronger than inclusion**: if both the normal and the `ignore-` fields match for a file, it will be excluded.
+**Exclusion is stronger than inclusion:** if both the normal and the `ignore-` fields match for a file, it will be excluded.
 
 Keys starting with `x-` can be used to extend the format with additional data. This could be used, for example, by other softwares (eg. scrapers) to store some program-specific data.
 

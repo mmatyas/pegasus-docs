@@ -7,7 +7,7 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 
 ## User guide
 
-- Installation and setup
+- [Installation and setup](user-guide/installation.md)
 - Plaform notes
     - [Android](user-guide/platform-android.md)
 - [Game collections and metadata files](user-guide/config-files.md)

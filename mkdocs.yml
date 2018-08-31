@@ -7,6 +7,7 @@ copyright: Copyright &copy; 2018 Mátyás Mustoha
 pages:
     - Home: index.md
     - User Guide:
+        - Installation and setup: user-guide/installation.md
         - Controls: user-guide/controls.md
         - Game collections and metadata files: user-guide/config-files.md
         - Scripting: user-guide/scripting.md

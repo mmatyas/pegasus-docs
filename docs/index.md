@@ -2,6 +2,9 @@
 
 Pegasus is an experimental emulator frontend, focusing on customizability, cross platform support (including embedded) and high performance. Here you can find the related documentation, development notes and guides.
 
+[&gt;&gt; Back to pegasus-frontend.org](http://pegasus-frontend.org/)
+
+
 ## User guide
 
 - Installation and setup

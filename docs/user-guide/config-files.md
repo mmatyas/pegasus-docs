@@ -1,19 +1,16 @@
 # Game collections and metadata files
 
-*To tell Pegasus the list of directories in which it should look for games, you can use the Settings menu* -- is what I'd like to say, but this isn't done yet as of `alpha7`. The list of directories is read from `[config directory]/game_dirs.txt`, one directory per line. The file might not exist at first, but you can create it and then it'll be read.
+To tell Pegasus in which directories it should look for games, you can use the *Settings menu* -> *Set game directories...* option.
 
-!!! help "Configuration directories"
-    Depending on your platform, the default config directory should be:
+![screenshot](img/gamedir-editor.png)
 
-    - Linux: `~/.config/pegasus-frontend`
-    - Windows: `C:\Users\<User Name>\AppData\Local\pegasus-frontend`
-    - macOS: `~/Library/Preferences/pegasus-frontend`
+In each of these directories, Pegasus will look for a *collection* and a *metadata* file:
 
-Pegasus will then go through the directories listed in `game_dirs.txt`, and look for the *collection* and *metadata* file in them:
+- The **collection** file (`collections.pegasus.txt` or `collections.txt`) defines which files in the directory (and its subdirectories) should be treated as games, and thus appear in Pegasus. It also stores information about how to launch them (eg. open in emulator X, or run with parameter Y). All games are grouped into collections, but one game can belong to as many collections as you wish.
 
-- The **collection** file defines which files in the directory (and its subdirectories) should be treated as games, and thus appear in Pegasus. It also stores information about how to launch them (eg. open in emulator X, or run with parameter Y). Games can be grouped into collections, and one game can belong to multiple collections as well.
+- The **metadata** file (`metadata.pegasus.txt` or `metadata.txt`) stores additional information about the individual games, such as title, developer(s) or release date. If a game need a special way to get launched, it can also be set here.
 
-- Additional information about the *individual games* can be set in the **metadata** file. Common properties, like title, developer(s) or release date can be defined here. If a game need a special way to get launched, it can also be set here.
+Pegasus will look for the files with `.pegasus.txt` extension first, and if they don't exist, will try the simple `.txt` variants.
 
 !!! tip "EmulationStation"
     If you have EmulationStation installed and set up, Pegasus will also check the directories set in `es_systems.cfg`, read the `gamelist.xml` files and use the metadata and assets defined there.

@@ -10,9 +10,9 @@ pages:
         - Installation and setup: user-guide/installation.md
         - Controls: user-guide/controls.md
         - Game collections and metadata files: user-guide/config-files.md
-        - Scripting: user-guide/scripting.md
         - Platform Notes:
             - Android: user-guide/platform-android.md
+        - Scripting: user-guide/scripting.md
     - Core Dev:
         - Installing Qt: dev/install-qt.md
         - Cross compile Qt: dev/cross-compile-qt.md

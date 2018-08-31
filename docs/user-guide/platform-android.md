@@ -2,6 +2,12 @@
 
 Pegasus is available for Android devices running at least Android 4.1 (Jelly Bean). For proper multimedia support, **Android 4.4 (KitKat)** or newer is recommended.
 
+## Installation
+
+Pegasus is released as an APK package. To install it, you'll need to enable such files, which can be done under *Settings &rarr; Security &rarr; Unknown Sources*, turned on. Then open the APK file with any file manager app.
+
+If you have an active full screen app (eg. screen shade), Android might not allow you to press on the install button due to security reasons. In this case, just disable that app for the time of the installation.
+
 ## Directories
 
 Config files are stored under `<storage>/pegasus-frontend`, where `<storage>` the internal storage, if you have one, otherwise the SD card. The directory will be created automatically when you first launch Pegasus (or you can create it yourself).

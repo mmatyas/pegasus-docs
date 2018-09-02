@@ -1,6 +1,6 @@
 # Building Pegasus
 
-Pegasus is a C++ program that uses the Qt framework. To build it run on your OS or device, you'll need a C++11 supporting compiler (G++ 4.9, Visual Studio 2017), Qt 5.7 or later (version is important!) for your platform, and at least the following additional Qt components:
+Pegasus is a C++ program that uses the Qt framework. To build it for on your OS or device, you'll need a C++11 supporting compiler (eg. G++ 4.9, Visual Studio 2017), Qt 5.8 or later (version is important!) for your platform, and at least the following additional Qt components:
 
 - QML module
 - Qt Quick 2 module

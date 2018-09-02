@@ -7,7 +7,7 @@ copyright: Copyright &copy; 2018 Mátyás Mustoha
 nav:
     - Home: index.md
     - User Guide:
-        - Installation and setup: user-guide/installation.md
+        - Getting started: user-guide/getting-started.md
         - Controls: user-guide/controls.md
         - Game collections and metadata files: user-guide/config-files.md
         - Platform Notes:

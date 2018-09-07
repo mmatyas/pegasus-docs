@@ -209,3 +209,7 @@ rating: 60%
 x-id: 4139
 x-source: ScreenScraper
 ```
+
+## Asset files
+
+You can add various assets (eg. cover art) for your games, this is documented [HERE](asset-files.md).

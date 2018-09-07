@@ -49,6 +49,7 @@ Outside the Settings menu, there's also the Controls screen, where you can confi
 Now that you're done with the basics, you might want to dig deeper into the customization aspect of Pegasus. Here are a few articles you could take a look, if you're interested:
 
 - [Game collections and metadata files](config-files.md)
+- [Asset files](asset-files.md)
 - [Scripting](scripting.md)
 - [Creating themes](../themes/overview.md)
 - [Translating Pegasus](../dev/translate.md)

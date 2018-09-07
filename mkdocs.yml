@@ -10,6 +10,7 @@ nav:
         - Getting started: user-guide/getting-started.md
         - Controls: user-guide/controls.md
         - Game collections and metadata files: user-guide/config-files.md
+        - Asset files: user-guide/asset-files.md
         - Platform Notes:
             - Android: user-guide/platform-android.md
         - Scripting: user-guide/scripting.md

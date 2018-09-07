@@ -72,6 +72,8 @@ Key | Description
 `launch` | A common launch command for the games in this collection. See below for the supported variables.
 `command` | Same as `launch`. Use whichever you prefer.
 `shortname` | An optional short name for the collection, often an abbreviation (like MAME, NES, etc.). Should be lowercase.
+`summary` | A short description of the collection in one paragraph.
+`description` | A possibly longer description of the collection.
 
 The following fields control which files of the directory should be included in the collection:
 

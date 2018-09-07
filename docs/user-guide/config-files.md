@@ -137,7 +137,7 @@ collection: Multi-game carts
 regex: \d+.in.1
 ```
 
-Then add `C:/games/snes` to `[config directory]/game_dirs.txt` in a new line. The games and categories will appear the next time you start Pegasus.
+Then add `C:/games/snes` to the searched game directories in the Settings menu. The games and categories will appear the next time you start Pegasus.
 
 
 ## Metadata properties

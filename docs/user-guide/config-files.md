@@ -65,8 +65,8 @@ The following keys can be used in the collection config files:
 Key | Description
 ----|---
 `collection` | Creates a new collection with the value as name (if it was not created yet). The properties after this line will modify this colection. This is a **required** field.
-`launch` | A common launch command for the games in this collection. See below for the supported variables.
-`command` | Same as `launch`. Use whichever you prefer.
+`launch` | A common launch command for the games in this collection. See below for the supported variables. As an alternate name, `launch` is also accepted, use whichever you prefer.
+`workdir` | The default working directory used when launching a game. Defaults to the directory of the launched program. As alternate names, `working-directory` and `cwd` are also accepted.
 `shortname` | An optional short name for the collection, often an abbreviation (like MAME, NES, etc.). Should be lowercase.
 `summary` | A short description of the collection in one paragraph.
 `description` | A possibly longer description of the collection.
@@ -155,8 +155,8 @@ Key | Description
 `players` | The number of players who can play the game. Either a single number (eg. `2`) or a number range (eg. `1-4`).
 `release` | The date when the game was released, in YYYY-MM-DD format (eg. `1985-05-22`). Month and day can be omitted if unknown (eg. `1985-05` or `1985` alone is also accepted).
 `rating` | The rating of the game, in percentages. Either an integer percentage in the 0-100% range (eg. `70%`), or a fractional value between 0 and 1 (eg. `0.7`).
-`launch` | If this game must be launched differently than the others in the same collection, a custom launch command can be defined for it.
-`command` | Same as `launch`. Use whichever you prefer.
+`launch` | If this game must be launched differently than the others in the same collection, a custom launch command can be defined for it. As an alternate name, `launch` is also accepted.
+`workdir` | The working directory in which the game is launched. Defaults to the directory of the launched program. Alternatively, `working-directory` and `cwd` are also accepted as the name of this field.
 
 Like with the collections, keys starting with `x-` can be used to extend the format with additional data. This could be used, for example, by other softwares (eg. scrapers) to store some program-specific data.
 

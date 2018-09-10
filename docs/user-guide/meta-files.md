@@ -17,7 +17,7 @@ You can find examples for both kind of files below on this page, after their for
 !!! help "Third-party data sources"
     Pegasus is compatible with various third-party sources, such as EmulationStation and Steam, and can recognize their games automatically. You can turn on/off support for these sources in the Settings menu.
 
-    For more details, see the documentation [HERE](gaming-sources.md).
+    For more details, see the documentation [HERE](meta-sources.md).
 
 !!! info "Global config files"
     Instead of having a collection file in every game directory, if you prefer to have only one big global file, you can also do that. Pegasus will also look for collection and metadata files in the `<config dir>/global_collection` directory, if it exists.
@@ -208,8 +208,8 @@ x-source: ScreenScraper
 
 ## Asset files
 
-You can add various assets (eg. cover art) for your games, this is documented [HERE](asset-files.md).
+You can add various assets (eg. cover art) for your games, this is documented [HERE](meta-assets.md).
 
 ## Real-world examples
 
-Here are some real examples collected on [this page](gaming-examples.md) for the various platforms.
+Here are some real examples collected on [this page](meta-examples.md) for the various platforms.

@@ -1,6 +1,6 @@
 # Asset searching
 
-This page describes how Pegasus is searching for game assets, such as logo images, backgrounds or video files when you're using [collection and metadata files](config-files.md). Such media files can come from these sources:
+This page describes how Pegasus is searching for game assets, such as logo images, backgrounds or video files when you're using [collection and metadata files](meta-files.md). Such media files can come from these sources:
 
 1. A manually set file in `metadata.txt`
 2. A manually set default file in `collections.txt`
@@ -57,7 +57,7 @@ Continuing the example above, let's say we have an `assets/default_cover.jpg` fi
 ```make
 collection: Game Boy Advanced
 extension: gba
-description: The Game Boy Advance[a] (GBA) is a 32-bit handheld
+description: The Game Boy Advance (GBA) is a 32-bit handheld
   video game console developed, manufactured and marketed by Nintendo
   as the successor to the Game Boy Color.
 assets.default-boxFront: assets/default_cover.jpg

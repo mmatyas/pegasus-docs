@@ -42,7 +42,7 @@ launch: am start --user 0
     - `-d` is the parameter (data) of the action, and must be in such URI format (`file://...`)
 
     The full documentation of `am` can be found [here](https://developer.android.com/studio/command-line/adb#am) and [here](https://developer.android.com/studio/command-line/adb#IntentSpec).<br>
-    If you're not familiar with Pegasus' config files, you can find their documentation [here](config-files.md).
+    If you're not familiar with Pegasus' config files, you can find their documentation [here](meta-files.md).
 
 Note that not every app supports opening arbitrary files, or opening files at all (for example, RetroArch). In addition, there seems to be a glich on some systems where a file may get opened with something else when there are multiple apps that can handle the file type. Which leads to...
 

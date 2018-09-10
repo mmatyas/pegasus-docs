@@ -1,6 +1,6 @@
 # Game collections and metadata files
 
-To tell Pegasus in which directories it should look for games, you can use the *Settings menu &rarr; Set game directories* option:
+Often you may want to add games that are not detected automatically, such as emulated retro games or standalone programs. To tell Pegasus in which directories it should look for these, you can use the *Settings menu &rarr; Set game directories* option:
 
 [![screenshot](img/gamedir-editor.png)](img/gamedir-editor.png)
 
@@ -14,17 +14,13 @@ Pegasus will look for the files with `.pegasus.txt` extension first, and if they
 
 You can find examples for both kind of files below on this page, after their format and keywords are detailed.
 
-!!! tip "EmulationStation"
-    If you have EmulationStation installed and set up, Pegasus will also check the directories set in `es_systems.cfg`, read the `gamelist.xml` files and use the metadata and assets defined there.
+!!! help "Third-party data sources"
+    Pegasus is compatible with various third-party sources, such as EmulationStation and Steam, and can recognize their games automatically. You can turn on/off support for these sources in the Settings menu.
 
-    A tool for converting between ES and Pegasus files can be found [HERE](http://pegasus-frontend.org/tools/convert). Compared to ES files, the collection file is like `es_systems.cfg`, except it's local to the directory it's placed in, while the metadata file is mostly equal to `gamelist.xml`.
+    For more details, see the documentation [HERE](gaming-sources.md).
 
-    You can disable EmulationStation support in the Settings menu if you wish.
-
-!!! tip "Steam"
-    Pegasus is also compatible with Steam. No additional configuration is necessary, installed Steam games will automatically appear in Pegasus with metadata and multimedia assets.
-
-    You can disable Steam support in the Settings menu if you wish.
+!!! info "Global config files"
+    Instead of having a collection file in every game directory, if you prefer to have only one big global file, you can also do that. Pegasus will also look for collection and metadata files in the `<config dir>/global_collection` directory, if it exists.
 
 
 ## Common file format
@@ -213,3 +209,7 @@ x-source: ScreenScraper
 ## Asset files
 
 You can add various assets (eg. cover art) for your games, this is documented [HERE](asset-files.md).
+
+## Real-world examples
+
+Here are some real examples collected on [this page](gaming-examples.md) for the various platforms.

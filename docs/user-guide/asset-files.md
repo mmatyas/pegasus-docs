@@ -7,6 +7,8 @@ This page describes how Pegasus is searching for game assets, such as logo image
 3. A file with matching name under `<directory>/media/`
 4. Third-party sources (eg. EmulationStation, Steam)
 
+To download assets for all your games automatically, you might want to use a so-called "scraper". See the [bottom of this page](#how-to-get-assets-for-my-games) for more details.
+
 ## Assets in the Metadata file
 
 All recognized asset types can be set in the `metadata.txt` (and `metadata.pegasus.txt`) file by adding a `assets.<assetname>: <file>` key-value pair for a game.
@@ -83,3 +85,9 @@ and loads the first one it finds.
 ## Third-party sources
 
 Pegasus also tries to use the assets of third-party data sources, if possible. Usually no configuration is necessary, just enable the data source in the Settings menu. Internet access might be required, depending on the source (eg. Steam).
+
+## How to get assets for my games?
+
+For larger game libraries, it might be cumbersome to download each and every asset manually. To automatize this process, you can use programs called "scraper"s. These go through all your games, check multiple online databases for available assets, and may even generate a configuration file for you.
+
+Some popular scraper programs are Universal XML Scraper, Steven Selph's Scraper, Skraper.net and Skyscraper. Try giving them a go!

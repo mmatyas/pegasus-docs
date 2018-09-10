@@ -54,32 +54,7 @@ QML generally describes *what* is on the screen and how they *look* like -- to t
 
 ## Theme directories
 
-Pegasus is looking for themes in the following directories:
-
-**All platforms:**
-
-- `[directory of the program]/themes`
-- `[INSTALL_DATADIR]/themes` (only if defined during a [manual build](../dev/build.md))
-
-**Linux:**
-
-- `~/.config/pegasus-frontend/themes`
-- `~/.local/share/pegasus-frontend/themes`
-- `/etc/xdg/pegasus-frontend/themes`
-- `/usr/local/share/pegasus-frontend/themes`
-- `/usr/share/pegasus-frontend/themes`
-
-**Windows:**
-
-- `C:/Users/[user name]/AppData/Local/pegasus-frontend/themes`
-- `C:/ProgramData/pegasus-frontend/themes`
-
-**macOS:**
-
-- `~/Library/Preferences/pegasus-frontend/themes`
-- `~/Library/Application Support/pegasus-frontend/themes`
-- `/Library/Application Support/pegasus-frontend/themes`
-
+Pegasus is looking for themes in the [configuration directories](../user-guide/config-dirs.md), under a `themes` subdirectory (eg. `~/.config/pegasus-frontend/themes/`).
 
 ## Theme structure
 

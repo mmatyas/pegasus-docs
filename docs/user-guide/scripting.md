@@ -4,14 +4,11 @@ Pegasus supports calling external scripts and executables on certain program eve
 
 ## 1. The scripts directory
 
-First, create a new directory called `scripts` inside the config directory:
-
-- Linux: `~/.config/pegasus-frontend` or `/etc/xdg/pegasus-frontend`
-- Windows: `C:\Users\<User Name>\AppData\Roaming\pegasus-frontend`
+First, find your [config directory](config-dirs.md) and create a new directory there called `scripts` (eg. `~/.config/pegasus-frontend/scripts/`).
 
 ## 2. Event directories
 
-Inside the `scripts` folder, create a new directory for the kind of event you want to script:
+Inside the `scripts` folder, create a new directory for the kind of events for which you want to react:
 
 Name | When
 :--- | ----

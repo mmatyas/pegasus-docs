@@ -8,12 +8,17 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 ## User guide
 
 - [**Getting started!**](user-guide/getting-started.md)
+- [Default controls](user-guide/controls.md)
 - Plaform notes
     - [Android](user-guide/platform-android.md)
-- [Game collections and metadata files](user-guide/config-files.md)
-- [Asset files](user-guide/asset-files.md)
-- [Default controls](user-guide/controls.md)
+    - [RetroPie](user-guide/platform-retropie.md)
+- Adding games
+    - [Collections and metadata files](user-guide/config-files.md)
+    - [Asset files](user-guide/asset-files.md)
+    - [Real world examples](user-guide/gaming-examples.md)
+    - [Third-party data sources](user-guide/gaming-sources.md)
 - [Scripting](user-guide/scripting.md)
+- [Config directories](user-guide/config-dirs.md)
 
 ## Core development
 

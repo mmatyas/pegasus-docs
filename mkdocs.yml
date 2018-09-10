@@ -5,45 +5,50 @@ site_author: Mátyás Mustoha
 copyright: Copyright &copy; 2018 Mátyás Mustoha
 
 nav:
-    - Home: index.md
-    - User Guide:
-        - Getting started: user-guide/getting-started.md
-        - Controls: user-guide/controls.md
-        - Game collections and metadata files: user-guide/config-files.md
-        - Asset files: user-guide/asset-files.md
-        - Platform Notes:
-            - Android: user-guide/platform-android.md
-        - Scripting: user-guide/scripting.md
-    - Core Dev:
-        - Installing Qt: dev/install-qt.md
-        - Cross compile Qt: dev/cross-compile-qt.md
-        - Building: dev/build.md
-        - Deployment: dev/deploy.md
-        - Translations: dev/translate.md
-    - Theme Dev:
-        - Overview: themes/overview.md
-        - QML tutorials: themes/qml-tutorials.md
-        - QML modules: themes/qml-modules.md
-        - Example -- Simple theme: themes/example-simple.md
-        - Example -- Flixnet theme: themes/example-flixnet.md
-        - API reference: themes/api.md
+  - Home: index.md
+  - User Guide:
+    - Getting started: user-guide/getting-started.md
+    - Controls: user-guide/controls.md
+    - Platform Notes:
+      - Android: user-guide/platform-android.md
+      - RetroPie: user-guide/platform-retropie.md
+    - Game files:
+      - Collections and metadata files: user-guide/config-files.md
+      - Asset files: user-guide/asset-files.md
+      - Real world examples: user-guide/gaming-examples.md
+      - Other data sources: user-guide/gaming-sources.md
+    - Scripting: user-guide/scripting.md
+    - Config directories: user-guide/config-dirs.md
+  - Core Dev:
+    - Installing Qt: dev/install-qt.md
+    - Cross compile Qt: dev/cross-compile-qt.md
+    - Building: dev/build.md
+    - Deployment: dev/deploy.md
+    - Translations: dev/translate.md
+  - Theme Dev:
+    - Overview: themes/overview.md
+    - QML tutorials: themes/qml-tutorials.md
+    - QML modules: themes/qml-modules.md
+    - Example -- Simple theme: themes/example-simple.md
+    - Example -- Flixnet theme: themes/example-flixnet.md
+    - API reference: themes/api.md
 
 theme:
-    name: cinder
-    custom_dir: cinder_custom
+  name: cinder
+  custom_dir: cinder_custom
 extra_css:
-    - css/extra.css
-    - css/codehl.css
+  - css/extra.css
+  - css/codehl.css
 
 markdown_extensions:
-    - toc
-    - sane_lists
-    - admonition
-    - def_list
-    - codehilite:
-        guess_lang: false
-    - pymdownx.inlinehilite
-    - pymdownx.keys
-    - pymdownx.magiclink
-    - pymdownx.extrarawhtml
-    - pymdownx.details
+  - toc
+  - sane_lists
+  - admonition
+  - def_list
+  - codehilite:
+      guess_lang: false
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.extrarawhtml
+  - pymdownx.details

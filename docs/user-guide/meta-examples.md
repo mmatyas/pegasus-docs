@@ -44,6 +44,7 @@ I've also downloaded assets (like box art and video) for my games using a [scrap
 Now I create a [collection file](meta-files.md) for each system. As mentioned in the [Android platform notes](platform-android.md), RetroArch happens to need a bunch of parameters, but PPSSPP can just open the file directly. Here are my configs:
 
 ??? note "[SD card]/Roms/NES/collections.txt"
+        :::make
         collection: NES
         extensions: zip
         launch: am start
@@ -62,6 +63,7 @@ Now I create a [collection file](meta-files.md) for each system. As mentioned in
           --activity-clear-top
 
 ??? note "[SD card]/Roms/PSP/collections.txt"
+        :::make
         collection: PSP
         extension: iso, cso
         launch: am start

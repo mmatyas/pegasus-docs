@@ -154,3 +154,35 @@ Property | Description
 You can use them as the value for `font.family` members of Text items, eg. `font.family: globalFonts.sans`.
 
 The fonts currently in use are Roboto and Roboto Condensed.
+
+## Keys
+
+Controls configuration can be queried using the `api.keys` object, with the functions and members below. For each UI functionality (eg. "accept"), you can check whether a particular key/button is registered to that event, or get all of the registered keys as an array.
+
+Purpose | Check function | Array
+---|---|---
+accept/select | `isAccept(key)` | `accept`
+cancel/back | `isCancel(key)` | `cancel`
+details | `isDetails(key)` | `details`
+filters | `isFilters(key)` | `filters`
+next page | `isNextPage(key)` | `nextPage`
+previous page | `isPrevPage(key)` | `prevPage`
+page up | `isPageUp(key)` | `pageUp`
+page down | `isPageDown(key)` | `pageDown`
+
+In themes, you typically handle keyboard and gamepad key presses/releases using `Keys.onPressed` and `Keys.onReleased` (see the [Qt documentation](https://doc.qt.io/qt-5/qml-qtquick-keys.html#pressed-signal)). The `event` object you receive there has a `key` field which can be used as the parameter for the functions above.
+
+Example:
+
+```qml
+Keys.onPressed: {
+    if (api.keys.isAccept(event.key)) {
+        event.accepted = true;
+
+        // do something
+    }
+}
+```
+
+!!! info
+    For regular navigation (ie. up/down/left/right), the QML `KeyNavigation` can be used (documentation [here](https://doc.qt.io/qt-5/qml-qtquick-keynavigation.html)). Navigation keys (arrows/dpad/left stick) cannot be changed at the moment.

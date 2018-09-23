@@ -8,7 +8,7 @@ nav:
   - Home: index.md
   - User Guide:
     - Getting started: user-guide/getting-started.md
-    - Controls: user-guide/controls.md
+    - Default controls: user-guide/controls.md
     - Platform Notes:
       - Android: user-guide/platform-android.md
       - RetroPie: user-guide/platform-retropie.md

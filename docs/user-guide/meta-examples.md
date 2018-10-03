@@ -6,7 +6,7 @@ On this page, some real-world examples have been collected for the various suppo
 
 ## Android
 
-Let's say I want to play my NES and PSP games on Android. I'd like to use RetroArch with the fceumm core (installed from its menu) for emulating NES, and use the standalone PPSSPP app for PSP. After copying the roms to the SD card, my directory structure looks like this *(games are examples)*:
+Let's say I want to play my NES and PSP games on Android. I'd like to use RetroArch with the `fceumm` core (installed from its menu) for emulating NES, and use the standalone PPSSPP app for PSP. After copying the roms to the SD card, my directory structure looks like this *(games are examples)*:
 
 ```
 [SD card]
@@ -26,20 +26,26 @@ I've also downloaded assets (like box art and video) for my games using a [scrap
 └─ Roms
    ├─ NES
    │  ├─ <b>media</b>
-   │  │  ├─ <i>Contra-boxFront.png</i>
-   │  │  ├─ <i>Contra-video.mp4</i>
-   │  │  ├─ <i>Super Mario-boxFront.png</i>
-   │  │  └─ <i>Super Mario-video.mp4</i>
+   │  │  ├─ <b>Contra</b>
+   │  │  │  ├─ <i>boxFront.png</i>
+   │  │  │  └─ <i>video.mp4</i>
+   │  │  └─ <b>Super Mario</b>
+   │  │     ├─ <i>boxFront.png</i>
+   │  │     └─ <i>video.mp4</i>
    │  ├─ Contra.zip
    │  └─ Super Mario.zip
    └─ PSP
       ├─ <b>media</b>
-      │  ├─ <i>Patapon-boxFront.png</i>
-      │  ├─ <i>Lumines-boxFront.png</i>
-      │  └─ <i>Lumines-video.mp4</i>
+      │  ├─ <b>Patapon</b>
+      │  │  └─ <i>boxFront.png</i>
+      │  └─ <b>Lumines</b>
+      │     ├─ <i>boxFront.png</i>
+      │     └─ <i>video.mp4</i>
       ├─ Patapon.iso
       └─ Lumines.cso
 </pre>
+
+(see the documentation [here](meta-assets.md#the-media-directory))
 
 Now I create a [collection file](meta-files.md) for each system. As mentioned in the [Android platform notes](platform-android.md), RetroArch happens to need a bunch of parameters, but PPSSPP can just open the file directly. Here are my configs:
 

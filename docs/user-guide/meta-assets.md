@@ -4,7 +4,7 @@ This page describes how Pegasus is searching for game assets, such as logo image
 
 1. A manually set file in `metadata.txt`
 2. A manually set default file in `collections.txt`
-3. A file with matching name under `<directory>/media/`
+3. A file with a recognized name under `<directory>/media/<gamename>/`
 4. Third-party sources (eg. EmulationStation, Steam)
 
 To download assets for all your games automatically, you might want to use a so-called "scraper". See the [bottom of this page](#how-to-get-assets-for-my-games) for more details.
@@ -68,19 +68,63 @@ assets.default-boxFront: assets/default_cover.jpg
 
 ## The media directory
 
-If the game's assets haven't beed defined manually, Pegasus will also look for a matching file in the game directory's `media` subdirectory, if it exists. If there's a file in there with the same name as the game, plus a known asset name as suffix, then the file will be used for that particular asset type.
+If the game's assets haven't beed defined manually, Pegasus will also look for a matching file under `<gamedir>/media/<gamename>/`, where `<gamedir>` is the directory of the games (ie. where `collections.txt` is), and `<gamename>` is a particular game's filename without extension.
 
 ### Example
 
-Let's say you have `Contra.nes` in your collection and want to have logo art for it. If it's not manually defined, Pegasus will also check for the following files:
+```
+NES/
+├─ collections.txt
+├─ metadata.txt
+├─ Contra (U).zip
+└─ media/
+   └─ Contra (U)/
+      ├─ boxFront.jpg
+      ├─ logo.jpg
+      └─ video.mp4
+```
 
-- `<gamedir>/media/Contra-logo.png`
-- `<gamedir>/media/Contra-logo.jpg`
 
-and loads the first one it finds.
+??? info "Recognized assets"
+	For still images, PNG and JPG files are searched, for videos WEBM, MP4 and AVI, and for audio MP3, OGG and WAV. The recognized filenames are:
 
-!!! tip "Box front art"
-    As box front arts tend to be the most popular kind of assets, images without asset suffix in the media directory (eg. `<gamedir>/media/Contra.png`) will also be recognized and used as box front art.
+	- `boxFront`
+	- `box_front`
+	- `boxart2D`
+	- `boxBack`
+	- `box_back`
+	- `boxSpine`
+	- `box_spine`
+	- `boxSide`
+	- `box_side`
+	- `boxFull`
+	- `box_full`
+	- `box`
+	- `cartridge`
+	- `disc`
+	- `cart`
+	- `logo`
+	- `wheel`
+	- `marquee`
+	- `bezel`
+	- `screenmarquee`
+	- `border`
+	- `panel`
+	- `cabinetLeft`
+	- `cabinet_left`
+	- `cabinetRight`
+	- `cabinet_right`
+	- `tile`
+	- `banner`
+	- `steam`
+	- `steamgrid`
+	- `grid`
+	- `poster`
+	- `flyer`
+	- `background`
+	- `music`
+	- `screenshot`
+	- `video`
 
 ## Third-party sources
 

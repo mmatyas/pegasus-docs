@@ -80,6 +80,7 @@ Property | Description
 `assets` | An Object containing game assets (see below)
 `favorite` | <span class="optional"></span> Boolean (true/false) value (default: false). **Writable**.
 `playCount` | <span class="optional"></span> Positive integer (default: 0)
+`playTime` | <span class="optional"></span> Play time in seconds, positive integer (default: 0)
 `lastPlayed` | <span class="optional"></span> As QML `date`, incl. time (default: invalid)
 
 ## Game Assets

@@ -130,7 +130,7 @@ Mupen64 Plus AE | `paulscode.android.mupen64plusae/.MainActivity`
 Neo.emu | `com.explusalpha.NeoEmu/com.imagine.BaseActivity`
 NES.emu | `com.explusalpha.NesEmu/com.imagine.BaseActivity`
 NGP.emu | `com.explusalpha.NgpEmu/com.imagine.BaseActivity`
-Nostalgia.NES | `com.nostalgiaemulators.neslite/com.nostalgiaemulators.nes.NesSlotImportActivity`
+Nostalgia.NES | no support
 PPSSPP | `org.ppsspp.ppsspp/.PpssppActivity`
 Reicast | `com.reicast.emulator/.MainActivity`
 Snes9xPlus | `com.explusalpha.Snes9xPlus/com.imagine.BaseActivity`

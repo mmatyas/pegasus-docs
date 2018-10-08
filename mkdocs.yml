@@ -18,6 +18,7 @@ nav:
       - Real world examples: user-guide/meta-examples.md
       - Other data sources: user-guide/meta-sources.md
     - Scripting: user-guide/scripting.md
+    - Installing themes: user-guide/installing-themes.md
     - Config directories: user-guide/config-dirs.md
   - Core Dev:
     - Installing Qt: dev/install-qt.md

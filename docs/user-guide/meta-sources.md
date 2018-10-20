@@ -22,6 +22,8 @@ A tool for converting between ES and Pegasus files can be found [HERE](http://pe
 
 It just works, no additional configuration is necessary. Installed Steam games should automatically appear in Pegasus with metadata and multimedia assets.
 
+On Windows you might need to install DirectShow codecs for video playback. You can download them [HERE](https://xiph.org/dshow/), look for `opencodecs_<version>.exe`.
+
 ## GOG
 
 *Available on: desktop Linux, Windows*

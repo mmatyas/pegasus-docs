@@ -31,3 +31,9 @@ On Windows you might need to install DirectShow codecs for video playback. You c
 On Windows, this works out of the box, like Steam. Similarly to GOG Galaxy, games installed older than a few years ago might not be detected, due to a change in GOG's installers. In this case, try downloading the game again from GOG.com and reinstall it.
 
 On Linux, there's way less information available offline, so support is a bit hit and miss. Games installed in the default location (`<home>/GOG Games`) can be detected, but assets might me missing (for the games installed somewhere else, you can always just create symlinks). If you have games that refuse to show up, feel free to report it as an issue.
+
+## Android Apps
+
+*Available on: Android*
+
+It just works. Installed and launchable apps will appear in Pegasus just like with any other Android launcher. Note that no metadata and assets are available at the time of writing; this will be improved in the future.

@@ -37,4 +37,4 @@ cp /path/to/libQt5Svg.so.5 ./lib/
 
 ## macOS
 
-Haven't tried yet. `macdeployqt` should work in theory.
+`make` creates a regular `.app` release. Similarly to Linux, you can use it as-is for static builds, or use `macdeployqt` to collect the liraries and optionally generate a DMG file.

@@ -10,13 +10,14 @@ Pegasus is available for various devices and operating systems. Currently there 
 - Linux
 - Raspberry Pi
 - Android
+- macOS
 
 You can find the latest releases on <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, in the *Downloads* section. On most platforms, Pegasus is just a single file, which you can extract and run anywhere on your system. If there are additional system requirements, they are mentioned on the download page as well.
 
 For the **Android** release, you can find some additional notes and guides [HERE](platform-android.md).
 
 !!! info "Other platforms"
-    Pegasus can also run on platforms not listed above (it's confirmed working on macOS, for example), but will need to be compiled manually from source code. If you wish to do that, the [Build documentation](../dev/build.md) can help you along the way.
+    Pegasus can also run on platforms not listed above, but may need to be compiled manually from source code. If you wish to do that, the [Build documentation](../dev/build.md) can help you along the way.
 
 ## Basic navigation
 

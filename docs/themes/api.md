@@ -162,22 +162,22 @@ Controls configuration can be queried using the `api.keys` object, with the func
 
 Purpose | Check function | Array
 ---|---|---
-accept/select | `isAccept(key)` | `accept`
-cancel/back | `isCancel(key)` | `cancel`
-details | `isDetails(key)` | `details`
-filters | `isFilters(key)` | `filters`
-next page | `isNextPage(key)` | `nextPage`
-previous page | `isPrevPage(key)` | `prevPage`
-page up | `isPageUp(key)` | `pageUp`
-page down | `isPageDown(key)` | `pageDown`
+accept/select | `isAccept(keyevent)` | `accept`
+cancel/back | `isCancel(keyevent)` | `cancel`
+details | `isDetails(keyevent)` | `details`
+filters | `isFilters(keyevent)` | `filters`
+next page | `isNextPage(keyevent)` | `nextPage`
+previous page | `isPrevPage(keyevent)` | `prevPage`
+page up | `isPageUp(keyevent)` | `pageUp`
+page down | `isPageDown(keyevent)` | `pageDown`
 
-In themes, you typically handle keyboard and gamepad key presses/releases using `Keys.onPressed` and `Keys.onReleased` (see the [Qt documentation](https://doc.qt.io/qt-5/qml-qtquick-keys.html#pressed-signal)). The `event` object you receive there has a `key` field which can be used as the parameter for the functions above.
+In themes, you typically handle keyboard and gamepad key presses/releases using `Keys.onPressed` and `Keys.onReleased` (see the [Qt documentation](https://doc.qt.io/qt-5/qml-qtquick-keys.html#pressed-signal)). The `event` object you receive there can be used as the parameter for the functions above. As for the key list querying, the returned array contains simple objects that have `key` and `modifiers` fields, like the real QML `KeyEvent` object (but nothing else).
 
 Example:
 
 ```qml
 Keys.onPressed: {
-    if (api.keys.isAccept(event.key)) {
+    if (api.keys.isAccept(event)) {
         event.accepted = true;
 
         // do something

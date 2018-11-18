@@ -1,5 +1,8 @@
 ![preview](img/simple_preview.png)
 
+!!! warning
+    This tutorial is a bit outdated. Certain API commands have changed, so the code blocks below may not work out of the box. However the general ideas still hold, so this might be useful for learning QML itself.
+
 # Step by step: Simple theme
 
 In this tutorial, I'll show the theme creation in practice by implementing the theme above from scratch. Before we start, you might want to be familiar with the QML basics and dynamic layout elements (see the [QML tutorials](qml-tutorials.md)).

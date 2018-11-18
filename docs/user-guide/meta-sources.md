@@ -2,11 +2,7 @@
 
 Pegasus is compatible with various third-party sources, such as EmulationStation and Steam, and can recognize their games automatically, often with all the available assets as well. You can turn on/off support for these sources in the *Settings* menu, under *Enable/disable data sources*.
 
-Other than Pegasus' [own configuration files](config-files), at the moment there is support for the following applications:
-
-- EmulationStation
-- Steam
-- GOG
+Other than Pegasus' [own configuration files](config-files), there is also support for the applications below.
 
 ## EmulationStation
 
@@ -37,3 +33,9 @@ On Linux, there's way less information available offline, so support is a bit hi
 *Available on: Android*
 
 It just works. Installed and launchable apps will appear in Pegasus just like with any other Android launcher. Note that no metadata and assets are available at the time of writing; this will be improved in the future.
+
+## Skraper Assets
+
+*Available on: all platforms*
+
+Pegasus can recognize the assets ("media" directory) layout created by Skraper. Pegasus will look for assets in `[game directory]/skraper` and `[game directory]/media`, for the game directories set in the Settings menu.

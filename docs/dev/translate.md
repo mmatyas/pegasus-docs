@@ -23,11 +23,11 @@ pegasus_[language][-script][-country].ts
 
 where
 
-- `language` is the language code (two- or rarely three letters, lowercase).
-- optionally,`script` defines the writing system, like simplified/traditional chinese or Old German Runes (four letters, title case)
-- optionally, `country` defines a country-specific variant (two letters, uppercase)
+- `language` is the language code, mentioned above. Two- or rarely three letters, lowercase.
+- optionally,`script` defines the writing system, like simplified/traditional chinese or Old German Runes. Four letters, title case.
+- optionally, `country` defines regional settings, which affects things like date format, usually. Two letters, uppercase.
 
-for example, `hi-Deva-IN` means Hindi language, Devanagari script, and used in India. Usually though the two letter language code is enough for most locales.
+for example, `hi-Deva-IN` means Hindi language, Devanagari script, and the regional settings of India. Usually though the two letter language code is enough for most locales.
 
 Two letter language codes can be found [here](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and four letter script codes [here](https://en.wikipedia.org/wiki/ISO_15924).
 

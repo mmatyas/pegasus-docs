@@ -1,91 +1,64 @@
 # API reference (alpha)
 
-Games found by Pegasus are organized in collections. Games can have metadata and various kinds of assets, and one game may be present in multiple collections.
+All data provided by Pegasus can be accessed using a global QML object called `api`. It has the following main components:
 
-All data provided by the Core is available in a global QML object called `api`. It has the following main components. Unless otherwise noted, all fields are read-only.
+- `api.collections`: the list of all collections
+- `api.allGames`: the list of all games
+- `api.keys`: the keyboard/gamepad configuration of the user
 
-## List of Collections
 
-The list of collections can be accessed trough `api.collections`. It's an Object with the following members:
+## Collections
 
-Property | Description
----|---
-`model` | The array of `Collection` items; can be used as the `model` parameter of dynamic layouts.
-`count` | The number of `Collection` items in `model`. Positive integer.
-`index` | The index of the currently selected item of `model`. **Writable**, accepted values are positive integers less than `count`, and `-1` (nothing selected). Setting invalid values will be ignored.
-`current` | The currently selected `Collection`. If `index` is `-1`, its value is `null`, otherwise equivalent to `model[index]`. `current` as a field is read-only, but the `Collection` itself has writable fields; see below.
-
-Furthermore, it also has the following callable methods:
-
-Method | Description
----|---
-`incrementIndex()` | Increments the `index` by one. If the `index` was pointing to the last item, it jumps to the first one (ie. wraps around).
-`decrementIndex()` | Decrements the `index` by one. If the `index` was pointing to the firs item, it jumps to the last one (ie. wraps around).
-`incrementIndexNoWrap()` | Increments the `index` by one, if it's not pointing to the last item already.
-`decrementIndexNoWrap()` | Decrements the `index` by one, if it's not pointing to the first item already.
-
-## One Collection
-
-`api.currentCollection` can be used as a shortcut for `api.collections.current`. A `Collection` has the following data members. Properties marked as "optional" might have no value (eg. empty string or empty array).
+Games found by Pegasus are organized in collections, and one game may be present in multiple collections. The collections can be accessed trough `api.collections`, which is an *item model* with the following properties:
 
 Property | Description
 ---|---
 `name` | The unique name of the collection, eg. "Nintendo Entertainment System", "Mario Cartridges", etc.
-`shortName` | <span class="optional"></span> An optional, lowercase short name for the collection. Often an abbreviation, like `nes`, `mame`, etc.
-`games` | Object storing the list of games (see below).
+`shortName` | <span class="optional"></span> A short name for the collection, often an abbreviation like `nes`, `mame`, etc. Always in lowercase. If not set, defaults to the value of `name`.
+`games` | The list of games belonging to this collection; see "Games" below. All available collections are guaranteed to have at least one game.
 
-## List of Games
+Properties marked as "optional" might have no value (eg. empty string or empty array). All fields are read-only.
 
-Similarly to the list of collections, `api.currentCollection.games` is an Object with the following members:
 
-Property | Description
----|---
-`modelAll` | The array of all `Game` items in this collection; can be used as the `model` parameter of dynamic layouts.
-`model` | The array of `Game` items matching the currently active `Filter` (see later); can be used as the `model` parameter of dynamic layouts.
-`countAll` | The number of items in `modelAll`. Positive integer.
-`count` | The number of items in `model`. Positive integer.
-`index` | The index of the currently selected item of `model` (not `modelAll`, since you can't select a game you've hide with a filter). **Writable**, accepted values are positive integers less than `count`, and `-1` (nothing selected). Setting invalid values will be ignored.
-`current` | The currently selected `Game`. If `index` is `-1`, its value is `null`, otherwise equivalent to `model[index]`.
+## Games
 
-Furthermore, it also has the following callable methods:
-
-Method | Description
----|---
-`incrementIndex()` | Increments the `index` by one. If the `index` was pointing to the last item, it jumps to the first one (ie. wraps around).
-`decrementIndex()` | Decrements the `index` by one. If the `index` was pointing to the firs item, it jumps to the last one (ie. wraps around).
-`incrementIndexNoWrap()` | Increments the `index` by one, if it's not pointing to the last item already.
-`decrementIndexNoWrap()` | Decrements the `index` by one, if it's not pointing to the first item already.
-
-## One Game
-
-`api.currentGame` can be used as a shortcut for `api.collections.current.games.current`. A `Game` is an Object with the following data members. Properties marked as "optional" might have no value (eg. empty string or empty array).
+Games can have metadata and various kinds of assets. The list of games belonging to a collection can be accessed using the collection's `games` field, and the list of all available games through `api.allGames`. Both are *item models* with the following properties:
 
 Property | Description
 ---|---
-`title` | Game title
+`title` | The game's title
 `developer` | <span class="optional"></span> Developer(s) as a string. If there are more than one, they are separated with `, `.
 `publisher` | <span class="optional"></span> Publisher(s) as a string. If there are more than one, they are separated with `, `.
 `genre` | <span class="optional"></span> Genre(s) as a string. If there are more than one, they are separated with `, `.
-`developerList` | <span class="optional"></span> Developers as an array.
-`publisherList` | <span class="optional"></span> Publishers as an array.
-`genreList` | <span class="optional"></span> Genres as an array.
-`summary` | <span class="optional"></span> Short description (2-3 sentence or less)
-`description` | <span class="optional"></span> Longer description
-`release` | <span class="optional"></span> Release date as QML `date` (default: invalid)
-`year` | <span class="optional"></span> Release year as integer (default: 0)
-`month` | <span class="optional"></span> Release month as integer (default: 0)
-`day` | <span class="optional"></span> Release day as integer (default: 0)
-`players` | <span class="optional"></span> Maximum number of players (default: 1)
-`rating` | <span class="optional"></span> Floating-point value between and including `0.0` and `1.0` (default: `0.0`)
-`assets` | An Object containing game assets (see below)
-`favorite` | <span class="optional"></span> Boolean (true/false) value (default: false). **Writable**.
-`playCount` | <span class="optional"></span> Positive integer (default: 0)
-`playTime` | <span class="optional"></span> Play time in seconds, positive integer (default: 0)
-`lastPlayed` | <span class="optional"></span> As QML `date`, incl. time (default: invalid)
+`developerList` | <span class="optional"></span> The list of developers as an array.
+`publisherList` | <span class="optional"></span> The list of publishers as an array.
+`genreList` | <span class="optional"></span> The list of genres as an array.
+`summary` | <span class="optional"></span> Short description (typically 2-3 sentences).
+`description` | <span class="optional"></span> Longer description.
+`release` | <span class="optional"></span> Release date as QML `date`. If not set, defaults to an invalid date.
+`year` | <span class="optional"></span> Release year as integer. Defaults to 0.
+`month` | <span class="optional"></span> Release month as integer. Defaults to 0.
+`day` | <span class="optional"></span> Release day as integer. Defaults to 0.
+`players` | <span class="optional"></span> Maximum number of players. If not set, defaults to 1.
+`rating` | <span class="optional"></span> Floating-point value between and including `0.0` and `1.0` (ie. 0% and 100%). If not set, defaults to `0.0`.
+`favorite` | <span class="optional"></span> Boolean (true/false) value. If not set, defaults to false. This field is **writable**.
+`playCount` | <span class="optional"></span> The number of times this games was launched. Defaults to 0.
+`lastPlayed` | <span class="optional"></span> The last time this game was launched. A QML `date` value with time information. Defaults to an invalid date.
+`playTime` | <span class="optional"></span> Play time in seconds, as a positive integer value. Defaults to 0.
+`assets` | An object containing the game's assets (see below).
 
-## Game Assets
+Properties marked as "optional" might have no value (eg. empty string or empty array). Unless otherwise noted, all fields are read-only.
 
-Every `Game` has an `asset` member Object with the following data members. All of them are string URLs, and all of them can be empty.
+In addition, games have the following callable methods:
+
+Method | Description
+---|---
+`launch()` | Launch this game. If the games launches successfully, Pegasus closes down while the game runs.
+
+
+## Assets
+
+Every game has an `asset` object that contains all assets belonging to the game. It has the following properties. All of them are (local or remote) URLs as string, and all of them can be empty.
 
 Property | Description
 ---|---
@@ -126,35 +99,6 @@ Property | Description
 `screenshots` | Array of strings, each a URL to an image.
 `videos` | Array of strings, each a URL to a video source.
 
-## Launching games
-
-You can select a game by changing `api.collections.index` and `api.currentCollection.games.index`. Then call `api.launchGame` to start the game.
-
-## Filtering games
-
-`api.filters` is an Object with the data members below. Changing these values will automatically update all `Collection`'s `model` field to include `Game`s that match *all* filters. **All fields are writable**.
-
-Property | Description
----|---
-`title` |  Match games whose titles contain this string. String value. (default: empty)
-`playerCount` |  Match games that have at least this many players. Positive integer. (default: 1)
-`favorite` |  Setting to true includes only games marked as favorite. Boolean (true/false) value. (default: false)
-
-!!! note
-    At the moment, the indices of the game lists reset to `0` or `-1` (no hits) when the `Filter` changes.
-
-## Fonts
-
-Pegasus comes with a sans-serif and a sans-serif condensed font face, which are used in the main menu. If you want to use the same font families in your theme, you can access them using a global QML object called `globalFonts`. This has the following properties:
-
-Property | Description
----|---
-`sans` | The sans-serif font
-`condensed` | The sans-serif condensed font
-
-You can use them as the value for `font.family` members of Text items, eg. `font.family: globalFonts.sans`.
-
-The fonts currently in use are Roboto and Roboto Condensed.
 
 ## Keys
 
@@ -185,5 +129,50 @@ Keys.onPressed: {
 }
 ```
 
-!!! info
+!!! warning
     For regular navigation (ie. up/down/left/right), the QML `KeyNavigation` can be used (documentation [here](https://doc.qt.io/qt-5/qml-qtquick-keynavigation.html)). Navigation keys (arrows/dpad/left stick) cannot be changed at the moment.
+
+
+## Theme utilities
+
+### Item models
+
+*Item models* are list of objects that support custom sorting and filtering, and can be used as the `model` property of QML Views (eg. ListView or PathView). See [the Qt documentation](https://doc.qt.io/qt-5/qtquick-modelviewsdata-modelview.html#displaying-data-with-views) for more details. For convenience, the `modelData` role is also provided for all item models mentioned in this documentation.
+
+Sometimes you may want to access the items of an item model manually. To qery the number of items in the model, you can check its `count` property (eg. `api.allGames.count`), while to get a single item of it, you can use the `get(index)` method (eg. `api.allGames.get(5)`).
+
+### Sorting and filtering
+
+*Item models* can be sorted and filtered using [SortFilterProxyModel](https://github.com/oKcerG/SortFilterProxyModel). Please see the samples in the linked documentation for usage tips. The list of all available sorters and filters can be found [here](https://okcerg.github.io/SortFilterProxyModel/).
+
+For example, to get the list of all games ordered by play time, you could write a code similar to this:
+
+```qml
+import SortFilterProxyModel 0.2
+
+...
+
+SortFilterProxyModel {
+    id: mysorter
+    sourceModel: api.allGames
+    sorters: RoleSorter { roleName: "playTime" }
+}
+
+ListView {
+    model: mysorter
+    ...
+}
+```
+
+### Fonts
+
+Pegasus comes with a sans-serif and a sans-serif condensed font face, which are used in the main menu. If you want to use the same font families in your theme, you can access them using a global QML object called `globalFonts`. This has the following properties:
+
+Property | Description
+---|---
+`sans` | The sans-serif font
+`condensed` | The sans-serif condensed font
+
+You can use them as the value for `font.family` members of Text items, eg. `font.family: globalFonts.sans`.
+
+The fonts currently in use are Roboto and Roboto Condensed.

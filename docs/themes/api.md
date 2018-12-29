@@ -53,7 +53,9 @@ In addition, games have the following callable methods:
 
 Method | Description
 ---|---
-`launch()` | Launch this game. If the games launches successfully, Pegasus closes down while the game runs.
+`launch()` | Launch this game.
+
+Launching a game may fail, in which case the reason is logged (and in the future, will be shown to the user). If the game starts up successfully, Pegasus minimizes its resource usage and goes to the background while the game runs. On return, the theme will be reloaded -- if you wish it to remember something, <del>you can use `api.memory`</del> (will be implemented next week).
 
 
 ## Assets

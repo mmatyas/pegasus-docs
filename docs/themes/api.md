@@ -9,7 +9,7 @@ All data provided by Pegasus can be accessed using a global QML object called `a
 
 ## Collections
 
-Games found by Pegasus are organized in collections, and one game may be present in multiple collections. The collections can be accessed trough `api.collections`, which is an *item model* with the following properties:
+Games found by Pegasus are organized in collections, and one game may be present in multiple collections. The collections can be accessed trough `api.collections`, which is an [*item model*](#item-models) (in short, a list of items). Each collection in it has the following properties:
 
 Property | Description
 ---|---
@@ -22,7 +22,7 @@ Properties marked as "optional" might have no value (eg. empty string or empty a
 
 ## Games
 
-Games can have metadata and various kinds of assets. The list of games belonging to a collection can be accessed using the collection's `games` field, and the list of all available games through `api.allGames`. Both are *item models* with the following properties:
+Games can have metadata and various kinds of assets. The list of games belonging to a collection can be accessed using a collection's `games` field (see above). The list of *all* available games can be accessed through `api.allGames`. Both are [*item models*](#item-models). Each game in them has the following properties:
 
 Property | Description
 ---|---
@@ -139,7 +139,7 @@ Keys.onPressed: {
 
 *Item models* are list of objects that support custom sorting and filtering, and can be used as the `model` property of QML Views (eg. ListView or PathView). See [the Qt documentation](https://doc.qt.io/qt-5/qtquick-modelviewsdata-modelview.html#displaying-data-with-views) for more details. For convenience, the `modelData` role is also provided for all item models mentioned in this documentation.
 
-Sometimes you may want to access the items of an item model manually. To qery the number of items in the model, you can check its `count` property (eg. `api.allGames.count`), while to get a single item of it, you can use the `get(index)` method (eg. `api.allGames.get(5)`).
+Sometimes you may want to access the items of an item model manually. To query the **number of items** in the model, you can check its `count` property (eg. `api.allGames.count`), while to **get a single item** of it, you can use the `get(index)` method (eg. `api.allGames.get(5)`).
 
 ### Sorting and filtering
 

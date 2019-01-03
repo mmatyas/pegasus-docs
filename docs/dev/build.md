@@ -43,12 +43,12 @@ You can change build parameters to `qmake` (the Qt configuration tool) by append
 
 &nbsp;
 
-You can use the following parameters:
+The following additional parameters are available for QMake. Usually they don't need to be touched unless you wish to set up a certain installation structure (eg. on Linux).
 
 Option | Description
 ---|---
-`INSTALLDIR` | The general installation directory used by `make install`. Defaults to `/opt/pegasus-frontend` on Linux and `C:\pegasus-frontend` on Windows. You can fine tune the installation directory of some components by other options.
-`INSTALL_BINDIR` | The installation directory of the runtime binary ("exe"). Defaults to `INSTALLDIR`.
-`INSTALL_DATADIR` | The installation directory of the data files, eg. default themes. Defaults to `INSTALLDIR`.
-`INSTALL_ICONDIR` | [Linux only] The installation directory of the icon file. Defaults to `INSTALLDIR` (to make it portable), `/usr/share/pixmaps` is recommended if you want to install Pegasus system-wide.
-`INSTALL_DESKTOPDIR` | [Linux only] The installation directory of the desktop entry. Defaults to `INSTALLDIR` (to make it portable), `/usr/share/applications` is recommended if you want to install Pegasus system-wide.
+`INSTALLDIR` | The general installation directory used by `make install`. Defaults to `/opt/pegasus-frontend` on Linux and `C:\pegasus-frontend` on Windows.
+`INSTALL_BINDIR` | The installation directory of the  executable. You can use this to place the binary under `/usr/bin/`, for example. Defaults to `INSTALLDIR`.
+`INSTALL_DATADIR` | The installation directory of the data files (if there's any), and where to look for them. You can use this to add another directory where Pegasus looks for themes, for example. Defaults to `INSTALLDIR`.
+`INSTALL_DESKTOPDIR` | Linux only, if set, `make install` will create an XDG desktop file there (making Pegasus appear in the main menu). Unset by default, on most distros `/usr/share/applications` is a good value.
+`INSTALL_ICONDIR` | Linux only, if set, `make install` will create an XDG icon file there (making Pegasus have an icon on the tray and the menu). Unset by default, on most distros `/usr/share/pixmaps` or `/usr/share/icons/hicolor/128x128/apps` is a good value.

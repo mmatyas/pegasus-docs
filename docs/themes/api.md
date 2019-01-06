@@ -5,6 +5,7 @@ All data provided by Pegasus can be accessed using a global QML object called `a
 - `api.collections`: the list of all collections
 - `api.allGames`: the list of all games
 - `api.keys`: the keyboard/gamepad configuration of the user
+- `api.memory`: an object that can store theme specific settings
 
 
 ## Collections
@@ -133,6 +134,46 @@ Keys.onPressed: {
 
 !!! warning
     For regular navigation (ie. up/down/left/right), the QML `KeyNavigation` can be used (documentation [here](https://doc.qt.io/qt-5/qml-qtquick-keynavigation.html)). Navigation keys (arrows/dpad/left stick) cannot be changed at the moment.
+
+
+## Memory
+
+Themes often want to remember data like custom options or the index of the last launched game or collection. To store the settings belonging to your theme, you can use `api.memory`. This is an object that contains key-value pairs (like a Map), and can be modified using the following methods:
+
+Method | Description
+---|---
+`set(key, value)` | Sets the value belonging to `key`. If `key` already exists, its value will be overwritten.
+`get(key)` | Returns the value belonging to `key`, if there is any, otherwise returns `undefined`.
+`has(key)` | Returns true if `key` is set (has value), otherwise returns false.
+`unset(key)` | Removes `key` and its value.
+
+`key` must be a string in all methods above, while `value` can be any JSON-compatible JavaScript type.
+
+Good places to use `api.memory` for example is when your theme loads (`Component.onCompleted`), unloads (`Component.onDestruction`) or the user starts a game. For example:
+
+```qml
+ListView {
+    id: mygamelist
+
+    model: api.allGames
+    delegate: Rectangle {
+        MouseArea {
+            anchors.fill: parent
+            onClicked: launchGame(modelData)
+        }
+    }
+}
+
+
+Component.onCompleted: {
+    mygamelist.currentIndex = api.memory.get('gameIndex') || 0;
+}
+
+function launchGame(game) {
+    api.memory.set('gameIndex', mygamelist.currentIndex);
+    game.launch();
+}
+```
 
 
 ## Theme utilities

@@ -1,4 +1,3 @@
 site/
-build-dev/
-build-dist/
+build/
 node_modules/

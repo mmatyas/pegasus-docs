@@ -39,6 +39,27 @@ There are various ways to set up Raspbian, so to make sure you have all the depe
 In addition, Pegasus requires at least 64 MB of video RAM. You can change the memory split of the Raspberry Pi using `raspi-config`.
 
 
+## Arch
+
+A community maintained package is available from AUR. You can install it using your favorite AUR helper:
+
+```sh
+yay -S pegasus-fe-git
+# or
+trizen -S pegasus-fe-git
+# or
+yaourt -S pegasus-fe-git
+# etc.
+```
+
+or get it manually:
+
+```sh
+git clone https://aur.archlinux.org/pegasus-fe-git.git
+cd pegasus-fe-git
+makepkg -si
+```
+
 ## Custom builds
 
 As always, you can build Pegasus from source for your platform. You can find the instructions for that [HERE](../dev/build.md).

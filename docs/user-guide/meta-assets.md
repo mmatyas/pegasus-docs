@@ -1,9 +1,9 @@
 # Asset searching
 
-This page describes how Pegasus is searching for game assets, such as logo images, backgrounds or video files when you're using [collection and metadata files](meta-files.md). Such media files can come from these sources:
+This page describes how Pegasus is searching for game assets, such as logo images, backgrounds or video files when you're using [metadata files](meta-files.md). Such media files can come from these sources:
 
-1. A manually set file in `metadata.txt`
-2. A manually set default file in `collections.txt`
+1. A manually set file for the game
+2. A manually set default file for the collections
 3. A file with a recognized name under `<directory>/media/<gamename>/`
 4. Third-party sources (eg. EmulationStation, Steam)
 
@@ -21,8 +21,7 @@ Let's say we have the following structure:
 
 ```
 gba/
-├─ collections.txt
-├─ metadata.txt
+├─ metadata.pegasus.txt
 ├─ Alien Hominid.gba
 └─ assets/
    ├─ covers/
@@ -34,8 +33,8 @@ gba/
 Our `metadata.txt` file could then look like this:
 
 ```make
+game: Alien Hominid
 file: Alien Hominid.gba
-title: Alien Hominid
 developer: Zoo Digital
 assets.boxFront: assets/covers/Alien_Hominid.jpg
 assets.logo: assets/logos/Alien_Hominid_logo.jpg
@@ -46,13 +45,13 @@ assets.logo: assets/logos/Alien_Hominid_logo.jpg
 
 ## Default assets in the Collection file
 
-Similarly, you can also set default assets for a collection in the `collection.txt` (and `collection.pegasus.txt`) file by adding a `assets.default-<assetname>: <file>` key-value pair for a collection.
+Similarly, you can also set default assets for a collection by adding a `assets.<assetname>: <file>` field.
 
 **However**, note that using these default assets depends on the theme set in Pegasus, as a theme's creator can decide to use a different artwork for such purposes as well.
 
 ### Example
 
-Continuing the example above, let's say we have an `assets/default_cover.jpg` file. In this case the `collections.txt` file could have the following contents:
+Continuing the example above, let's say we have an `assets/default_cover.jpg` file. In this case the collection could be defined like this:
 
 ```make
 collection: Game Boy Advanced
@@ -60,22 +59,21 @@ extension: gba
 description: The Game Boy Advance (GBA) is a 32-bit handheld
   video game console developed, manufactured and marketed by Nintendo
   as the successor to the Game Boy Color.
-assets.default-boxFront: assets/default_cover.jpg
+assets.boxFront: assets/default_cover.jpg
 ```
 
 !!! tip
-    Similarly, `asset` is also accepted instead of `assets`, and `default` instead of `default-` works too.
+    Similarly, `asset` is also accepted instead of `assets`.
 
 ## The media directory
 
-If the game's assets haven't beed defined manually, Pegasus will also look for a matching file under `<gamedir>/media/<gamename>/`, where `<gamedir>` is the directory of the games (ie. where `collections.txt` is), and `<gamename>` is a particular game's filename without extension.
+If the game's assets haven't beed defined manually, Pegasus will also look for a matching file under `<gamedir>/media/<gamename>/`, where `<gamedir>` is the directory of the games (ie. where `metadata.pegasus.txt` is), and `<gamename>` is a particular game's filename without extension.
 
 ### Example
 
 ```
 NES/
-├─ collections.txt
-├─ metadata.txt
+├─ metadata.pegasus.txt
 ├─ Contra (U).zip
 └─ media/
    └─ Contra (U)/
@@ -84,8 +82,7 @@ NES/
       └─ video.mp4
 ```
 
-
-??? info "Recognized assets"
+??? info "Recognized files"
 	For still images, PNG and JPG files are searched, for videos WEBM, MP4 and AVI, and for audio MP3, OGG and WAV. The recognized filenames are:
 
 	- `boxFront`
@@ -132,6 +129,6 @@ Pegasus also tries to use the assets of third-party data sources, if possible. U
 
 ## How to get assets for my games?
 
-For larger game libraries, it might be cumbersome to download each and every asset manually. To automatize this process, you can use programs called "scraper"s. These go through all your games, check multiple online databases for available assets, and may even generate a configuration file for you.
+For larger game libraries, it might be tiresome to download each and every asset manually. To automatize this process, you can use programs called *scraper*s. These go through all your games, check multiple online databases for available assets, and may even generate a configuration file for you.
 
 Some popular scraper programs are Universal XML Scraper, Steven Selph's Scraper, Skraper.net and Skyscraper. Try giving them a go!

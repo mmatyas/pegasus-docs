@@ -18,7 +18,7 @@ This page list the directories where Pegasus is allowed to find your configurati
 
 **Windows:**
 
-- `C:/Users/[user name]/AppData/Local/pegasus-frontend/` (default)
+- `C:/Users/[username]/AppData/Local/pegasus-frontend/` (default)
 - `C:/ProgramData/pegasus-frontend/`
 
 **macOS:**

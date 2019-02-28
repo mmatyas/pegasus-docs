@@ -24,7 +24,7 @@ The best case is when you have a file format associated with an app already. To 
 
 `am start --user 0  -a android.intent.action.VIEW  -d "file://<path-to-file>"`
 
-Here is an example `collections.txt` that will open ISO files with the default app:
+Here is an example `metadata.txt` that will open ISO files with the default app:
 
 ```make
 collection: PSP
@@ -59,7 +59,7 @@ Anyway, once you know the Activity you want to call, the command is
 !!!help
     `-n` stands for "name"
 
-Here is an example `collections.txt` that will open ISO files with PPSSPP:
+Here is an example `metadata.txt` that will open ISO files with PPSSPP:
 
 ```make
 collection: PSP

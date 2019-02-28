@@ -47,9 +47,9 @@ I've also downloaded assets (like box art and video) for my games using a [scrap
 
 (see the documentation [here](meta-assets.md#the-media-directory))
 
-Now I create a [collection file](meta-files.md) for each system. As mentioned in the [Android platform notes](platform-android.md), RetroArch happens to need a bunch of parameters, but PPSSPP can just open the file directly. Here are my configs:
+Now I create a [metadata file](meta-files.md) for each system. As mentioned in the [Android platform notes](platform-android.md), RetroArch happens to need a bunch of parameters, but PPSSPP can just open the file directly. Here are my configs:
 
-??? note "[SD card]/Roms/NES/collections.txt"
+??? note "[SD card]/Roms/NES/metadata.pegasus.txt"
         :::make
         collection: NES
         extensions: zip
@@ -68,7 +68,7 @@ Now I create a [collection file](meta-files.md) for each system. As mentioned in
           -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files
           --activity-clear-top
 
-??? note "[SD card]/Roms/PSP/collections.txt"
+??? note "[SD card]/Roms/PSP/metadata.pegasus.txt"
         :::make
         collection: PSP
         extension: iso, cso
@@ -80,12 +80,14 @@ Now I create a [collection file](meta-files.md) for each system. As mentioned in
 !!! warning "SD card path"
     In the above configurations I use `/storage/emulated/0/` which is the path of the SD card on my device. This might be different for you! You can check the path in most file manager apps, look for something like "file details" or similar.
 
-While it's optional, I'd also like some descriptions and such for my games, so I create a [metadata file](meta-files.md) in the NES and PSP directories as well:
+While it's optional, I'd also like some descriptions and such for my games, so I add the following as well as well:
 
-??? note "[SD card]/Roms/NES/metadata.txt"
+??? note "[SD card]/Roms/NES/metadata.pegasus.txt"
         :::make
+        ...
+
+        game: Contra
         file: Contra.zip
-        title: Contra
         developer: Konami
         players: 2
         description: In the year 2633, the evil Red Falcon Organization have set a base on the Galuga
@@ -95,8 +97,8 @@ While it's optional, I'd also like some descriptions and such for my games, so I
           Red Falcon, the alien entity controlling them.
 
 
+        game: Super Mario Bros.
         file: Super Mario.zip
-        title: Super Mario Bros.
         developer: Nintendo
         players: 2
         description: In the fantasy setting of the Mushroom Kingdom, a tribe of turtle-like creatures
@@ -106,10 +108,12 @@ While it's optional, I'd also like some descriptions and such for my games, so I
           of the Mushroom Kingdom and the only one with the ability to reverse Bowsers spell. After
           hearing the news, Mario sets out to save the princess and free the kingdom from Bowser.
 
-??? note "[SD card]/Roms/PSP/metadata.txt"
+??? note "[SD card]/Roms/PSP/metadata.pegasus.txt"
         :::make
+        ...
+
+        game: Patapon
         file: Patapon.iso
-        title: Patapon
         description: For years the Patapon tribe has lived in the desolate frontier, driven from their
           home by the evil Zigoton army. Behind the Patapons cute exterior, lies a fierce warrior
           spirit that can only be commanded by the beat of their God’s war drum. They wait for the day
@@ -118,8 +122,8 @@ While it's optional, I'd also like some descriptions and such for my games, so I
           again.
 
 
+        game: LUMINES
         file: Lumines.cso
-        title: LUMINES
         description: LUMINES brings minimalism to the puzzle genre where the fusion of light and sound
           sets the stage for a two-color falling block experience in HD and 4K. Groove to electronic
           jams while strategically dropping blocks before the BPM bar sweeps combos clean after each

@@ -1,6 +1,6 @@
-# Getting started
+# Getting started!
 
-Welcome to the documentation of the Pegasus Frontend! Here you can find information about how to install and configure Pegasus on your device, and further along, about the various customization possibilities. Let's get started!
+Welcome to the documentation of the Pegasus frontend! Here you can find information about how to install and configure Pegasus on your device, and further along, about the various customization possibilities. Let's get started!
 
 ## Installation
 
@@ -12,9 +12,9 @@ Pegasus is available for various devices and operating systems. Currently there 
 - Android
 - macOS
 
-You can find the latest releases on <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, in the *Downloads* section. On most platforms, Pegasus is just a single file, which you can extract and run anywhere on your system. If there are additional system requirements, they are mentioned on the download page as well.
+You can find the **latest releases** on <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section.
 
-For the **Android** release, you can find some additional notes and guides [HERE](platform-android.md).
+On most platforms, Pegasus is just a single file, which you can extract and run anywhere on your system. If there are additional system requirements, they are mentioned on the download page as well.
 
 !!! info "Other platforms"
     Pegasus can also run on platforms not listed above, but may need to be compiled manually from source code. If you wish to do that, the [Build documentation](../dev/build.md) can help you along the way.
@@ -36,12 +36,12 @@ You can navigate in the menu (and in the whole program in general) using the arr
 
 On the Settings screen, you can set some general parameters, like the language of the interface or whether you'd like to run in full screen or windowed mode. You can also change the "theme", the look and feel of the whole program.
 
-Pegasus is a program that can collect your list of games from various sources. You can import your list of games from other, already installed game libraries, like Steam, for which there is built-in support. For others, especially emulators and standalone games, you can use Pegasus' own *collection* and *metadata* files, which is documented on the [Game collections and metadata files](meta-files.md) page.
+Pegasus is a program that can collect your list of games from various sources. You can import your list of games from other, already installed game libraries, like Steam, for which there is built-in support. For others, especially emulators and standalone games, you can use Pegasus' own *metadata* files, which is documented on [this page](meta-files.md).
 
-The behaviour of the game searching can be then configured in the Gaming section:
+The behaviour of the game searching can be configured in the Gaming section:
 
-- The **Set game directories** option will open a dialog where you can edit the list of directories Pegasus will search for *collection* (as well as *metadata*) files (see the documentation linked above).
-- On the **Enable/disable data sources** panel, you can enable or disable importing games from the individual data sources that might be available on your system.
+- The **Set game directories** option will open a dialog where you can edit the list of directories Pegasus will search for *metadata* files (see the documentation linked above).
+- On the **Enable/disable data sources** panel you can enable or disable importing games from the individual data sources that might be available on your system.
 
 Outside the Settings menu, there's also the Controls screen, where you can configure your gamepad's layout, and a Help screen that shows some information about Pegasus, and contains a link to this documentation site.
 
@@ -49,7 +49,7 @@ Outside the Settings menu, there's also the Controls screen, where you can confi
 
 Now that you're done with the basics, you might want to dig deeper into the customization aspect of Pegasus. Here are a few articles you could take a look, if you're interested:
 
-- [Game collections and metadata files](meta-files.md)
+- [Metadata files](meta-files.md)
 - [Asset files](meta-assets.md)
 - [Scripting](scripting.md)
 - [Creating themes](../themes/overview.md)

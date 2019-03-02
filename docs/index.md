@@ -23,14 +23,6 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 - [Config directories](user-guide/config-dirs.md)
 - [Breaking changes](user-guide/breaking-changes.md)
 
-## Core development
-
-- [Installing Qt on desktop](dev/install-qt.md)
-- [Cross compiling Qt for embedded](dev/cross-compile-qt.md)
-- [Building Pegasus](dev/build.md)
-- [Deployment](dev/deploy.md)
-- [Translations](dev/translate.md)
-
 ## Theme development
 
 - [Overview](themes/overview.md)
@@ -39,3 +31,11 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 - [Step-by-step: Simple theme](themes/example-simple.md)
 - [Step-by-step: Flixnet theme](themes/example-flixnet.md)
 - [API reference](themes/api.md)
+
+## Core development
+
+- [Installing Qt on desktop](dev/install-qt.md)
+- [Cross compiling Qt for embedded](dev/cross-compile-qt.md)
+- [Building Pegasus](dev/build.md)
+- [Deployment](dev/deploy.md)
+- [Translations](dev/translate.md)

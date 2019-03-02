@@ -22,12 +22,6 @@ nav:
     - Installing themes: user-guide/installing-themes.md
     - Config directories: user-guide/config-dirs.md
     - Breaking changes: user-guide/breaking-changes.md
-  - Core Dev:
-    - Installing Qt: dev/install-qt.md
-    - Cross compile Qt: dev/cross-compile-qt.md
-    - Building: dev/build.md
-    - Deployment: dev/deploy.md
-    - Translations: dev/translate.md
   - Theme Dev:
     - Overview: themes/overview.md
     - QML tutorials: themes/qml-tutorials.md
@@ -35,6 +29,12 @@ nav:
     - Example -- Simple theme: themes/example-simple.md
     - Example -- Flixnet theme: themes/example-flixnet.md
     - API reference: themes/api.md
+  - Core Dev:
+    - Installing Qt: dev/install-qt.md
+    - Cross compile Qt: dev/cross-compile-qt.md
+    - Building: dev/build.md
+    - Deployment: dev/deploy.md
+    - Translations: dev/translate.md
 
 theme:
   name: cinder

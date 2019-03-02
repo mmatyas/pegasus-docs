@@ -21,6 +21,7 @@ nav:
     - Scripting: user-guide/scripting.md
     - Installing themes: user-guide/installing-themes.md
     - Config directories: user-guide/config-dirs.md
+    - Breaking changes: user-guide/breaking-changes.md
   - Core Dev:
     - Installing Qt: dev/install-qt.md
     - Cross compile Qt: dev/cross-compile-qt.md

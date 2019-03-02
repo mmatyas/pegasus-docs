@@ -16,7 +16,10 @@ Property | Description
 ---|---
 `name` | The unique name of the collection, eg. "Nintendo Entertainment System", "Mario Cartridges", etc.
 `shortName` | <span class="optional"></span> A short name for the collection, often an abbreviation like `nes`, `mame`, etc. Always in lowercase. If not set, defaults to the value of `name`.
+`summary` | <span class="optional"></span> Short description (typically 2-3 sentences).
+`description` | <span class="optional"></span> Longer description.
 `games` | The list of games belonging to this collection; see "Games" below. All available collections are guaranteed to have at least one game.
+`assets` | An object containing the default assets (see later).
 
 Properties marked as "optional" might have no value (eg. empty string or empty array). All fields are read-only.
 
@@ -46,7 +49,8 @@ Property | Description
 `playCount` | <span class="optional"></span> The number of times this games was launched. Defaults to 0.
 `lastPlayed` | <span class="optional"></span> The last time this game was launched. A QML `date` value with time information. Defaults to an invalid date.
 `playTime` | <span class="optional"></span> Play time in seconds, as a positive integer value. Defaults to 0.
-`assets` | An object containing the game's assets (see below).
+`files` | An object containing the game's launchable files (see below).
+`assets` | An object containing the game's assets (see later).
 
 Properties marked as "optional" might have no value (eg. empty string or empty array). Unless otherwise noted, all fields are read-only.
 
@@ -54,14 +58,39 @@ In addition, games have the following callable methods:
 
 Method | Description
 ---|---
-`launch()` | Launch this game.
+`launch()` | Launch this game. If the game has more than one launchable file, the default file selector of Pegasus will appear.
 
-Launching a game may fail, in which case the reason is logged (and in the future, will be shown to the user). If the game starts up successfully, Pegasus minimizes its resource usage and goes to the background while the game runs. On return, the theme will be reloaded -- if you wish it to remember something, you can use `api.memory` (see later on this page).
+
+### Game files
+
+!!! bug "Experimental"
+    This section is experimental and may change in the future.
+
+Games can have more than one file to launch (disks, clones, mods, etc). Every game has a `files` object that contains the files belonging to the game. It has the following properties:
+
+Property | Description
+---|---
+`name` | The pretty name of this file.
+`path` | The path to this file.
+`playCount` | The number of times this file was launched. Defaults to 0.
+`lastPlayed` | The last time this file was launched. A QML `date` value with time information. Defaults to an invalid date.
+`playTime` | Play time in seconds, as a positive integer value. Defaults to 0.
+
+!!! note
+    At the moment `name` comes from the filename of the file. In the future, this could be set in the metadata format.
+
+In addition, games have the following callable methods:
+
+Method | Description
+---|---
+`launch()` | Launch this game file.
+
+Launching a game file may fail, in which case the reason is logged (and in the future, will be shown to the user). If the game starts up successfully, Pegasus minimizes its resource usage and goes to the background while the game runs. On return, the theme will be reloaded -- if you wish it to remember something, you can use `api.memory` (see later on this page).
 
 
 ## Assets
 
-Every game has an `asset` object that contains all assets belonging to the game. It has the following properties. All of them are (local or remote) URLs as string, and all of them can be empty.
+Every game and collection has an `asset` object that contains the assets that may belong to a game. It has the following properties. All of them are (local or remote) URLs as string, and all of them can be empty.
 
 Property | Description
 ---|---

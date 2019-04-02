@@ -4,13 +4,13 @@ This page list the directories where Pegasus is allowed to find your configurati
 
 **All platforms:**
 
-- `<directory of the program>/`
 - `<directory of the program>/config`
+- `<directory of the program>/`
 - `<INSTALL_DATADIR>/` (only if defined during a [manual build](../dev/build.md))
 
 **Linux:**
 
-- `~/.config/pegasus-frontend/` (default)
+- `~/.config/pegasus-frontend/` (**default**)
 - `~/.local/share/pegasus-frontend/`
 - `/etc/xdg/pegasus-frontend/`
 - `/usr/local/share/pegasus-frontend/`
@@ -18,12 +18,12 @@ This page list the directories where Pegasus is allowed to find your configurati
 
 **Windows:**
 
-- `C:/Users/[username]/AppData/Local/pegasus-frontend/` (default)
+- `C:/Users/[username]/AppData/Local/pegasus-frontend/` (**default**)
 - `C:/ProgramData/pegasus-frontend/`
 
 **macOS:**
 
-- `~/Library/Preferences/pegasus-frontend/` (default)
+- `~/Library/Preferences/pegasus-frontend/` (**default**)
 - `~/Library/Application Support/pegasus-frontend/`
 - `/Library/Application Support/pegasus-frontend/`
 

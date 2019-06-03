@@ -40,9 +40,9 @@ Property | Description
 `summary` | <span class="optional"></span> Short description (typically 2-3 sentences).
 `description` | <span class="optional"></span> Longer description.
 `release` | <span class="optional"></span> Release date as QML `date`. If not set, defaults to an invalid date.
-`year` | <span class="optional"></span> Release year as integer. Defaults to 0.
-`month` | <span class="optional"></span> Release month as integer. Defaults to 0.
-`day` | <span class="optional"></span> Release day as integer. Defaults to 0.
+`releaseYear` | <span class="optional"></span> Release year as integer. Defaults to 0.
+`releaseMonth` | <span class="optional"></span> Release month as integer. Defaults to 0.
+`releaseDay` | <span class="optional"></span> Release day as integer. Defaults to 0.
 `players` | <span class="optional"></span> Maximum number of players. If not set, defaults to 1.
 `rating` | <span class="optional"></span> Floating-point value between and including `0.0` and `1.0` (ie. 0% and 100%). If not set, defaults to `0.0`.
 `favorite` | <span class="optional"></span> Boolean (true/false) value. If not set, defaults to false. This field is **writable**.

@@ -6,7 +6,7 @@
     "gulp-cli": "^2.2.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^6.0.0",
-    "gulp-uglify-es": "^1.0.4"
+    "gulp-terser": "^1.2.0"
   },
   "scripts": {
     "gulp": "gulp"

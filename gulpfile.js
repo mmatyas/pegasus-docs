@@ -5,7 +5,7 @@ const gulp = require('gulp'),
     del = require('del'),
     htmlmin = require('gulp-htmlmin'),
     imagemin = require('gulp-imagemin'),
-    uglify = require('gulp-uglify-es').default;
+    terser = require('gulp-terser');
 
 
 const DEST_PATH = 'build';
@@ -19,6 +19,10 @@ const htmlminConfig = {
     removeRedundantAttributes: true,
     removeScriptTypeAttributes: true,
     removeStyleLinkTypeAttributes: true,
+};
+const terser_config = {
+    warnings: true,
+    toplevel: true,
 };
 
 
@@ -36,7 +40,7 @@ gulp.task('css', () => gulp
 
 gulp.task('js', () => gulp
     .src('site/**/*.js')
-    .pipe(uglify())
+    .pipe(terser(terser_config))
     .pipe(gulp.dest(DEST_PATH))
 );
 

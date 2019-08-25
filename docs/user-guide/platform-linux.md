@@ -44,19 +44,19 @@ In addition, Pegasus requires at least 64 MB of video RAM. You can change the me
 A community maintained package is available from AUR. You can install it using your favorite AUR helper:
 
 ```sh
-yay -S pegasus-fe-git
+yay -S pegasus-frontend-git
 # or
-trizen -S pegasus-fe-git
+trizen -S pegasus-frontend-git
 # or
-yaourt -S pegasus-fe-git
+yaourt -S pegasus-frontend-git
 # etc.
 ```
 
 or get it manually:
 
 ```sh
-git clone https://aur.archlinux.org/pegasus-fe-git.git
-cd pegasus-fe-git
+git clone https://aur.archlinux.org/pegasus-frontend-git.git
+cd pegasus-frontend-git
 makepkg -si
 ```
 

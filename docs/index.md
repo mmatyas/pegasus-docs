@@ -13,6 +13,7 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
     - [Android](user-guide/platform-android.md)
     - [Linux](user-guide/platform-linux.md)
     - [RetroPie](user-guide/platform-retropie.md)
+    - [Windows](user-guide/platform-windows.md)
 - Adding games
     - [Metadata files](user-guide/meta-files.md)
     - [Asset files](user-guide/meta-assets.md)

@@ -39,6 +39,8 @@ There are various ways to set up Raspbian, so to make sure you have all the depe
 
 In addition, Pegasus requires at least 64 MB of video RAM. You can change the memory split of the Raspberry Pi using `raspi-config`.
 
+If you're running RetroPie, you can also install Pegasus from its setup menu. [See this page for more details.](platform-retropie.md)
+
 
 ## Arch
 

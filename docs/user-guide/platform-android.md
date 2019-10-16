@@ -12,6 +12,12 @@ If you have an active full screen app (eg. screen shade), Android might not allo
 
 Config files are stored under `<storage>/pegasus-frontend`, where `<storage>` the internal storage, if you have one, otherwise the SD card. The directory will be created automatically when you first launch Pegasus (or you can create it yourself).
 
+### Default launcher
+
+Pegasus can be set as the default launcher, which will make it start automatically when the device is turned on. After installing Pegasus, when you press the home screen button a popup message should appear, asking you which launcher you would like to run. Select Pegasus (or your previous launcher) from the list to set it as the default launcher.
+
+**To restore the default launcher**, open the Android Settings menu, either from Pegasus or by pulling down the noticfication bar at the top of the screen and clicking the cogwheel icon. Depending on your device, you should find a "Default launcher" option in either under *Apps &rarr; Advanced settings &rarr; Default apps*, *Apps &rarr; Configure apps* or *Home*.
+
 ## Loading games
 
 Compared to desktop systems, launching other applications is slightly different on Android. Instead of directly calling a program, you'll need to ask the Activity Manager (`am`) to open a file or start an app, optionally with additional parameters.

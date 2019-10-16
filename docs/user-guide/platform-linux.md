@@ -12,7 +12,8 @@ In general, the dependencies on Linux are:
 - PolicyKit (optional, for shutting down/restarting the device without admin rights)
 - SDL2 (optional, for improved gamepad support)
 
-Another important thing to note is that depending on your settings, **the system may not allow running programs from USB drives or Windows file systems**. This is not a bug, but something you might want to be aware of.
+!!! warning
+    Depending on your settings, **the system may not allow running programs from USB drives or Windows file systems**. This is not a bug, but something you might want to be aware of.
 
 
 ## Ubuntu
@@ -21,13 +22,13 @@ At the time of writing, the official builds require Ubuntu **16.04 or later**. M
 
 ```
 sudo apt-get install \
-	gstreamer1.0-alsa \
-	gstreamer1.0-libav \
-	gstreamer1.0-plugins-good \
-	fontconfig \
-	libsdl2-2.0-0 \
-	libssl1.0.0 \
-	policykit-1
+    gstreamer1.0-alsa \
+    gstreamer1.0-libav \
+    gstreamer1.0-plugins-good \
+    fontconfig \
+    libsdl2-2.0-0 \
+    libssl1.0.0 \
+    policykit-1
 ```
 
 
@@ -39,7 +40,8 @@ There are various ways to set up Raspbian, so to make sure you have all the depe
 
 In addition, Pegasus requires at least 64 MB of video RAM. You can change the memory split of the Raspberry Pi using `raspi-config`.
 
-If you're running RetroPie, you can also install Pegasus from its setup menu. [See this page for more details.](platform-retropie.md)
+!!! tip
+    If you're running RetroPie, you can also install Pegasus from its setup menu. [See this page for more details.](platform-retropie.md)
 
 
 ## Arch

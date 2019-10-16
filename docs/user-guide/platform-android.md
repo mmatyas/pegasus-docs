@@ -78,22 +78,42 @@ Some apps simply don't support opening files, for example because they rely on a
 
 ### RetroArch
 
-RetroArch happens to use a large number of custom parameters. It can be launched like this:
+RetroArch has two versions available on Google Play: the standard app is called **RetroArch**, and there's a version optimized for 64-bit devices called **RetroArch64** (with the name "RetroArch (AArch64)" when installed). Depending on which one you'd like to use, the launch command will be slightly different.
+
+Unlike must applications, RetroArch happens to use a large number of custom parameters. It can be launched like this:
+
+#### RetroArch (standard):
 
 ```make
 collection: NES
 extensions: zip
 launch: am start --user 0
   -n com.retroarch/.browser.retroactivity.RetroActivityFuture
-  -e ROM "{file.path}"
+  -e ROM {file.path}
   -e LIBRETRO /data/data/com.retroarch/cores/fceumm_libretro_android.so
   -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg
   -e IME com.android.inputmethod.latin/.LatinIME
   -e DATADIR /data/data/com.retroarch
   -e APK /data/app/com.retroarch-1/base.apk
   -e SDCARD /storage/emulated/0
-  -e DOWNLOADS /storage/emulated/0/Download
-  -e SCREENSHOTS /storage/emulated/0/Pictures
+  -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files
+  --activity-clear-top
+```
+
+#### RetroArch64 (AArch64):
+
+```make
+collection: NES
+extensions: zip
+launch: am start --user 0
+  -n com.retroarch.aarch64/.browser.retroactivity.RetroActivityFuture
+  -e ROM {file.path}
+  -e LIBRETRO /data/data/com.retroarch.aarch64/cores/fceumm_libretro_android.so
+  -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg
+  -e IME com.android.inputmethod.latin/.LatinIME
+  -e DATADIR /data/data/com.retroarch.aarch64
+  -e APK /data/app/com.retroarch.aarch64-1/base.apk
+  -e SDCARD /storage/emulated/0
   -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files
   --activity-clear-top
 ```
@@ -104,9 +124,13 @@ The important parts here are the **core** and the **storage** paths. Make sure y
 
 - `/storage/emulated/0` is the absolute path to the internal storage on my phone. This can be completely different on other devices (eg. `/storage/sdcard`). Most file browser apps can tell you the correct path, then you can replace all occurences above.
 - `/data/data/com.retroarch/cores/fceumm_libretro_android.so` is the libretro core I've installed using the RetroArch menu. You'll only need to change the `fceumm_libretro_android.so` part. You can find the available cores [here](http://buildbot.libretro.com/nightly/android/latest/armeabi-v7a/).
+- If you've created a custom configuration file inside RetroArch, you can change `CONFIGFILE` to point to that instead of the default.
 
 !!!help
     `-e KEY VALUE` defines an extra parameter, specific to the app. Unlike the file opening before, RetroArch does not need `file://` for the ROM path.
+
+!!! note
+    There is also a third option available on RetroArch's page, a 32-bit-only package called `RetroArch_ra32.apk`. To use that, replace `aarch64` in the example above with `ra32`.
 
 ### Known emulators
 

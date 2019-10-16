@@ -74,7 +74,7 @@ Option | Description
 
 If only `USE_SDL_GAMEPAD` is set (ie. `SDL_LIBS` and `SDL_INCLUDES` are both empty), **pkg-config** will be used on platforms where it is available.
 
-!!! tip
+!!! example
     Example configuration 1: `qmake path/to/sources USE_SDL_GAMEPAD=1`
 
     Example configuration 2:
@@ -98,11 +98,12 @@ Option | Description
 `INSTALL_DESKTOPDIR` | Linux only. If set, `make install` will create an XDG desktop file there (making Pegasus appear in the main menu). Unset by default, on most distros `/usr/share/applications` is a good value.
 `INSTALL_ICONDIR` | Linux only. If set, `make install` will create an XDG icon file there (making Pegasus have an icon on the tray and the menu). Unset by default, on most distros `/usr/share/pixmaps` or `/usr/share/icons/hicolor/128x128/apps` is a good value.
 
-!!! tip
+!!! example
     Example configuration for a global Linux installation:
 
         :::sh
         qmake path/to/sources \
             INSTALL_BINDIR=/usr/bin \
-            INSTALL_DESKTOPDIR=/usr/share/icons/hicolor/128x128/apps \
-            INSTALL_ICONDIR=/usr/share/pixmaps
+            INSTALL_DESKTOPDIR=/app/share/applications \
+            INSTALL_ICONDIR=/usr/share/pixmaps \
+            INSTALL_APPSTREAMDIR=/app/share/metainfo

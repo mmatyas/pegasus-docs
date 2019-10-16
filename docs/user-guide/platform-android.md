@@ -134,7 +134,7 @@ The important parts here are the **core** and the **storage** paths. Make sure y
 
 ### Known emulators
 
-Here's an incomplete list of emulators that can open external files using `android.intent.action.VIEW`. If you think some some of the entries are incorrect, or you'd like to extend this list, feel free to open an Issue [here](https://github.com/mmatyas/pegasus-frontend/issues).
+Here's an incomplete list of emulators that can open external files using `android.intent.action.VIEW`. If you think some of the entries are incorrect, or you'd like to extend this list, feel free to open an Issue [here](https://github.com/mmatyas/pegasus-frontend/issues).
 
 App name | Activity
 :--------|:---------
@@ -143,7 +143,7 @@ C54.emu | `com.explusalpha.C64Emu/com.imagine.BaseActivity`
 ClassicBoy | `com.portableandroid.classicboyLite/com.portableandroid.classicboy.EntryActivity`
 DraStic | `com.dsemu.drastic/.DraSticActivity`
 Emulator for NES/SNES - Arcade Classic Games | no support
-ePSXe | `com.epsxe.ePSXe/com.dropbox.client2.android.AuthActivity`
+ePSXe | no support
 GBA.emu | `com.explusalpha.GbaEmu/com.imagine.BaseActivity`
 GBC.emu | `com.explusalpha.GbcEmu/com.imagine.BaseActivity`
 John emulators | no support

@@ -16,7 +16,7 @@ These provide an introduction to the language. After reading them, you should be
 
 **Resources:**
 
-- [QML ebook chapter 4](https://qmlbook.github.io/en/ch04/index.html)
+- [QML ebook chapter 4](https://qmlbook.github.io/ch04-qmlstart/qmlstart.html)
 - [Wikipedia](https://en.wikipedia.org/wiki/QML)
 - [QML official tutorial](https://doc.qt.io/qt-5/qml-tutorial.html)
 - [basic types](https://doc.qt.io/qt-5/qtqml-typesystem-basictypes.html#basic-types-provided-by-the-qml-language)
@@ -34,7 +34,7 @@ The standard layouts are:
 
 **Resources:**
 
-- [QML ebook chapter 6](https://qmlbook.github.io/en/ch06/index.html)
+- [QML ebook chapter 6](https://qmlbook.github.io/ch06-controls/controls.html)
 
 ## States, transitions, animations
 
@@ -42,7 +42,7 @@ You might want to create a theme that consists of multiple states, eg. a platfor
 
 **Resources:**
 
-- [QML ebook chapter 5](https://qmlbook.github.io/en/ch05/index.html)
+- [QML ebook chapter 5](https://qmlbook.github.io/ch05-fluid/fluid.html)
 
 ## Media playback
 
@@ -50,8 +50,8 @@ You can write a complete media player in QML. The third-party documentation is a
 
 **Resources:**
 
-- [Multimedia module](https://doc.qt.io/qt-5.10/qtmultimedia-index.html)
-- [QML ebook chapter 10](https://qmlbook.github.io/en/ch10/index.html)
+- [Multimedia module](https://doc.qt.io/qt-5/qtmultimedia-index.html)
+- [QML ebook chapter 11](https://qmlbook.github.io/ch11-multimedia/multimedia.html)
 
 
 ## Further resources

@@ -2,6 +2,23 @@
 
 This page list the directories where Pegasus is allowed to find your configuration files, including themes.
 
+## In short
+
+Platform | Directory
+---------|----------
+**all platforms:** | `<directory of the program>/config`
+**Linux:** | `~/.config/pegasus-frontend/`
+**Windows:** | `C:/Users/[username]/AppData/Local/pegasus-frontend/`
+**macOS:** | `~/Library/Preferences/pegasus-frontend/`
+**Android:** | `<storage>/pegasus-frontend/`
+
+!!! tip "Portable mode"
+    If you launch Pegasus with the `--portable` command line parameter, it will read/write settings only under `<directory of the program>/config/`.
+
+## All possible directories
+
+Most platforms define multiple possible directories for storing user content, and so Pegasus can also detect configuration files in locations different than the default:
+
 **All platforms:**
 
 - `<directory of the program>/config`
@@ -29,7 +46,3 @@ This page list the directories where Pegasus is allowed to find your configurati
 **Android:**
 
 - `<storage>/pegasus-frontend`, where `<storage>` the internal storage, if you have one, otherwise the SD card
-
-## Portable mode
-
-If you launch Pegasus with the `--portable` command line parameter, it will read/write settings only under `<directory of the program>/config/`.

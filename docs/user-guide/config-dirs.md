@@ -6,7 +6,6 @@ This page list the directories where Pegasus is allowed to find your configurati
 
 - `<directory of the program>/config`
 - `<directory of the program>/`
-- `<INSTALL_DATADIR>/` (only if defined during a [manual build](../dev/build.md))
 
 **Linux:**
 

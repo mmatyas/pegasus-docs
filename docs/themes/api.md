@@ -239,13 +239,13 @@ ListView {
 
 ### Fonts
 
-Pegasus comes with a sans-serif and a sans-serif condensed font face, which are used in the main menu. If you want to use the same font families in your theme, you can access them using a global QML object called `globalFonts`. This has the following properties:
+Pegasus comes with a sans-serif and a sans-serif condensed font face, which are used in the main menu. If you want to use the same font families in your theme, you can access them using a global QML object called `global.fonts`. This has the following properties:
 
 Property | Description
 ---|---
-`sans` | The sans-serif font
-`condensed` | The sans-serif condensed font
+`sans` | The font family name of the sans-serif font
+`condensed` | The font family name of the sans-serif condensed font
 
-You can use them as the value for `font.family` members of Text items, eg. `font.family: globalFonts.sans`.
+You can use them as the value for `font.family` members of Text items, eg. `font.family: global.fonts.sans`.
 
-The fonts currently in use are Roboto and Roboto Condensed.
+The default fonts currently in use are *Roboto* and *Roboto Condensed*.

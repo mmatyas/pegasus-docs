@@ -53,6 +53,7 @@ launch: myemulator "{file.path}"
 
 
 game: Final Fantasy VII
+sort_title: Final Fantasy 7
 files:
   ffvii_disc1.iso
   ffvii_disc2.iso
@@ -192,6 +193,7 @@ The following properties can be used in game entries:
 Key | Description
 ----|---
 `game` | Creates a new game with the value as title. The properties after this line will modify this game. This is a **required** field.
+`sort_title` | An alternate title that should be used for sorting. Can be useful when the title contains eg. roman numerals or special symbols. `sort-title` and `sorttitle` are also accepted.
 `file`, `files` | The file or list of files (eg. disks) that belong to this game. If there are multiple files, you'll be able to select which one to launch when you start the game.
 `developer`, `developers` | The developer or list of developers. This field can appear multiple times.
 `publisher`, `publishers` | The publisher or list of publishers. This field can appear multiple times.

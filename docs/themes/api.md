@@ -30,7 +30,8 @@ Games can have metadata and various kinds of assets. The list of games belonging
 
 Property | Description
 ---|---
-`title` | The game's title
+`title` | The game's title.
+`sortTitle` | A variation of the game's title that should be used for sorting.
 `developer` | <span class="optional"></span> Developer(s) as a string. If there are more than one, they are separated with `, `.
 `publisher` | <span class="optional"></span> Publisher(s) as a string. If there are more than one, they are separated with `, `.
 `genre` | <span class="optional"></span> Genre(s) as a string. If there are more than one, they are separated with `, `.

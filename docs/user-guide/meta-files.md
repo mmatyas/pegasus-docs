@@ -197,7 +197,8 @@ Key | Description
 `file`, `files` | The file or list of files (eg. disks) that belong to this game. If there are multiple files, you'll be able to select which one to launch when you start the game.
 `developer`, `developers` | The developer or list of developers. This field can appear multiple times.
 `publisher`, `publishers` | The publisher or list of publishers. This field can appear multiple times.
-`genre`, `genres` | The genre or list of genres. This field can appear multiple times.
+`genre`, `genres` | The genre or list of genres (for example *Action*, *Adventure*, etc.). This field can appear multiple times.
+`tag`, `tags` | Tag or list of tags (for example *Co-op*, *VR*, etc.). This field can appear multiple times.
 `summary` | A short description of the game in one paragraph.
 `description` | A possibly longer description of the game.
 `players` | The number of players who can play the game. Either a single number (eg. `2`) or a number range (eg. `1-4`).

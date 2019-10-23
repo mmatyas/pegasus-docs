@@ -37,6 +37,7 @@ Property | Description
 `developerList` | <span class="optional"></span> The list of developers as an array.
 `publisherList` | <span class="optional"></span> The list of publishers as an array.
 `genreList` | <span class="optional"></span> The list of genres as an array.
+`tagList` | <span class="optional"></span> The list of tags as an array.
 `summary` | <span class="optional"></span> Short description (typically 2-3 sentences).
 `description` | <span class="optional"></span> Longer description.
 `release` | <span class="optional"></span> Release date as QML `date`. If not set, defaults to an invalid date.

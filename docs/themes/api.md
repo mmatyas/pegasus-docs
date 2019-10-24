@@ -213,7 +213,13 @@ function launchGame(game) {
 
 *Item models* are list of objects that support custom sorting and filtering, and can be used as the `model` property of QML Views (eg. ListView or PathView). See [the Qt documentation](https://doc.qt.io/qt-5/qtquick-modelviewsdata-modelview.html#displaying-data-with-views) for more details. For convenience, the `modelData` role is also provided for all item models mentioned in this documentation.
 
-Sometimes you may want to access the items of an item model manually. To query the **number of items** in the model, you can check its `count` property (eg. `api.allGames.count`), while to **get a single item** of it, you can use the `get(index)` method (eg. `api.allGames.get(5)`).
+Sometimes you may want to access the items of an item model manually, in which case you can use the following members:
+
+Field | Description
+------|------------
+`count` | Returns the number of items in the model (eg. `api.allGames.count`).
+`get(index)` | Returns a single item from the model located at `index` (eg. `api.allGames.get(5)`). If `index` is not inside the model, `null` is returned.
+`toVarArray()` | Returns a new array, containing the items of the model, in the same order.
 
 ### Sorting and filtering
 

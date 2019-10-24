@@ -93,10 +93,12 @@ Some platforms optionally support installing and deploying builds. In practice, 
 
 Option | Description
 ---|---
-`INSTALLDIR` | The general installation directory used by `make install`. Defaults to `/opt/pegasus-frontend` on Linux and `C:\pegasus-frontend` on Windows.
-`INSTALL_BINDIR` | The installation directory of the executable. Defaults to `INSTALLDIR`. O most distros `/usr/bin` is a good value.
+`INSTALLDIR` | The general installation directory used by `make install`. Defaults to `/opt/pegasus-frontend` on Linux, `/usr/local/pegasus-frontend` on Mac and `C:\pegasus-frontend` on Windows.
+`INSTALL_BINDIR` | The installation directory of the executable. Defaults to `INSTALLDIR`. On most distros `/usr/bin` is a good value.
+`INSTALL_DOCDIR` | If set, `make install` will copy the license and readme files there. On most distros `/usr/share/doc/pegasus-frontend` is a good value.
 `INSTALL_DESKTOPDIR` | Linux only. If set, `make install` will create an XDG desktop file there (making Pegasus appear in the main menu). Unset by default, on most distros `/usr/share/applications` is a good value.
 `INSTALL_ICONDIR` | Linux only. If set, `make install` will create an XDG icon file there (making Pegasus have an icon on the tray and the menu). Unset by default, on most distros `/usr/share/pixmaps` or `/usr/share/icons/hicolor/128x128/apps` is a good value.
+`INSTALL_APPSTREAMDIR` | Linux only. If set, `make install` will create an AppStream XML entry there (making Pegasus appear in certain app store applications). Unset by default, on most distros `/app/share/metainfo` is a good value.
 
 !!! example
     Example configuration for a global Linux installation:
@@ -104,6 +106,7 @@ Option | Description
         :::sh
         qmake path/to/sources \
             INSTALL_BINDIR=/usr/bin \
-            INSTALL_DESKTOPDIR=/app/share/applications \
+            INSTALL_DOCDIR=/usr/share/doc/pegasus-frontend \
             INSTALL_ICONDIR=/usr/share/pixmaps \
+            INSTALL_DESKTOPDIR=/app/share/applications \
             INSTALL_APPSTREAMDIR=/app/share/metainfo

@@ -9,6 +9,7 @@ Pegasus is available for various devices and operating systems. Currently there 
 - **Windows** 7 or later
 - **Linux** with Ubuntu 16.04/Debian Jessie or later
 - **Raspberry Pi** with Raspbian Jessie or later
+- **Odroid** C0/C1/C2 and XU3/XU4 with Ubuntu 18.04 or later
 - **Android** 4.4 (KitKat) or later
 - **macOS** 10.11 (El Capitan) or later
 

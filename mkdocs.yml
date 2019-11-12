@@ -43,6 +43,7 @@ theme:
 extra_css:
   - css/extra.css
   - css/codehl.css
+  - //fonts.googleapis.com/icon?family=Material+Icons
 
 markdown_extensions:
   - toc

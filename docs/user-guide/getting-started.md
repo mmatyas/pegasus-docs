@@ -18,7 +18,7 @@ You can find the **latest releases** on <a href="http://pegasus-frontend.org/" t
 On most platforms, Pegasus is just a single file, which you can extract and run anywhere on your system. The system requirements, dependencies and other notes can be found on the following pages:
 
 - [Platform notes: Windows](platform-windows.md)
-- [Platform notes: Linux](platform-linux.md) (also see for Raspberry Pi)
+- [Platform notes: Linux](platform-linux.md) (including ARM devices)
 - [Platform notes: Android](platform-android.md)
 
 !!! info "Other platforms"

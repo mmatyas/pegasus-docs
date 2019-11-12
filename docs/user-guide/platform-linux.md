@@ -6,11 +6,11 @@ On desktop, the releases are expected to run on at least the last two stable rel
 
 In general, the dependencies on Linux are:
 
-- GStreamer 1.x (for video playback)
-- Fontconfig (for typography)
-- OpenSSL 1.0.x (for networking)
-- PolicyKit (optional, for shutting down/restarting the device without admin rights)
-- SDL2 (optional, for improved gamepad support)
+- GStreamer 1.x <small>(for video playback)</small>
+- Fontconfig <small>(for typography)</small>
+- OpenSSL 1.0.x <small>(for networking)</small>
+- PolicyKit <small>(optional, for shutting down/restarting the device without admin rights)</small>
+- SDL2 <small>(optional, for improved gamepad support)</small>
 
 !!! warning
     Depending on your settings, **the system may not allow running programs from USB drives or Windows file systems**. This is not a bug, but something you might want to be aware of.

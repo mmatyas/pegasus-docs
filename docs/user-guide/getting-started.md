@@ -1,8 +1,8 @@
-# Getting started!
+# <i class="fas fa-fire" style="color:#ff4136"></i> Getting started!
 
 Welcome to the documentation of the Pegasus frontend! Here you can find information about how to install and configure Pegasus on your device, and further along, about the various customization possibilities. Let's get started!
 
-## Installation
+## <i class="fas fa-download" style="color:#2ecc40"></i> Installation
 
 Pegasus is available for various devices and operating systems. Currently there are official releases for the following platforms:
 
@@ -24,7 +24,7 @@ On most platforms, Pegasus is just a single file, which you can extract and run 
 !!! info "Other platforms"
     Pegasus can also run on platforms not listed above, but may need to be compiled manually from source code. If you wish to do that, the [Build documentation](../dev/build.md) can help you.
 
-## Basic navigation
+## <i class="fas fa-mouse" style="color:#ff851b"></i> Basic navigation
 
 The first time you start Pegasus, you'll be either greeted with a message that says no games have been found, or depending on your system, there might be already games present from other sources (eg. Steam or EmulationStation).
 
@@ -37,7 +37,7 @@ You can navigate in the menu (and in the whole program in general) using the arr
 !!! help "Controls"
     For the full list of the default navigation keys and buttons, visit [the Controls page](controls.md).
 
-## Configuration
+## <i class="fas fa-tools" style="color:#17a2b8"></i> Configuration
 
 On the Settings screen, you can set some general parameters, like the language of the interface or whether you'd like to run in full screen or windowed mode. You can also change the "theme", the look and feel of the whole program.
 
@@ -50,7 +50,7 @@ The behaviour of the game searching can be configured in the Gaming section:
 
 Outside the Settings menu, there's also the Controls screen, where you can configure your gamepad's layout, and a Help screen that shows some information about Pegasus, and contains a link to this documentation site.
 
-## Customization
+## <i class="fas fa-fan" style="color:#b10dc9"></i> Customization
 
 Now that you're done with the basics, you might want to dig deeper into the customization aspect of Pegasus. Here are a few articles you could take a look, if you're interested:
 

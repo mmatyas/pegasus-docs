@@ -36,6 +36,9 @@ sudo apt-get install \
     policykit-1
 ```
 
+!!! info "Odroid"
+    On Odroid, you may also have to install the Mali fbdev libraries (`mali-fbdev`), if they are missing.
+
 
 ## Raspbian
 
@@ -45,7 +48,7 @@ There are various ways to set up Raspbian, so to make sure you have all the depe
 
 In addition, Pegasus requires at least 64 MB of video RAM. You can change the memory split of the Raspberry Pi using `raspi-config`.
 
-!!! tip
+!!! tip "RetroPie"
     If you're running RetroPie, you can also install Pegasus from its setup menu. [See this page for more details.](platform-retropie.md)
 
 

@@ -16,6 +16,11 @@ In general, the dependencies on Linux are:
     Depending on your settings, **the system may not allow running programs from USB drives or Windows file systems**. This is not a bug, but something you might want to be aware of.
 
 
+## Flatpak
+
+Pegasus is [available on FlatHub](https://flathub.org/apps/details/org.pegasus_frontend.Pegasus). You can use any Flatpak-supporting software centers to install it, or follow the instructions on the page to do it manually.
+
+
 ## Ubuntu
 
 At the time of writing, the official builds require Ubuntu **16.04 or later**. Most of the dependencies come preinstalled, but in case you run into troubles, you can install them like this:
@@ -64,6 +69,7 @@ git clone https://aur.archlinux.org/pegasus-frontend-git.git
 cd pegasus-frontend-git
 makepkg -si
 ```
+
 
 ## Custom builds
 

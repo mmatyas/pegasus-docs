@@ -1,6 +1,6 @@
 # Platform notes: Windows
 
-Pegasus is available for **Windows 7 and later**, and should work out of the box.
+Pegasus is available for **Windows 7** or later, and should work out of the box.
 
 ## Multimedia support
 

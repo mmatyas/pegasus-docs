@@ -5,7 +5,8 @@ Other than the official Raspberry Pi releases you can found on the [download pag
 - a) From the RetroPie setup menu
 - b) Using the Frontend Chooser tool
 
-Note: you will need RetroPie version 4.3 (released on September 21, 2017) or later to install Pegasus through RetroPie.
+!!! note
+    You will need RetroPie version 4.3 (released on September 21, 2017) or later to install Pegasus through RetroPie.
 
 ## From the setup menu
 
@@ -17,8 +18,7 @@ After the installation, you can either call `/opt/retropie/supplementary/pegasus
 
 ## Using the Frontend Chooser
 
-There's also a graphical tool for installing various frontend and setting them up to boot automatically.
+There's also a graphical tool for installing various frontend and setting them up to boot automatically. It is available from [HERE](https://github.com/mmatyas/retropie-frontendchooser).
 
 ![retropie frontend chooser screenshot](img/retropie-frontendchooser.png)
 
-It is available from [HERE](https://github.com/mmatyas/retropie-frontendchooser).

@@ -31,6 +31,7 @@ nav:
     - Example -- Flixnet theme: themes/example-flixnet.md
     - API reference: themes/api.md
   - Core Dev:
+    - Metadata syntax: dev/meta-syntax.md
     - Installing Qt: dev/install-qt.md
     - Cross compile Qt: dev/cross-compile-qt.md
     - Building: dev/build.md

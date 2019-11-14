@@ -19,9 +19,9 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
     - [Asset files](user-guide/meta-assets.md)
     - [Real world examples](user-guide/meta-examples.md)
     - [Other sources](user-guide/meta-sources.md) (Steam, GOG, etc.)
-- [Scripting](user-guide/scripting.md)
 - [Installing themes](user-guide/installing-themes.md)
 - [Config directories](user-guide/config-dirs.md)
+- [Scripting](user-guide/scripting.md)
 - [Breaking changes](user-guide/breaking-changes.md)
 
 ## Theme development

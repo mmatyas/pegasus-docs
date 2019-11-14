@@ -19,9 +19,9 @@ nav:
       - Asset files: user-guide/meta-assets.md
       - Real world examples: user-guide/meta-examples.md
       - Other data sources: user-guide/meta-sources.md
-    - Scripting: user-guide/scripting.md
     - Installing themes: user-guide/installing-themes.md
     - Config directories: user-guide/config-dirs.md
+    - Scripting: user-guide/scripting.md
     - Breaking changes: user-guide/breaking-changes.md
   - Theme Dev:
     - Overview: themes/overview.md
@@ -32,9 +32,9 @@ nav:
     - API reference: themes/api.md
   - Core Dev:
     - Metadata syntax: dev/meta-syntax.md
-    - Installing Qt: dev/install-qt.md
-    - Cross compile Qt: dev/cross-compile-qt.md
     - Building: dev/build.md
+    - Installing Qt: dev/install-qt.md
+    - Cross compiling Qt: dev/cross-compile-qt.md
     - Deployment: dev/deploy.md
     - Translations: dev/translate.md
 

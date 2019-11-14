@@ -1,6 +1,6 @@
 # Deployment
 
-Qt uses lots of modules, plugins and QML files, which makes it somewhat hard to create deployable packages manually. Fortunately, there are tools that can collect the necessary files for you.
+Qt uses lots of modules, plugins and QML files, which may make it somewhat hard to create deployable packages manually. Fortunately, there are tools that can collect the necessary files for you.
 
 See the general Qt documentation [here](https://doc.qt.io/qt-5/deployment.html), especially the platform-specific notes. Since most of the details are described there, I'll just list the commands I usually use.
 
@@ -27,12 +27,12 @@ cp /path/to/libQt5Svg.so.5 ./lib/
 ## Windows
 
 ```sh
- windeployqt
-      --release
-      --qmldir <build dir>
-      --no-translations
-      --no-opengl-sw
-      <installation dir>
+windeployqt
+    --release
+    --qmldir <build dir>
+    --no-translations
+    --no-opengl-sw
+    <installation dir>
 ```
 
 ## macOS

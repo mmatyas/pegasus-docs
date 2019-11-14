@@ -40,7 +40,7 @@ These files are named `metadata.pegasus.txt`, and Pegasus looks for them in the 
 
 ## File format
 
-The metadata files are text files that contain `property: value` entries:
+The metadata file contains a list of `name: value` *entries*, where each entry has a *name* and one or more lines of *values*. Groups of such entries are then used to describe *Collections* and *Games*. Here is an example file:
 
 ```make
 collection: PlayStation
@@ -64,25 +64,24 @@ description: Final Fantasy VII is a 1997 role-playing video game developed by
   Square for the PlayStation console. It is the seventh main installment in the
   Final Fantasy series.
   .
-  The game's story follows Cloud Strife, a mercenary who joins an eco-terrorist
-  organization to stop a world-controlling megacorporation from using the planet's
+  The games story follows Cloud Strife, a mercenary who joins an eco-terrorist
+  organization to stop a world-controlling megacorporation from using the planets
   life essence as an energy source.
 rating: 92%
 x-scrape-source: SomeScraper
 ```
 
-- Entries always start on a new line.
-- Property names are case insensitive, so `title`, `Title` and `TitLe` are the same.
-- Values have two different types:
-  - text: simple human-readable text, like titles or descriptions (actually most of the fields belong to this category). Long texts can be broken into multiple lines to improve readability. Empty lines can be represented with a single dot (`.`).
-  - item list: one or more items (eg. files), with one item per line.
-- For multiline fields, each line except the very first one (where the property name is) must start with at least one space or tab.
-- Lines starting with `#` are comments and will be ignored.
+Lines starting with `#` are comments and will be ignored. Empty lines are ignored too.
 
-There are two kinds of elements in a metadata file: Collections and Games. All entries belong to the last defined `collection` or `game` entry in metadata files.
+The *name* of the entries is case insensitive, so `title`, `Title` and `TitLe` are the same. Values can span multiple lines, but additional lines have to start with at least one space or tab. Depending on the kind of the entry, the lines will be treated as either a *list of items*&nbsp;<i title="List" class="metaentry fas fa-list-ul"></i> (eg. file list) or as *flowing text* <span class="metaentry text" title="Text">T</span>&nbsp;(eg. descriptions and single-value entries).
+
+!!! help "Line breaks"
+    In flowing text, lines that contain a single dot `.` will be treated as *paragraph break*s ("empty lines"), while the characters `\n` can be used for manual *line break*s.
 
 !!! info "Developers"
     In case you're interested in writing software that would read or write such metadata files, a more detailed page about the syntax can be found [HERE](../dev/meta-syntax.md).
+
+Currently there are two kinds of groups in a metadata file: Collections and Games. All entries belong to the last defined `collection` or `game` entry in metadata files. The entries recognized by Pegasus are listed below.
 
 
 ## Collections
@@ -93,32 +92,32 @@ Collections define which files in the directory (and its subdirectories) should 
 
 The following fields define some **basic properties**:
 
-Key | Description
-----|---
-`collection` | Creates a new collection with the value as name (if it was not created yet). The properties after this line will modify this collection. This is a **required** field.
-`launch` | A common launch command for the games in this collection. If a game has its own custom launch command, that will override this field. There are some placeholder variables you can use here, see below for more details.
-`command` | An alternate name for `launch`. Use whichever you prefer.
-`workdir` | The default working directory used when launching a game. Defaults to the directory of the launched program.
-`cwd` | An alternate name for `workdir`. Use whichever you prefer.
+Key | Description | Type
+----|-------------|:----:
+`collection` | Creates a new collection with the value as name (if it was not created yet). The properties after this line will modify this collection. This is a **required** field. | <span class="metaentry text" title="Text">T</span>
+`launch` | A common launch command for the games in this collection. If a game has its own custom launch command, that will override this field. There are some placeholder variables you can use here, see below for more details. | <span class="metaentry text" title="Text">T</span>
+`command` | An alternate name for `launch`. Use whichever you prefer. | <span class="metaentry text" title="Text">T</span>
+`workdir` | The default working directory used when launching a game. Defaults to the directory of the launched program. | <span class="metaentry text" title="Text">T</span>
+`cwd` | An alternate name for `workdir`. Use whichever you prefer. | <span class="metaentry text" title="Text">T</span>
 
 !!! tip "Multiple directories"
     Collections can span over multiple metadata files *if they have the same name*. This means you can create categories such as "Platformer games" in multiple locations, and the games will still belong to the same collection.
 
-### Include
+### Include files
 
 The following fields control which files of the directory should be **included** in the collection:
 
-Key | Description
-----|---
-`extension`, `extensions` | A comma-separated list of file extensions (without the `.` dot). All files with these extensions (including those in subdirectories) will be included. This field can appear multiple times.
-`file`, `files` | A single file or a list of files to add to the collection. This field can appear multiple times.
-`regex` | A Perl-compatible regular expression string, without leading or trailing slashes. Relative file paths matching the regex will be included. Unicode is supported.
-`directory`, `directories` | A single directory or a list of directories to search for matching games (see below). This field can appear multiple times.
+Key | Description | Type
+----|-------------|:----:
+`extension`, `extensions` | A comma-separated list of file extensions (without the `.` dot), or a list of such lines. All files with these extensions (including those in subdirectories) will be included. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
+`file`, `files` | A single file or a list of files to add to the collection. The paths don't have to be wrapped in quotes and can contain spaces. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
+`regex` | A Perl-compatible regular expression string, without leading or trailing slashes. Relative file paths matching the regex will be included. Unicode is supported. | <span class="metaentry text" title="Text">T</span>
+`directory`, `directories` | A single directory or a list of directories to search for matching games (see below). This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
 
-!!! note "Foreign directories"
-    By default, a metadata file is expected to be next to the games, and files are searched in the directory of the this file. If you also want to search for matching files in other directories (eg. you prefer to keep the metadata separately), you can list them under `directories` (similarly to the files, one directory per line).
+!!! help "Foreign directories"
+    By default, a metadata file is expected to be next to the games, and files are searched in the directory of the this file. If you also want to search for matching files in other directories (eg. you prefer to keep the metadata separately), you can list them under `directories` (similarly to the files, one directory per line). You don't have to mention the directory the metadata file is in.
 
-### Exclude
+### Exclude files
 
 The file-related fields above with the `ignore-` prefix control which files should be **excluded**:
 
@@ -129,20 +128,20 @@ Key | Description
 `ignore-regex` | Similarly to `regex` above.
 
 !!! warning "Exclusion is stronger than inclusion"
-    If both the normal and the `ignore-` fields match for a file, it will be excluded.
+    If both the regular and the `ignore-` fields match for a file, it will be excluded.
 
-!!! note "Plural forms"
+!!! help "Plural forms"
     Sometimes writing the plural forms of the fields feels more natural, so `directories`, `files`, `ignore-extensions`, etc. are also supported without any difference to their regular forms.
 
 ### Metadata
 
 The following fields can tell some **additional information**:
 
-Key | Description
-----|---
-`shortname` | An optional short name for the collection, often an abbreviation (like MAME, NES, etc.). Should be lowercase.
-`summary` | A short description of the collection in one paragraph.
-`description` | A possibly longer description of the collection.
+Key | Description | Type
+----|-------------|:----:
+`shortname` | An optional short name for the collection, often an abbreviation (like MAME, NES, etc.). Should be lowercase. | <span class="metaentry text" title="Text">T</span>
+`summary` | A short description of the collection in one paragraph. | <span class="metaentry text" title="Text">T</span>
+`description` | A possibly longer description of the collection. | <span class="metaentry text" title="Text">T</span>
 
 Keys starting with `x-` can be used to extend the format with additional data. This could be used, for example, by other softwares (eg. scrapers) to store some program-specific data.
 
@@ -193,24 +192,24 @@ Game entries store additional information about the individual games, such as ti
 
 The following properties can be used in game entries:
 
-Key | Description
-----|---
-`game` | Creates a new game with the value as title. The properties after this line will modify this game. This is a **required** field.
-`sort_title` | An alternate title that should be used for sorting. Can be useful when the title contains eg. roman numerals or special symbols. `sort-title` and `sorttitle` are also accepted.
-`file`, `files` | The file or list of files (eg. disks) that belong to this game. If there are multiple files, you'll be able to select which one to launch when you start the game.
-`developer`, `developers` | The developer or list of developers. This field can appear multiple times.
-`publisher`, `publishers` | The publisher or list of publishers. This field can appear multiple times.
-`genre`, `genres` | The genre or list of genres (for example *Action*, *Adventure*, etc.). This field can appear multiple times.
-`tag`, `tags` | Tag or list of tags (for example *Co-op*, *VR*, etc.). This field can appear multiple times.
-`summary` | A short description of the game in one paragraph.
-`description` | A possibly longer description of the game.
-`players` | The number of players who can play the game. Either a single number (eg. `2`) or a number range (eg. `1-4`).
-`release` | The date when the game was released, in YYYY-MM-DD format (eg. `1985-05-22`). Month and day can be omitted if unknown (eg. `1985-05` or `1985` alone is also accepted).
-`rating` | The rating of the game, in percentages. Either an integer percentage in the 0-100% range (eg. `70%`), or a fractional value between 0 and 1 (eg. `0.7`).
-`launch` | If this game must be launched differently than the others in the same collection, a custom launch command can be defined for it.
-`command` | An alternate name for `launch`. Use whichever you prefer.
-`workdir` | The working directory in which the game is launched. Defaults to the directory of the launched program.
-`cwd` | An alternate name for `workdir`. Use whichever you prefer.
+Key | Description | Type
+----|-------------|:----:
+`game` | Creates a new game with the value as title. The properties after this line will modify this game. This is a **required** field. | <span class="metaentry text" title="Text">T</span>
+`sort_title` | An alternate title that should be used for sorting. Can be useful when the title contains eg. roman numerals or special symbols. `sort-title` and `sorttitle` are also accepted. | <span class="metaentry text" title="Text">T</span>
+`file`, `files` | The file or list of files (eg. disks) that belong to this game. If there are multiple files, you'll be able to select which one to launch when you start the game. | <i title="List" class="metaentry fas fa-list-ul"></i>
+`developer`, `developers` | The developer or list of developers. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
+`publisher`, `publishers` | The publisher or list of publishers. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
+`genre`, `genres` | The genre or list of genres (for example *Action*, *Adventure*, etc.). This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
+`tag`, `tags` | Tag or list of tags (for example *Co-op*, *VR*, etc.). This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
+`summary` | A short description of the game in one paragraph. | <span class="metaentry text" title="Text">T</span>
+`description` | A possibly longer description of the game. | <span class="metaentry text" title="Text">T</span>
+`players` | The number of players who can play the game. Either a single number (eg. `2`) or a number range (eg. `1-4`). | <span class="metaentry text" title="Text">T</span>
+`release` | The date when the game was released, in YYYY-MM-DD format (eg. `1985-05-22`). Month and day can be omitted if unknown (eg. `1985-05` or `1985` alone is also accepted). | <span class="metaentry text" title="Text">T</span>
+`rating` | The rating of the game, in percentages. Either an integer percentage in the 0-100% range (eg. `70%`), or a fractional value between 0 and 1 (eg. `0.7`). | <span class="metaentry text" title="Text">T</span>
+`launch` | If this game must be launched differently than the others in the same collection, a custom launch command can be defined for it. | <span class="metaentry text" title="Text">T</span>
+`command` | An alternate name for `launch`. Use whichever you prefer. | <span class="metaentry text" title="Text">T</span>
+`workdir` | The working directory in which the game is launched. Defaults to the directory of the launched program. | <span class="metaentry text" title="Text">T</span>
+`cwd` | An alternate name for `workdir`. Use whichever you prefer. | <span class="metaentry text" title="Text">T</span>
 
 Like with the collections, keys starting with `x-` can be used to extend the format with additional data. This could be used, for example, by other softwares (eg. scrapers) to store some program-specific data.
 
@@ -228,24 +227,19 @@ developer: Zoo Digital
 genre: Shooter
 players: 1
 summary: You're a little yellow alien.  The FBI has shot down your ship
-  while flying over planet Earth.  And it, quite literally, lands right on their
-  doorstep.  After a series of FBI Agents swipe your ship, what option do you have
+  while flying over planet Earth. And it, quite literally, lands right on their
+  doorstep. After a series of FBI Agents swipe your ship, what option do you have
   other than to blow up everything in your path to get it back?
 description:
   Alien Hominid is a 2D side-scrolling shooter with heavy references to the Metal
   Slug series of games - from the hand-drawn graphics, huge explosions, right down
-  to the ability to eviscerate FBI Agents when you get up close to them.  The
-  graphics are by featured artist Dan Paladin.  Your goal, is quite simply, to get
-  to the end of the stage, and die as little as possible.  Which is made difficult
-  due to the fact that any bullet is an instant kill.
+  to the ability to eviscerate FBI Agents when you get up close to them. The
+  graphics are by featured artist Dan Paladin.
   .
-  To help you out, you can grab a range of power-ups, such as lasers, spread
-  shots, shotguns and more, as well as hijacking vehicles and using them for
-  protection.  Grenades can be lobbed, and you can jump on enemy shoulders and
-  choose to bite their heads off if you like, or pick them up and throw them at
-  other enemies.  You can also dive underground for a short period of time to
-  avoid enemies - while underground, you can drag agents into the ground to kill
-  them.
+  Your goal, is quite simply, to get to the end of the stage, and die as little as
+  possible. Which is made difficult due to the fact that any bullet is an instant
+  kill. To help you out, you can grab a range of power-ups, such as lasers, spread
+  shots, shotguns and more.
 rating: 50%
 x-id: 4149
 x-source: ScreenScraper

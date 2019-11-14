@@ -21,6 +21,19 @@ img.joybtn.x3 {
 h2 {
     margin-top: 1.5em;
 }
+h3 {
+    margin-top: 1.25em;
+}
+
+.metaentry {
+    background-color: #eee;
+    border-radius: .4em;
+    padding: .25em .4em;
+}
+.metaentry.text {
+    font-family: serif;
+    font-weight: bold;
+}
 
 /* based on the Material theme */
 

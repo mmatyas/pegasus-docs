@@ -35,9 +35,9 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 
 ## Core development
 
+- [**Translations**](dev/translate.md)
 - [Metadata syntax](dev/meta-syntax.md)
 - [Building Pegasus](dev/build.md)
 - [Installing Qt on desktop](dev/install-qt.md)
 - [Cross compiling Qt for embedded](dev/cross-compile-qt.md)
 - [Deployment](dev/deploy.md)
-- [Translations](dev/translate.md)

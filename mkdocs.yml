@@ -31,12 +31,12 @@ nav:
     - Example -- Flixnet theme: themes/example-flixnet.md
     - API reference: themes/api.md
   - Core Dev:
+    - Translations: dev/translate.md
     - Metadata syntax: dev/meta-syntax.md
     - Building: dev/build.md
     - Installing Qt: dev/install-qt.md
     - Cross compiling Qt: dev/cross-compile-qt.md
     - Deployment: dev/deploy.md
-    - Translations: dev/translate.md
 
 theme:
   name: cinder

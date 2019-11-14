@@ -2,7 +2,7 @@
 
 This page list the directories where Pegasus is allowed to find your configuration files, including themes.
 
-## In short
+## Default directories
 
 Platform | Directory
 ---------|----------

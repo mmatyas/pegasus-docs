@@ -81,6 +81,9 @@ x-scrape-source: SomeScraper
 
 There are two kinds of elements in a metadata file: Collections and Games. All entries belong to the last defined `collection` or `game` entry in metadata files.
 
+!!! info "Developers"
+    In case you're interested in writing software that would read or write such metadata files, a more detailed page about the syntax can be found [HERE](../dev/meta-syntax.md).
+
 
 ## Collections
 

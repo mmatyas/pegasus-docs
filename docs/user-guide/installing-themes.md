@@ -3,7 +3,7 @@
 Themes are stored in the theme directory. The default location of that is:
 
 - **Linux:** `~/.config/pegasus-frontend/themes/`
-- **Windows:** `C:/Users/[username]/AppData/Local/pegasus-frontend/themes/`
+- **Windows:** `C:\Users\[username]\AppData\Local\pegasus-frontend\themes\`
 - **macOS:** `~/Library/Preferences/pegasus-frontend/themes/`
 - **Android:** `<storage>/pegasus-frontend/themes/`
 - **all platform:** `<directory of the program>/config/themes/`

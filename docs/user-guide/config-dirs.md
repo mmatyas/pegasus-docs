@@ -8,7 +8,7 @@ Platform | Directory
 ---------|----------
 **all platforms:** | `<directory of the program>/config`
 **Linux:** | `~/.config/pegasus-frontend/`
-**Windows:** | `C:/Users/[username]/AppData/Local/pegasus-frontend/`
+**Windows:** | `C:\Users\[username]\AppData\Local\pegasus-frontend\`
 **macOS:** | `~/Library/Preferences/pegasus-frontend/`
 **Android:** | `<storage>/pegasus-frontend/`
 
@@ -34,8 +34,8 @@ Most platforms define multiple possible directories for storing user content, an
 
 **Windows:**
 
-- `C:/Users/[username]/AppData/Local/pegasus-frontend/` (**default**)
-- `C:/ProgramData/pegasus-frontend/`
+- `C:\Users\[username]\AppData\Local\pegasus-frontend\` (**default**)
+- `C:\ProgramData\pegasus-frontend\`
 
 **macOS:**
 

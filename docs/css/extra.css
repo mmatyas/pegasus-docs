@@ -35,6 +35,11 @@ h3 {
     font-weight: bold;
 }
 
+.color-windows { color:#0078d7 }
+.color-macos { color:#a3aaae }
+.color-android { color:#a4c639 }
+.color-embedded { color:#800080 }
+
 /* based on the Material theme */
 
 p {

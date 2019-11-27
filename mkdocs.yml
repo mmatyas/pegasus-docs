@@ -28,7 +28,13 @@ nav:
     - QML tutorials: themes/qml-tutorials.md
     - QML modules: themes/qml-modules.md
     - Example -- Simple theme: themes/example-simple.md
-    - Example -- Flixnet theme: themes/example-flixnet.md
+    - "Step-by-step: Flixnet theme":
+      - Introduction: themes/example-flixnet-intro.md
+      - Part 1: themes/example-flixnet-ch1.md
+      - Part 2: themes/example-flixnet-ch2.md
+      - Part 3: themes/example-flixnet-ch3.md
+      - Part 4: themes/example-flixnet-ch4.md
+      - Part 5: themes/example-flixnet-ch5.md
     - API reference: themes/api.md
   - Core Dev:
     - Translations: dev/translate.md

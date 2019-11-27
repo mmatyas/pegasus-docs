@@ -99,6 +99,6 @@ QML can be a quite large topic, so this documentation is grouped into the follow
 - To get familiar with QML, a number of tutorials were collected on [this page](qml-tutorials.md).
 - To learn by examples, there are step-by-step tutorials of writing themes from scratch. QML code is also explained along the way.
     - [Simple theme](example-simple.md)
-    - [Flixnet theme](example-flixnet.md)
+    - [Flixnet theme](example-flixnet-intro.md)
 - A list of commonly used QML components is available here. // TODO
 - A reference of the accessible data structures Pegasus provides is available [here](api.md).

@@ -30,7 +30,7 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 - [QML tutorials](themes/qml-tutorials.md)
 - [Available QML modules](themes/qml-modules.md)
 - [Step-by-step: Simple theme](themes/example-simple.md)
-- [Step-by-step: Flixnet theme](themes/example-flixnet.md)
+- [Step-by-step: Flixnet theme](themes/example-flixnet-intro.md)
 - [API reference](themes/api.md)
 
 ## Core development

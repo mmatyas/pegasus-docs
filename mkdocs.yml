@@ -27,7 +27,11 @@ nav:
     - Overview: themes/overview.md
     - QML tutorials: themes/qml-tutorials.md
     - QML modules: themes/qml-modules.md
-    - Example -- Simple theme: themes/example-simple.md
+    - "Step-by-step: Simple theme":
+      - Introduction: themes/example-simple-intro.md
+      - Part 1: themes/example-simple-ch1.md
+      - Part 2: themes/example-simple-ch2.md
+      - Part 3: themes/example-simple-ch3.md
     - "Step-by-step: Flixnet theme":
       - Introduction: themes/example-flixnet-intro.md
       - Part 1: themes/example-flixnet-ch1.md

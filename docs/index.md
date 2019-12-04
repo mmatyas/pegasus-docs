@@ -27,6 +27,7 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 ## Theme development
 
 - [Overview](themes/overview.md)
+    - [Virtual screen](themes/virtual-screen.md)
 - [QML tutorials](themes/qml-tutorials.md)
 - [Available QML modules](themes/qml-modules.md)
 - [Step-by-step: Simple theme](themes/example-simple-intro.md)

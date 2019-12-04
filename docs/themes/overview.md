@@ -92,6 +92,13 @@ FocusScope {
 Themes should have a `FocusScope` as their root element, which is then set up by Pegasus to always fill the whole screen. (`FocusScope` itself is a special container in QML which is used for separating keyboard/gamepad input from other parts of the UI (eg. main menu).)
 
 
+## Usage
+
+If you've created the `theme.cfg` and `theme.qml` files as described above, you should now see your entry in the list of available themes in Pegasus' settings menu.
+
+After the theme is loaded, pressing the ++f5++ key will make Pegasus reload its files, making it easier to try out changes.
+
+
 ## Next steps
 
 QML can be a quite large topic, so this documentation is grouped into the following main areas:

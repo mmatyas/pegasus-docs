@@ -40,3 +40,12 @@ description: Example for the case where a game
 
 !!! tip
     On Windows both forward- (`/`) and backward (`\`) slashes are supported in paths. Use whichever you prefer.
+
+
+## RocketLauncher
+
+You can launch games via RocketLauncher through its command line interface. In the simplest case, the launch command would look like this:
+
+`launch: "path/to/RocketLauncher/RocketLauncher.exe" -s "Some System Here" -r "{file.path}"`
+
+For more information, you can visit [the RocketLauncher documentation page](http://www.rlauncher.com/wiki/index.php?title=RocketLauncher_Command_Line_Parameters).

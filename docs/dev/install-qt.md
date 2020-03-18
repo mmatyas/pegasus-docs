@@ -29,9 +29,15 @@ On many Linux distros, the Qt libraries in the official repositories are often s
 
 ### Ubuntu, Debian
 
-**Debian 10** (buster/testing) contains an up-to-date Qt release and building Pegasus should be possible.
+**Debian 10** (buster) and **Ubuntu 19.04** or later contains up-to-date Qt releases, so building Pegasus should be possible using the following packages:
 
-**Ubuntu 18.04** contains an up-to-date Qt release, but misses a few necessary packages. You can either use the Qt installer (see above), or the followin PPAs:
+- `qtdeclarative5-dev`
+- `qtmultimedia5-dev`
+- `libqt5gamepad5-dev`
+- `libqt5svg5-dev`
+- `qml-module-qtgraphicaleffects`
+
+**Earlier releases** contain an up-to-date Qt release, but miss a few necessary packages. You can either use the Qt installer (see above), or use the following PPA:
 
 ```sh
 sudo add-apt-repository ppa:beineri/opt-qt-5.11.1-bionic

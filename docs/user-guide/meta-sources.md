@@ -76,3 +76,16 @@ Once LaunchBox is found, all games added there should also appear in Pegasus, wi
 *Available on: all platforms*
 
 Pegasus can recognize the assets ("media" directory) layout created by Skraper. Pegasus will look for assets in `[game directory]/skraper` and `[game directory]/media`, for the game directories set in the Settings menu.
+
+An example directory structure could look like this:
+
+```
+NES/
+├─ metadata.pegasus.txt
+├─ Contra (U).zip
+└─ media/
+   ├─ box2dfront/
+   │  └─ Contra (U).png
+   └─ videos/
+      └─ Contra (U).mp4
+```

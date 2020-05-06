@@ -1,20 +1,22 @@
 # Platform notes: RetroPie
 
-Other than the official Raspberry Pi releases you can found on the [download page](getting-started.md), Pegasus is also from the RetroPie repositories. You can install it by two ways:
+For Raspberry Pi devices Pegasus is also available from the RetroPie repositories. You can install it by two ways:
 
 - a) From the RetroPie setup menu
 - b) Using the Frontend Chooser tool
 
 !!! note
-    You will need RetroPie version 4.3 (released on September 21, 2017) or later to install Pegasus through RetroPie.
+    You will need RetroPie version **4.6** (released on April 28, 2020) or later to successfully install Pegasus.
 
 ## From the setup menu
 
-You can start the RetroPie setup script from the terminal (`sudo ~/RetroPie-Setup/retropie_setup.sh`) or from another already installed frontend. You will be greeted with a text-based interface. To install Pegasus, select *Manage Packages &rarr; Manage experimental packages &rarr; pegasus-fe &rarr; Install from binary*. The latest release will then be downloaded. You can also update your existing installation here.
+You can start the RetroPie setup script from the terminal (`sudo ~/RetroPie-Setup/retropie_setup.sh`) or from another already installed frontend. You will be greeted with a text-based interface.
+
+To install Pegasus, select *Manage Packages &rarr; Manage experimental packages &rarr; pegasus-fe &rarr; Install from binary*. The latest release will then be downloaded. You can also update your existing installation here.
 
 ![retropie screenshot](img/retropie-expmenu.png)
 
-After the installation, you can either call `/opt/retropie/supplementary/pegasus-fe/pegasus-fe` manually, or edit `/opt/retropie/configs/all/autostart.sh` to launch Pegasus on boot (instead of eg. ES2).
+After the installation, you can either call `pegasus-fe` manually, or edit `/opt/retropie/configs/all/autostart.sh` to launch Pegasus on boot (instead of eg. ES2).
 
 ## Using the Frontend Chooser
 

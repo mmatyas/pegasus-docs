@@ -7,11 +7,11 @@ Welcome to the documentation of the Pegasus frontend! Here you can find informat
 Pegasus is available for various devices and operating systems. Currently there are official releases for the following platforms:
 
 - **Windows** 7 or later
-- **Linux** with Ubuntu 16.04/Debian Jessie or later
-- **Raspberry Pi** with Raspbian Jessie or later
+- **Linux** with Ubuntu 18.04/Debian Buster or later
+- **Raspberry Pi** with Raspbian Buster or later
 - **Odroid** C0/C1/C2 and XU3/XU4 with Ubuntu 18.04 or later
 - **Android** 4.4 (KitKat) or later
-- **macOS** 10.11 (El Capitan) or later
+- **macOS** 10.13 (High Sierra) or later
 
 You can find the **latest releases** on <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section.
 
@@ -19,6 +19,7 @@ On most platforms, Pegasus is just a single file, which you can extract and run 
 
 - [Platform notes: Windows](platform-windows.md)
 - [Platform notes: Linux](platform-linux.md) (including ARM devices)
+    - [RetroPie](platform-retropie.md)
 - [Platform notes: Android](platform-android.md)
 
 !!! info "Other platforms"

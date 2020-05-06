@@ -2,28 +2,23 @@
 
 Pegasus runs on both desktop and embedded Linux devices, and official releases are available for several platforms.
 
-On desktop, the releases are expected to run on at least the last two stable releases of Ubuntu, while on the Raspberry Pi, the last two stable releases of Raspbian. Other than a few required system libraries however, Pegasus is mostly self-contained, so as long as you have a fairly up-to-date system, you may be able to run the official builds without problem.
+On desktop, the releases are expected to run on at least the last two stable releases of Ubuntu, while on the Raspberry Pi, the last stable releases of Raspbian. Other than a few required system libraries however, Pegasus is mostly self-contained, so as long as you have a fairly up-to-date system, you may be able to run the official builds without problem.
 
 In general, the dependencies on Linux are:
 
 - GStreamer 1.x <small>(for video playback)</small>
 - Fontconfig <small>(for typography)</small>
-- OpenSSL 1.0.x <small>(for networking)</small>
+- OpenSSL <small>(for networking)</small>
 - PolicyKit <small>(optional, for shutting down/restarting the device without admin rights)</small>
-- SDL2 <small>(optional, for improved gamepad support)</small>
+- SDL2 <small>(for improved gamepad support, required by the official build, optional when building from source)</small>
 
 !!! warning
     Depending on your settings, **the system may not allow running programs from USB drives or Windows file systems**. This is not a bug, but something you might want to be aware of.
 
 
-## Flatpak
-
-Pegasus is [available on FlatHub](https://flathub.org/apps/details/org.pegasus_frontend.Pegasus). You can use any Flatpak-supporting software centers to install it, or follow the instructions on the page to do it manually.
-
-
 ## Ubuntu
 
-At the time of writing, the official builds require Ubuntu **16.04 or later**. Most of the dependencies come preinstalled, but in case you run into troubles, you can install them like this:
+At the time of writing, the official builds require Ubuntu **18.04 or later**. Most of the dependencies come preinstalled, but in case you run into troubles, you can install them like this:
 
 ```
 sudo apt-get install \
@@ -32,7 +27,7 @@ sudo apt-get install \
     gstreamer1.0-plugins-good \
     fontconfig \
     libsdl2-2.0-0 \
-    libssl1.0.0 \
+    libssl1.1 \
     policykit-1
 ```
 
@@ -42,7 +37,7 @@ sudo apt-get install \
 
 ## Raspbian
 
-On the Raspberry Pi, the official builds require **Raspbian Jessie or later**. All Raspberry boards are supported, however the releases are generally not interchangeable: trying to launch an executable made for a different device will result in `Illegal instruction` errors.
+On the Raspberry Pi, the official builds require **Raspbian Buster or later**. All Raspberry boards are supported, however the releases are generally not interchangeable: trying to launch an executable made for a different device will result in `Illegal instruction` errors.
 
 There are various ways to set up Raspbian, so to make sure you have all the dependencies ready, install them the same way as mentioned in the Ubuntu section above. A desktop installation (X11) is not required, so you can also use the "Lite" versions of Raspbian on your boards.
 
@@ -72,6 +67,11 @@ git clone https://aur.archlinux.org/pegasus-frontend-git.git
 cd pegasus-frontend-git
 makepkg -si
 ```
+
+
+## Flatpak
+
+The stable version of Pegasus is [available on FlatHub](https://flathub.org/apps/details/org.pegasus_frontend.Pegasus). You can use any Flatpak-supporting software centers to install it, or follow the instructions on the page to do it manually.
 
 
 ## Custom builds

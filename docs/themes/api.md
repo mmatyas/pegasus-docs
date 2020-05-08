@@ -15,6 +15,7 @@ Games found by Pegasus are organized in collections, and one game may be present
 Property | Description
 ---|---
 `name` | The unique name of the collection, eg. "Nintendo Entertainment System", "Mario Cartridges", etc.
+`sortName` | A variation of the collections's name that should be used for sorting. By default, it's the same as `name`.
 `shortName` | <span class="optional"></span> A short name for the collection, often an abbreviation like `nes`, `mame`, etc. Always in lowercase. If not set, defaults to the value of `name`.
 `summary` | <span class="optional"></span> Short description (typically 2-3 sentences).
 `description` | <span class="optional"></span> Longer description.
@@ -22,6 +23,9 @@ Property | Description
 `assets` | An object containing the default assets (see later).
 
 Properties marked as "optional" might have no value (eg. empty string or empty array). All fields are read-only.
+
+!!! warning
+    `sortName` and `shortName` look quite similar, be careful!
 
 
 ## Games
@@ -31,7 +35,7 @@ Games can have metadata and various kinds of assets. The list of games belonging
 Property | Description
 ---|---
 `title` | The game's title.
-`sortTitle` | A variation of the game's title that should be used for sorting.
+`sortTitle` | A variation of the game's title that should be used for sorting. By default, it's the same as `title`.
 `developer` | <span class="optional"></span> Developer(s) as a string. If there are more than one, they are separated with `, `.
 `publisher` | <span class="optional"></span> Publisher(s) as a string. If there are more than one, they are separated with `, `.
 `genre` | <span class="optional"></span> Genre(s) as a string. If there are more than one, they are separated with `, `.

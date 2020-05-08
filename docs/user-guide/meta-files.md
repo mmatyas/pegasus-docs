@@ -140,6 +140,7 @@ The following fields can tell some **additional information**:
 Key | Description | Type
 ----|-------------|:----:
 `shortname` | An optional short name for the collection, often an abbreviation (like MAME, NES, etc.). Should be lowercase. | <span class="metaentry text" title="Text">T</span>
+`sort-name` | An alternate name that should be used for sorting. Can be useful when the name contains eg. roman numerals or special symbols. `sort_name` and `sortname` are also accepted. | <span class="metaentry text" title="Text">T</span>
 `summary` | A short description of the collection in one paragraph. | <span class="metaentry text" title="Text">T</span>
 `description` | A possibly longer description of the collection. | <span class="metaentry text" title="Text">T</span>
 
@@ -195,7 +196,7 @@ The following properties can be used in game entries:
 Key | Description | Type
 ----|-------------|:----:
 `game` | Creates a new game with the value as title. The properties after this line will modify this game. This is a **required** field. | <span class="metaentry text" title="Text">T</span>
-`sort_title` | An alternate title that should be used for sorting. Can be useful when the title contains eg. roman numerals or special symbols. `sort-title` and `sorttitle` are also accepted. | <span class="metaentry text" title="Text">T</span>
+`sort-title` | An alternate title that should be used for sorting. Can be useful when the title contains eg. roman numerals or special symbols. `sort_title` and `sorttitle` are also accepted. | <span class="metaentry text" title="Text">T</span>
 `file`, `files` | The file or list of files (eg. disks) that belong to this game. If there are multiple files, you'll be able to select which one to launch when you start the game. | <i title="List" class="metaentry fas fa-list-ul"></i>
 `developer`, `developers` | The developer or list of developers. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
 `publisher`, `publishers` | The publisher or list of publishers. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>

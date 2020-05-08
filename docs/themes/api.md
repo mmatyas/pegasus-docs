@@ -51,6 +51,7 @@ Property | Description
 `playCount` | <span class="optional"></span> The number of times this games was launched. Defaults to 0.
 `lastPlayed` | <span class="optional"></span> The last time this game was launched. A QML `date` value with time information. Defaults to an invalid date.
 `playTime` | <span class="optional"></span> Play time in seconds, as a positive integer value. Defaults to 0.
+`collections` | An [item model](#item-models), the list of Collection objects (see above) to which this Game belongs. Every Game belongs to at least one Collection, so this list is never empty.
 `files` | An object containing the game's launchable files (see below).
 `assets` | An object containing the game's assets (see later).
 

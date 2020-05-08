@@ -113,7 +113,7 @@ Property | Description
 `cabinetLeft` | Left side of the arcade machine
 `cabinetRight` | Right side of the arcade machine
 
-![box-related assets](img/assets-arcade.png)
+![arcade-related assets](img/assets-arcade.png)
 
 Property | Description
 ---|---
@@ -123,15 +123,17 @@ Property | Description
 `poster` | Advertisement poster, usually with 2:3 aspect ratio (in general a portrait-aligned image)
 `background` | A background image, eg. artwork or selected screenshot
 `music` | Background music
+`screenshot` | A screenshot from the game
+`video` | A gameplay video or advertisement movie
 
-![box-related assets](img/assets-ui.png)
+![ui-related assets](img/assets-ui.png)
 
-In addition, the following members can have multiple values, and as such usable as eg. `model` sources. All of them can be empty.
+<br>
 
-Property | Description
----|---
-`screenshots` | Array of strings, each a URL to an image.
-`videos` | Array of strings, each a URL to a video source.
+**Multiple assets** are also supported for all asset types. For each of the fields above, there is also a field with the suffix `List` under the `asset` object (eg. `boxFront` -> `boxFrontList`). These are arrays of strings, and as such are usable as eg. `model` sources. Like the single-value fields, they can also be empty (ie. empty arrays).
+
+!!! tip
+    In fact, the single-value variants just return the first value from their array variant, if there is anything in them, or an empty string if they are empty.
 
 
 ## Keys

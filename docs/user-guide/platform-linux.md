@@ -46,6 +46,18 @@ In addition, Pegasus requires at least 64 MB of video RAM. You can change the me
 !!! tip "RetroPie"
     If you're running RetroPie, you can also install Pegasus from its setup menu. [See this page for more details.](platform-retropie.md)
 
+### GPU driver notes
+
+On the **Raspberry Pi 4** you have to define the `QT_QPA_EGLFS_KMS_ATOMIC` environment variable before launching Pegasus:
+
+`export QT_QPA_EGLFS_KMS_ATOMIC=1`
+
+(You can type it in the terminal, if you're launching Pegasus from there, or write a script for launching. If this isn't set, you'll see `Could not queue DRM page flip on screen HDMI1` errors.)
+
+To **improve gradient colors** on all Raspberries, define the `QT_QPA_EGLFS_FORCE888` environment variable:
+
+`export QT_QPA_EGLFS_FORCE888=1`
+
 
 ## Arch
 

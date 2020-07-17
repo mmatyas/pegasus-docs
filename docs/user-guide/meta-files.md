@@ -110,7 +110,7 @@ The following fields control which files of the directory should be **included**
 Key | Description | Type
 ----|-------------|:----:
 `extension`, `extensions` | A comma-separated list of file extensions (without the `.` dot), or a list of such lines. All files with these extensions (including those in subdirectories) will be included. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
-`file`, `files` | A single file or a list of files to add to the collection. The paths don't have to be wrapped in quotes and can contain spaces. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
+`file`, `files` | A single file or a list of files to add to the collection. You can use either absolute paths or paths relative to the metadata file. The entries don't have to be wrapped in quotes and can contain spaces. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
 `regex` | A Perl-compatible regular expression string, without leading or trailing slashes. Relative file paths matching the regex will be included. Unicode is supported. | <span class="metaentry text" title="Text">T</span>
 `directory`, `directories` | A single directory or a list of directories to search for matching games (see below). This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
 
@@ -197,7 +197,7 @@ Key | Description | Type
 ----|-------------|:----:
 `game` | Creates a new game with the value as title. The properties after this line will modify this game. This is a **required** field. | <span class="metaentry text" title="Text">T</span>
 `sort-by` | An alternate title that should be used for sorting. Can be useful when the title contains eg. roman numerals or special symbols. `sort_title` and `sort_name` are also accepted. | <span class="metaentry text" title="Text">T</span>
-`file`, `files` | The file or list of files (eg. disks) that belong to this game. If there are multiple files, you'll be able to select which one to launch when you start the game. | <i title="List" class="metaentry fas fa-list-ul"></i>
+`file`, `files` | The file or list of files (eg. disks) that belong to this game. Paths can be either absolute or relative to the metadata file. If there are multiple files, you'll be able to select which one to launch when you start the game. | <i title="List" class="metaentry fas fa-list-ul"></i>
 `developer`, `developers` | The developer or list of developers. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
 `publisher`, `publishers` | The publisher or list of publishers. This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
 `genre`, `genres` | The genre or list of genres (for example *Action*, *Adventure*, etc.). This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>

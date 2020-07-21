@@ -2,7 +2,7 @@
 
 Pegasus supports several gaming platforms out of the box, but other than those, you can also add your own custom games and emulators. These can be described using **metadata files**.
 
-A metadata file is a human-readable text file that stores information about the individual games (title, developers, release date, etc.), and groups the games into categories (eg. "Playstation games", "Mario games", etc.). Here is an example (with more details below):
+A metadata file is a human-readable text file that stores information about the individual games (title, developers, release date, etc.), and groups the games into categories (eg. "Playstation games", "Mario games", etc.). These files can be edited either via a text editor or via the [graphical metadata editor for Pegasus](https://github.com/mmatyas/pegasus-metadata-editor). Here is an example (with more details below):
 
 ```make
 collection: Game Boy Advanced

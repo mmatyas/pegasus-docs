@@ -1,10 +1,4 @@
-# Real-world examples
-
-On this page, some real-world examples have been collected for the various supported platforms.
-
-*(under construction)*
-
-## Android
+## Android example setup
 
 Let's say I want to play my NES and PSP games on Android. I'd like to use RetroArch with the `fceumm` core (installed from its menu) for emulating NES, and use the standalone PPSSPP app for PSP. After copying the roms to the SD card, my directory structure looks like this *(games are examples)*:
 

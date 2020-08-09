@@ -146,7 +146,9 @@ App name | Activity
 :--------|:---------
 2600.emu | `com.explusalpha.A2600Emu/com.imagine.BaseActivity`
 C54.emu | `com.explusalpha.C64Emu/com.imagine.BaseActivity`
+Citra | no support yet, but their code is open source
 ClassicBoy | `com.portableandroid.classicboyLite/com.portableandroid.classicboy.EntryActivity`
+Dolphin | `org.dolphinemu.dolphinemu/.activities.AppLinkActivity`
 DraStic | `com.dsemu.drastic/.DraSticActivity`
 Emulator for NES/SNES - Arcade Classic Games | no support
 ePSXe | no support

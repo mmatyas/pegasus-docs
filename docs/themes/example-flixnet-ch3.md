@@ -12,7 +12,7 @@ ListView {
 
     // ...
 
-    model: api.collectionList.model
+    model: api.collections
     delegate: collectionAxisDelegate
 
     // ...
@@ -206,8 +206,7 @@ With all that, navigation should now work well in our theme. Next step, let's ma
                 anchors.top: parent.verticalCenter
                 anchors.bottom: parent.bottom
 
-                model: api.collectionList.model
-                currentIndex: api.collectionList.index
+                model: api.collections
                 delegate: collectionAxisDelegate
 
                 snapMode: ListView.SnapOneItem

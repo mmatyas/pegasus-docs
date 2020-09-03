@@ -137,8 +137,7 @@ ListView {
     anchors.top: parent.verticalCenter
     anchors.bottom: parent.bottom
 
-    model: api.collectionList.model
-    currentIndex: api.collectionList.index
+    model: api.collections
     delegate: collectionAxisDelegate
 
     snapMode: ListView.SnapOneItem
@@ -157,7 +156,7 @@ ListView {
 
 **After**
 
-```qml hl_lines="14 19 34"
+```qml hl_lines="13 18 33"
 PathView {
     id: collectionAxis
 
@@ -166,8 +165,7 @@ PathView {
     anchors.top: parent.verticalCenter
     anchors.bottom: parent.bottom
 
-    model: api.collectionList.model
-    currentIndex: api.collectionList.index
+    model: api.collections
     delegate: collectionAxisDelegate
 
 

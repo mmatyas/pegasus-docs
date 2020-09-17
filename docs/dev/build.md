@@ -97,7 +97,7 @@ Option | Description
 `INSTALL_BINDIR` | The installation directory of the executable. Defaults to `INSTALLDIR`. On most distros `/usr/bin` is a good value.
 `INSTALL_DOCDIR` | If set, `make install` will copy the license and readme files there. On most distros `/usr/share/doc/pegasus-frontend` is a good value.
 `INSTALL_DESKTOPDIR` | Linux only. If set, `make install` will create an XDG desktop file there (making Pegasus appear in the main menu). Unset by default, on most distros `/usr/share/applications` is a good value.
-`INSTALL_ICONDIR` | Linux only. If set, `make install` will create an XDG icon file there (making Pegasus have an icon on the tray and the menu). Unset by default, on most distros `/usr/share/pixmaps` or `/usr/share/icons/hicolor/128x128/apps` is a good value.
+`INSTALL_ICONDIR` | Linux only. If set, `make install` will create an XDG icon file there (making Pegasus have an icon on the tray and the menu). Unset by default, on most distros `/usr/share/pixmaps` or `/usr/share/icons/hicolor` is a good value.
 `INSTALL_APPSTREAMDIR` | Linux only. If set, `make install` will create an AppStream XML entry there (making Pegasus appear in certain app store applications). Unset by default, on most distros `/app/share/metainfo` is a good value.
 
 !!! example
@@ -107,6 +107,6 @@ Option | Description
         qmake path/to/sources \
             INSTALL_BINDIR=/usr/bin \
             INSTALL_DOCDIR=/usr/share/doc/pegasus-frontend \
-            INSTALL_ICONDIR=/usr/share/pixmaps \
+            INSTALL_ICONDIR=/usr/share/icons/hicolor \
             INSTALL_DESKTOPDIR=/app/share/applications \
             INSTALL_APPSTREAMDIR=/app/share/metainfo

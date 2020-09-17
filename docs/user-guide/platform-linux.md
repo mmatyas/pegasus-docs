@@ -74,6 +74,23 @@ To **improve gradient colors** on all Raspberries, define the `QT_QPA_EGLFS_FORC
 
 `export QT_QPA_EGLFS_FORCE888=1`
 
+By default Pegasus tries to match the **preferred resolution** of the display (eg. TV) and use the default one if there are multiple connected outputs. To fine tune this behaviour, you can create a JSON file with a content like this:
+
+```json
+{
+    "outputs": [{
+        "name": "HDMI1",
+        "mode": "1280x720"
+    }]
+}
+```
+
+then tell Pegasus to use it like this:
+
+`export QT_QPA_EGLFS_KMS_CONFIG=/path/to/my.json`
+
+For more details, please visit [this site](https://doc.qt.io/qt-5/embedded-linux.html#eglfs-with-the-eglfs-kms-backend).
+
 
 ## Arch
 

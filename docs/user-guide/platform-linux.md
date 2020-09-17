@@ -9,6 +9,8 @@ In general, the dependencies on Linux are:
 - GStreamer 1.x <small>(for video playback)</small>
 - Fontconfig <small>(for typography)</small>
 - OpenSSL <small>(for networking)</small>
+- X11 XCB libraries <small>(for display)</small>
+- ZStd library <small>(for data compression)</small>
 - PolicyKit <small>(optional, for shutting down/restarting the device without admin rights)</small>
 - SDL2 <small>(for improved gamepad support, required by the official build, optional when building from source)</small>
 
@@ -18,16 +20,30 @@ In general, the dependencies on Linux are:
 
 ## Ubuntu
 
-At the time of writing, the official builds require Ubuntu **18.04 or later**. Most of the dependencies come preinstalled, but in case you run into troubles, you can install them like this:
+At the time of writing, the official builds require Ubuntu **18.04 or later**. Most of the dependencies come preinstalled, but in case some might be missing, you can install them like this:
 
 ```
 sudo apt-get install \
+    fontconfig \
     gstreamer1.0-alsa \
     gstreamer1.0-libav \
     gstreamer1.0-plugins-good \
-    fontconfig \
     libsdl2-2.0-0 \
     libssl1.1 \
+    libxcb-glx0 \
+    libxcb-icccm4 \
+    libxcb-image0 \
+    libxcb-keysyms1 \
+    libxcb-randr0 \
+    libxcb-render-util0 \
+    libxcb-shape0 \
+    libxcb-shm0 \
+    libxcb-sync1 \
+    libxcb-xfixes0 \
+    libxcb-xinerama0 \
+    libxcb-xkb1 \
+    libxkbcommon-x11-0 \
+    libzstd1 \
     policykit-1
 ```
 

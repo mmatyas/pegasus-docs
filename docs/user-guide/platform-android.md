@@ -1,6 +1,6 @@
 # Platform Notes: Android
 
-Pegasus is available for Android devices running at least Android 4.1 (Jelly Bean). For proper multimedia support, **Android 4.4 (KitKat)** or newer is recommended.
+Pegasus is available for Android devices running at least **Android 5.0** (Lollipop).
 
 ## Installation
 

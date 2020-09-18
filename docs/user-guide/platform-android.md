@@ -56,7 +56,7 @@ Note that not every app supports opening arbitrary files, or opening files at al
 
 Unfortunately opening a file with anything else than the default is a bit painful. To open the file, you have to know the exact name of the app component ("activity") that handles file opening requests. For example, for the Android version of the PPSSPP emulator, this is `org.ppsspp.ppsspp/.PpssppActivity`.
 
-I haven't found a good app yet that could tell this about the installed apps, so I guess the best bet for now is either asking the developers for a particular app or looking into its source code (tip: it's always in `AndroidManifest.xml`). I've also made a small collection which you can find at the [bottom of this page](#apps-that-can-open-files).
+I haven't found a good app yet that could tell this about the installed apps, so I guess the best bet for now is either asking the developers for a particular app or looking into its source code (tip: it's always in `AndroidManifest.xml`). I've also made a small collection which you can find at the [bottom of this page](#apps-that-can-open-files), and a [**tool that can generate metadata files for you**](http://pegasus-frontend.org/tools/metagen-android/).
 
 Anyway, once you know the Activity you want to call, the command is
 
@@ -125,6 +125,9 @@ launch: am start --user 0
 ```
 
 (based on the source code of their Android port at the time of writing).
+
+!!! tip "Android metadata generator"
+    [This online tool](http://pegasus-frontend.org/tools/metagen-android/) might help you generate the launch commands for RetroArch.
 
 The important parts here are the **core** and the **storage** paths. Make sure you **correct the paths** of the above example to match your system and collection:
 

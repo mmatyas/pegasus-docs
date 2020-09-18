@@ -84,7 +84,7 @@ Some apps simply don't support opening files, for example because they rely on a
 
 ### RetroArch
 
-RetroArch has two versions available on Google Play: the standard app is called **RetroArch**, and there's a version optimized for 64-bit devices called **RetroArch64** (with the name "RetroArch (AArch64)" when installed). Depending on which one you'd like to use, the launch command will be slightly different.
+RetroArch has different versions available on Google Play and their site: the standard app is called **RetroArch**, which should work generally on all devices, and there are releases that only support 32- or 64-bit devices (eg. **RetroArch64**, with the name "RetroArch (AArch64)" when installed). Depending on which one you'd like to use, the launch command will be slightly different.
 
 Unlike must applications, RetroArch happens to use a large number of custom parameters. It can be launched like this:
 

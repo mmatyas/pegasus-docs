@@ -1,6 +1,6 @@
 'use strict';
 
-const gulp = require('gulp'),
+const { src, dest, parallel, series, watch } = require('gulp'),
     cleancss = require('gulp-clean-css'),
     del = require('del'),
     htmlmin = require('gulp-htmlmin'),
@@ -9,7 +9,7 @@ const gulp = require('gulp'),
 
 
 const DEST_PATH = 'build';
-const htmlminConfig = {
+const htmlmin_config = {
     collapseBooleanAttributes: true,
     collapseWhitespace: true,
     removeAttributeQuotes: true,
@@ -26,37 +26,42 @@ const terser_config = {
 };
 
 
-gulp.task('html', () => gulp
-    .src('site/**/*.html')
-    .pipe(htmlmin(htmlminConfig))
-    .pipe(gulp.dest(DEST_PATH))
-);
+function html() {
+    return src('site/**/*.html')
+        .pipe(htmlmin(htmlmin_config))
+        .pipe(dest(DEST_PATH))
+}
 
-gulp.task('css', () => gulp
-    .src('site/**/*.css')
-    .pipe(cleancss())
-    .pipe(gulp.dest(DEST_PATH))
-);
+function css() {
+    return src('site/**/*.css')
+        .pipe(cleancss())
+        .pipe(dest(DEST_PATH))
+}
 
-gulp.task('js', () => gulp
-    .src('site/**/*.js')
-    .pipe(terser(terser_config))
-    .pipe(gulp.dest(DEST_PATH))
-);
+function js() {
+    return src('site/**/*.js')
+        .pipe(terser(terser_config))
+        .pipe(dest(DEST_PATH))
+}
 
-gulp.task('img', () => gulp
-    .src('site/**/*.{jpg,png}')
-    .pipe(imagemin({ verbose: true }))
-    .pipe(gulp.dest(DEST_PATH))
-);
+function img() {
+    return src('site/**/*.{jpg,png}')
+        .pipe(imagemin({ verbose: true }))
+        .pipe(dest(DEST_PATH))
+}
 
-gulp.task('data', () => gulp
-    .src('site/**/*.{json,xml,eot,svg,ttf,woff,mustache,ico,webm}')
-    .pipe(gulp.dest(DEST_PATH))
-);
+function data() {
+    return src('site/**/*.{json,xml,eot,svg,ttf,woff,mustache,ico,webm}')
+        .pipe(dest(DEST_PATH))
+}
 
 
-gulp.task('clean', () => del([DEST_PATH + '/*']));
+function clean(done) {
+    del(DESTDIR);
+    done();
+}
 
-gulp.task('default', ['html', 'css', 'js', 'img', 'data']);
-gulp.task('build', ['default']);
+
+exports.clean = clean;
+exports.default = parallel(html, css, js, img, data);
+exports.build = exports.default;

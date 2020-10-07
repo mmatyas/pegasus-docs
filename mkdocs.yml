@@ -67,5 +67,5 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.keys
   - pymdownx.magiclink
-  - pymdownx.extrarawhtml
   - pymdownx.details
+  - markdown.extensions.md_in_html

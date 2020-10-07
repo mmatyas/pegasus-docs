@@ -1,7 +1,47 @@
-!!! warning "Deprecated"
-    While the methods described here still work, in new themes you should write your own scaling function if necessary. To get the properties of the device's screen (eg. DPI), you can use the [QML Screen](https://doc.qt.io/qt-5/qml-qtquick-window-screen.html) object. To get the size of the window, you can check the `width` and `height` properties of your theme's root element (ie. the `FocusScope`), as it will be set to fill the whole window.
+# Special features
 
-# Virtual screen coordinates
+This page lists some additional features Pegasus provides for themes.
+
+<br>
+
+## Blurhash
+
+Blurhash is a way to generate placeholders for images by using a short string to represent them. For more details, as well as producing BlurHash strings, visit [blurha.sh](https://blurha.sh/).
+
+![demo image](img/blurhash_demo.jpg)
+
+To use them in a theme, set an Image component's `source` field to a special format like this:
+
+```qml
+Image {
+    source: "image://blurhash/" + encodeURIComponent(yourHash)
+    width: someWidth
+    height: someHeight
+}
+```
+
+For example:
+
+```qml
+Image {
+    source: "image://blurhash/" + encodeURIComponent("LEHV6nWB2yk8pyoJadR*.7kCMdnj")
+    width: 300
+    height: 200
+}
+```
+
+!!! info "encodeURIComponent"
+    Technically the `source` field is an URI, and certain characters that BlurHash strings use, like `%` signs, are not allowed there. `encodeURIComponent` is a standard JavaScript function that encodes this string to a safe to use format.
+
+!!! tip "sourceSize"
+    By default the placeholder images are generated in a small resolution (24&times;24) then scaled to match the Image's size. If you wish to increase or decrease this internal resolution, you can use the Image's `sourceSize` property for that. Note that in most cases increasing this resolution does not produce better visual results.
+
+<br>
+
+## Virtual screen coordinates
+
+!!! danger "Deprecated"
+    While the methods described here still work, in new themes you should write your own scaling function if necessary. To get the properties of the device's screen (eg. DPI), you can use the [QML Screen](https://doc.qt.io/qt-5/qml-qtquick-window-screen.html) object. To get the size of the window, you can check the `width` and `height` properties of your theme's root element (ie. the `FocusScope`), as it will be set to fill the whole window.
 
 When you load a theme, its main component (the `FocusScope` above) will be set to fill the whole screen. The top left corner of the screen is (0,0), with the X axis growing right and the Y axis growing downwards.
 

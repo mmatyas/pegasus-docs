@@ -25,7 +25,7 @@ nav:
     - Breaking changes: user-guide/breaking-changes.md
   - Theme Dev:
     - Overview: themes/overview.md
-    - Virtual screen: themes/virtual-screen.md
+    - Special features: themes/extra.md
     - QML tutorials: themes/qml-tutorials.md
     - QML modules: themes/qml-modules.md
     - "Step-by-step: Simple theme":

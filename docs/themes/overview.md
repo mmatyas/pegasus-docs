@@ -55,19 +55,38 @@ The `theme.cfg` is a text file in the same format as Pegasus' [metadata files](.
 
 - `name`: the name of your theme (required)
 - `version`: a version identifier; can be a number, text, whatever you like as long as it's unique
-- `author`: the author of the theme; either simply a name or in "name &lt;email&gt;" format
+- `author`: the author of the theme; either simply a name or in "name &lt;email&gt;" format. If there's more than one, you can list them one line per author. `authors` is also an accepted name for this field.
 - `summary`: a short (80-100 characters) summary
 - `description`: a longer description
-- `keywords`: keywords used for searching. Separate them with '`,`'
+- `keywords`: keywords used for searching, separated with '`,`'
 - `homepage`: a link to you project's site
+- `assets.screenshots`: a list of screenshots, one line per file, that show how your theme looks. They should be either file paths relative to the `cfg` file, or image URLs
 
 Every theme is required to have a `theme.cfg` file, with at least the `name` defined. Here is an example:
 
-```control
+```make
 name: Tutorial
 author: John Smith
 version: 1.0
 summary: A super cool theme!
+```
+
+Another one:
+
+```make
+name: Tutorial 2
+authors:
+  John Smith <johnsmith@example.com>
+  Jane Doe <janedoe@xample.com>
+version: beta
+summary: A super cool theme that
+  should look really nice on big screens,
+  like TVs
+keywords: 10foot, retro
+homepage: example.com
+assets.screenshots:
+  demo/screenshot_a.jpg
+  demo/screenshot_b.jpg
 ```
 
 

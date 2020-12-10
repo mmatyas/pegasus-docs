@@ -163,7 +163,7 @@ ClassicBoy | `com.portableandroid.classicboyLite/com.portableandroid.classicboy.
 Dolphin | `org.dolphinemu.dolphinemu/.activities.AppLinkActivity`
 DraStic | `com.dsemu.drastic/.DraSticActivity`
 Emulator for NES/SNES - Arcade Classic Games | no support
-ePSXe | no support
+ePSXe | no support, but has workaround -- see the metadata generator page
 GBA.emu | `com.explusalpha.GbaEmu/com.imagine.BaseActivity`
 GBC.emu | `com.explusalpha.GbcEmu/com.imagine.BaseActivity`
 John emulators | no support

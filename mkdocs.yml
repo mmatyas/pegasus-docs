@@ -2,7 +2,7 @@ site_name: Pegasus Docs
 site_url: http://www.pegasus-frontend.org/docs
 site_description: Documentation and customization guides for the Pegasus frontend.
 site_author: Mátyás Mustoha
-copyright: Copyright &copy; 2018-2019 Mátyás Mustoha
+copyright: Copyright &copy; 2018-2021 Mátyás Mustoha
 
 nav:
   - Home: index.md

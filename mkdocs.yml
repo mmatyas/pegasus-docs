@@ -9,6 +9,7 @@ nav:
   - User Guide:
     - Getting started: user-guide/getting-started.md
     - Default controls: user-guide/controls.md
+    - Portable mode: user-guide/portable.md
     - Platform Notes:
       - Windows: user-guide/platform-windows.md
       - Android: user-guide/platform-android.md

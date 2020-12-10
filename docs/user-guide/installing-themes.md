@@ -12,3 +12,6 @@ If this directory does not exists, you can create it manually. Then simply extra
 
 !!! help
     If you wish to place the themes somewhere else, please see [this page](config-dirs.md) for the list of directories Pegasus can access.
+
+!!! tip "Theme Gallery"
+    You can find themes [HERE](https://pegasus-frontend.org/tools/themes/).

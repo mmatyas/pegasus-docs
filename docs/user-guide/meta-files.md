@@ -27,6 +27,8 @@ These files are named `metadata.pegasus.txt`, and Pegasus looks for them in the 
 !!! tip "Alternative file names"
     If `metadata.pegasus.txt` doesn't exists, Pegasus will also try to load `metadata.txt`. Use whichever filename you prefer.
 
+    You can also place multiple files in the same directory if their extension is `.metadata.pegasus.txt` or `.metadata.txt` (for example `MarioGames.metadata.pegasus.txt`)
+
 !!! help "Global config files"
     The metadata files are usually kept together with the games. If you prefer to have them separately in one place, that is also possible: Pegasus will also look for them in the `<config dir>/metafiles`, if this directory exists.
 

@@ -65,7 +65,7 @@ Rectangle {
         height: vpx(60)
 
         fillMode: Image.PreserveAspectFit
-        source: "assets/" + currentCollection.shortname + ".svg"
+        source: "assets/" + currentCollection.shortName + ".svg"
         asynchronous: true
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -77,7 +77,7 @@ Rectangle {
 
 Some interesting things here:
 
-- `source` is the concatenation of three strings, `shortname` being the short name for a collection (eg. `nes`, `gba`, ...).
+- `source` is the concatenation of three strings, `shortName` being the short name for a collection (eg. `nes`, `gba`, ...).
 - `asynchronous` will load the image in the background. By default (`false`), the program will wait until the Image is fully loaded, but during this time it cannot respond to user input. Since images may take a long time to load depending on the device, asynchronous loading is preferred in most cases.
 
 ### Changing collections

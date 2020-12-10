@@ -20,6 +20,9 @@ Pegasus can be set as the default launcher, which will make it start automatical
 
 ## Loading games
 
+!!! tip "Android metadata generator"
+    [This online tool](http://pegasus-frontend.org/tools/metagen-android/) can help with generating the launch commands for various emulators.
+
 Compared to desktop systems, launching other applications is slightly different on Android. Instead of directly calling a program, you'll need to ask the Activity Manager (`am`) to open a file or start an app, optionally with additional parameters.
 
 Here's how it looks in practice:
@@ -82,6 +85,9 @@ Some apps simply don't support opening files, for example because they rely on a
 
 ## App-specific notes
 
+!!! tip "Android metadata generator"
+    [This online tool](http://pegasus-frontend.org/tools/metagen-android/) can help with generating the launch commands for various emulators.
+
 ### RetroArch
 
 RetroArch has different versions available on Google Play and their site: the standard app is called **RetroArch**, which should work generally on all devices, and there are releases that only support 32- or 64-bit devices (eg. **RetroArch64**, with the name "RetroArch (AArch64)" when installed). Depending on which one you'd like to use, the launch command will be slightly different.
@@ -127,7 +133,7 @@ launch: am start --user 0
 (based on the source code of their Android port at the time of writing).
 
 !!! tip "Android metadata generator"
-    [This online tool](http://pegasus-frontend.org/tools/metagen-android/) might help you generate the launch commands for RetroArch.
+    [This online tool](http://pegasus-frontend.org/tools/metagen-android/) can help with generating the launch commands for RetroArch.
 
 The important parts here are the **core** and the **storage** paths. Make sure you **correct the paths** of the above example to match your system and collection:
 
@@ -144,6 +150,9 @@ The important parts here are the **core** and the **storage** paths. Make sure y
 ### Known emulators
 
 Here's an incomplete list of emulators that can open external files using `android.intent.action.VIEW`. If you think some of the entries are incorrect, or you'd like to extend this list, feel free to open an Issue [here](https://github.com/mmatyas/pegasus-frontend/issues).
+
+!!! tip "Android metadata generator"
+    [This online tool](http://pegasus-frontend.org/tools/metagen-android/) can help with generating the launch commands for various emulators.
 
 App name | Activity
 :--------|:---------

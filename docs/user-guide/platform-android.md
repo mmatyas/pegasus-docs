@@ -112,21 +112,21 @@ launch: am start --user 0
   --activity-clear-top
 ```
 
-#### RetroArch64 (AArch64):
+#### RetroArch64/RetroArch Plus (AArch64):
 
 ```make
 collection: NES
 extensions: zip
 launch: am start --user 0
-  -n com.retroarch.aarch64/.browser.retroactivity.RetroActivityFuture
+  -n com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture
   -e ROM {file.path}
   -e LIBRETRO /data/data/com.retroarch.aarch64/cores/fceumm_libretro_android.so
-  -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg
+  -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg
   -e IME com.android.inputmethod.latin/.LatinIME
   -e DATADIR /data/data/com.retroarch.aarch64
   -e APK /data/app/com.retroarch.aarch64-1/base.apk
   -e SDCARD /storage/emulated/0
-  -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files
+  -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files
   --activity-clear-top
 ```
 

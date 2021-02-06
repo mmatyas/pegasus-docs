@@ -2,6 +2,30 @@
 
 Welcome to the documentation of the Pegasus frontend! Here you can find information about how to install and configure Pegasus on your device, and further along, about the various customization possibilities. Let's get started!
 
+## <i class="fas fa-question-circle" style="color:#82c91e"></i> What is Pegasus
+
+Pegasus provides a graphical interface where you can collect games of various platforms in one common place, present them in a nice and friendly view, and launch them directly from there. You can make it display informations, play videos and show images about your favorite titles. If you like playing games with emulators, you can also set them up to launch from Pegasus as well.
+
+There are various frontend softwares with different ideas and goals. Pegasus tries to be **customizable, minimal and cooperative**; it offers you the following abilities:
+
+- Runs on many devices and operating systems, so you can play on desktop PCs, smartphones, arcades... and accordingly, supports navigation using gamepads, keyboard/mouse or by touch controls
+- Supports different screen sizes, so you can use it on TVs just as well as on handhelds
+- Works with all possible emulators, and gives complete control over how you wish to launch them
+- Enables full customization of the user interface, so you call completely change how your collection is presented and interacted with
+- Allows you to use it as a component in a larger gaming setup
+- Free and open source, no ads or in-app purchases
+
+On the other hand, because Pegasus aims to be minimal, it's not a "batteries included" package:
+
+- It does not include or download games for you &mdash; but allows you to show games from any sources
+- It does not include or download emulators and game stores &mdash; but allows you to use any of your own
+- It does not include or download game data or assets &mdash; but allows you to use your own preferred sources
+
+The point is, Pegasus tries to do one thing (and do it well); it does not include features for which there are external tools, but instead tries to play nicely together with those. This allows you to use Pegasus in a larger setup: you can bundle it together with emulators, configurations or tools, and modularly change these parts separately when needed.
+
+Still interested in Pegasus? Keep on reading!
+
+
 ## <i class="fas fa-download" style="color:#2ecc40"></i> Installation
 
 Pegasus is available for various devices and operating systems. Currently there are official releases for the following platforms:

@@ -10,20 +10,69 @@ Pegasus is available for various devices and operating systems. Currently there 
 - **Linux** with Ubuntu 18.04/Debian Buster or later
 - **Raspberry Pi** with Raspbian Buster or later
 - **Odroid** C0/C1/C2 and XU3/XU4 with Ubuntu 18.04 or later
-- **Android** 4.4 (KitKat) or later
+- **Android** 5 (Lollipop) or later
 - **macOS** 10.13 (High Sierra) or later
 
-You can find the **latest releases** on <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section.
+For each platform, there are two main release channels:
 
-On most platforms, Pegasus is just a single file, which you can extract and run anywhere on your system. The system requirements, dependencies and other notes can be found on the following pages:
+- the **latest** version contains the latest fixes and improvements, but are not well tested before release
+- the **stable** version is a release that's been out for a few weeks already, and our community found no unexpected issues with it so far
 
-- [Platform notes: Windows](platform-windows.md)
-- [Platform notes: Linux](platform-linux.md) (including ARM devices)
-    - [RetroPie](platform-retropie.md)
-- [Platform notes: Android](platform-android.md)
+For more details, select your preferred platform:
+
+??? help "Windows"
+    1. (Recommended) Install a codec pack: Pegasus uses Windows' built-in media engine for playing video files, and some formats, for example Steam's trailers require codecs. If the codecs are not present, the videos may make Pegasus crash
+    2. Download your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section
+    3. Extract it somewhere
+    4. (Optional) If you'd like to run Pegasus in portable mode (eg. you plan to place it on a USB drive), create a new file called `portable.txt` and place it next to Pegasus
+
+??? help "Android"
+    1. Enable installing APK files: in the Android Settings, under Security, turn on *Unknown Sources*. Pegasus is not available from the Play Store yet, and installing APK files have to be enabled manually like this
+    2. Download your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section
+    3. Open the APK file with any file manager app, and press "Install"
+    4. The first time you open Pegasus, it will ask for permission to access the storage. Make sure to enable them so that Pegasus could see your games
+    5. (Optional) Android will ask if you wish to use Pegasus as the default launcher. You can also change this from Android's Settings menu, see the [platform notes](../platform-android/#default-launcher) for more details
+
+??? help "Linux - Desktop"
+    **Using the Ubuntu/Debian package manager**
+
+    1. Download the Debian package (`.deb`) of your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section
+    2. Install it by double clicking on it (or manually from the command line)
+    3. (Optional) Run the commands under the "APT repository" section to make sure the system keeps it up to date
+
+    **Using the standalone package**
+
+    1. Download the standalone version of your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section
+    2. Extract it somewhere
+    3. (Optional) If you'd like to run Pegasus in portable mode (eg. you plan to place it on a USB drive), create a new file called `portable.txt` and place it next to Pegasus
+    4. Install the required dependencies -- see the [platform notes](platform-linux.md) for more details
+
+    **Using Flatpak**
+
+    - You can install the stable version from either a graphical software manager, or manually following the instructions at https://flathub.org/apps/details/org.pegasus_frontend.Pegasus
+
+    **Using AUR**
+
+    - A community maintained release is available from AUR, see the [platform notes](../platform-linux/#arch) for more details
+
+??? help "Linux - Raspberry/Odroid"
+    **Using the standalone package**
+
+    1. Download your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section. Make sure you download it for the correct device -- they are, in most cases, not interchangeable
+    2. Extract it somewhere
+    3. (Optional) If you'd like to run Pegasus in portable mode (eg. you plan to place it on a USB drive), create a new file called `portable.txt` and place it next to Pegasus
+    4. Install the required dependencies -- see the [platform notes](platform-linux.md) for more details
+
+    **Using RetroPie**
+
+    - You can find Pegasus under the *experimental* section -- see [this page](platform-retropie.md) for more details
+
+??? help "macOS"
+    1. Download your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section
+    2. Extract it somewhere
 
 !!! info "Other platforms"
-    Pegasus can also run on platforms not listed above, but may need to be compiled manually from source code. If you wish to do that, the [Build documentation](../dev/build.md) can help you.
+    Pegasus can also run on platforms not listed above, but may need to be compiled manually from source code. If you wish to do that, the [Build documentation](../dev/build.md) can help you
 
 ## <i class="fas fa-mouse" style="color:#ff851b"></i> Basic navigation
 
@@ -35,7 +84,7 @@ In either way, you can reach the main menu by pressing the ESC key, the "back bu
 
 You can navigate in the menu (and in the whole program in general) using the arrow keys, the directional buttons, the left stick or your mouse and finger. You can select item by pressing the Enter key, the "select button" (<img class="joybtn" src="../../img/A.png" title="A"> / <img class="joybtn" src="../../img/Cross.png" title="CROSS">) or simply clicking/pressing on an item.
 
-!!! help "Controls"
+!!! info "Controls"
     For the full list of the default navigation keys and buttons, visit [the Controls page](controls.md).
 
 ## <i class="fas fa-tools" style="color:#17a2b8"></i> Configuration

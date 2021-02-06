@@ -21,9 +21,9 @@ On the other hand, because Pegasus aims to be minimal, it's not a "batteries inc
 - It does not include or download emulators and game stores &mdash; but allows you to use any of your own
 - It does not include or download game data or assets &mdash; but allows you to use your own preferred sources
 
-The point is, Pegasus tries to do one thing (and do it well); it does not include features for which there are external tools, but instead tries to play nicely together with those. This allows you to use Pegasus in a larger setup: you can bundle it together with emulators, configurations or tools, and modularly change these parts separately when needed.
+The point is, Pegasus tries to do one thing (and do it well); it does not include features for which there are various external tools, but instead tries to play nicely together with those. This allows you to use Pegasus in a larger setup: you can bundle it together with emulators, configurations or other programs, and modularly change these parts separately when needed.
 
-Still interested in Pegasus? Keep on reading!
+Still interested? Keep on reading!
 
 
 ## <i class="fas fa-download" style="color:#2ecc40"></i> Installation

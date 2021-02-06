@@ -69,7 +69,7 @@ For more details, select your preferred platform:
     1. Download the standalone version of your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section
     2. Extract it somewhere
     3. (Optional) If you'd like to run Pegasus in portable mode (eg. you plan to place it on a USB drive), create a new file called `portable.txt` and place it next to Pegasus
-    4. Install the required dependencies -- see the [platform notes](platform-linux.md) for more details
+    4. Install the required dependencies &mdash; see the [platform notes](platform-linux.md) for more details
 
     **Using Flatpak**
 
@@ -82,14 +82,14 @@ For more details, select your preferred platform:
 ??? help "Linux - Raspberry/Odroid"
     **Using the standalone package**
 
-    1. Download your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section. Make sure you download it for the correct device -- they are, in most cases, not interchangeable
+    1. Download your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section. Make sure you download it for the correct device &mdash; they are, in most cases, not interchangeable
     2. Extract it somewhere
     3. (Optional) If you'd like to run Pegasus in portable mode (eg. you plan to place it on a USB drive), create a new file called `portable.txt` and place it next to Pegasus
-    4. Install the required dependencies -- see the [platform notes](platform-linux.md) for more details
+    4. Install the required dependencies &mdash; see the [platform notes](platform-linux.md) for more details
 
     **Using RetroPie**
 
-    - You can find Pegasus under the *experimental* section -- see [this page](platform-retropie.md) for more details
+    - You can find Pegasus under the *experimental* section &mdash; see [this page](platform-retropie.md) for more details
 
 ??? help "macOS"
     1. Download your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section

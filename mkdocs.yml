@@ -8,6 +8,8 @@ nav:
   - Home: index.md
   - User Guide:
     - Getting started: user-guide/getting-started.md
+    - How to:
+      - Add games manually: user-guide/howto-metafiles.md
     - Default controls: user-guide/controls.md
     - Portable mode: user-guide/portable.md
     - Platform Notes:
@@ -70,3 +72,11 @@ markdown_extensions:
   - pymdownx.magiclink
   - pymdownx.details
   - markdown.extensions.md_in_html
+
+plugins:
+  - search
+#  - redirects:
+#      redirect_maps:
+#        'old.md': 'new.md'
+#        'old/file.md': 'new/file.md'
+#        'some_file.md': 'http://external.url.com/foobar'

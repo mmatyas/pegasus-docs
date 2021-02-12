@@ -39,7 +39,7 @@ Pegasus is available for various devices and operating systems. Currently there 
 
 For each platform, there are two main release channels:
 
-- the **latest** version contains the latest fixes and improvements, but are not well tested before release
+- the **latest** version contains the latest fixes and improvements, but isn't well tested before release
 - the **stable** version is a release that's been out for a few weeks already, and our community found no unexpected issues with it so far
 
 For more details, select your preferred platform:
@@ -100,31 +100,32 @@ For more details, select your preferred platform:
 
 ## <i class="fas fa-mouse" style="color:#ff851b"></i> Basic navigation
 
-The first time you start Pegasus, you'll be either greeted with a message that says no games have been found, or depending on your system, there might be already games present from other sources (eg. Steam or EmulationStation).
+The first time you start Pegasus, you'll be either greeted with a message that says no games have been found, or, depending on your system, there might be already games present from other sources, like Steam or EmulationStation.
 
-In either way, you can reach the main menu by pressing the ESC key, the "back button" (<img class="joybtn" src="../../img/B.png" title="B"> / <img class="joybtn" src="../../img/Circle.png" title="CIRCLE">) on a gamepad, or by dragging out the menu panel from the right edge of the screen with your mouse or finger.
+In either way, you can reach the main menu by pressing the <kbd>Esc</kbd> key, the "back button" (<img class="joybtn" src="../../img/B.png" title="B"> / <img class="joybtn" src="../../img/Circle.png" title="CIRCLE">) on a gamepad, or by dragging out the menu panel from the right edge of the screen with your mouse or finger.
 
 ![main menu screenshot](img/mainmenu.png)
 
-You can navigate in the menu (and in the whole program in general) using the arrow keys, the directional buttons, the left stick or your mouse and finger. You can select item by pressing the Enter key, the "select button" (<img class="joybtn" src="../../img/A.png" title="A"> / <img class="joybtn" src="../../img/Cross.png" title="CROSS">) or simply clicking/pressing on an item.
+You can navigate in the menu (and in the whole program in general) using the arrow keys, the directional buttons, the left stick or your mouse and finger. You can select item by pressing the <kbd>Enter</kbd> key, the "select button" (<img class="joybtn" src="../../img/A.png" title="A"> / <img class="joybtn" src="../../img/Cross.png" title="CROSS">) or simply clicking/pressing on an item.
 
 !!! info "Controls"
     For the full list of the default navigation keys and buttons, visit [the Controls page](controls.md).
 
 ## <i class="fas fa-tools" style="color:#17a2b8"></i> Configuration
 
-On the Settings screen, you can set some general parameters, like the language of the interface or whether you'd like to run in full screen or windowed mode. You can also change the "theme", the look and feel of the whole program.
+On the Settings screen, you can set some **general** options, like the language of the interface or whether you'd like to run in full screen or windowed mode. You can also change the "theme", the look and feel of the whole program.
 
-Pegasus is a program that can collect your list of games from various sources. You can import your list of games from other, already installed game libraries, like Steam, for which there is built-in support. For others, especially emulators and standalone games, you can use Pegasus' own *metadata* files, which is documented on [this page](meta-files.md).
+At the **Controls** section you can change the *functions* of the keys and buttons, and also the recognized *layout* of connected gamepads.
 
-The behaviour of the game searching can be configured in the Gaming section:
+Under the **Gaming** section, you can change where Pegasus should look for game information. Pegasus tries to collect games from various other sources, like Steam or GOG, but if you'd like to disable this function, you can also do it so here.
 
-- The **Set game directories** option will open a dialog where you can edit the list of directories Pegasus will search for *metadata* files (see the documentation linked above).
-- On the **Enable/disable data sources** panel you can enable or disable importing games from the individual data sources that might be available on your system.
+Outside the Settings menu, there's also a Help screen, where you can find the version of Pegasus, and also a link to this documentation site.
 
-Outside the Settings menu, there's also the Controls screen, where you can configure your gamepad's layout, and a Help screen that shows some information about Pegasus, and contains a link to this documentation site.
+## <i class="fas fa-fan" style="color:#b10dc9"></i> Next steps
 
-## <i class="fas fa-fan" style="color:#b10dc9"></i> Customization
+You now have Pegasus set up! For further customization, you might be interested in the following topics:
+
+- [How to add games manually](howto-metafiles.md)
 
 Now that you're done with the basics, you might want to dig deeper into the customization aspect of Pegasus. Here are a few articles you could take a look, if you're interested:
 

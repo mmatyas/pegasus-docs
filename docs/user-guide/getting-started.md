@@ -45,7 +45,7 @@ For each platform, there are two main release channels:
 For more details, select your preferred platform:
 
 ??? help "Windows"
-    1. (Recommended) Install a codec pack: Pegasus uses Windows' built-in media engine for playing video files, and some formats, for example Steam's trailers require codecs. If the codecs are not present, the videos may make Pegasus crash
+    1. (Recommended) Install a codec pack: Pegasus uses Windows' built-in media engine for playing video files, and some formats, for example Steam's trailers require codecs. If the codecs are not present, the videos may make Pegasus crash. <a href="https://codecguide.com/download_kl.htm" target="_blank">K-Lite Basic</a> is a popular choice for a codec pack
     2. Download your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section
     3. Extract it somewhere
     4. (Optional) If you'd like to run Pegasus in portable mode (eg. you plan to place it on a USB drive), create a new file called `portable.txt` and place it next to Pegasus

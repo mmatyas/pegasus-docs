@@ -11,7 +11,7 @@ There are various frontend softwares with different ideas and goals. Pegasus tri
 - Runs on many devices and operating systems, so you can play on desktop PCs, smartphones, arcades... and accordingly, supports navigation using gamepads, keyboard/mouse or by touch controls
 - Supports different screen sizes, so you can use it on TVs just as well as on handhelds
 - Works with all possible emulators, and gives complete control over how you wish to launch them
-- Enables full customization of the user interface, so you call completely change how your collection is presented and interacted with
+- Enables full customization of the user interface, so you can completely change how your collection is presented and interacted with
 - Allows you to use it as a component in a larger gaming setup
 - Free and open source, no ads or in-app purchases
 

@@ -6,6 +6,7 @@ All data provided by Pegasus can be accessed using a global QML object called `a
 - `api.allGames`: the list of all games
 - `api.keys`: the keyboard/gamepad configuration of the user
 - `api.memory`: an object that can store theme specific settings
+- `api.device`: information about the user's device
 
 
 ## Collections
@@ -210,6 +211,23 @@ function launchGame(game) {
     game.launch();
 }
 ```
+
+
+## Device
+
+Some themes might want to display information about the real world, like current time or battery status. The `api.device` object provides some fields for that. Hovewer, as Pegasus is available for a number of various devices, note that not all features may be available on all platforms.
+
+Property | Description
+---------|------------
+`batteryCharging` | A boolean (true/false) value, telling whether the device is currently chaging its battery. If there's no battery, or the device doesn't support this property, the value will be `false`.
+`batteryPercent` | The percentage of battery life left, as a fractional value between `0.0` (0%) and `1.0` (100%). If there's no battery, or the device doesn't support this property, the value will be `NaN` (not-a-number). You can use [isNaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) to check this.
+`batterySeconds` | The remaining battery time, in seconds. If the device is charging, there's no battery, or the device doesn't support this property, the value will be 0 or negative.
+
+!!! info "Battery update rate"
+    Battery information is updated in a slow rate, to reduce power consumption. Your theme should probably not depend on the values, but you can use them for informational purposes.
+
+!!! tip "Time"
+    For date and time you can use the the regular JavaScript features, like [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date). There's also the QML [`date` type](https://doc.qt.io/qt-5/qml-date.html) for storing them as QML properties.
 
 
 ## Theme utilities

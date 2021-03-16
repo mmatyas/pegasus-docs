@@ -126,6 +126,7 @@ Property | Description
 `background` | A background image, eg. artwork or selected screenshot
 `music` | Background music
 `screenshot` | A screenshot from the game
+`titlescreen` | A screenshot of the game's title screen or main menu
 `video` | A gameplay video or advertisement movie
 
 ![ui-related assets](img/assets-ui.png)

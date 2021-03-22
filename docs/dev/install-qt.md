@@ -1,6 +1,6 @@
 # Installing Qt for desktop
 
-Qt is a cross-platform application framework used by Pegasus. At least Qt 5.9 is requred, with 5.12 or later recommended for better performance on embedded platforms. For desktop platforms you can get the Qt tools using their installer:
+Qt is a cross-platform application framework used by Pegasus. At least Qt 5.9 is required, with 5.12 or later recommended for better performance on embedded platforms. For desktop platforms you can get the Qt tools using their installer:
 
 <a href="https://www1.qt.io/download-open-source/"><button type="button" class="btn btn-success"><i class="fa fa-cloud-download"></i> &nbsp; Download the Qt installer</button></a>
 

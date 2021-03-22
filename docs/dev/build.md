@@ -18,7 +18,7 @@ Pegasus is a cross-platform native application written in C++ and built mainly o
 
 To **install Qt**, you can follow the guide on [this page](install-qt.md).<br/>
 To **install SDL2**, you can use your platform's package manager or you can download the library directly from its [official site](https://www.libsdl.org/download-2.0.php).<br/>
-To **install Git**, use your platform's package manager, or the [official installer](https://git-scm.com/downloads), and make sure it's avalable in your `PATH`.
+To **install Git**, use your platform's package manager, or the [official installer](https://git-scm.com/downloads), and make sure it's available in your `PATH`.
 
 
 ## The build process

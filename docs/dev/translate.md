@@ -53,7 +53,7 @@ Then, create a copy of `pegasus_en.ts`, and change `en` to your locale's code (s
 
 Open your new file in a text editor or in Qt Linguist.
 
-If you're using a **text editor**, the translateable strings are inside `<message>` tags: you can see the original text in the `<source>` tag, and you can provide your translation in `<translation>`. Also change the language tag on the top of the file (`<TS ...>`).
+If you're using a **text editor**, the translatable strings are inside `<message>` tags: you can see the original text in the `<source>` tag, and you can provide your translation in `<translation>`. Also change the language tag on the top of the file (`<TS ...>`).
 
 If you're using **Qt Linguist**, first set your language in *Edit -> Translation file settings -> Target language*. After that, you can select a "module" (group of texts) on the left, then see the relevant strings in the upper-middle panel. You can add the translation in the center panel (marked with "1" on the picture above). Then press the green checkmark on the top toolbar (or press Ctrl+Enter) to jump to the next untranslated line.
 
@@ -61,7 +61,7 @@ A detailed guide for Qt Linguist can be found [here](https://doc.qt.io/qt-5/ling
 
 !!! help
     - `%1`, `%2`, ... in the text is a placeholder for additional values, such as numbers, file names, etc.
-    - screenshots for most of the translateable text can be found [here](https://imgur.com/a/no3Jm)
+    - screenshots for most of the translatable text can be found [here](https://imgur.com/a/no3Jm)
 
 ## 4. (optional) Rebuild Pegasus and test the translation
 

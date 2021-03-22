@@ -34,6 +34,10 @@ gba/
 Our `metadata.pegasus.txt` file could then look like this:
 
 ```make
+collection: Game Boy Advance
+extension: gba
+
+
 game: Alien Hominid
 file: Alien Hominid.gba
 developer: Zoo Digital
@@ -53,12 +57,16 @@ Similarly, you can also set default assets for a collection by adding a `assets.
 Continuing the example above, let's say we have an `assets/default_cover.jpg` file. In this case the collection could be defined like this:
 
 ```make
-collection: Game Boy Advanced
+collection: Game Boy Advance
 extension: gba
 description: The Game Boy Advance (GBA) is a 32-bit handheld
   video game console developed, manufactured and marketed by Nintendo
   as the successor to the Game Boy Color.
 assets.box_front: assets/default_cover.jpg
+
+
+game: Alien Hominid
+# ...
 ```
 
 

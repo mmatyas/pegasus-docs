@@ -116,6 +116,7 @@ NES/
     `background` | A background image, eg. artwork or selected screenshot
     `music` | Background music
     `screenshot` | An in-game screenshot
+    `titlescreen` | An in-game screenshot of the title screen or main menu of the game
     `video` | A video about the game, eg. a trailer or gameplay presentation
 
 ## Third-party sources

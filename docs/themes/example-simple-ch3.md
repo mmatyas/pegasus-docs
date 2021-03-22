@@ -65,7 +65,7 @@ Rectangle {
 }
 ```
 
-Box art images might be quite big in resolution, so this time I've also set `sourceSize`: it limits the maximum amount of memory the image will take up. If the image is largen than this, it will be scaled down, keeping the aspect ratio. In this particular case, I've set it to scale down to 1024 &times; 1024 pixels (taking up about/at most 1024 &times; 1024 &times; 3 bytes = 3 MiB space in the memory).
+Box art images might be quite big in resolution, so this time I've also set `sourceSize`: it limits the maximum amount of memory the image will take up. If the image is larger than this, it will be scaled down, keeping the aspect ratio. In this particular case, I've set it to scale down to 1024 &times; 1024 pixels (taking up about/at most 1024 &times; 1024 &times; 3 bytes = 3 MiB space in the memory).
 
 !!! note "Column and Row"
     The QML Column and Row object are great tools for aligning a fixed number of elements. In this case, the box art and the further Text items could be put into a Column that would `anchors.fill` its parent with a 50px `anchors.margin`, so I wouldn't have to define it for the Image itself and the other Texts.
@@ -157,7 +157,7 @@ Note that I only show the year when it's greater than 0. If we have no informati
 
 ### Description
 
-A multiline text area. If the game has a short summar, it'll show that, otherwise the detailed description (or stay empty if none is available).
+A multiline text area. If the game has a short summary, it'll show that, otherwise the detailed description (or stay empty if none is available).
 
 ```qml
 Rectangle {

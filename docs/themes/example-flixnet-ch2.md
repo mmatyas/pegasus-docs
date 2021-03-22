@@ -54,7 +54,7 @@ ListView {
 
 ## Horizontal scroll
 
-We have a somewhat complex layout -- scrollable items inside a scrollable item; we can't just set `focus: true` here, since that'd mean we set it for *each* row, and end up with scrolling one we don't want. Hovewer, every `ListView` has select-next and select-previous function we can use (`incrementCurrentIndex()`, `decrementCurrentIndex()`), and the currently selected item can be accessed through `currentItem`.
+We have a somewhat complex layout -- scrollable items inside a scrollable item; we can't just set `focus: true` here, since that'd mean we set it for *each* row, and end up with scrolling one we don't want. However, every `ListView` has select-next and select-previous function we can use (`incrementCurrentIndex()`, `decrementCurrentIndex()`), and the currently selected item can be accessed through `currentItem`.
 
 In this case, the `currentItem` of `collectionAxis` will be the `Item` element inside `collectionAxisDelegate`:
 

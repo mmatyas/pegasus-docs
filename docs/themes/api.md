@@ -16,7 +16,7 @@ Games found by Pegasus are organized in collections, and one game may be present
 Property | Description
 ---|---
 `name` | The unique name of the collection, eg. "Nintendo Entertainment System", "Mario Cartridges", etc.
-`sortBy` | A variation of the collections's name that should be used for sorting. By default, it's the same as `name`.
+`sortBy` | A variation of the collections' name that should be used for sorting. By default, it's the same as `name`.
 `shortName` | <span class="optional"></span> A short name for the collection, often an abbreviation like `nes`, `mame`, etc. Always in lowercase. If not set, defaults to the value of `name`.
 `summary` | <span class="optional"></span> Short description (typically 2-3 sentences).
 `description` | <span class="optional"></span> Longer description.
@@ -215,11 +215,11 @@ function launchGame(game) {
 
 ## Device
 
-Some themes might want to display information about the real world, like current time or battery status. The `api.device` object provides some fields for that. Hovewer, as Pegasus is available for a number of various devices, note that not all features may be available on all platforms.
+Some themes might want to display information about the real world, like current time or battery status. The `api.device` object provides some fields for that. However, as Pegasus is available for a number of various devices, note that not all features may be available on all platforms.
 
 Property | Description
 ---------|------------
-`batteryCharging` | A boolean (true/false) value, telling whether the device is currently chaging its battery. If there's no battery, or the device doesn't support this property, the value will be `false`.
+`batteryCharging` | A boolean (true/false) value, telling whether the device is currently charging its battery. If there's no battery, or the device doesn't support this property, the value will be `false`.
 `batteryPercent` | The percentage of battery life left, as a fractional value between `0.0` (0%) and `1.0` (100%). If there's no battery, or the device doesn't support this property, the value will be `NaN` (not-a-number). You can use [isNaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) to check this.
 `batterySeconds` | The remaining battery time, in seconds. If the device is charging, there's no battery, or the device doesn't support this property, the value will be 0 or negative.
 

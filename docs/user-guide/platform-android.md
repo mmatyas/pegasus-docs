@@ -16,7 +16,7 @@ Config files are stored under `<storage>/pegasus-frontend`, where `<storage>` th
 
 Pegasus can be set as the default launcher, which will make it start automatically when the device is turned on. After installing Pegasus, when you press the home screen button a popup message should appear, asking you which launcher you would like to run. Select Pegasus (or your previous launcher) from the list to set it as the default launcher.
 
-**To restore the default launcher**, open the Android Settings menu, either from Pegasus or by pulling down the noticfication bar at the top of the screen and clicking the cogwheel icon. Depending on your device, you should find a "Default launcher" option in either under *Apps &rarr; Advanced settings &rarr; Default apps*, *Apps &rarr; Configure apps* or *Home*.
+**To restore the default launcher**, open the Android Settings menu, either from Pegasus or by pulling down the notification bar at the top of the screen and clicking the cogwheel icon. Depending on your device, you should find a "Default launcher" option in either under *Apps &rarr; Advanced settings &rarr; Default apps*, *Apps &rarr; Configure apps* or *Home*.
 
 ## Loading games
 
@@ -53,7 +53,7 @@ launch: am start --user 0
     The full documentation of `am` can be found [here](https://developer.android.com/studio/command-line/adb#am) and [here](https://developer.android.com/studio/command-line/adb#IntentSpec).<br>
     If you're not familiar with Pegasus' config files, you can find their documentation [here](meta-files.md).
 
-Note that not every app supports opening arbitrary files, or opening files at all (for example, RetroArch). In addition, there seems to be a glich on some systems where a file may get opened with something else when there are multiple apps that can handle the file type. Which leads to...
+Note that not every app supports opening arbitrary files, or opening files at all (for example, RetroArch). In addition, there seems to be a glitch on some systems where a file may get opened with something else when there are multiple apps that can handle the file type. Which leads to...
 
 ### Open a file with a specific app
 
@@ -137,7 +137,7 @@ launch: am start --user 0
 
 The important parts here are the **core** and the **storage** paths. Make sure you **correct the paths** of the above example to match your system and collection:
 
-- `/storage/emulated/0` is the absolute path to the internal storage on my phone. This can be completely different on other devices (eg. `/storage/sdcard`). Most file browser apps can tell you the correct path, then you can replace all occurences above.
+- `/storage/emulated/0` is the absolute path to the internal storage on my phone. This can be completely different on other devices (eg. `/storage/sdcard`). Most file browser apps can tell you the correct path, then you can replace all occurrences above.
 - `/data/data/com.retroarch/cores/fceumm_libretro_android.so` is the libretro core I've installed using the RetroArch menu. You'll only need to change the `fceumm_libretro_android.so` part. You can find the available cores [here](http://buildbot.libretro.com/nightly/android/latest/armeabi-v7a/).
 - If you've created a custom configuration file inside RetroArch, you can change `CONFIGFILE` to point to that instead of the default.
 
@@ -186,4 +186,4 @@ SuperRetro16 Lite | `com.bubblezapgames.supergnes_lite/com.bubblezapgames.superg
 - Video playback has a high battery drain
 - Unmounting the SD card while Pegasus is running may force close it
 - If you're launching a memory-intensive application, the Android OS may decide to close Pegasus
-- Shutdown and reboot are not avaliable due to Android restrictions
+- Shutdown and reboot are not available due to Android restrictions

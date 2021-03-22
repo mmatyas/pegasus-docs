@@ -254,7 +254,7 @@ You can add various assets (eg. cover art) for your games. This is documented [H
 
 ## Real-world examples
 
-You can find some more exaples on the platform specific pages:
+You can find some more examples on the platform specific pages:
 
 - [Windows](platform-windows.md)
 - [Android](platform-android.md)

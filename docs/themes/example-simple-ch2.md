@@ -42,7 +42,7 @@ FocusScope {
 
 ### Collection logo
 
-Lets's add the collection's logo to the panel. First you'll need a bunch of game system logo images. I've borrowed them from EmulationStation (original: Nils Bonenberger, CC-BY-NC-SA), except the RetroPie logo (original: Florian Müller, CC-BY-NC-SA). You can get them [here](https://github.com/mmatyas/pegasus-frontend/releases/download/alpha1/logos.zip). The file names match the system names from EmulationStation. Simply create a new directory inside your theme's folder, eg. `assets`, and extract them there.
+Lets add the collection's logo to the panel. First you'll need a bunch of game system logo images. I've borrowed them from EmulationStation (original: Nils Bonenberger, CC-BY-NC-SA), except the RetroPie logo (original: Florian Müller, CC-BY-NC-SA). You can get them [here](https://github.com/mmatyas/pegasus-frontend/releases/download/alpha1/logos.zip). The file names match the system names from EmulationStation. Simply create a new directory inside your theme's folder, eg. `assets`, and extract them there.
 
 After that, I add an Image element inside the `menu` Rectangle:
 
@@ -128,7 +128,7 @@ After a refresh, pressing ++left++ and ++right++ should now change the logo on t
     Handling keyboard keys also enables gamepad navigation. See the [controls](../user-guide/controls) page about how keys and buttons are related.
 
 !!! tip
-    Often there are mmore than one way to solve problems. Instead of manually handling the collection index, I could have used a ListView. We do that in the [Flixnet tutorial](example-flixnet-intro.md), and also for the game list.
+    Often there are more than one way to solve problems. Instead of manually handling the collection index, I could have used a ListView. We do that in the [Flixnet tutorial](example-flixnet-intro.md), and also for the game list.
 
 ### Game list
 

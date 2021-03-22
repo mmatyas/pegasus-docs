@@ -23,12 +23,12 @@ These provide an introduction to the language. After reading them, you should be
 
 ## Dynamic layout
 
-A theme should be able to show the list of games and collections. An array of data objects is what QML calls "Model". You can fully customize how one item should look like on the screen (the "Delegate"), and how all these items should be aligned/layed out (the "View").
+A theme should be able to show the list of games and collections. An array of data objects is what QML calls "Model". You can fully customize how one item should look like on the screen (the "Delegate"), and how all these items should be aligned/laid out (the "View").
 
 The standard layouts are:
 
 - [ListView](https://doc.qt.io/qt-5/qml-qtquick-listview.html): aligns the items on a horizontal or vertical path
-- [GridView](https://doc.qt.io/qt-5/qml-qtquick-gridview.html): fills a grid with the items (either the number rows or the number of colums should be specified)
+- [GridView](https://doc.qt.io/qt-5/qml-qtquick-gridview.html): fills a grid with the items (either the number rows or the number of columns should be specified)
 - [PathView](https://doc.qt.io/qt-5/qml-qtquick-pathview.html): aligns the items along an arbitrary path
 - [Repeater](https://doc.qt.io/qt-5/qml-qtquick-repeater.html): simply creates the items but doesn't do any further alignment
 

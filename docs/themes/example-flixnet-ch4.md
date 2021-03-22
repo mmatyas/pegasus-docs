@@ -33,7 +33,7 @@ Component {
 }
 ```
 
-So which image asset should we use? A game box is a rectangle with 16:9 aspect ratio, so the `banner` would be perfect for this. However, since every asset is potentially missing, we should consider showing other images and provide multiple fallbacks. If we don't have a `banner`, the next similarly sized one is the `steam` ("grid icon") asset. Because it's wider than 16:9, we'll need to crop it if we don't want black bars or squashed/scretched images (though you might prefer that). If neither image is available, I'll use `boxFront` as it tends to be commonly available.
+So which image asset should we use? A game box is a rectangle with 16:9 aspect ratio, so the `banner` would be perfect for this. However, since every asset is potentially missing, we should consider showing other images and provide multiple fallbacks. If we don't have a `banner`, the next similarly sized one is the `steam` ("grid icon") asset. Because it's wider than 16:9, we'll need to crop it if we don't want black bars or squashed/stretched images (though you might prefer that). If neither image is available, I'll use `boxFront` as it tends to be commonly available.
 
 Let's extend the Image object created previously:
 
@@ -224,7 +224,7 @@ The horizontal scrolling works similarly, with one important difference: there i
 
 <video autoplay loop style="max-width:100%;display:block;margin:0 auto"><source src="../webm/flixnet_pathview2.webm" type="video/webm"></video>
 
-I've set the left margin previously to 100 px and the width of a game box to be 240x135. In addition, there's a 10px spacing between the elements, giving the full width of a box to 250. The center of the current-item would be at 100 + 250/2 = 225 on the path, but to make it align with the collection label, I'll shift it 5px (half of the spacing) to the left, making the X center to be 220px. Then counting backwards, the previous-item will be at 220 - 250, and the one before that (the leftmost postion, where the new elements will appear when scrolling) at 220 - 250 * 2.
+I've set the left margin previously to 100 px and the width of a game box to be 240x135. In addition, there's a 10px spacing between the elements, giving the full width of a box to 250. The center of the current-item would be at 100 + 250/2 = 225 on the path, but to make it align with the collection label, I'll shift it 5px (half of the spacing) to the left, making the X center to be 220px. Then counting backwards, the previous-item will be at 220 - 250, and the one before that (the leftmost position, where the new elements will appear when scrolling) at 220 - 250 * 2.
 
 All right, let's change the horizontal ListView into a PathView:
 

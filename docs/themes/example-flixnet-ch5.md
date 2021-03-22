@@ -30,7 +30,7 @@ Text {
 
 The rating will be displayed as a five-star bar, with some percentage of it colored according to the actual rating. This can be done with two simple, overlapping QML Images: draw five empty stars first, then over them, draw filled ones according to the rating. Kind of like a progress bar, except we're using stars for filling.
 
-But first of all, I actuatlly draw two images for the stars, an empty one and a filled. Both have square size and transparent background. I create a new directory (eg. `assets`) in my theme folder and put them there.
+But first of all, I actually draw two images for the stars, an empty one and a filled. Both have square size and transparent background. I create a new directory (eg. `assets`) in my theme folder and put them there.
 
 star_empty.svg | star_filled.svg
 :---: | :----:

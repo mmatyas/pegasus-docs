@@ -141,7 +141,7 @@ The following fields can tell some **additional information**:
 
 Key | Description | Type
 ----|-------------|:----:
-`shortname` | An optional short name for the collection, often an abbreviation (like MAME, NES, etc.). Should be lowercase. | <span class="metaentry text" title="Text">T</span>
+`shortname` | An optional short name for the collection, in lowercase. Often an abbreviation, like MAME, NES, etc. By default, matches the name of the collection. | <span class="metaentry text" title="Text">T</span>
 `sort-by` | An alternate name that should be used for sorting. Can be useful when the name contains eg. roman numerals or special symbols. | <span class="metaentry text" title="Text">T</span>
 `summary` | A short description of the collection in one paragraph. | <span class="metaentry text" title="Text">T</span>
 `description` | A possibly longer description of the collection. | <span class="metaentry text" title="Text">T</span>

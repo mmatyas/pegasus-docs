@@ -12,8 +12,7 @@ Platform | Directory
 **macOS:** | `~/Library/Preferences/pegasus-frontend/`
 **Android:** | `<storage>/pegasus-frontend/`
 
-!!! tip "Portable mode"
-    If you launch Pegasus with the `--portable` command line parameter, it will read/write settings only under `<directory of the program>/config/`.
+If you launch Pegasus in [portable mode](portable.md), it will read/write settings to `<directory of the program>/config/`.
 
 ## All possible directories
 

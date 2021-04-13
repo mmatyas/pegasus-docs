@@ -50,6 +50,9 @@ sudo apt-get install \
 !!! info "Odroid"
     On Odroid, you may also have to install the Mali fbdev libraries (`mali-fbdev`), if they are missing.
 
+!!! help "Green videos"
+    There have been reports of green video screens with certain Linux distros, caused by `gstreamer1.0-vaapi`. Removing that package seems to fix the issue.
+
 
 ## Raspbian
 

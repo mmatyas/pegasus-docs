@@ -53,7 +53,8 @@ Pegasus is a Qt `qmake` project. Qt provides a graphical IDE, called Qt Creator,
     - If you have multiple Qt versions installed, make sure you call the right `qmake`.<br/>If you've installed using the official release from the Qt site, you can find it in `[qt-installdir]/Qt5/[version]/gcc_64/bin`. You can add it to your `PATH` if you want, but it's not necessary.
     - You can also change some configuration options, which you can find [below](#configuration-options).
 3. Call `make`
-4. *(optional)* Call `make install`
+4. *(optional)* Call `make check` to run tests.
+5. *(optional)* Call `make install`
 
 
 ## Configuration options

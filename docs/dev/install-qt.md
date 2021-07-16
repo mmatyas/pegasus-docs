@@ -34,9 +34,9 @@ On many Linux distros, the Qt libraries in the official repositories are often s
 - `libqt5gamepad5-dev`
 - `libqt5svg5-dev`
 - `qml-module-qtgraphicaleffects`
+- `qml-module-qtmultimedia`
 - `qtdeclarative5-dev`
 - `qtmultimedia5-dev`
-- `qml-module-qtmultimedia`
 - `qttools5-dev-tools`
 
 **Earlier releases** contain an up-to-date Qt release, but miss a few necessary packages. You can either use the Qt installer (see above), or use the following PPA:

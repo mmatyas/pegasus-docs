@@ -3,6 +3,13 @@
 This page list the breaking changes that happened during the development, and how to update between the releases affected.
 
 
+## Alpha 15
+
+Recently Pegasus was updated to support Android 10 and 11, and the way apps are launched had to be changed to work on all Android releases. Unfortunately, parameters starting with `file://` no longer work, because Android itself does not allow them (you get a `FileUriExposedException`).
+
+For most apps, you can fix this by just removing the leading `file://` part from the launch command, eg. if you have `-d "file://{file.path}"`, replace it with `-d "{file.path}"`.
+
+
 ## Alpha 11
 
 Alpha 10 &rarr; Alpha 11, 2019-03. There have been several breaking changes related to the [metadata file format](meta-files.md) and the theme programming interface.

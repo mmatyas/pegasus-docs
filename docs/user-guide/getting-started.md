@@ -89,7 +89,7 @@ For more details, select your preferred platform:
 
     **Using RetroPie**
 
-    - You can find Pegasus under the *experimental* section &mdash; see [this page](platform-retropie.md) for more details
+    - You can find Pegasus under the *experimental* section &mdash; see [this page](platform-raspberry.md) for more details
 
 ??? help "macOS"
     1. Download your preferred release from <a href="http://pegasus-frontend.org/" target="_blank">pegasus-frontend.org</a>, under the *Downloads* section

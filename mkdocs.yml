@@ -15,7 +15,7 @@ nav:
       - Android: user-guide/platform-android.md
       - Android example: user-guide/platform-android-example.md
       - Linux: user-guide/platform-linux.md
-      - RetroPie: user-guide/platform-retropie.md
+      - Raspberry Pi: user-guide/platform-raspberry.md
     - Game files:
       - Metadata files: user-guide/meta-files.md
       - Asset files: user-guide/meta-assets.md

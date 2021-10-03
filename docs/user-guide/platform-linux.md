@@ -17,6 +17,9 @@ In general, the dependencies on Linux are:
 !!! warning
     Depending on your settings, **the system may not allow running programs from USB drives or Windows file systems**. This is not a bug, but something you might want to be aware of.
 
+!!! help
+    Running on embedded devices? Take a look on [this page too](platform-raspberry.md)!
+
 
 ## Ubuntu
 
@@ -52,47 +55,6 @@ sudo apt-get install \
 
 !!! help "Green videos"
     There have been reports of green video screens with certain Linux distros, caused by `gstreamer1.0-vaapi`. Removing that package seems to fix the issue.
-
-
-## Raspbian
-
-On the Raspberry Pi, the official builds require **Raspbian Buster or later**. All Raspberry boards are supported, however the releases are generally not interchangeable: trying to launch an executable made for a different device will result in `Illegal instruction` errors.
-
-There are various ways to set up Raspbian, so to make sure you have all the dependencies ready, install them the same way as mentioned in the Ubuntu section above. A desktop installation (X11) is not required, so you can also use the "Lite" versions of Raspbian on your boards.
-
-In addition, Pegasus requires at least 64 MB of video RAM. You can change the memory split of the Raspberry Pi using `raspi-config`.
-
-!!! tip "RetroPie"
-    If you're running RetroPie, you can also install Pegasus from its setup menu. [See this page for more details.](platform-retropie.md)
-
-### GPU driver notes
-
-On the **Raspberry Pi 4** you have to define the `QT_QPA_EGLFS_KMS_ATOMIC` environment variable before launching Pegasus:
-
-`export QT_QPA_EGLFS_KMS_ATOMIC=1`
-
-(You can type it in the terminal, if you're launching Pegasus from there, or write a script for launching. If this isn't set, you'll see `Could not queue DRM page flip on screen HDMI1` errors.)
-
-To **improve gradient colors** on all Raspberries, define the `QT_QPA_EGLFS_FORCE888` environment variable:
-
-`export QT_QPA_EGLFS_FORCE888=1`
-
-By default Pegasus tries to match the **preferred resolution** of the display (eg. TV) and use the default one if there are multiple connected outputs. To fine tune this behaviour, you can create a JSON file with a content like this:
-
-```json
-{
-    "outputs": [{
-        "name": "HDMI1",
-        "mode": "1280x720"
-    }]
-}
-```
-
-then tell Pegasus to use it like this:
-
-`export QT_QPA_EGLFS_KMS_CONFIG=/path/to/my.json`
-
-For more details, please visit [this site](https://doc.qt.io/qt-5/embedded-linux.html#eglfs-with-the-eglfs-kms-backend).
 
 
 ## Arch

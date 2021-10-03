@@ -50,7 +50,7 @@ Now I create a [metadata file](meta-files.md) for each system. As mentioned in t
         launch: am start
           --user 0
           -a android.intent.action.VIEW
-          -d "file://{file.path}"
+          -d {file.path}
 
 ??? note "[SD card]/Roms/NES/metadata.pegasus.txt"
         :::make
@@ -59,7 +59,7 @@ Now I create a [metadata file](meta-files.md) for each system. As mentioned in t
         launch: am start
           --user 0
           -n com.retroarch/.browser.retroactivity.RetroActivityFuture
-          -e ROM "{file.path}"
+          -e ROM {file.path}
           -e LIBRETRO /data/data/com.retroarch/cores/fceumm_libretro_android.so
           -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg
           -e IME com.android.inputmethod.latin/.LatinIME

@@ -31,7 +31,7 @@ Here's how it looks in practice:
 
 The best case is when you have a file format associated with an app already. To open a file with its default app, invoke the Activity Manager like this:
 
-`am start --user 0  -a android.intent.action.VIEW  -d "file://<path-to-file>"`
+`am start --user 0  -a android.intent.action.VIEW  -d "<path-to-file>"`
 
 Here is an example `metadata.txt` that will open ISO files with the default app:
 
@@ -40,7 +40,7 @@ collection: PSP
 extension: iso
 launch: am start --user 0
   -a android.intent.action.VIEW
-  -d "file://{file.path}"
+  -d {file.path}
 ```
 
 !!!help
@@ -48,7 +48,7 @@ launch: am start --user 0
     - the `start` command sends an app launching request ("intent") to the Activity Manager
     - `--user 0` selects the user (by ID) that sends this request. Without this parameter I've got permission denied errors on my devices.
     - `-a` stands for "action"; if an app supports opening files (`android.intent.action.VIEW` ie. "open with"), it will react to this action. There are other possible actions, like "take a photo" or "call a taxi", but we probably won't need them for our use.
-    - `-d` is the parameter (data) of the action, and must be in such URI format (`file://...`)
+    - `-d` is the parameter (data) of the action, and must be in a format the target app expects
 
     The full documentation of `am` can be found [here](https://developer.android.com/studio/command-line/adb#am) and [here](https://developer.android.com/studio/command-line/adb#IntentSpec).<br>
     If you're not familiar with Pegasus' config files, you can find their documentation [here](meta-files.md).
@@ -63,7 +63,7 @@ I haven't found a good app yet that could tell this about the installed apps, so
 
 Anyway, once you know the Activity you want to call, the command is
 
-`am start --user 0  -a android.intent.action.VIEW  -n <activity-name>  -d "file://<path-to-file>"`
+`am start --user 0  -a android.intent.action.VIEW  -n <activity-name>  -d "<path-to-file>"`
 
 !!!help
     `-n` stands for "name"
@@ -76,7 +76,7 @@ extension: iso
 launch: am start --user 0
   -a android.intent.action.VIEW
   -n org.ppsspp.ppsspp/.PpssppActivity
-  -d "file://{file.path}"
+  -d {file.path}
 ```
 
 ### Run a custom command
@@ -142,7 +142,7 @@ The important parts here are the **core** and the **storage** paths. Make sure y
 - If you've created a custom configuration file inside RetroArch, you can change `CONFIGFILE` to point to that instead of the default.
 
 !!!help
-    `-e KEY VALUE` defines an extra parameter, specific to the app. Unlike the file opening before, RetroArch does not need `file://` for the ROM path.
+    `-e KEY VALUE` defines an extra parameter, specific to the app.
 
 !!! note
     There is also a third option available on RetroArch's page, a 32-bit-only package called `RetroArch_ra32.apk`. To use that, replace `aarch64` in the example above with `ra32`.

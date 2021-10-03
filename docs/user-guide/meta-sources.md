@@ -25,9 +25,6 @@ On Windows, this works out of the box, like Steam. Similarly to GOG Galaxy, game
 
 On Linux, there's way less information available offline, so support is a bit hit and miss. Games installed in the default location (`<home>/GOG Games`) can be detected, but assets might me missing (for the games installed somewhere else, you can always just create symlinks). If you have games that refuse to show up, feel free to report it as an issue.
 
-!!! bug "Bug on Windows 10"
-    Some users reported crashes on Windows 10 when GOG support is enabled, but we had no luck in reproducing this yet. If you have some information that could help, please visit [this bug report](https://github.com/mmatyas/pegasus-frontend/issues/464).
-
 <br>
 
 ## <i class="fab fa-android" style="font-weight:normal;color:#A4C639"></i> Android Apps

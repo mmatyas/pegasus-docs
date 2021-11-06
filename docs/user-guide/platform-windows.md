@@ -34,12 +34,66 @@ game: Call of Duty 2
 files:
   ./CoD2/CoD2SP_s.exe
   ./CoD2/CoD2MP_s.exe
-description: Example for the case where a game
+description:
+  Example for the case where a game
   has multiple launchable files.
 ```
 
 !!! tip
     On Windows both forward- (`/`) and backward (`\`) slashes are supported in paths. Use whichever you prefer.
+
+
+## Launching emulators
+
+In most cases, the launch command for emulators look like this:
+
+`path\to\myemulator.exe  {file.path}`
+
+For example:
+
+```make
+collection: Game Boy Advanced
+extension: gba
+launch: C:\Emulators\visualboy.exe {file.path}
+
+game: Advance Wars
+file: Advance Wars (USA).gba
+developer: Intelligent Games
+genre: Strategy
+players: 4
+
+...
+```
+
+Many emulators also provide other command line options as well, like auto fullscreen or loading a specific configuration. Usually you can find these in the documentation of the emulators.
+
+### RetroArch
+
+RetroArch is a popular choice, but as it supports various platforms, it also requires a more explicit command:
+
+`path\to\retroarch.exe  -L path\to\core.dll  {file.path}`
+
+where `-L path\to\core.dll` tells RetroArch which core to use when running the game. For example:
+
+```make
+collection: Game Boy Advanced
+extension: gba
+launch: C:\RetroArch\retroarch.exe  -L C:\RetroArch\cores\mgba_libretro.dll  {file.path}
+
+game: Advance Wars
+file: Advance Wars (USA).gba
+developer: Intelligent Games
+genre: Strategy
+players: 4
+
+...
+```
+
+!!! note
+    If your directory names contain spaces, don't forget to wrap the parameter in quotes, eg.: `"C:\My Games\RetroArch emulator\cores\mgba_libretro.dll"`
+
+!!! tip
+    You can also add the `launch` field to games too, in case some of them require a specifix emulator to work.
 
 
 ## RocketLauncher

@@ -155,12 +155,19 @@ The following variables will be replaced in the launch command value:
 Variable | Description | Example
 ---------|-------------|---------
 `{file.path}` | Absolute path to the file. | `/home/joe/games/mygame.bin`
+`{file.uri}` | Absolute path to the file, in URI form. | `file:///home/joe/games/mygame.bin` (*)
 `{file.name}` | The file name part of the path | `mygame.bin`
 `{file.basename}` | The file name without extension (ie. until but not including the last dot) | `mygame`
 `{file.dir}` | The directory where the file is located. | `/home/joe/games`
 `{env.MYVAR}` | The value of the environment variable `MYVAR`, if defined. | `launch: x11app --tty={env.TTY}`
 
 Note that the variables will be replaced as-is, without additional formatting. You might need to wrap them in quotes if necessary.
+
+!!! help "Android URIs"
+    On Android some apps expect direct file paths, others only work with so called "content URIs". Depending on your use case, you can use `{file.path}` for raw paths, or `{file.uri}` for Android 30 compatible content URIs. Furhermore, on Android 30 and later, apps have a restricted access to the file system, and may require per-directory permissions. You might need to open the app first and manually give access to your game directories.
+
+    Note that Pegasus cannot grant file system access to other apps, and cannot guarantee that the app understands a particular path format. If in doubt, contact the app's developer.
+
 
 ### Example
 

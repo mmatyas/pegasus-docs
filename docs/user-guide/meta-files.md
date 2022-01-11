@@ -148,6 +148,101 @@ Key | Description | Type
 
 Keys starting with `x-` can be used to extend the format with additional data. This could be used, for example, by other softwares (eg. scrapers) to store some program-specific data.
 
+??? tip "Common platform names"
+    The `shortname` parameter is often used by themes to show assets (eg. logo, device artwork, etc.) for a particular collection. Here is a list of the most common name&ndash;shortname pairs for game platforms:
+
+    Name | Short name
+    -----|-----------
+    3DO | `3do`
+    Amiga | `amiga`
+    Amiga CD32 | `amigacd32`
+    Amiga CDTV | `amigacdtv`
+    Amstrad CPC | `amstradcpc`
+    Android | `android`
+    Apple II | `apple2`
+    Arcade | `arcade`
+    Arcade (Daphne) | `daphne`
+    Arcade (Final Burn Alpha) | `fba`
+    Arcade (MAME) | `mame`
+    Atari 800 | `atari800`
+    Atari 2600 | `atari2600`
+    Atari 5200 | `atari5200`
+    Atari 7800 | `atari7800`
+    Atari Jaguar | `atarijaguar`
+    Atari Jaguar CD | `atarijaguarcd`
+    Atari Lynx | `atarilynx`
+    Atari ST | `atarist`
+    Atari XE | `atarixe`
+    CHIP-8 | `chip8`
+    ColecoVision | `colecovision`
+    Commodore 64 | `c64`
+    DOS | `dos`
+    Dragon 32 | `dragon32`
+    Famicom Disk System | `fds`
+    Game Boy Advance | `gba`
+    Game Boy Color | `gbc`
+    Game Boy | `gb`
+    GOG | `gog`
+    Intellivision | `intellivision`
+    Linux | `linux`
+    Löve | `love`
+    Macintosh | `macintosh`
+    MSX | `msx`
+    Naomi | `naomi`
+    Neo Geo CD | `neogeocd`
+    Neo Geo Pocket Color | `ngpc`
+    Neo Geo Pocket | `ngp`
+    Neo Geo | `neogeo`
+    Nintendo 3DS | `3ds`
+    Nintendo 64 | `n64`
+    Nintendo DS | `nds`
+    Nintendo Entertainment System | `nes`
+    Nintendo Game-and-Watch | `gameandwatch`
+    Nintendo GameCube | `gc`
+    Nintendo Switch | `switch`
+    Nintendo VirtualBoy | `virtualboy`
+    Nintendo Wii | `wii`
+    Nintendo WiiU | `wiiu`
+    Odyssey 2 | `odyssey2`
+    PC 88 | `pc88`
+    PC 98 | `pc98`
+    PC Engine | `pcengine`
+    PC | `pc`
+    PC-FX | `pcfx`
+    PlayStation | `psx`
+    PlayStation 2 | `ps2`
+    PlayStation 3 | `ps3`
+    PlayStation Portable | `psp`
+    PlayStation Vita | `psvita`
+    RPG Maker | `rpgmaker`
+    SAM coupe | `samcoupe`
+    Scumm VM | `scummvm`
+    SEGA 32X | `sega32x`
+    SEGA CD | `segacd`
+    Sega Dreamcast | `dreamcast`
+    SEGA GameGear | `gamegear`
+    Sega Genesis | `genesis`
+    Sega Master System | `mastersystem`
+    Sega Megadrive | `megadrive`
+    Sega Saturn | `saturn`
+    SEGA SG-1000 | `sg1000`
+    Sharp X1 | `x1`
+    Sharp X6800 | `x68000`
+    Steam | `steam`
+    Super Nintendo Entertainment System | `snes`
+    SuperGrafx | `supergrafx`
+    TIC80 | `tic80`
+    TurboGrafx 16 | `pcengine`
+    TurboGrafx CD | `pcenginecd`
+    Vectrex | `vectrex`
+    Windows | `windows`
+    WonderSwan | `wonderswan`
+    WonderSwan/Color | `wonderswancolor`
+    Xbox | `xbox`
+    Xbox 360 | `xbox360`
+    ZX Spectrum | `zxspectrum`
+    ZX81 | `zx81`
+
 ### Launch command parameters
 
 The following variables will be replaced in the launch command value:

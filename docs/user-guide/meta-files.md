@@ -232,8 +232,7 @@ Keys starting with `x-` can be used to extend the format with additional data. T
     Super Nintendo Entertainment System | `snes`
     SuperGrafx | `supergrafx`
     TIC80 | `tic80`
-    TurboGrafx 16 | `pcengine`
-    TurboGrafx CD | `pcenginecd`
+    TurboGrafx 16 | `turbografx16`
     Vectrex | `vectrex`
     Windows | `windows`
     WonderSwan | `wonderswan`

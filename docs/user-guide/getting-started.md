@@ -115,7 +115,7 @@ You can navigate in the menu (and in the whole program in general) using the arr
 
 On the Settings screen, you can set some general parameters, like the language of the interface or whether you'd like to run in full screen or windowed mode. You can also change the "theme", the look and feel of the whole program.
 
-Pegasus is a program that can collect your list of games from various sources. You can import your list of games from other, already installed game libraries, like Steam, for which there is built-in support. For others, especially emulators and standalone games, you can use Pegasus' own *metadata* files, which is documented on [this page](meta-files.md).
+**Pegasus is a program that can collect your list of games from various sources.** You can import your list of games from other, already installed game libraries, like Steam, for which there is built-in support. For others, especially emulators and standalone games, you can use Pegasus' own *metadata* files, which is documented on [this page](meta-files.md).
 
 The behaviour of the game searching can be configured in the Gaming section:
 

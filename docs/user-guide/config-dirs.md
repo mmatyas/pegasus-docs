@@ -8,6 +8,7 @@ Platform | Directory
 ---------|----------
 **all platforms:** | `<directory of the program>/config`
 **Linux:** | `~/.config/pegasus-frontend/`
+**Linux (Flatpak):** | `~/home/[username]/.var/app/org.pegasus_frontend.Pegasus/config/`
 **Windows:** | `C:\Users\[username]\AppData\Local\pegasus-frontend\`
 **macOS:** | `~/Library/Preferences/pegasus-frontend/`
 **Android:** | `<storage>/pegasus-frontend/`

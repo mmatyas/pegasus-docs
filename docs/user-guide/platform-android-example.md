@@ -62,14 +62,10 @@ Now I create a [metadata file](meta-files.md) for each system. As mentioned in t
           -e ROM {file.path}
           -e LIBRETRO /data/data/com.retroarch/cores/fceumm_libretro_android.so
           -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg
-          -e IME com.android.inputmethod.latin/.LatinIME
-          -e DATADIR /data/data/com.retroarch
-          -e APK /data/app/com.retroarch-1/base.apk
-          -e SDCARD /storage/emulated/0
-          -e DOWNLOADS /storage/emulated/0/Download
-          -e SCREENSHOTS /storage/emulated/0/Pictures
-          -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files
+          -e QUITFOCUS
           --activity-clear-top
+          --activity-clear-task
+          --activity-no-history
 
 !!! warning "SD card path"
     In the above configurations I use `/storage/emulated/0/` which is the path of the SD card on my device. This might be different for you! You can check the path in most file manager apps, look for something like "file details" or similar.

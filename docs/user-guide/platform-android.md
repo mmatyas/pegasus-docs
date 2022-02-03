@@ -104,12 +104,10 @@ launch: am start --user 0
   -e ROM {file.path}
   -e LIBRETRO /data/data/com.retroarch/cores/fceumm_libretro_android.so
   -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg
-  -e IME com.android.inputmethod.latin/.LatinIME
-  -e DATADIR /data/data/com.retroarch
-  -e APK /data/app/com.retroarch-1/base.apk
-  -e SDCARD /storage/emulated/0
-  -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files
+  -e QUITFOCUS
   --activity-clear-top
+  --activity-clear-task
+  --activity-no-history
 ```
 
 #### RetroArch64/RetroArch Plus (AArch64):
@@ -122,12 +120,10 @@ launch: am start --user 0
   -e ROM {file.path}
   -e LIBRETRO /data/data/com.retroarch.aarch64/cores/fceumm_libretro_android.so
   -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg
-  -e IME com.android.inputmethod.latin/.LatinIME
-  -e DATADIR /data/data/com.retroarch.aarch64
-  -e APK /data/app/com.retroarch.aarch64-1/base.apk
-  -e SDCARD /storage/emulated/0
-  -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files
+  -e QUITFOCUS
   --activity-clear-top
+  --activity-clear-task
+  --activity-no-history
 ```
 
 (based on the source code of their Android port at the time of writing).

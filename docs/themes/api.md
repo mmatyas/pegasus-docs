@@ -22,6 +22,7 @@ Property | Description
 `description` | <span class="optional"></span> Longer description.
 `games` | The list of games belonging to this collection; see "Games" below. All available collections are guaranteed to have at least one game.
 `assets` | An object containing the default assets (see later).
+`extra` | An object containing any extra properties (ie. `x-`) set in metadata files. For example, if the game has `x-something: Some cool text`, you can reach the value by `game.extra.something` as JS string.
 
 Properties marked as "optional" might have no value (eg. empty string or empty array). All fields are read-only.
 
@@ -56,6 +57,7 @@ Property | Description
 `collections` | An [item model](#item-models), the list of Collection objects (see above) to which this Game belongs. Every Game belongs to at least one Collection, so this list is never empty.
 `files` | An object containing the game's launchable files (see below).
 `assets` | An object containing the game's assets (see later).
+`extra` | An object containing any extra properties (ie. `x-`) set in metadata files. For example, if the game has `x-something: Some cool text`, you can reach the value by `game.extra.something` as JS string.
 
 Properties marked as "optional" might have no value (eg. empty string or empty array). Unless otherwise noted, all fields are read-only.
 

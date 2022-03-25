@@ -7,21 +7,23 @@ copyright: Copyright &copy; 2018-2021 Mátyás Mustoha
 nav:
   - Home: index.md
   - User Guide:
-    - Getting started: user-guide/getting-started.md
-    - Default controls: user-guide/controls.md
-    - Portable mode: user-guide/portable.md
-    - Platform Notes:
+    - Setup:
+      - Getting started: user-guide/getting-started.md
+      - Default controls: user-guide/controls.md
+      - Portable mode: user-guide/portable.md
+      - Config directories: user-guide/config-dirs.md
+    - Platform notes:
       - Windows: user-guide/platform-windows.md
       - Android: user-guide/platform-android.md
       - Android example: user-guide/platform-android-example.md
       - Linux: user-guide/platform-linux.md
       - Raspberry Pi: user-guide/platform-raspberry.md
-    - Game files:
+    - Adding games:
+      - How to add games: user-guide/adding-games.md
       - Metadata files: user-guide/meta-files.md
       - Asset files: user-guide/meta-assets.md
       - Other sources: user-guide/meta-sources.md
     - Installing themes: user-guide/installing-themes.md
-    - Config directories: user-guide/config-dirs.md
     - Scripting: user-guide/scripting.md
     - Breaking changes: user-guide/breaking-changes.md
   - Theme Dev:

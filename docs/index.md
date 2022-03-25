@@ -8,20 +8,20 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
 ## User guide
 
 - [**Getting started!**](user-guide/getting-started.md)
-- [Default controls](user-guide/controls.md)
-- [Portable](user-guide/portable.md)
+    - [Default controls](user-guide/controls.md)
+    - [Portable mode](user-guide/portable.md)
+    - [Config directories](user-guide/config-dirs.md)
 - Plaform notes
     - [Windows](user-guide/platform-windows.md)
     - [Android](user-guide/platform-android.md)
     - [Android example setup](user-guide/platform-android-example.md)
     - [Linux](user-guide/platform-linux.md)
     - [Raspberry](user-guide/platform-raspberry.md)
-- Adding games
+- [**How to add games**](user-guide/adding-games.md)
     - [Metadata files](user-guide/meta-files.md)
     - [Asset files](user-guide/meta-assets.md)
     - [Other sources](user-guide/meta-sources.md) (Steam, GOG, etc.)
 - [Installing themes](user-guide/installing-themes.md)
-- [Config directories](user-guide/config-dirs.md)
 - [Scripting](user-guide/scripting.md)
 - [Breaking changes](user-guide/breaking-changes.md)
 

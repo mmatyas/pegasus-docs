@@ -11,7 +11,7 @@ Platform | Directory
 **Linux (Flatpak):** | `~/.var/app/org.pegasus_frontend.Pegasus/config/pegasus-frontend/`
 **Windows:** | `C:\Users\[username]\AppData\Local\pegasus-frontend\`
 **macOS:** | `~/Library/Preferences/pegasus-frontend/`
-**Android:** | `<storage>/pegasus-frontend/`
+**Android:** | `<storage>/Android/data/org.pegasus_frontend.android/files/pegasus-frontend/`
 
 If you launch Pegasus in [portable mode](portable.md), it will read/write settings to `<directory of the program>/config/`.
 

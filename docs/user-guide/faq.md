@@ -21,7 +21,7 @@ For example:
 
 ```make
 game: Spotify
-file: android:com.spotify.music.MainActivity
+file: android:com.spotify.music
 launch: am start -n com.spotify.music/com.spotify.music.MainActivity
 ```
 

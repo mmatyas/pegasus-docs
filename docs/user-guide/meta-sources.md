@@ -50,7 +50,7 @@ Should work out of the box. Games added in Lutris will also appear in Pegasus, w
 
 *Available on: <i class="fab fa-linux"></i> desktop Linux, <i class="fas fa-microchip color-embedded"></i> embedded Linux, <i class="fab fa-windows color-windows"></i> Windows, <i class="fab fa-apple color-macos"></i> macOS*
 
-If you have EmulationStation installed and set up, Pegasus will also check the directories set in `es_systems.cfg`, read the `gamelist.xml` files in them, use the metadata and assets defined there, and also check for assets in `<config dir>/downloaded_images` (where config dir is eg. `~/.emulationstation`).
+If you have EmulationStation installed and set up, Pegasus will also check the directories set in `es_systems.cfg`, read the `gamelist.xml` files in them, and use the metadata and assets defined there. Note that there are several, mutually incompatible EmulationStation variants out there; Pegasus supports only the last official ES release.
 
 A tool for converting between ES and Pegasus files can be found [HERE](http://pegasus-frontend.org/tools/convert). Compared to ES files, the metadata file is like a combination of `es_systems.cfg` (as it contains platform data) and `gamelist.xml` (as it contains game data).
 

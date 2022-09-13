@@ -53,6 +53,23 @@ launch: "C:\Program Files (x86)\Steam\Steam.exe" steam://rungameid/108600
 ```
 
 
+## Running more than one command
+
+In a metadata file, the `launch` property accepts exactly one command. This command however can be a command line interpreter too, allowing you to chain executables together.
+
+For example, on Windows:
+
+```make
+launch: cmd /C  "start /b /wait someprogram.exe  &&  start /b /wait emulator.exe {file.path}"
+```
+
+and on Linux:
+
+```make
+launch: sh -c "someprogram && emulator {file.path}"
+```
+
+
 ## Common issues
 
 ### Pegasus crashes when playing a video

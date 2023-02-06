@@ -1,4 +1,4 @@
-# Platform notes: Raspberry
+# Platform Notes: Raspberry
 
 On the Raspberry Pi, the official builds require **Raspbian Buster or later**. All Raspberry boards are supported, however the releases are generally not interchangeable: trying to launch an executable made for a different device will result in `Illegal instruction` errors.
 

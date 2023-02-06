@@ -1,4 +1,4 @@
-# Platform notes: Windows
+# Platform Notes: Windows
 
 Pegasus is available for **Windows 7** or later, and should work out of the box.
 

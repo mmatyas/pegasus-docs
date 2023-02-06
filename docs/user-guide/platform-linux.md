@@ -1,4 +1,4 @@
-# Platform notes: Linux
+# Platform Notes: Linux
 
 Pegasus runs on both desktop and embedded Linux devices, and official releases are available for several platforms.
 

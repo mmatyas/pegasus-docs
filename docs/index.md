@@ -17,6 +17,7 @@ Pegasus is an experimental emulator frontend, focusing on customizability, cross
     - [Android example setup](user-guide/platform-android-example.md)
     - [Linux](user-guide/platform-linux.md)
     - [Raspberry](user-guide/platform-raspberry.md)
+    - [MacOS](user-guide/platform-macos.md)
 - [**How to add games**](user-guide/adding-games.md)
     - [Metadata files](user-guide/meta-files.md)
     - [Asset files](user-guide/meta-assets.md)

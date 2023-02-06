@@ -18,6 +18,7 @@ nav:
       - Android example: user-guide/platform-android-example.md
       - Linux: user-guide/platform-linux.md
       - Raspberry Pi: user-guide/platform-raspberry.md
+      - MacOS: user-guide/platform-macos.md
     - Adding games:
       - How to add games: user-guide/adding-games.md
       - Metadata files: user-guide/meta-files.md

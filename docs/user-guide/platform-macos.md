@@ -23,3 +23,9 @@ players: 4
 
 ...
 ```
+
+!!! note
+    If your directory names contain spaces, don't forget to wrap the parameter in quotes, eg.: `"/my custom cores/mgba_libretro.dylib"`
+
+!!! tip
+    You can also add the `launch` field to games too, in case some of them require a specifix emulator to work.

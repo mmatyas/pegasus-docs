@@ -80,7 +80,7 @@ makepkg -si
 
 ## Steam Deck
 
-Currently, Steam OS is missing 2 required plugins for gstreamer in order for video playback to work in the standalone version. In order to install them, you must temporarily disable Read Only mode, install them and then re-enable Read Only mode as follows:
+Currently, Steam OS is missing 2 required plugins for GStreamer in order for video playback to work in the standalone version. To install them, you must temporarily disable Read Only mode, install the plugins and then re-enable Read Only mode as follows:
 
 ```sh
 sudo steamos-readonly disable

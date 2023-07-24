@@ -78,6 +78,15 @@ cd pegasus-frontend-git
 makepkg -si
 ```
 
+## Steam Deck
+
+Currently, Steam OS is missing 2 required plugins for GStreamer in order for video playback to work in the standalone version. To install them, you must temporarily disable Read Only mode, install the plugins and then re-enable Read Only mode as follows:
+
+```sh
+sudo steamos-readonly disable
+sudo pacman --noconfirm -S gst-libav gst-plugins-good
+sudo steamos-readonly enable
+```
 
 ## Flatpak
 
@@ -87,3 +96,4 @@ The stable version of Pegasus is [available on FlatHub](https://flathub.org/apps
 ## Custom builds
 
 As always, you can build Pegasus from source for your platform. You can find the instructions for that [HERE](../dev/build.md).
+

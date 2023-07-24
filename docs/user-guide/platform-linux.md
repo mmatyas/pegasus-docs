@@ -78,9 +78,10 @@ cd pegasus-frontend-git
 makepkg -si
 ```
 
-## "Steam Deck"
+## Steam Deck
 
 Currently, Steam OS is missing 2 required plugins for gstreamer in order for video playback to work in the standalone version. In order to install them, you must temporarily disable Read Only mode, install them and then re-enable Read Only mode as follows:
+
 ```sh
 sudo steamos-readonly disable
 sudo pacman --noconfirm -S gst-libav gst-plugins-good

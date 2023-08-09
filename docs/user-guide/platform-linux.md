@@ -88,6 +88,14 @@ sudo pacman --noconfirm -S gst-libav gst-plugins-good
 sudo steamos-readonly enable
 ```
 
+## OpenSUSE Tumbleweed
+
+OpenSUSE Tumbleweed is also missing the same packages as Steam Deck, though they have different names in this repository. To install them, you can use the following single line in a terminal:
+
+```sh
+sudo zypper install gstreamer-plugins-libav gstreamer-plugin-openh264
+```
+
 ## Flatpak
 
 The stable version of Pegasus is [available on FlatHub](https://flathub.org/apps/details/org.pegasus_frontend.Pegasus). You can use any Flatpak-supporting software centers to install it, or follow the instructions on the page to do it manually.

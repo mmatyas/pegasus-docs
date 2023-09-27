@@ -31,11 +31,13 @@ Most platforms define multiple possible directories for storing user content, an
 - `/etc/xdg/pegasus-frontend/`
 - `/usr/local/share/pegasus-frontend/`
 - `/usr/share/pegasus-frontend/`
+- (Flatpak) `~/.var/app/org.pegasus_frontend.Pegasus/config/pegasus-frontend/`
 
 **Windows:**
 
 - `C:\Users\[username]\AppData\Local\pegasus-frontend\` (**default**)
 - `C:\ProgramData\pegasus-frontend\`
+- (scoop) `C:\Users\[username]\scoop\apps\pegasus\current\config`
 
 **macOS:**
 

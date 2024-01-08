@@ -23,7 +23,7 @@ In general, the dependencies on Linux are:
 
 ## Ubuntu
 
-At the time of writing, the official builds require Ubuntu **18.04 or later**. Most of the dependencies come preinstalled, but in case some might be missing, you can install them like this:
+At the time of writing, the official builds require Ubuntu **22.04 or later**. Most of the dependencies come preinstalled, but in case some might be missing, you can install them like this:
 
 ```
 sudo apt-get install \

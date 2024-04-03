@@ -3,7 +3,7 @@
 Pegasus is a cross-platform native application written in C++ and built mainly on top of the Qt libraries. Manually building has the following requirements:
 
 - **C++11**-supporting compiler *(eg. G++ 4.9 or Visual Studio 2017)*
-- **Qt** 5.12 or later, with the following modules:
+- **Qt** 5.15 or later, with the following modules:
     - QML module
     - Qt Quick 2 module
     - Multimedia module

@@ -307,6 +307,7 @@ Key | Description | Type
 `tag`, `tags` | Tag or list of tags (for example *Co-op*, *VR*, etc.). This field can appear multiple times. | <i title="List" class="metaentry fas fa-list-ul"></i>
 `summary` | A short description of the game in one paragraph. | <span class="metaentry text" title="Text">T</span>
 `description` | A possibly longer description of the game. | <span class="metaentry text" title="Text">T</span>
+`slug` | A unique identifier to associate play time statistics with this game (instead of using the file path for this). Case insensitive. | <span class="metaentry text" title="Text">T</span>
 `players` | The number of players who can play the game. Either a single number (eg. `2`) or a number range (eg. `1-4`). | <span class="metaentry text" title="Text">T</span>
 `release` | The date when the game was released, in YYYY-MM-DD format (eg. `1985-05-22`). Month and day can be omitted if unknown (eg. `1985-05` or `1985` alone is also accepted). | <span class="metaentry text" title="Text">T</span>
 `rating` | The rating of the game, in percentages. Either an integer percentage in the 0-100% range (eg. `70%`), or a fractional value between 0 and 1 (eg. `0.7`). | <span class="metaentry text" title="Text">T</span>
